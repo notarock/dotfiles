@@ -23,6 +23,7 @@
   networking.hostName = "thinknix"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
+  hardware.bluetooth.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -58,14 +59,22 @@
 	neofetch
 	pass
 	scrot
+	zip
+	unzip
+	unar
+	tig
 	# Tooling
+	kitty
 	docker-compose
 	# GUI Apps
+	emacs
 	libreoffice
 	evince
-	emacs
 	firefox
 	qtpass
+	thunderbird
+	# Eye candy
+	moka-icon-theme
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -100,6 +109,8 @@
 
   # Enable touchpad support.
   services.xserver.libinput.enable = true;
+  services.xserver.wacom.enable = true;
+
 
   # Enable the KDE Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
@@ -108,7 +119,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.notarock = {
     isNormalUser = true;
-    shell = "/bin/zsh";
+    shell = pkgs.zsh;
     extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
   };
 
