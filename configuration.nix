@@ -25,6 +25,12 @@
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
 
+networking.extraHosts =
+  ''
+ 192.168.10.10 homestead.test
+  '';
+
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -63,18 +69,29 @@
 	unzip
 	unar
 	tig
+	sbcl
+	#
 	# Tooling
+	#
 	kitty
+	tilda
 	docker-compose
+	vagrant
+	#
 	# GUI Apps
+	#
 	emacs
 	libreoffice
 	evince
 	firefox
 	qtpass
 	thunderbird
+	obs-studio
+	#
 	# Eye candy
+	#
 	moka-icon-theme
+	screenkey
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -115,6 +132,10 @@
   # Enable the KDE Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
+  # Enable Stump Window Manager 
+  services.xserver.windowManager.stumpwm.enable = true;
+
+
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.notarock = {
