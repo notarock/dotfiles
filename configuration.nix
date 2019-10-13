@@ -8,6 +8,9 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      # Contains all system packages required
+      ./system-packages.nix
+      ./notarock.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -51,36 +54,6 @@ networking.extraHosts =
 
 
   # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [ 
-	# CLI Stuff
-	wget curl 
-	vim 
-	git tig
-	ack tree
-	feh neofetch scrot
-	gnupg pass  
-	zip unzip unar
-	sbcl php
-	#
-	# Tooling
-	#
-	kitty tilda
-	docker-compose vagrant
-	#
-	# GUI Apps
-	#
-	emacs
-	libreoffice evince
-	firefox thunderbird
-	qtpass
-	obs-studio
-	#
-	# Eye candy
-	#
-	moka-icon-theme screenkey
-	texlive.combined.scheme-full
-  ];
 
 	# Some programs need SUID wrappers, can be configured further or are
 	# started in user sessions.
@@ -126,15 +99,6 @@ networking.extraHosts =
 
   # Enable Stump Window Manager 
   services.xserver.windowManager.stumpwm.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.notarock = {
-    home = "/home/notarock";
-    description = "VIP";
-    isNormalUser = true;
-    shell = pkgs.zsh;
-    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
-  };
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
