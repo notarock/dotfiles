@@ -54,55 +54,58 @@ networking.extraHosts =
   # $ nix search wget
   environment.systemPackages = with pkgs; [ 
 	# CLI Stuff
-	wget 
+	wget curl 
 	vim 
-	curl 
-	git 
-	gnupg
-	ack
-	feh
-	tree
-	neofetch
-	pass
-	scrot
-	zip
-	unzip
-	unar
-	tig
-	sbcl
+	git tig
+	ack tree
+	feh neofetch scrot
+	gnupg pass  
+	zip unzip unar
+	sbcl php
 	#
 	# Tooling
 	#
-	kitty
-	tilda
-	docker-compose
-	vagrant
+	kitty tilda
+	docker-compose vagrant
 	#
 	# GUI Apps
 	#
 	emacs
-	libreoffice
-	evince
-	firefox
+	libreoffice evince
+	firefox thunderbird
 	qtpass
-	thunderbird
 	obs-studio
 	#
 	# Eye candy
 	#
-	moka-icon-theme
-	screenkey
+	moka-icon-theme screenkey
+	texlive.combined.scheme-full
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
+	# Some programs need SUID wrappers, can be configured further or are
+	# started in user sessions.
+	# programs.mtr.enable = true;
+	programs.gnupg.agent = {
+		enable = true;
+		enableSSHSupport = true;
+	};
 
-  # List services that you want to enable:
+	# list services that you want to enable:
+	services = {
+		journald.console = "/dev/tty12";
+		printing.enable = true;
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+		# Enable the X11 windowing system.
+		xserver = {
+			enable = true;
+			layout = "ca,fr";
+			dpi = 144;
+
+			# Enable touchpad support.
+			libinput.enable = true;
+			wacom.enable = true;
+		};
+	};
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -110,35 +113,24 @@ networking.extraHosts =
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "ca,fr";
-  services.xserver.dpi = 144;
-
   # services.xserver.xkbOptions = "eurosign:e";
-
-  # Enable touchpad support.
-  services.xserver.libinput.enable = true;
-  services.xserver.wacom.enable = true;
 
 
   # Enable the KDE Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
+
   # Enable Stump Window Manager 
   services.xserver.windowManager.stumpwm.enable = true;
 
-
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.notarock = {
+    home = "/home/notarock";
+    description = "VIP";
     isNormalUser = true;
     shell = pkgs.zsh;
     extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
@@ -148,6 +140,6 @@ networking.extraHosts =
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "19.03"; # Did you read the comment?
+  system.stateVersion = "19.03"; # Did you read the comment? YES
 
 }
