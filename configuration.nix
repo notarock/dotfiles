@@ -11,6 +11,7 @@
       # Contains all system packages required
       ./system-packages.nix
       ./notarock.nix
+      ./stumpwm.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -96,9 +97,6 @@ networking.extraHosts =
   # Enable the KDE Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
-
-  # Enable Stump Window Manager 
-  services.xserver.windowManager.stumpwm.enable = true;
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
