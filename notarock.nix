@@ -1,4 +1,3 @@
-
 { pkgs, ... }:
 
 {
@@ -10,11 +9,14 @@
     shell = pkgs.zsh;
     extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
+      scrot
       kitty tilda
       libreoffice evince
       firefox thunderbird
       qtpass
       obs-studio
+      feh
+      gimp
       #
       # Eye candy
       #
