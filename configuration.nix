@@ -7,11 +7,11 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      # Contains all system packages required
-      ./system-packages.nix
-      ./notarock.nix
-      ./stumpwm.nix
+      ./host/hardware-configuration.nix   # Host-specific hardware configuration
+      ./system-packages.nix               # Contains all system packages required
+      ./notarock.nix                      # Nickname for root
+      ./stumpwm.nix                       # My Poor attempt at overwriting a build.
+      ./desktop.nix                       # DE and WMs
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -24,16 +24,15 @@
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.guest.enable = true;
 
-  networking.hostName = "thinknix"; # Define your hostname.
+  networking.hostName = "NixOS"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
 
-networking.extraHosts =
-  ''
+  networking.extraHosts =
+    ''
  192.168.10.10 homestead.test
   '';
-
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -49,38 +48,22 @@ networking.extraHosts =
   # Set your time zone.
   time.timeZone = "America/Montreal";
 
-  # CLI stuff
-  programs.zsh.enable = true;
-  programs.zsh.ohMyZsh.enable = true;
+  programs = {
+    # CLI stuff
+    zsh.enable = true;
+    zsh.ohMyZsh.enable = true;
 
+    # Educationnal programming language
+    java.enable = true;
+
+    # Encryption key stuff
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+  };
 
   # List packages installed in system profile. To search, run:
-
-	# Some programs need SUID wrappers, can be configured further or are
-	# started in user sessions.
-	# programs.mtr.enable = true;
-	programs.gnupg.agent = {
-		enable = true;
-		enableSSHSupport = true;
-	};
-
-	# list services that you want to enable:
-	services = {
-		journald.console = "/dev/tty12";
-		printing.enable = true;
-
-		# Enable the X11 windowing system.
-		xserver = {
-			enable = true;
-			layout = "ca,fr";
-			dpi = 144;
-
-			# Enable touchpad support.
-			libinput.enable = true;
-			wacom.enable = true;
-		};
-	};
-
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -91,17 +74,15 @@ networking.extraHosts =
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # services.xserver.xkbOptions = "eurosign:e";
-
-
-  # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
   system.stateVersion = "19.03"; # Did you read the comment? YES
+
+  nix = {
+    maxJobs = 4;
+    autoOptimiseStore = true;
+  };
 
 }

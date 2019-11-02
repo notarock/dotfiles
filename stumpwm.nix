@@ -1,8 +1,6 @@
 { pkgs, ... }:
 
 {
-  services.xserver.windowManager.stumpwm.enable = true;
-
   environment.systemPackages = with pkgs; [
 
     lispPackages.xembed
@@ -28,5 +26,12 @@
 
     }))
   ];
+
+  environment.variables = {
+    ASDF_OUTPUT_TRANSLATIONS="/nix/store/:/nix/store/";
+  };
+
+  services.xserver.windowManager.stumpwm.enable = true;
+
 
 }

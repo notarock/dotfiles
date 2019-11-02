@@ -16,9 +16,6 @@
     lsof pstree
     nmap parted ranger stow
     traceroute telnet tcpdump whois dnsutils mtr
-    docker-compose vagrant
-    sbcl
+    docker-compose vagrant xorg.xhost
   ];
-
 }
-
