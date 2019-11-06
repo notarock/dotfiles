@@ -85,4 +85,7 @@
     autoOptimiseStore = true;
   };
 
+  # Fix Intel CPU throttling effecting ThinkPads
+  services.throttled.enable = true;
+
 }
