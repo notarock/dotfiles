@@ -48,7 +48,7 @@
       rakudo                                 # Perl 6
       nixfmt                                 # Nixos configuration linter
       shellcheck                             # Shell script linter
-      clojure                                # Elegant weapons for a more... civilized age
+      clojure leiningen                           # Elegant weapons for a more... civilized age
 
       # Devops tooling
       kubectl minikube kompose k9s
