@@ -30,3 +30,7 @@ or
 nixos-rebuild switch
 ```
 
+## Using fonts
+
+- Download the font from [here](https://input.fontbureau.com/download/)
+- Unzip in `~/.local/share/fonts`

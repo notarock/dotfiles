@@ -29,4 +29,16 @@
 
     };
   };
+
+  fonts = {
+    enableDefaultFonts = true;
+    fonts = with pkgs; [
+      dejavu_fonts
+      iosevka
+      ibm-plex
+      hack-font
+      # input-fonts - Must be downloaded from their website at
+    ];
+  };
+
 }

@@ -5,6 +5,7 @@
 { config, pkgs, ... }:
 
 {
+
   imports =
     [ # Include the results of the hardware scan.
       ./host/hardware-configuration.nix   # Host-specific hardware configuration
@@ -87,5 +88,6 @@
 
   # Fix Intel CPU throttling effecting ThinkPads
   services.throttled.enable = true;
+  boot.plymouth.enable = true;
 
 }
