@@ -14,7 +14,8 @@
       kitty tilda
       libreoffice evince
       firefox thunderbird
-      qtpass
+      rofi
+      qtpass rofi-pass
       obs-studio
       feh
       gimp
@@ -22,14 +23,19 @@
       vlc
       rhythmbox
       gnome3.gedit
+      screenkey
       #
       # Eye candy
       #
       moka-icon-theme
       papirus-icon-theme
-      screenkey
       arc-icon-theme
+      paper-icon-theme
+      paper-gtk-theme
+      numix-solarized-gtk-theme
       gnome3.gnome-tweaks
+      bibata-cursors
+      capitaine-cursors
 
       # Markup Languages
       texlive.combined.scheme-full
@@ -49,10 +55,14 @@
       nixfmt                                 # Nixos configuration linter
       shellcheck                             # Shell script linter
       clojure leiningen                           # Elegant weapons for a more... civilized age
+      python37Packages.pip
 
       # Devops tooling
       kubectl minikube kompose k9s
+      terraform
+      kubernetes-helm
       google-cloud-sdk
+      ansible
     ];
 
   };

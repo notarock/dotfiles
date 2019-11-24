@@ -33,4 +33,5 @@ nixos-rebuild switch
 ## Using fonts
 
 - Download the font from [here](https://input.fontbureau.com/download/)
+- run `nix-store --add-fixed sha256 Input-Font.zip`
 - Unzip in `~/.local/share/fonts`

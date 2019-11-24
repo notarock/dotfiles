@@ -13,7 +13,7 @@
       displayManager.gdm.autoLogin.enable = false;
 
       # Gnome
-      displayManager.gdm.wayland = true;
+      displayManager.gdm.wayland = false;
       desktopManager.gnome3.enable = true;
 
       # KDE
