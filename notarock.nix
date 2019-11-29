@@ -63,6 +63,9 @@
       kubernetes-helm
       google-cloud-sdk
       ansible
+
+      plantuml
+
     ];
 
   };

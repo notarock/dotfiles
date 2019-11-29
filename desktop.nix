@@ -37,6 +37,7 @@
       iosevka
       ibm-plex
       hack-font
+      monoid
       # input-fonts - Must be downloaded from their website at
     ];
   };
