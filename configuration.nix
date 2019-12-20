@@ -79,7 +79,7 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "19.03"; # Did you read the comment? YES
+  system.stateVersion = "19.09"; # Did you read the comment? YES
 
   nix = {
     maxJobs = 4;
@@ -87,7 +87,12 @@
   };
 
   # Fix Intel CPU throttling effecting ThinkPads
-  services.throttled.enable = true;
-  boot.plymouth.enable = true;
+
+  services = {
+    emacs.enable = false;
+    throttled.enable = true;
+  };
+
+  boot.plymouth.enable = false;
 
 }

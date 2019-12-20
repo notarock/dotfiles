@@ -29,10 +29,10 @@
       #
       moka-icon-theme
       papirus-icon-theme
-      arc-icon-theme
       paper-icon-theme
-      paper-gtk-theme
       numix-solarized-gtk-theme
+      numix-gtk-theme
+      arc-theme
       gnome3.gnome-tweaks
       bibata-cursors
       capitaine-cursors
@@ -65,9 +65,9 @@
       ansible
 
       plantuml
+      pandoc
 
     ];
-
   };
 
 }

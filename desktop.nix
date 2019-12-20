@@ -38,6 +38,8 @@
       ibm-plex
       hack-font
       monoid
+      ankacoder
+      ankacoder-condensed
       # input-fonts - Must be downloaded from their website at
     ];
   };
