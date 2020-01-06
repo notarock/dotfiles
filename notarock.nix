@@ -54,7 +54,7 @@
       rakudo                                 # Perl 6
       nixfmt                                 # Nixos configuration linter
       shellcheck                             # Shell script linter
-      clojure leiningen                           # Elegant weapons for a more... civilized age
+      clojure leiningen                      # Elegant weapons for a more... civilized age
       python37Packages.pip
 
       # Devops tooling
@@ -66,6 +66,7 @@
 
       plantuml
       pandoc
+      (steam.override { extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ]; nativeOnly = true; }).run
 
     ];
   };

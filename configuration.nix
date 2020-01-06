@@ -13,6 +13,7 @@
       ./notarock.nix                      # Nickname for root
       ./stumpwm.nix                       # My Poor attempt at overwriting a build.
       ./desktop.nix                       # DE and WMs
+      ./gaming.nix                        # Stuff that makes steam work
     ];
 
   # Use the systemd-boot EFI boot loader.
