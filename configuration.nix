@@ -5,16 +5,14 @@
 { config, pkgs, ... }:
 
 {
-
-  imports =
-    [ # Include the results of the hardware scan.
-      ./host/hardware-configuration.nix   # Host-specific hardware configuration
-      ./system-packages.nix               # Contains all system packages required
-      ./notarock.nix                      # Nickname for root
-      ./stumpwm.nix                       # My Poor attempt at overwriting a build.
-      ./desktop.nix                       # DE and WMs
-      ./gaming.nix                        # Stuff that makes steam work
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./host/hardware-configuration.nix # Host-specific hardware configuration
+    ./system-packages.nix # Contains all system packages required
+    ./notarock.nix # Nickname for root
+    ./stumpwm.nix # My Poor attempt at overwriting a build.
+    ./desktop.nix # DE and WMs
+    ./gaming.nix # Stuff that makes steam work
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -24,17 +22,16 @@
   # Virtualization
   virtualisation.docker.enable = true;
   virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.guest.enable = true;
+  virtualisation.virtualbox.guest.enable = false;
 
   networking.hostName = "NixOS"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
 
-  networking.extraHosts =
-    ''
- 192.168.10.10 homestead.test
-  '';
+  networking.extraHosts = ''
+    192.168.10.10 homestead.test
+     '';
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";

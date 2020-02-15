@@ -11,11 +11,15 @@
 
     packages = with pkgs; [
       scrot
-      kitty tilda
-      libreoffice evince
-      firefox thunderbird
+      kitty
+      tilda
+      libreoffice
+      evince
+      firefox
+      thunderbird
       rofi
-      qtpass rofi-pass
+      qtpass
+      rofi-pass
       obs-studio
       feh
       gimp
@@ -42,23 +46,36 @@
       multimarkdown
 
       # Programming Languages & associates tools
-      sbcl                                   # Steel bank's common lisp implementation
-      elixir                                 # A cure for erlang
-      php72                                  # Programmers Hate Php
-      gcc gnumake cmake rtags                # The power of the 80's
-      go_bootstrap gotools gocode gotests    # Gotta GO fast
-      ghc hlint stack                        # Purely functionnal
-      python38Full                           # SSSSSSSSSSSSSSsssssssssss
-      nodejs                                 # Writing spaghetti code with 12gbs of dependencies
-      plantuml                               # Uml and diagrams from text files
-      rakudo                                 # Perl 6
-      nixfmt                                 # Nixos configuration linter
-      shellcheck                             # Shell script linter
-      clojure leiningen                      # Elegant weapons for a more... civilized age
+      sbcl # Steel bank's common lisp implementation
+      elixir # A cure for erlang
+      php72 # Programmers Hate Php
+      gcc
+      gnumake
+      cmake
+      rtags # The power of the 80's
+      go_bootstrap
+      gotools
+      gocode
+      gotests # Gotta GO fast
+      ghc
+      hlint
+      stack # Purely functionnal
+      python38Full # SSSSSSSSSSSSSSsssssssssss
+      nodejs # Writing spaghetti code with 12gbs of dependencies
+      plantuml # Uml and diagrams from text files
+      rakudo # Perl 6
+      nixfmt # Nixos configuration linter
+      shellcheck # Shell script linter
+      clojure
+      leiningen # Elegant weapons for a more... civilized age
       python37Packages.pip
+      clang
 
       # Devops tooling
-      kubectl minikube kompose k9s
+      kubectl
+      minikube
+      kompose
+      k9s
       terraform
       kubernetes-helm
       google-cloud-sdk
@@ -66,7 +83,10 @@
 
       plantuml
       pandoc
-      (steam.override { extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ]; nativeOnly = true; }).run
+      (steam.override {
+        extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
+        nativeOnly = true;
+      }).run
 
     ];
   };
