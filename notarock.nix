@@ -10,24 +10,49 @@
     extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
 
     packages = with pkgs; [
-      scrot
+      #
+      # Programs
+      #
       kitty
-      tilda
       libreoffice
       evince
-      firefox
-      thunderbird
-      rofi
-      qtpass
-      rofi-pass
-      obs-studio
-      feh
-      gimp
-      maven
-      vlc
-      rhythmbox
+      gnome3.cheese
+      gnome3.evolution
       gnome3.gedit
+      gimp
+      krita
+      vlc
+      obs-studio
+      arandr
+      #jetbrains.datagrip
+      #jetbrains.idea-community
+      postman
+      #
+      # Web Browsers
+      #
+      chromium
+      firefox
+      #
+      # muh games
+      #
+      brogue
+      discord
+      steam
+      minecraft
+      #
+      # Terminal utility
+      #
+      scrot
+      rofi
+      rofi-pass
+      feh
+      rhythmbox
       screenkey
+      scrot
+      neofetch # This needs to be included with every distro.
+
+      unrar
+
       #
       # Eye candy
       #
@@ -41,37 +66,57 @@
       bibata-cursors
       capitaine-cursors
 
+      #
       # Markup Languages
+      #
       texlive.combined.scheme-full
       multimarkdown
+      plantuml
+      pandoc
 
+      #
       # Programming Languages & associates tools
-      sbcl # Steel bank's common lisp implementation
+      #
       elixir # A cure for erlang
-      php72 # Programmers Hate Php
+      #
+      # PHP Stuff
+      #
+      php73
+      php73Packages.composer
+      # C stuff
+      clang
       gcc
       gnumake
       cmake
       rtags # The power of the 80's
+      # Go stuff
       go_bootstrap
       gotools
       gocode
       gotests # Gotta GO fast
+      hugo
+      # Haskell
       ghc
       hlint
       stack # Purely functionnal
+      # Python stuff
       python38Full # SSSSSSSSSSSSSSsssssssssss
+      python37Packages.pip
+      # Parens
+      sbcl # Steel bank's common lisp implementation
+      clojure # Love this one.
+      leiningen # Elegant weapons for a more... civilized age
+      # Java
+      maven
+      # Others
       nodejs # Writing spaghetti code with 12gbs of dependencies
       plantuml # Uml and diagrams from text files
       rakudo # Perl 6
       nixfmt # Nixos configuration linter
       shellcheck # Shell script linter
-      clojure
-      leiningen # Elegant weapons for a more... civilized age
-      python37Packages.pip
-      clang
-
+      #
       # Devops tooling
+      #
       kubectl
       minikube
       kompose
@@ -81,14 +126,10 @@
       google-cloud-sdk
       ansible
 
-      plantuml
-      pandoc
       (steam.override {
         extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
         nativeOnly = true;
       }).run
-
     ];
   };
-
 }

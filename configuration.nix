@@ -5,6 +5,8 @@
 { config, pkgs, ... }:
 
 {
+  nixpkgs.config.allowUnfree = true;
+
   imports = [ # Include the results of the hardware scan.
     ./host/hardware-configuration.nix # Host-specific hardware configuration
     ./system-packages.nix # Contains all system packages required
@@ -79,6 +81,9 @@
   # should.
   system.stateVersion = "19.09"; # Did you read the comment? YES
 
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.allowReboot = true;
+
   nix = {
     maxJobs = 4;
     autoOptimiseStore = true;
@@ -92,5 +97,4 @@
   };
 
   boot.plymouth.enable = false;
-
 }
