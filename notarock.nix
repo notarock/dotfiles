@@ -108,6 +108,9 @@
       leiningen # Elegant weapons for a more... civilized age
       # Java
       maven
+      # rust
+      rustc
+      cargo
       # Others
       nodejs # Writing spaghetti code with 12gbs of dependencies
       plantuml # Uml and diagrams from text files
