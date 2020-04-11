@@ -13,11 +13,11 @@
       displayManager.gdm.autoLogin.enable = false;
 
       # Gnome
-      displayManager.gdm.wayland = false;
+      displayManager.gdm.wayland = true;
       desktopManager.gnome3.enable = true;
 
       # KDE
-      desktopManager.plasma5.enable = true;
+      desktopManager.plasma5.enable = false;
 
       enable = true;
       layout = "ca,fr";
@@ -48,10 +48,7 @@
       ibm-plex
       hack-font
       monoid
-      ankacoder
-      ankacoder-condensed
-      # input-fonts - Must be downloaded from their website at
+      mplus-outline-fonts
     ];
   };
-
 }

@@ -19,11 +19,14 @@
       gnome3.cheese
       gnome3.evolution
       gnome3.gedit
+      gnome3.pomodoro
       gimp
       krita
       vlc
       obs-studio
       arandr
+      peek
+      transmission
       #jetbrains.datagrip
       #jetbrains.idea-community
       postman
@@ -84,7 +87,9 @@
       php73
       php73Packages.composer
       # C stuff
+      # irony-server
       clang
+      clang-tools
       gcc
       gnumake
       cmake
@@ -105,14 +110,20 @@
       # Parens
       sbcl # Steel bank's common lisp implementation
       clojure # Love this one.
+      clj-kondo
       leiningen # Elegant weapons for a more... civilized age
       # Java
       maven
+      # Web omegalol
+      nodejs # Writing spaghetti code with 12gbs of dependencies
+      nodePackages.typescript
+      nodePackages.prettier
+
       # rust
       rustc
+      rustfmt
       cargo
       # Others
-      nodejs # Writing spaghetti code with 12gbs of dependencies
       plantuml # Uml and diagrams from text files
       rakudo # Perl 6
       nixfmt # Nixos configuration linter

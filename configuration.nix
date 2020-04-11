@@ -40,10 +40,11 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
-    defaultLocale = "en_CA.UTF-8";
+  i18n.defaultLocale = "en_CA.UTF-8";
+
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
   };
 
   # Set your time zone.
@@ -54,7 +55,6 @@
     zsh.enable = true;
     zsh.ohMyZsh.enable = true;
 
-    # Educationnal programming language
     java.enable = true;
 
     # Encryption key stuff
