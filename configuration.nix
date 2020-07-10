@@ -6,6 +6,9 @@
 
 {
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "openssl-1.0.2u"
+  ];
 
   imports = [ # Include the results of the hardware scan.
     ./host/hardware-configuration.nix # Host-specific hardware configuration
@@ -34,6 +37,8 @@
   networking.extraHosts = ''
     192.168.10.10 homestead.test
      '';
+
+  networking.nameservers = ["1.1.1.1" "9.9.9.9"];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -81,7 +86,7 @@
   # should.
   system.stateVersion = "19.09"; # Did you read the comment? YES
 
-  system.autoUpgrade.enable = true;
+  system.autoUpgrade.enable = false;
   system.autoUpgrade.allowReboot = true;
 
   nix = {
@@ -97,4 +102,7 @@
   };
 
   boot.plymouth.enable = false;
+
+  boot.supportedFilesystems = [ "ntfs" ];
+
 }

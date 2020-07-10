@@ -27,6 +27,7 @@
       arandr
       peek
       transmission
+      pgadmin
       #jetbrains.datagrip
       #jetbrains.idea-community
       postman
@@ -62,6 +63,7 @@
       moka-icon-theme
       papirus-icon-theme
       paper-icon-theme
+      paper-gtk-theme
       numix-solarized-gtk-theme
       numix-gtk-theme
       arc-theme
@@ -86,6 +88,7 @@
       #
       php73
       php73Packages.composer
+      # sdsadprintln "Hello, World!"))
       # C stuff
       # irony-server
       clang
@@ -106,18 +109,21 @@
       stack # Purely functionnal
       # Python stuff
       python38Full # SSSSSSSSSSSSSSsssssssssss
-      python37Packages.pip
+      # python38packages.pip
+      # python38packages.pylint
       # Parens
       sbcl # Steel bank's common lisp implementation
       clojure # Love this one.
+      clojure-lsp
       clj-kondo
       leiningen # Elegant weapons for a more... civilized age
       # Java
       maven
       # Web omegalol
-      nodejs # Writing spaghetti code with 12gbs of dependencies
+      nodejs-13_x # Writing spaghetti code with 12gbs of dependencies
       nodePackages.typescript
       nodePackages.prettier
+      nodePackages.eslint
 
       # rust
       rustc

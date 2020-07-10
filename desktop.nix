@@ -19,6 +19,8 @@
       # KDE
       desktopManager.plasma5.enable = false;
 
+      windowManager.stumpwm.enable = true;
+
       enable = true;
       layout = "ca,fr";
       dpi = 144;
@@ -49,6 +51,7 @@
       hack-font
       monoid
       mplus-outline-fonts
+      fantasque-sans-mono
     ];
   };
 }
