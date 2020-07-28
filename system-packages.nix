@@ -17,9 +17,5 @@
     nmap parted ranger stow
     traceroute telnet tcpdump whois dnsutils mtr
     docker-compose vagrant xorg.xhost
-
-    # Haskell packages for XMonad
-    haskellPackages.xmobar
-    haskellPackages.xmonad
   ];
 }

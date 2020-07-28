@@ -14,7 +14,6 @@
     ./host/hardware-configuration.nix # Host-specific hardware configuration
     ./system-packages.nix # Contains all system packages required
     ./notarock.nix # Nickname for root
-    ./stumpwm.nix # My Poor attempt at overwriting a build.
     ./desktop.nix # DE and WMs
     ./gaming.nix # Stuff that makes steam work
   ];
@@ -36,7 +35,7 @@
 
   networking.extraHosts = ''
     192.168.10.10 homestead.test
-     '';
+  '';
 
   networking.nameservers = ["1.1.1.1" "9.9.9.9"];
 
@@ -84,7 +83,7 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "19.09"; # Did you read the comment? YES
+  system.stateVersion = "20.03"; # Did you read the comment? YES
 
   system.autoUpgrade.enable = false;
   system.autoUpgrade.allowReboot = true;

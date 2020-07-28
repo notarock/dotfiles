@@ -27,7 +27,6 @@
       arandr
       peek
       transmission
-      pgadmin
       #jetbrains.datagrip
       #jetbrains.idea-community
       postman
@@ -70,6 +69,7 @@
       gnome3.gnome-tweaks
       bibata-cursors
       capitaine-cursors
+      riot-desktop
 
       #
       # Markup Languages
@@ -145,7 +145,6 @@
       kubernetes-helm
       google-cloud-sdk
       ansible
-
       (steam.override {
         extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
         nativeOnly = true;
@@ -153,3 +152,4 @@
     ];
   };
 }
+
