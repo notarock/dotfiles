@@ -6,16 +6,15 @@
 
 {
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "openssl-1.0.2u"
-  ];
+  # nixpkgs.config.permittedInsecurePackages = [
+  #   "openssl-1.0.2u"
+  # ];
 
   imports = [ # Include the results of the hardware scan.
     ./host/hardware-configuration.nix # Host-specific hardware configuration
-    ./system-packages.nix # Contains all system packages required
-    ./notarock.nix # Nickname for root
-    ./desktop.nix # DE and WMs
-    ./gaming.nix # Stuff that makes steam work
+    # ./system-packages.nix # Contains all system packages required
+    # ./notarock.nix # Nickname for root
+    # ./gaming.nix # Stuff that makes steam work
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -28,7 +27,7 @@
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.guest.enable = false;
 
-  networking.hostName = "NixOS"; # Define your hostname.
+  networking.hostName = "Labrue-nix"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
@@ -59,8 +58,6 @@
     zsh.enable = true;
     zsh.ohMyZsh.enable = true;
 
-    java.enable = true;
-
     # Encryption key stuff
     gnupg.agent = {
       enable = true;
@@ -88,11 +85,6 @@
   system.autoUpgrade.enable = false;
   system.autoUpgrade.allowReboot = true;
 
-  nix = {
-    maxJobs = 4;
-    autoOptimiseStore = true;
-  };
-
   # Fix Intel CPU throttling effecting ThinkPads
 
   services = {
@@ -103,5 +95,128 @@
   boot.plymouth.enable = false;
 
   boot.supportedFilesystems = [ "ntfs" ];
+
+  users.users.roche = {
+    isNormalUser = true;
+    home = "/home/roche";
+    description = "roche";
+    extraGroups = [ "wheel" ];
+  };
+
+  services.xserver.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome3.enable = true;
+
+      services.xserver.layout = "ca,fr";
+      services.xserver.dpi = 144;
+
+  environment.systemPackages = with pkgs; [
+
+    wget curl
+    vim neovim emacs
+    git tig
+    ack tree exa fd ripgrep bc bat
+    gnupg pass
+    zip unzip
+    colordiff
+    rsync
+    htop gotop
+    lsof pstree
+    nmap parted ranger stow
+    traceroute telnet tcpdump whois dnsutils mtr
+    docker-compose vagrant xorg.xhost
+
+      #
+      # Programs
+      #
+      kitty
+      libreoffice
+      evince
+      gnome3.cheese
+      gnome3.evolution
+      gnome3.gedit
+      gnome3.pomodoro
+      gimp
+      krita
+      vlc
+      obs-studio
+      arandr
+      peek
+      transmission
+      #jetbrains.datagrip
+      #jetbrains.idea-community
+      postman
+      #
+      # Web Browsers
+      #
+      chromium
+      firefox
+      #
+      # muh games
+      #
+      brogue
+      discord
+      steam
+      minecraft
+      #
+      # Terminal utility
+      #
+      scrot
+      rofi
+      rofi-pass
+      feh
+      rhythmbox
+      screenkey
+      scrot
+      neofetch # This needs to be included with every distro.
+
+      unrar
+
+      #
+      # Eye candy
+      #
+      moka-icon-theme
+      papirus-icon-theme
+      paper-icon-theme
+      paper-gtk-theme
+      numix-solarized-gtk-theme
+      numix-gtk-theme
+      arc-theme
+      gnome3.gnome-tweaks
+      bibata-cursors
+      capitaine-cursors
+      riot-desktop
+
+      #
+      # Devops tooling
+      #
+      kubectl
+      minikube
+      kompose
+      k9s
+      terraform
+      kubernetes-helm
+      google-cloud-sdk
+      ansible
+      (steam.override {
+        extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
+        nativeOnly = true;
+      }).run
+    ];
+
+
+  fonts = {
+    enableDefaultFonts = true;
+    fonts = with pkgs; [
+      dejavu_fonts
+      iosevka
+      hack-font
+    ];
+  };
+
+
+  hardware.opengl.driSupport32Bit = true;
+  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
+  hardware.pulseaudio.support32Bit = true;
 
 }
