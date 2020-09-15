@@ -12,10 +12,12 @@
 
   imports = [ # Include the results of the hardware scan.
     ./host/hardware-configuration.nix # Host-specific hardware configuration
+    <home-manager/nixos>
     # ./system-packages.nix # Contains all system packages required
     # ./notarock.nix # Nickname for root
     # ./gaming.nix # Stuff that makes steam work
   ];
+
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -103,15 +105,65 @@
     extraGroups = [ "wheel" ];
   };
 
+  home-manager = {
+    users.roche = { pkgs, ... }: {
+      programs.zsh.enable = true;
+
+      programs.kitty = {
+        enable = true;
+        font.package = pkgs.iosevka;
+        font.name = "Iosevka Regular 18";
+        settings = {
+          enable_audio_bell = false;
+          open_url_with = "firefox";
+          scrollback_lines = 5000;
+          cursor_shape = "block";
+          cursor_blink_interval = "1.0";
+          cursor_stop_blinking_after = "1.0";
+          cursor_text_color = "background";
+          copy_on_select = "no";
+          mouse_hide_wait = "3.0";
+          sync_to_monitor = "yes";
+          enabled_layouts =  "Vertical";
+
+          background = "#1d1f21";
+          foreground = "#c4c8c5";
+          cursor = "#ffffff";
+
+          selection_background = "#363a41";
+          color0 = "#000000";
+          color8 = "#000000";
+          color1 = "#cc6666";
+          color9 = "#cc6666";
+          color2 = "#b5bd68";
+          color10 = "#b5bd68";
+          color3 = "#f0c574";
+          color11 = "#f0c574";
+          color4 = "#80a1bd";
+          color12 = "#80a1bd";
+          color5 = "#b294ba";
+          color13 = "#b294ba";
+          color6 = "#8abdb6";
+          color14 = "#8abdb6";
+          color7 = "#fffefe";
+          color15 = "#fffefe";
+          selection_foreground = "#1d1f21";
+        };
+
+      };
+    };
+    useUserPackages = true;
+    useGlobalPkgs = true;
+  };
+
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
 
-      services.xserver.layout = "ca,fr";
-      services.xserver.dpi = 144;
+  services.xserver.layout = "ca,fr";
+  services.xserver.dpi = 144;
 
   environment.systemPackages = with pkgs; [
-
     wget curl
     vim neovim emacs
     git tig
@@ -126,78 +178,81 @@
     traceroute telnet tcpdump whois dnsutils mtr
     docker-compose vagrant xorg.xhost
 
-      #
-      # Programs
-      #
-      kitty
-      libreoffice
-      evince
-      gnome3.cheese
-      gnome3.evolution
-      gnome3.gedit
-      gnome3.pomodoro
-      gimp
-      krita
-      vlc
-      obs-studio
-      arandr
-      peek
-      transmission
-      #jetbrains.datagrip
-      #jetbrains.idea-community
-      postman
-      #
-      # Web Browsers
-      #
-      chromium
-      firefox
-      #
-      # muh games
-      #
-      brogue
-      discord
-      steam
-      minecraft
-      #
-      # Terminal utility
-      #
-      scrot
-      rofi
-      rofi-pass
-      feh
-      rhythmbox
-      screenkey
-      scrot
-      neofetch # This needs to be included with every distro.
+    #
+    # Programs
+    #
+    libreoffice
+    evince
+    gnome3.cheese
+    gnome3.evolution
+    gnome3.gedit
+    gnome3.pomodoro
+    gimp
+    krita
+    vlc
+    obs-studio
+    arandr
+    peek
+    transmission
+    #jetbrains.datagrip
+    #jetbrains.idea-community
+    postman
+    #
+    # Web Browsers
+    #
+    chromium
+    firefox
+    #
+    # muh games
+    #
+    brogue
+    discord
+    steam
+    minecraft
+    #
+    # Terminal utility
+    #
+    scrot
+    rofi
+    rofi-pass
+    feh
+    rhythmbox
+    screenkey
+    scrot
+    neofetch # This needs to be included with every distro.
 
-      unrar
+    unrar
 
-      #
-      # Eye candy
-      #
-      moka-icon-theme
-      papirus-icon-theme
-      paper-icon-theme
-      paper-gtk-theme
-      numix-solarized-gtk-theme
-      numix-gtk-theme
-      arc-theme
-      gnome3.gnome-tweaks
-      bibata-cursors
-      capitaine-cursors
-      riot-desktop
+    #
+    # Eye candy
+    #
+    moka-icon-theme
+    papirus-icon-theme
+    paper-icon-theme
+    paper-gtk-theme
+    numix-solarized-gtk-theme
+    numix-gtk-theme
+    arc-theme
+    gnome3.gnome-tweaks
+    bibata-cursors
+    capitaine-cursors
+    riot-desktop
+    nextcloud-client
 
-      #
-      # Devops tooling
-      #
-      kubectl
-      minikube
-      kompose
-      k9s
-      terraform
-      kubernetes-helm
-      google-cloud-sdk
-      ansible
+    jdk11
+    jre
+
+    #
+    # Devops tooling
+    #
+    kubectl
+    minikube
+    kompose
+    k9s
+    terraform
+    kubernetes-helm
+    google-cloud-sdk
+    ansible
       (steam.override {
         extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
         nativeOnly = true;
