@@ -151,6 +151,7 @@
         };
 
       };
+
     };
     useUserPackages = true;
     useGlobalPkgs = true;
@@ -239,9 +240,9 @@
     riot-desktop
     nextcloud-client
 
+    woeusb
     jdk11
     jre
-
     #
     # Devops tooling
     #
