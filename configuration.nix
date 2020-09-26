@@ -1,7 +1,5 @@
 # Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
+# your system.  Help is available in the configuration.nix(5) man page and in the NixOS manual (accessible by running ‘nixos-help’).
 { config, pkgs, ... }:
 
 {
@@ -103,16 +101,43 @@
     home = "/home/roche";
     description = "roche";
     extraGroups = [ "wheel" ];
+    shell = pkgs.zsh;
   };
 
   home-manager = {
     users.roche = { pkgs, ... }: {
-      programs.zsh.enable = true;
+      programs.zsh = {
+        enable = true;
+        shellAliases = {
+          ll = "ls -alF";
+          la = "ls -A";
+          l = "ls -CF";
+          cp = "cp -i";
+          df = "df -h";
+          cdsrc = "cd ~/src/";
+          ".." = "cd ..";
+          "..." = "cd ../..";
+          "...." = "cd ../../..";
+          "....." = "cd ../../../..";
+          vi = "vim";
+          vif = "vim \$\(fzf\)";
+          lla = "ls -la";
+          lt = "ls -lrt";
+          dstop = "docker stop $(docker ps -a -q)";
+          dclean = "docker rm $(docker ps -a -q)";
+          dclear = "docker rmi $(docker images -q)";
+          open = "$FILEMANAGER";
+          nixc = "sudo $EDITOR /etc/nixos/configuration.nix";
+          nbs = "sudo nixos-rebuild switch";
+          wttr = "curl wttr.in";
+          k = "kubectl";
+        };
+      };
 
       programs.kitty = {
         enable = true;
         font.package = pkgs.iosevka;
-        font.name = "Iosevka Regular 18";
+        font.name = "Iosevka Regular 20";
         settings = {
           enable_audio_bell = false;
           open_url_with = "firefox";
@@ -126,31 +151,70 @@
           sync_to_monitor = "yes";
           enabled_layouts =  "Vertical";
 
-          background = "#1d1f21";
-          foreground = "#c4c8c5";
-          cursor = "#ffffff";
+          # Base16 Helios - kitty color config
+          # Scheme by Alex Meyer (https://github.com/reyemxela)
+          background = "#1d2021";
+          foreground = "#d5d5d5";
+          selection_background = "#d5d5d5";
+          selection_foreground = "#1d2021";
+          url_color = "#cdcdcd";
+          cursor = "#d5d5d5";
+          active_border_color = "#6f7579";
+          inactive_border_color = "#383c3e";
+          active_tab_background = "#1d2021";
+          active_tab_foreground = "#d5d5d5";
+          inactive_tab_background = "#383c3e";
+          inactive_tab_foreground = "#cdcdcd";
+          tab_bar_background = "#383c3e";
 
-          selection_background = "#363a41";
-          color0 = "#000000";
-          color8 = "#000000";
-          color1 = "#cc6666";
-          color9 = "#cc6666";
-          color2 = "#b5bd68";
-          color10 = "#b5bd68";
-          color3 = "#f0c574";
-          color11 = "#f0c574";
-          color4 = "#80a1bd";
-          color12 = "#80a1bd";
-          color5 = "#b294ba";
-          color13 = "#b294ba";
-          color6 = "#8abdb6";
-          color14 = "#8abdb6";
-          color7 = "#fffefe";
-          color15 = "#fffefe";
-          selection_foreground = "#1d1f21";
+          color0 = "#1d2021";
+          color1 = "#d72638";
+          color2 = "#88b92d";
+          color3 = "#f19d1a";
+          color4 = "#1e8bac";
+          color5 = "#be4264";
+          color6 = "#1ba595";
+          color7 = "#d5d5d5";
+          color8 = "#6f7579";
+          color9 = "#eb8413";
+          color10 = "#383c3e";
+          color11 = "#53585b";
+          color12 = "#cdcdcd";
+          color13 = "#dddddd";
+          color14 = "#c85e0d";
+          color15 = "#e5e5e5";
+
         };
 
       };
+
+      programs.zsh.oh-my-zsh = {
+        enable = true;
+        theme = "mh";
+        plugins = [
+          "git"
+          "git-flow"
+          "git-extras"
+          "pass"
+          "docker"
+          "kubectl"
+          "vagrant"
+          "npm"
+          "node"
+          "python"
+        ];
+        extraConfig = "
+          export PATH=$HOME/bin:/usr/local/bin:$PATH
+          export PATH=$HOME/snap:$PATH
+          export PATH=$HOME/.emacs.d/bin/:$PATH
+        ";
+
+      };
+
+      gtk.iconTheme.package = pkgs.numix-icon-theme-square;
+      gtk.iconTheme.name = "Numix-Square";
+      gtk.theme.package = pkgs.numix-gtk-theme ;
+      gtk.theme.name = "Numix";
 
     };
     useUserPackages = true;
@@ -227,18 +291,14 @@
     #
     # Eye candy
     #
-    moka-icon-theme
-    papirus-icon-theme
-    paper-icon-theme
-    paper-gtk-theme
-    numix-solarized-gtk-theme
-    numix-gtk-theme
-    arc-theme
     gnome3.gnome-tweaks
     bibata-cursors
     capitaine-cursors
     riot-desktop
     nextcloud-client
+
+    pkgs.numix-icon-theme-square
+    pkgs.numix-gtk-theme
 
     woeusb
     jdk11
@@ -254,10 +314,24 @@
     kubernetes-helm
     google-cloud-sdk
     ansible
-      (steam.override {
-        extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
-        nativeOnly = true;
-      }).run
+    (steam.override {
+      extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
+      nativeOnly = true;
+    }).run
+
+    (sudo.override {
+      withInsults = true;
+    })
+
+    # Gnome ext
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.caffeine
+    gnomeExtensions.system-monitor
+    gnomeExtensions.impatience
+
+    spotify
+    ccls
+
     ];
 
 
@@ -269,7 +343,6 @@
       hack-font
     ];
   };
-
 
   hardware.opengl.driSupport32Bit = true;
   hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
