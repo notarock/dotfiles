@@ -331,6 +331,7 @@
 
     spotify
     ccls
+    clang-tools
 
     ];
 
