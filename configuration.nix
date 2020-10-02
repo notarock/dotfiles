@@ -22,8 +22,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.cleanTmpDir = true;
 
-  # Virtualization
-  virtualisation.docker.enable = true;
+  # Virtualization virtualisation.docker.enable = true;
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.guest.enable = false;
 
@@ -36,7 +35,7 @@
     192.168.10.10 homestead.test
   '';
 
-  networking.nameservers = ["1.1.1.1" "9.9.9.9"];
+  # networking.nameservers = ["1.1.1.1" "9.9.9.9"];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -100,7 +99,7 @@
     isNormalUser = true;
     home = "/home/roche";
     description = "roche";
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "docker"];
     shell = pkgs.zsh;
   };
 
@@ -131,6 +130,7 @@
           nbs = "sudo nixos-rebuild switch";
           wttr = "curl wttr.in";
           k = "kubectl";
+          randpw = "dd if=/dev/urandom bs=1 count=64 2>/dev/null | base64 -w 0 | rev | cut -b 2- | rev";
         };
       };
 
@@ -224,11 +224,19 @@
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
+  services.xserver.windowManager.stumpwm.enable = true;
 
   services.xserver.layout = "ca,fr";
   services.xserver.dpi = 144;
 
   environment.systemPackages = with pkgs; [
+    # (stumpwm.overrideAttrs (oldAttrs: {
+        # buildInputs = oldAttrs.buildInputs or [] ++ [
+          # pkgs.lispPackages.clx-truetype
+        # ];
+      # })
+    # )
+
     wget curl
     vim neovim emacs
     git tig
@@ -332,6 +340,9 @@
     spotify
     ccls
     clang-tools
+    wakatime
+
+    texlive.combined.scheme-medium
 
     ];
 
@@ -345,8 +356,16 @@
     ];
   };
 
+  # G-word (g*ming)
   hardware.opengl.driSupport32Bit = true;
   hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
   hardware.pulseaudio.support32Bit = true;
+
+  # Keychron k8 fn keys stuff
+  boot.extraModprobeConfig = ''
+      options hid_apple fnmode=2
+  '';
+  boot.kernelModules = [ "hid-apple" ];
+
 
 }
