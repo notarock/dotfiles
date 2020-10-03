@@ -21,3 +21,7 @@ fi
 git clone git@github.com:notarock/.doom.d.git ~/.doom.d
 git clone git@github.com:notarock/pass.git ~/.password-store
 
+ln -s ~/Nextcloud/Pictures/ ~/Pictures
+ln -s ~/Nextcloud/Documents/ ~/Documents
+ln -s ~/Nextcloud/Videos/ ~/Videos
+ln -s ~/Nextcloud/Music ~/Music
