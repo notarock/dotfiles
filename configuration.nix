@@ -26,7 +26,7 @@
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.guest.enable = false;
 
-  networking.hostName = "Labrue-nix"; # Define your hostname.
+  networking.hostName = "Kreizemm"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
@@ -85,26 +85,32 @@
   system.autoUpgrade.allowReboot = true;
 
   # Fix Intel CPU throttling effecting ThinkPads
-
   services = {
     emacs.enable = false;
-    throttled.enable = true;
+    # AMD cpu time
+    # throttled.enable = true;
   };
 
   boot.plymouth.enable = false;
 
   boot.supportedFilesystems = [ "ntfs" ];
 
-  users.users.roche = {
+  users.users.notarock = {
     isNormalUser = true;
-    home = "/home/roche";
-    description = "roche";
+    home = "/home/notarock";
+    description = "notarock";
     extraGroups = [ "wheel" "docker"];
     shell = pkgs.zsh;
   };
 
   home-manager = {
-    users.roche = { pkgs, ... }: {
+    users.notarock = { pkgs, ... }: {
+      programs.git = {
+        enable = true;
+        userName  = "Roch D'Amour";
+        userEmail = "roch.damour@gmail.com";
+      };
+
       programs.zsh = {
         enable = true;
         shellAliases = {
@@ -367,5 +373,6 @@
   '';
   boot.kernelModules = [ "hid-apple" ];
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
 }
