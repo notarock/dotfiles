@@ -7,7 +7,10 @@ sudo chmod 644 ~/.ssh/known_hosts
 sudo chmod 600 ~/.ssh/id_rsa
 sudo chmod 644 ~/.ssh/id_rsa.pub
 
-read -p "Overwrite current ~/.emacs.d? (y/n)" -n 1 -r
+cd /nixos-configuration && git remote remove origin && \
+    git remote add origin git@github.com:notarock/nixos-configuration.git
+
+read -p "Overwrite current ~/.emacs.d and install doom? (y/n)" -n 1 -r
 echo "..."
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
