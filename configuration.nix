@@ -22,9 +22,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.cleanTmpDir = true;
 
-  # Virtualization virtualisation.docker.enable = true;
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.guest.enable = false;
 
   networking.hostName = "Kreizemm"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -46,7 +43,7 @@
 
   console = {
     font = "Lat2-Terminus16";
-    keyMap = "us";
+  keyMap = "us";
   };
 
   # Set your time zone.
@@ -105,6 +102,29 @@
 
   home-manager = {
     users.notarock = { pkgs, ... }: {
+      home.keyboard.layout = "ca,fr";
+      xsession = {
+        enable = true;
+        initExtra = ''
+            export WM=stumpwm
+          '';
+        windowManager.command = ''
+            ${pkgs.lispPackages.stumpwm}/bin/stumpwm-lisp-launcher.sh \
+              --eval '(require :clx-truetype)' \
+              --eval '(require :xembed)' \
+              --eval '(require :swank)' \
+              --eval '(require :asdf)' \
+              --eval '(asdf:load-system :stumpwm)' \
+              --eval '(stumpwm:stumpwm)'
+          '';
+      };
+
+      xresources.properties = {
+        "XTerm*faceName" = "dejavu sans mono";
+        "Xcursor.size"= "32";
+        "Xcursor.theme"= "Bibata Oil";
+      };
+
       programs.git = {
         enable = true;
         userName  = "Roch D'Amour";
@@ -230,18 +250,32 @@
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
-  services.xserver.windowManager.stumpwm.enable = true;
+
+  services.xserver.windowManager.stumpwm = {
+    enable = true;
+  };
+
+  nixpkgs.overlays = [
+    (final: super: {
+      lispPackages.stumpwm = super.lispPackages.stumpwm.overrideAttrs (
+        oldAttrs: rec {
+          propagatedBuildInputs = with super; [
+            lispPackages.clx-truetype
+            lispPackages.xembed
+            lispPackages.swank
+            lispPackages.quicklisp
+          ] ++ (oldAttrs.propagatedBuildInputs or []);
+        }
+      );
+    }
+    )
+  ];
 
   services.xserver.layout = "ca,fr";
-  services.xserver.dpi = 144;
+  services.xserver.dpi = 96;
 
   environment.systemPackages = with pkgs; [
-    # (stumpwm.overrideAttrs (oldAttrs: {
-        # buildInputs = oldAttrs.buildInputs or [] ++ [
-          # pkgs.lispPackages.clx-truetype
-        # ];
-      # })
-    # )
+    qemu_kvm
 
     wget curl
     vim neovim emacs
@@ -343,6 +377,8 @@
     gnomeExtensions.system-monitor
     gnomeExtensions.impatience
 
+    tldr
+
     spotify
     ccls
     clang-tools
@@ -369,10 +405,10 @@
 
   # Keychron k8 fn keys stuff
   boot.extraModprobeConfig = ''
-      options hid_apple fnmode=2
+    options hid_apple fnmode=2
   '';
-  boot.kernelModules = [ "hid-apple" ];
-
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelModules = [ "kvm-amd" ];
+  virtualisation.libvirtd.enable = true;
 
 }
