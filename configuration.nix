@@ -32,7 +32,12 @@
     192.168.10.10 homestead.test
   '';
 
-  # networking.nameservers = ["1.1.1.1" "9.9.9.9"];
+  #  65.39.166.132 = Cogeco Montréal
+  #  1.1.1.1       = Cloudflare
+  #  9.9.9.9       = Quad-9
+  #
+  #
+  networking.nameservers = ["65.39.166.132"  "1.1.1.1" "9.9.9.9"];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -55,9 +60,11 @@
     zsh.ohMyZsh.enable = true;
 
     # Encryption key stuff
+    ssh.startAgent = false;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
+      # pinentryFlavor = "curses";
     };
   };
 
@@ -76,7 +83,7 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "20.03"; # Did you read the comment? YES
+  system.stateVersion = "20.09"; # Did you read the comment? YES
 
   system.autoUpgrade.enable = false;
   system.autoUpgrade.allowReboot = true;
@@ -100,23 +107,43 @@
     shell = pkgs.zsh;
   };
 
+  # nixpkgs.overlays = [
+  #   (final: super: {
+  #     lispPackages.stumpwm = super.lispPackages.stumpwm.overrideAttrs (
+  #       oldAttrs: rec {
+  #         propagatedBuildInputs = with super; [
+  #           lispPackages.clx-truetype
+  #           lispPackages.xembed
+  #           lispPackages.swank
+  #           lispPackages.quicklisp
+  #         ] ++ (oldAttrs.propagatedBuildInputs or []);
+  #       }
+  #     );
+  #   })
+  # ];
+
   home-manager = {
     users.notarock = { pkgs, ... }: {
       home.keyboard.layout = "ca,fr";
-      xsession = {
+      # xsession = {
+      #   enable = true;
+      #   initExtra = ''
+      #       export WM=stumpwm
+      #     '';
+      #   windowManager.command = ''
+      #       ${pkgs.lispPackages.stumpwm}/bin/stumpwm-lisp-launcher.sh \
+      #         --eval '(require :clx-truetype)' \
+      #         --eval '(require :xembed)' \
+      #         --eval '(require :swank)' \
+      #         --eval '(require :asdf)' \
+      #         --eval '(asdf:load-system :stumpwm)' \
+      #         --eval '(stumpwm:stumpwm)'
+      #     '';
+      # };
+
+      xsession.windowManager.xmonad = {
         enable = true;
-        initExtra = ''
-            export WM=stumpwm
-          '';
-        windowManager.command = ''
-            ${pkgs.lispPackages.stumpwm}/bin/stumpwm-lisp-launcher.sh \
-              --eval '(require :clx-truetype)' \
-              --eval '(require :xembed)' \
-              --eval '(require :swank)' \
-              --eval '(require :asdf)' \
-              --eval '(asdf:load-system :stumpwm)' \
-              --eval '(stumpwm:stumpwm)'
-          '';
+        enableContribAndExtras = true;
       };
 
       xresources.properties = {
@@ -162,9 +189,9 @@
 
       programs.kitty = {
         enable = true;
-        font.package = pkgs.iosevka;
-        font.name = "Iosevka Regular 20";
+        font.name = "Essential PragmataPro";
         settings = {
+          font_size = "12.0";
           enable_audio_bell = false;
           open_url_with = "firefox";
           scrollback_lines = 5000;
@@ -177,39 +204,41 @@
           sync_to_monitor = "yes";
           enabled_layouts =  "Vertical";
 
-          # Base16 Helios - kitty color config
-          # Scheme by Alex Meyer (https://github.com/reyemxela)
+          # Base16 Darktooth - kitty color config
+          # Scheme by Jason Milkins (https://github.com/jasonm23)
           background = "#1d2021";
-          foreground = "#d5d5d5";
-          selection_background = "#d5d5d5";
+          foreground = "#a89984";
+          selection_background = "#a89984";
           selection_foreground = "#1d2021";
-          url_color = "#cdcdcd";
-          cursor = "#d5d5d5";
-          active_border_color = "#6f7579";
-          inactive_border_color = "#383c3e";
+          url_color = "#928374";
+          cursor = "#a89984";
+          active_border_color = "#665c54";
+          inactive_border_color = "#32302f";
           active_tab_background = "#1d2021";
-          active_tab_foreground = "#d5d5d5";
-          inactive_tab_background = "#383c3e";
-          inactive_tab_foreground = "#cdcdcd";
-          tab_bar_background = "#383c3e";
+          active_tab_foreground = "#a89984";
+          inactive_tab_background = "#32302f";
+          inactive_tab_foreground = "#928374";
+          tab_bar_background = "#32302f";
 
+          # normal
           color0 = "#1d2021";
-          color1 = "#d72638";
-          color2 = "#88b92d";
-          color3 = "#f19d1a";
-          color4 = "#1e8bac";
-          color5 = "#be4264";
-          color6 = "#1ba595";
-          color7 = "#d5d5d5";
-          color8 = "#6f7579";
-          color9 = "#eb8413";
-          color10 = "#383c3e";
-          color11 = "#53585b";
-          color12 = "#cdcdcd";
-          color13 = "#dddddd";
-          color14 = "#c85e0d";
-          color15 = "#e5e5e5";
+          color1 = "#fb543f";
+          color2 = "#95c085";
+          color3 = "#fac03b";
+          color4 = "#0d6678";
+          color5 = "#8f4673";
+          color6 = "#8ba59b";
+          color7 = "#a89984";
 
+          # bright
+          color8 =  "#665c54";
+          color9 =  "#fe8625";
+          color10 = "#32302f";
+          color11 = "#504945";
+          color12 = "#928374";
+          color13 = "#d5c4a1";
+          color14 = "#a87322";
+          color15 = "#fdf4c1";
         };
 
       };
@@ -251,28 +280,27 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
 
-  services.xserver.windowManager.stumpwm = {
-    enable = true;
-  };
-
-  nixpkgs.overlays = [
-    (final: super: {
-      lispPackages.stumpwm = super.lispPackages.stumpwm.overrideAttrs (
-        oldAttrs: rec {
-          propagatedBuildInputs = with super; [
-            lispPackages.clx-truetype
-            lispPackages.xembed
-            lispPackages.swank
-            lispPackages.quicklisp
-          ] ++ (oldAttrs.propagatedBuildInputs or []);
-        }
-      );
-    }
-    )
-  ];
-
   services.xserver.layout = "ca,fr";
   services.xserver.dpi = 96;
+
+  # services.xserver = {
+  #   windowManager.xmonad = {
+  #     enable = true;
+  #     enableContribAndExtras = true;
+  #     extraPackages = haskellPackages: [
+  #       haskellPackages.xmonad-contrib
+  #       haskellPackages.xmonad-extras
+  #       haskellPackages.xmonad
+  #     ];
+  #   };
+  #   windowManager.default = "xmonad";
+
+  #   displayManager.sessionCommands = with pkgs; lib.mkAfter
+  #     ''
+  #     xmodmap /path/to/.Xmodmap
+  #     '';
+  # };
+
 
   environment.systemPackages = with pkgs; [
     qemu_kvm
@@ -342,7 +370,7 @@
     gnome3.gnome-tweaks
     bibata-cursors
     capitaine-cursors
-    riot-desktop
+    element-desktop
     nextcloud-client
 
     pkgs.numix-icon-theme-square
@@ -386,15 +414,26 @@
 
     texlive.combined.scheme-medium
 
+    go
+    gocode
+    gopls
+
+    pandoc
+
+    zoom-us # School stuff
+    yubioath-desktop
+
+    virt-manager
+    gnome3.dconf
+
     ];
+
 
 
   fonts = {
     enableDefaultFonts = true;
     fonts = with pkgs; [
       dejavu_fonts
-      iosevka
-      hack-font
     ];
   };
 
@@ -410,5 +449,16 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "kvm-amd" ];
   virtualisation.libvirtd.enable = true;
+  virtualisation.docker.enable = true;
+
+  services.udev.packages = [ pkgs.yubikey-personalization pkgs.libu2f-host  ];
+  services.pcscd.enable = true;
+
+  # environment.shellInit = ''
+  # export GPG_TTY="$(tty)"
+  # gpg-connect-agent /bye
+  # export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+  # '';
+
 
 }

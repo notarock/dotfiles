@@ -23,6 +23,11 @@
       fsType = "vfat";
     };
 
+  fileSystems."/mnt/Cassette" =
+    { device = "/dev/disk/by-label/Cassette";
+      fsType = "ext4";
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/44b14860-eaa1-4956-bf47-3b7c69aac097"; }
     ];
