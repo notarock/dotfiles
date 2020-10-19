@@ -32,5 +32,23 @@
     [ { device = "/dev/disk/by-uuid/44b14860-eaa1-4956-bf47-3b7c69aac097"; }
     ];
 
+  powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
   nix.maxJobs = lib.mkDefault 8;
+
+  services.xserver.xrandrHeads = [
+    { output = "DP-1";
+      monitorConfig = ''
+          Option "PreferredMode" "3840x2160"
+          Option "Position" "1080 0"
+        '';
+    }
+    { output = "DP-2";
+      monitorConfig = ''
+          Option "PreferredMode" "1920x1080"
+          Option "Position" "0 0"
+          Option "Rotate" "left"
+        '';
+    }
+  ];
+
 }

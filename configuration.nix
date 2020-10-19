@@ -2,7 +2,29 @@
 # your system.  Help is available in the configuration.nix(5) man page and in the NixOS manual (accessible by running ‘nixos-help’).
 { config, pkgs, ... }:
 
-{
+let
+  my-theme = {
+          # normal
+          color0 = "#1d2021";
+          color1 = "#fb543f";
+          color2 = "#95c085";
+          color3 = "#fac03b";
+          color4 = "#0d6678";
+          color5 = "#8f4673";
+          color6 = "#8ba59b";
+          color7 = "#a89984";
+
+          # bright
+          color8 =  "#665c54";
+          color9 =  "#fe8625";
+          color10 = "#32302f";
+          color11 = "#504945";
+          color12 = "#928374";
+          color13 = "#d5c4a1";
+          color14 = "#a87322";
+          color15 = "#fdf4c1";
+  };
+in {
   nixpkgs.config.allowUnfree = true;
   # nixpkgs.config.permittedInsecurePackages = [
   #   "openssl-1.0.2u"
@@ -141,9 +163,160 @@
       #     '';
       # };
 
+      services.polybar = {
+        enable = true;
+        # package = pkgs.polybar.override {};
+        config = {
+          "settings" = {
+            throttle-ms = 50;
+            throttle-limit = 5;
+          };
+
+          "bar/main" = {
+            font-0 = "PragmataPro Essential:size=10";
+            monitor = "\${env:MONITOR:DP-1}";
+            width = "100%";
+            height = "1.5%";
+            radius = 0;
+            bottom = true;
+            background = my-theme.color0;
+            foreground = my-theme.color7;
+            overline-size = 0;
+            overline-color = my-theme.color6;
+            underline-size = 0;
+            underline-color = my-theme.color6;
+            spacing = 1;
+            padding-right = 2;
+            module-margin-left = 0;
+            module-margin-right = 2;
+            modules-left = "ewmh";
+            modules-center = "my-hostname";
+            modules-right = "volume cpu memory clock";
+            tray-position = "right";
+            tray-detached = false;
+
+            # font-0 = "NotoSans-Regular:size=8;0"
+            # font-1 = "FontAwesome:size=8;-2"
+            # font-2 = "ypn envypn:size=10;-1"
+            # font-3 = "Termsynu:size=8;-1"
+            # font-4 = "Unifont:size=6;-3"
+          };
+
+          "module/my-hostname" = {
+            type = "custom/script";
+            exec = "echo \"$(whoami) @ $(hostname)\"";
+            fail = false;
+            interval = 0;
+            format-foreground = my-theme.color7;
+          };
+
+          "module/cpu" = {
+            type = "internal/cpu";
+            interval = 2;
+            format = "<label> <ramp-coreload>";
+            format-background = my-theme.color2;
+            format-foreground = my-theme.color0;
+            format-underline = my-theme.color2;
+            format-overline = my-theme.color2;
+            format-padding = 2;
+            label = "cpu %percentage%%";
+            label-font = 3;
+            ramp-coreload-0 = "▁";
+            ramp-coreload-0-font = 5;
+            ramp-coreload-0-foreground = my-theme.color0;
+            ramp-coreload-1 = "▂";
+            ramp-coreload-1-font = 5;
+            ramp-coreload-1-foreground = my-theme.color0;
+            ramp-coreload-2 = "▃";
+            ramp-coreload-2-font = 5;
+            ramp-coreload-2-foreground = my-theme.color0;
+            ramp-coreload-3 = "▄";
+            ramp-coreload-3-font = 5;
+            ramp-coreload-3-foreground = my-theme.color0;
+            ramp-coreload-4 = "▅";
+            ramp-coreload-4-font = 5;
+            ramp-coreload-4-foreground = my-theme.color11;
+            ramp-coreload-5 = "▆";
+            ramp-coreload-5-font = 5;
+            ramp-coreload-5-foreground = my-theme.color11;
+            ramp-coreload-6 = "▇";
+            ramp-coreload-6-font = 5;
+            ramp-coreload-6-foreground = my-theme.color1;
+            ramp-coreload-7 = "█";
+            ramp-coreload-7-font = 5;
+            ramp-coreload-7-foreground = my-theme.color1;
+          };
+
+          "module/memory" = {
+            type = "internal/memory";
+            format = "<label> <bar-used>";
+            format-padding = 2;
+            format-background = my-theme.color6;
+            format-foreground = my-theme.color0;
+            format-underline = my-theme.color6;
+            format-overline = my-theme.color6;
+            label = "memory %percentage_used%%";
+            label-font = 3;
+            bar-used-width = 10;
+            bar-used-indicator = "|";
+            bar-used-indicator-font = 4;
+            bar-used-indicator-foreground = my-theme.color7;
+            bar-used-fill = "─";
+            bar-used-fill-font = 4;
+            bar-used-fill-foreground = my-theme.color7;
+            bar-used-empty = "─";
+            bar-used-empty-font = 4;
+            bar-used-empty-foreground = my-theme.color0;
+          };
+
+          "module/clock" = {
+            type = "internal/date";
+            date = "%%{T3}%Y-%m-%d %H:%M%%{T-}";
+            format-padding = 2;
+            format-background = my-theme.color1;
+            format-foreground = my-theme.color0;
+            format-underline = my-theme.color1;
+            format-overline = my-theme.color1;
+          };
+
+          "module/volume" = {
+            type = "internal/alsa";
+            master-mixer = "Master";
+            headphone-id = 9;
+            format-volume-padding = 2;
+            format-volume-background = my-theme.color3;
+            format-volume-foreground = "#43433a";
+            format-volume-underline = my-theme.color3;
+            format-volume-overline = my-theme.color3;
+            format-muted-padding = 2;
+            format-muted-background = "#77ffff";
+            format-muted-foreground = "#666666";
+            label-volume = "volume %percentage%%";
+            label-volume-font = 3;
+            label-muted = "sound muted";
+            label-muted-font = 3;
+          };
+
+          "module/ewmh" = {
+            type = "internal/xworkspaces";
+            enable-click = false;
+            enable-scroll = false;
+            label-active-foreground = "#ffffff";
+            label-active-background = "#3f3f3f";
+            label-active-padding = 4;
+            label-empty-padding = 1;
+          };
+        };
+
+        script = ''
+        MONITOR=$(polybar -m | grep primary | awk '{print $1}' | sed '$s/.$//') polybar main &
+        '';
+      };
+
       xsession.windowManager.xmonad = {
         enable = true;
         enableContribAndExtras = true;
+        config = extras/xmonad/xmonad.hs ;
       };
 
       xresources.properties = {
@@ -189,20 +362,20 @@
 
       programs.kitty = {
         enable = true;
-        font.name = "Essential PragmataPro";
-        settings = {
-          font_size = "12.0";
-          enable_audio_bell = false;
-          open_url_with = "firefox";
-          scrollback_lines = 5000;
-          cursor_shape = "block";
-          cursor_blink_interval = "1.0";
-          cursor_stop_blinking_after = "1.0";
-          cursor_text_color = "background";
-          copy_on_select = "no";
-          mouse_hide_wait = "3.0";
-          sync_to_monitor = "yes";
-          enabled_layouts =  "Vertical";
+      font.name = "Essential PragmataPro";
+      settings = {
+        font_size = "12.0";
+        enable_audio_bell = false;
+        open_url_with = "firefox";
+        scrollback_lines = 5000;
+        cursor_shape = "block";
+        cursor_blink_interval = "1.0";
+        cursor_stop_blinking_after = "1.0";
+        cursor_text_color = "background";
+        copy_on_select = "no";
+        mouse_hide_wait = "3.0";
+        sync_to_monitor = "yes";
+        enabled_layouts =  "Vertical";
 
           # Base16 Darktooth - kitty color config
           # Scheme by Jason Milkins (https://github.com/jasonm23)
@@ -279,9 +452,22 @@
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
+  services.xserver.windowManager.xmonad = {
+    enable = true;
+    enableContribAndExtras = true;
+  };
 
   services.xserver.layout = "ca,fr";
   services.xserver.dpi = 96;
+
+  services.redshift = {
+    enable = true;
+    temperature.day = 6500;
+    temperature.night = 3000;
+  };
+
+  location.latitude = 45.5;
+  location.longitude = -73.5;
 
   # services.xserver = {
   #   windowManager.xmonad = {
@@ -426,6 +612,12 @@
     virt-manager
     gnome3.dconf
 
+    nitrogen
+    polybar
+    xorg.xmessage
+    ghc
+
+    # pkglist
     ];
 
 
@@ -434,6 +626,7 @@
     enableDefaultFonts = true;
     fonts = with pkgs; [
       dejavu_fonts
+      opensans-ttf
     ];
   };
 
@@ -447,18 +640,15 @@
     options hid_apple fnmode=2
   '';
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [ "kvm-amd" ];
   virtualisation.libvirtd.enable = true;
   virtualisation.docker.enable = true;
 
-  services.udev.packages = [ pkgs.yubikey-personalization pkgs.libu2f-host  ];
+  services.udev.packages = [ pkgs.yubikey-personalization pkgs.libu2f-host ];
   services.pcscd.enable = true;
-
   # environment.shellInit = ''
   # export GPG_TTY="$(tty)"
   # gpg-connect-agent /bye
   # export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
   # '';
-
 
 }
