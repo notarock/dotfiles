@@ -4,25 +4,25 @@
 
 let
   my-theme = {
-          # normal
-          color0 = "#1d2021";
-          color1 = "#fb543f";
-          color2 = "#95c085";
-          color3 = "#fac03b";
-          color4 = "#0d6678";
-          color5 = "#8f4673";
-          color6 = "#8ba59b";
-          color7 = "#a89984";
+    # normal
+    color0 = "#1d2021";
+    color1 = "#fb543f";
+    color2 = "#95c085";
+    color3 = "#fac03b";
+    color4 = "#0d6678";
+    color5 = "#8f4673";
+    color6 = "#8ba59b";
+    color7 = "#a89984";
 
-          # bright
-          color8 =  "#665c54";
-          color9 =  "#fe8625";
-          color10 = "#32302f";
-          color11 = "#504945";
-          color12 = "#928374";
-          color13 = "#d5c4a1";
-          color14 = "#a87322";
-          color15 = "#fdf4c1";
+    # bright
+    color8 =  "#665c54";
+    color9 =  "#fe8625";
+    color10 = "#32302f";
+    color11 = "#504945";
+    color12 = "#928374";
+    color13 = "#d5c4a1";
+    color14 = "#a87322";
+    color15 = "#fdf4c1";
   };
 in {
   nixpkgs.config.allowUnfree = true;
@@ -70,7 +70,7 @@ in {
 
   console = {
     font = "Lat2-Terminus16";
-  keyMap = "us";
+    keyMap = "us";
   };
 
   # Set your time zone.
@@ -260,13 +260,13 @@ in {
             bar-used-width = 10;
             bar-used-indicator = "|";
             bar-used-indicator-font = 4;
-            bar-used-indicator-foreground = my-theme.color7;
+            bar-used-indicator-foreground = my-theme.color0;
             bar-used-fill = "─";
             bar-used-fill-font = 4;
-            bar-used-fill-foreground = my-theme.color7;
+            bar-used-fill-foreground = my-theme.color0;
             bar-used-empty = "─";
             bar-used-empty-font = 4;
-            bar-used-empty-foreground = my-theme.color0;
+            bar-used-empty-foreground = my-theme.color5;
           };
 
           "module/clock" = {
@@ -331,6 +331,16 @@ in {
         userEmail = "roch.damour@gmail.com";
       };
 
+      programs.rofi = {
+        enable = true;
+        separator = "solid";
+        font = "PragmataPro Essential 14";
+        theme = "/etc/nixos/extras/rofi/conf";
+        extraConfig = ''
+      rofi.dpi: 0
+    '';
+      };
+
       programs.zsh = {
         enable = true;
         shellAliases = {
@@ -362,20 +372,20 @@ in {
 
       programs.kitty = {
         enable = true;
-      font.name = "Essential PragmataPro";
-      settings = {
-        font_size = "12.0";
-        enable_audio_bell = false;
-        open_url_with = "firefox";
-        scrollback_lines = 5000;
-        cursor_shape = "block";
-        cursor_blink_interval = "1.0";
-        cursor_stop_blinking_after = "1.0";
-        cursor_text_color = "background";
-        copy_on_select = "no";
-        mouse_hide_wait = "3.0";
-        sync_to_monitor = "yes";
-        enabled_layouts =  "Vertical";
+        font.name = "Essential PragmataPro";
+        settings = {
+          font_size = "12.0";
+          enable_audio_bell = false;
+          open_url_with = "firefox";
+          scrollback_lines = 5000;
+          cursor_shape = "block";
+          cursor_blink_interval = "1.0";
+          cursor_stop_blinking_after = "1.0";
+          cursor_text_color = "background";
+          copy_on_select = "no";
+          mouse_hide_wait = "3.0";
+          sync_to_monitor = "yes";
+          enabled_layouts =  "Vertical";
 
           # Base16 Darktooth - kitty color config
           # Scheme by Jason Milkins (https://github.com/jasonm23)
@@ -618,7 +628,7 @@ in {
     ghc
 
     # pkglist
-    ];
+  ];
 
 
 
