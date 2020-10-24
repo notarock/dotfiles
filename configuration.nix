@@ -4,25 +4,25 @@
 
 let
   my-theme = {
-    # normal
-    color0 = "#1d2021";
-    color1 = "#fb543f";
-    color2 = "#95c085";
-    color3 = "#fac03b";
-    color4 = "#0d6678";
-    color5 = "#8f4673";
-    color6 = "#8ba59b";
-    color7 = "#a89984";
+          # normal
+          color0 = "#1d2021";
+          color1 = "#fb543f";
+          color2 = "#95c085";
+          color3 = "#fac03b";
+          color4 = "#0d6678";
+          color5 = "#8f4673";
+          color6 = "#8ba59b";
+          color7 = "#a89984";
 
-    # bright
-    color8 =  "#665c54";
-    color9 =  "#fe8625";
-    color10 = "#32302f";
-    color11 = "#504945";
-    color12 = "#928374";
-    color13 = "#d5c4a1";
-    color14 = "#a87322";
-    color15 = "#fdf4c1";
+          # bright
+          color8 =  "#665c54";
+          color9 =  "#fe8625";
+          color10 = "#32302f";
+          color11 = "#504945";
+          color12 = "#928374";
+          color13 = "#d5c4a1";
+          color14 = "#a87322";
+          color15 = "#fdf4c1";
   };
 in {
   nixpkgs.config.allowUnfree = true;
@@ -44,8 +44,6 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
   boot.cleanTmpDir = true;
 
-
-  networking.hostName = "Kreizemm"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
@@ -70,7 +68,7 @@ in {
 
   console = {
     font = "Lat2-Terminus16";
-    keyMap = "us";
+  keyMap = "us";
   };
 
   # Set your time zone.
@@ -129,43 +127,19 @@ in {
     shell = pkgs.zsh;
   };
 
-  # nixpkgs.overlays = [
-  #   (final: super: {
-  #     lispPackages.stumpwm = super.lispPackages.stumpwm.overrideAttrs (
-  #       oldAttrs: rec {
-  #         propagatedBuildInputs = with super; [
-  #           lispPackages.clx-truetype
-  #           lispPackages.xembed
-  #           lispPackages.swank
-  #           lispPackages.quicklisp
-  #         ] ++ (oldAttrs.propagatedBuildInputs or []);
-  #       }
-  #     );
-  #   })
-  # ];
-
   home-manager = {
     users.notarock = { pkgs, ... }: {
       home.keyboard.layout = "ca,fr";
-      # xsession = {
-      #   enable = true;
-      #   initExtra = ''
-      #       export WM=stumpwm
-      #     '';
-      #   windowManager.command = ''
-      #       ${pkgs.lispPackages.stumpwm}/bin/stumpwm-lisp-launcher.sh \
-      #         --eval '(require :clx-truetype)' \
-      #         --eval '(require :xembed)' \
-      #         --eval '(require :swank)' \
-      #         --eval '(require :asdf)' \
-      #         --eval '(asdf:load-system :stumpwm)' \
-      #         --eval '(stumpwm:stumpwm)'
-      #     '';
-      # };
+
+      services.udiskie = {
+        enable = true;
+        automount = true;
+        notify = true;
+        tray = "auto";
+      };
 
       services.polybar = {
         enable = true;
-        # package = pkgs.polybar.override {};
         config = {
           "settings" = {
             throttle-ms = 50;
@@ -173,7 +147,11 @@ in {
           };
 
           "bar/main" = {
-            font-0 = "PragmataPro Essential:size=10";
+            font-0 = "Essential PragmataPro:size=11";
+            # font-1 = "FontAwesome:size=8;-2"
+            # font-2 = "ypn envypn:size=10;-1"
+            # font-3 = "Termsynu:size=8;-1"
+            # font-4 = "Unifont:size=6;-3"
             monitor = "\${env:MONITOR:DP-1}";
             width = "100%";
             height = "1.5%";
@@ -183,7 +161,7 @@ in {
             foreground = my-theme.color7;
             overline-size = 0;
             overline-color = my-theme.color6;
-            underline-size = 0;
+            underline-size = 2;
             underline-color = my-theme.color6;
             spacing = 1;
             padding-right = 2;
@@ -194,20 +172,13 @@ in {
             modules-right = "volume cpu memory clock";
             tray-position = "right";
             tray-detached = false;
-
-            # font-0 = "NotoSans-Regular:size=8;0"
-            # font-1 = "FontAwesome:size=8;-2"
-            # font-2 = "ypn envypn:size=10;-1"
-            # font-3 = "Termsynu:size=8;-1"
-            # font-4 = "Unifont:size=6;-3"
           };
 
           "module/my-hostname" = {
-            type = "custom/script";
-            exec = "echo \"$(whoami) @ $(hostname)\"";
-            fail = false;
-            interval = 0;
+            type = "custom/text";
+            content = "notarock @ ${config.networking.hostName}";
             format-foreground = my-theme.color7;
+            format-underline = my-theme.color1;
           };
 
           "module/cpu" = {
@@ -309,7 +280,7 @@ in {
         };
 
         script = ''
-        MONITOR=$(polybar -m | grep primary | awk '{print $1}' | sed '$s/.$//') polybar main &
+        MONITOR=$(polybar -m | grep primary | awk '{print $1}' | sed '$s/.$//'); USER=$(whoami); polybar main &
         '';
       };
 
@@ -334,7 +305,7 @@ in {
       programs.rofi = {
         enable = true;
         separator = "solid";
-        font = "PragmataPro Essential 14";
+        font = "Essential PragmataPro 14";
         theme = "/etc/nixos/extras/rofi/conf";
         extraConfig = ''
       rofi.dpi: 0
@@ -372,20 +343,20 @@ in {
 
       programs.kitty = {
         enable = true;
-        font.name = "Essential PragmataPro";
-        settings = {
-          font_size = "12.0";
-          enable_audio_bell = false;
-          open_url_with = "firefox";
-          scrollback_lines = 5000;
-          cursor_shape = "block";
-          cursor_blink_interval = "1.0";
-          cursor_stop_blinking_after = "1.0";
-          cursor_text_color = "background";
-          copy_on_select = "no";
-          mouse_hide_wait = "3.0";
-          sync_to_monitor = "yes";
-          enabled_layouts =  "Vertical";
+      font.name = "Essential PragmataPro";
+      settings = {
+        font_size = "13.0";
+        enable_audio_bell = false;
+        open_url_with = "firefox";
+        scrollback_lines = 5000;
+        cursor_shape = "block";
+        cursor_blink_interval = "1.0";
+        cursor_stop_blinking_after = "1.0";
+        cursor_text_color = "background";
+        copy_on_select = "no";
+        mouse_hide_wait = "3.0";
+        sync_to_monitor = "yes";
+        enabled_layouts =  "Vertical";
 
           # Base16 Darktooth - kitty color config
           # Scheme by Jason Milkins (https://github.com/jasonm23)
@@ -428,7 +399,7 @@ in {
 
       programs.zsh.oh-my-zsh = {
         enable = true;
-        theme = "mh";
+        theme = "agnoster";
         plugins = [
           "git"
           "git-flow"
@@ -449,10 +420,13 @@ in {
 
       };
 
-      gtk.iconTheme.package = pkgs.numix-icon-theme-square;
-      gtk.iconTheme.name = "Numix-Square";
-      gtk.theme.package = pkgs.numix-gtk-theme ;
-      gtk.theme.name = "Numix";
+      gtk = {
+        enable = true;
+        iconTheme.package = pkgs.numix-icon-theme-square;
+        iconTheme.name = "Numix-Square";
+        theme.package = pkgs.numix-gtk-theme ;
+        theme.name = "Numix";
+      };
 
     };
     useUserPackages = true;
@@ -623,12 +597,16 @@ in {
     gnome3.dconf
 
     nitrogen
-    polybar
     xorg.xmessage
     ghc
+    slack
+
+    gdk-pixbuf
+    librsvg
+    gnumake
 
     # pkglist
-  ];
+    ];
 
 
 
@@ -660,5 +638,12 @@ in {
   # gpg-connect-agent /bye
   # export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
   # '';
+
+  # Fixes svg icon-theme
+  # https://github.com/NixOS/nixpkgs/issues/13537#issuecomment-332327760
+  # Use librsvg's gdk-pixbuf loader cache file as it enables gdk-pixbuf to load SVG files (important for icons)
+  environment.sessionVariables = {
+    GDK_PIXBUF_MODULE_FILE = "$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)";
+  };
 
 }

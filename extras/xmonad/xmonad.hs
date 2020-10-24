@@ -14,6 +14,7 @@ import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Layout.Spacing
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -55,7 +56,7 @@ myWorkspaces    = map show [1..9]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#1d2021"
+myNormalBorderColor  = "#0d6678"
 myFocusedBorderColor = "#fac03b"
 
 ------------------------------------------------------------------------
@@ -90,10 +91,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_Tab   ), windows W.focusDown)
 
     -- Move focus to the next window
-    , ((modm,               xK_j     ), windows W.focusDown)
+    , ((modm,               xK_l     ), windows W.focusDown)
 
     -- Move focus to the previous window
-    , ((modm,               xK_k     ), windows W.focusUp  )
+    , ((modm,               xK_h     ), windows W.focusUp  )
 
     -- Move focus to the master window
     , ((modm,               xK_m     ), windows W.focusMaster  )
@@ -102,16 +103,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_Return), windows W.swapMaster)
 
     -- Swap the focused window with the next window
-    , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
+    , ((modm .|. shiftMask, xK_l     ), windows W.swapDown  )
 
     -- Swap the focused window with the previous window
-    , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
+    , ((modm .|. shiftMask, xK_h     ), windows W.swapUp    )
 
     -- -- Shrink the master area
-    , ((modm,               xK_h     ), sendMessage Shrink)
+    , ((modm,               xK_j     ), sendMessage Shrink)
 
     -- -- Expand the master area
-    , ((modm,               xK_l     ), sendMessage Expand)
+    , ((modm,               xK_k     ), sendMessage Expand)
 
     -- Push window back into tiling
     , ((modm,               xK_t     ), withFocused $ windows . W.sink)
@@ -135,7 +136,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
-    , ((modm .|. shiftMask, xK_h ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
+    -- , ((modm .|. shiftMask, xK_h ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
     ]
     ++
 
@@ -190,7 +191,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
-     tiled   = Tall nmaster delta ratio
+     tiled   = spacing 15 $ Tall nmaster delta ratio
 
      -- The default number of windows in the master pane
      nmaster = 1
@@ -251,6 +252,7 @@ myLogHook = return ()
 -- By default, do nothing.
 myStartupHook = do
   spawnOnce "nitrogen --restore &"
+  spawnOnce "nextcloud &"
   spawnOnce "picom &"
 
 ------------------------------------------------------------------------

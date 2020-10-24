@@ -8,6 +8,9 @@
     [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ];
 
+  # This machine has a name :
+  networking.hostName = "Kreizemm";
+
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
