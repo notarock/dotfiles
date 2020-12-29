@@ -56,10 +56,6 @@ in {
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
 
-  networking.extraHosts = ''
-    192.168.10.10 homestead.test
-  '';
-
   networking.nameservers = [
     "65.39.166.132" # Cogeco Montréal
     "1.1.1.1"       # Cloudflare
@@ -264,6 +260,30 @@ in {
         "XTerm*faceName" = "dejavu sans mono";
         "Xcursor.size"= "32";
         "Xcursor.theme"= "Bibata Oil";
+      };
+
+      programs.vim = {
+        enable = true;
+        extraConfig = ''
+          set number
+          set linebreak
+          set showbreak=+++
+          set textwidth=100
+          set showmatch
+          set visualbell
+          set hlsearch
+          set smartcase
+          set ignorecase
+          set incsearch
+          set autoindent
+          set shiftwidth=4
+          set smartindent
+          set smarttab
+          set softtabstop=4
+          set ruler
+          set undolevels=1000
+          set backspace=indent,eol,start
+        '';
       };
 
       programs.emacs = {
