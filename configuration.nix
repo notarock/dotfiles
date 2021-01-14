@@ -619,13 +619,13 @@ in {
     leiningen
     clojure
     kdenlive
-    hunspell
-    hunspellDicts.en-ca
-    hunspellDicts.fr-any
-
-    # pkglist
+    aspell
+    aspellDicts.en
+    aspellDicts.fr
     gitAndTools.delta
     dive
+
+    # pkglist
   ];
 
   fonts = {
