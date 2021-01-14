@@ -342,6 +342,7 @@ in {
           open = "$FILEMANAGER";
           nixc = "sudo $EDITOR /etc/nixos/configuration.nix";
           nbs = "sudo nixos-rebuild switch";
+          nbsu = "sudo nixos-rebuild switch --upgrade";
           wttr = "curl wttr.in";
           k = "kubectl";
           randpw = "dd if=/dev/urandom bs=1 count=64 2>/dev/null | base64 -w 0 | rev | cut -b 2- | rev";
@@ -618,6 +619,9 @@ in {
     leiningen
     clojure
     kdenlive
+    hunspell
+    hunspellDicts.en-ca
+    hunspellDicts.fr-any
 
     # pkglist
     gitAndTools.delta
