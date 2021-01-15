@@ -633,11 +633,16 @@ in {
     leiningen
     clojure
     kdenlive
+    hunspell
+    hunspellDicts.en-ca
+    hunspellDicts.fr-any
     aspell
     aspellDicts.en
     aspellDicts.fr
     gitAndTools.delta
     dive
+    gitlab-runner
+    geogebra6
 
     sbcl
     # pkglist
