@@ -101,6 +101,23 @@ in {
 
   home-manager = {
     users.notarock = { pkgs, ... }: {
+
+      xsession = {
+        enable = true;
+        initExtra = ''
+            export WM=stumpwm
+          '';
+        windowManager.command = ''
+            ${pkgs.lispPackages.stumpwm}/bin/stumpwm-lisp-launcher.sh \
+              --eval '(require :clx-truetype)' \
+              --eval '(require :xembed)' \
+              --eval '(require :swank)' \
+              --eval '(require :asdf)' \
+              --eval '(asdf:load-system :stumpwm)' \
+              --eval '(stumpwm:stumpwm)'
+          '';
+      };
+
       home.keyboard.layout = "ca,fr";
 
       services.udiskie = {
@@ -250,11 +267,11 @@ in {
         script = "";
       };
 
-      xsession.windowManager.xmonad = {
-        enable = true;
-        enableContribAndExtras = true;
-        config = extras/xmonad/xmonad.hs ;
-      };
+      # xsession.windowManager.xmonad = {
+      #   enable = true;
+      #   enableContribAndExtras = true;
+      #   config = extras/xmonad/xmonad.hs ;
+      # };
 
       xresources.properties = {
         "XTerm*faceName" = "dejavu sans mono";
@@ -455,10 +472,7 @@ in {
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
-  services.xserver.windowManager.xmonad = {
-    enable = true;
-    enableContribAndExtras = true;
-  };
+  services.xserver.windowManager.stumpwm.enable = true;
 
   services.xserver.layout = "ca,fr";
   services.xserver.dpi = 96;
@@ -625,6 +639,7 @@ in {
     gitAndTools.delta
     dive
 
+    sbcl
     # pkglist
   ];
 
@@ -663,5 +678,21 @@ in {
     GDK_PIXBUF_MODULE_FILE = "$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)";
   };
   environment.variables.EDITOR = "vim";
+
+  nixpkgs.overlays = [
+    (final: super: {
+      lispPackages.stumpwm = super.lispPackages.stumpwm.overrideAttrs (
+        oldAttrs: rec {
+          propagatedBuildInputs = with super; [
+            lispPackages.clx-truetype
+            lispPackages.xembed
+            lispPackages.swank
+            lispPackages.quicklisp
+          ] ++ (oldAttrs.propagatedBuildInputs or []);
+        }
+      );
+    }
+    )
+  ];
 
 }
