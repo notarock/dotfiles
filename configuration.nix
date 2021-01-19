@@ -78,6 +78,7 @@ in {
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
+      pinentryFlavor = "gtk2";
     };
   };
 
@@ -102,22 +103,6 @@ in {
   home-manager = {
     users.notarock = { pkgs, ... }: {
 
-      xsession = {
-        enable = true;
-        initExtra = ''
-            export WM=stumpwm
-          '';
-        windowManager.command = ''
-            ${pkgs.lispPackages.stumpwm}/bin/stumpwm-lisp-launcher.sh \
-              --eval '(require :clx-truetype)' \
-              --eval '(require :xembed)' \
-              --eval '(require :swank)' \
-              --eval '(require :asdf)' \
-              --eval '(asdf:load-system :stumpwm)' \
-              --eval '(stumpwm:stumpwm)'
-          '';
-      };
-
       home.keyboard.layout = "ca,fr";
 
       services.udiskie = {
@@ -136,12 +121,13 @@ in {
           };
 
           "bar/main" = {
-            font-0 = "Essential PragmataPro:size=11";
+            font-0 = "Essential PragmataPro:size=14";
             monitor = "\${env:MONITOR:DP-1}";
             width = "100%";
             height = "1.5%";
             radius = 0;
-            bottom = true;
+            top = true;
+            # bottom = true;
             background = my-theme.color0;
             foreground = my-theme.color7;
             overline-size = 0;
@@ -264,16 +250,13 @@ in {
           };
         };
 
-        script = "";
+        script = ''
+        sleep 3 && MONITOR=$(polybar -m | grep primary | awk '{print $1}' | sed '$s/.$//'); USER=$(whoami); polybar main &
+        '';
       };
 
-      # xsession.windowManager.xmonad = {
-      #   enable = true;
-      #   enableContribAndExtras = true;
-      #   config = extras/xmonad/xmonad.hs ;
-      # };
-
       xresources.properties = {
+        "xft.dpi" = "144";
         "XTerm*faceName" = "dejavu sans mono";
         "Xcursor.size"= "32";
         "Xcursor.theme"= "Bibata Oil";
@@ -472,10 +455,13 @@ in {
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
-  services.xserver.windowManager.stumpwm.enable = true;
-
+  services.xserver.windowManager.stumpwm.enable = false;
+  services.xserver.windowManager.xmonad.enable = false;
+  services.xserver.windowManager.herbstluftwm.enable = true;
+  services.xserver.windowManager.herbstluftwm.configFile = builtins.toPath "/etc/nixos/extras/herbstluftwm/autostart";
   services.xserver.layout = "ca,fr";
-  services.xserver.dpi = 96;
+
+  services.xserver.dpi = 144;
 
   services.redshift = {
     enable = true;
@@ -485,24 +471,6 @@ in {
 
   location.latitude = 45.5;
   location.longitude = -73.5;
-
-  # I might come back for this later?
-  # services.xserver = {
-  #   windowManager.xmonad = {
-  #     enable = true;
-  #     enableContribAndExtras = true;
-  #     extraPackages = haskellPackages: [
-  #       haskellPackages.xmonad-contrib
-  #       haskellPackages.xmonad-extras
-  #       haskellPackages.xmonad
-  #     ];
-  #   };
-  #   windowManager.default = "xmonad";
-  #   displayManager.sessionCommands = with pkgs; lib.mkAfter
-  #     ''
-  #     xmodmap /path/to/.Xmodmap
-  #     '';
-  # };
 
   environment.systemPackages = with pkgs; [
     qemu_kvm wget curl vim neovim git tig ack tree exa fd ripgrep bc bat
@@ -551,9 +519,7 @@ in {
     screenkey
     scrot
     neofetch # This needs to be included with every distro.
-
     unrar
-
     #
     # Eye candy
     #
@@ -562,10 +528,8 @@ in {
     capitaine-cursors
     element-desktop
     nextcloud-client
-
     pkgs.numix-icon-theme-square
     pkgs.numix-gtk-theme
-
     woeusb
     jdk11
     jre
@@ -584,44 +548,29 @@ in {
       extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
       nativeOnly = true;
     }).run
-
-    (sudo.override {
-      withInsults = true;
-    })
-
     # Gnome ext
     gnomeExtensions.dash-to-dock gnomeExtensions.caffeine
     gnomeExtensions.system-monitor
     gnomeExtensions.appindicator
-
     tldr
-
     nodejs-14_x
-
     spotify
     ccls
     clang-tools
     wakatime
-
     texlive.combined.scheme-medium
-
     go
     gocode
     gopls
-
     pandoc
-
     zoom-us # School stuff
     yubioath-desktop
-
     virt-manager
     gnome3.dconf
-
     nitrogen
     xorg.xmessage
     ghc
     slack
-
     gdk-pixbuf
     librsvg
     gnumake
@@ -643,9 +592,12 @@ in {
     dive
     gitlab-runner
     geogebra6
-
+    picom
     sbcl
+    pciutils
     # pkglist
+    killall
+    pdftk
   ];
 
   fonts = {
@@ -663,7 +615,7 @@ in {
 
   # Keychron k8 fn keys stuff
   boot.extraModprobeConfig = ''
-    options hid_apple fnmode=2
+    options hid_apple fnmode=0
   '';
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -684,20 +636,5 @@ in {
   };
   environment.variables.EDITOR = "vim";
 
-  nixpkgs.overlays = [
-    (final: super: {
-      lispPackages.stumpwm = super.lispPackages.stumpwm.overrideAttrs (
-        oldAttrs: rec {
-          propagatedBuildInputs = with super; [
-            lispPackages.clx-truetype
-            lispPackages.xembed
-            lispPackages.swank
-            lispPackages.quicklisp
-          ] ++ (oldAttrs.propagatedBuildInputs or []);
-        }
-      );
-    }
-    )
-  ];
-
 }
+
