@@ -105,6 +105,8 @@ in {
 
       home.keyboard.layout = "ca,fr";
 
+      services.nextcloud-client.enable = true;
+
       services.udiskie = {
         enable = true;
         automount = true;
@@ -458,7 +460,7 @@ in {
   services.xserver.windowManager.stumpwm.enable = false;
   services.xserver.windowManager.xmonad.enable = false;
   services.xserver.windowManager.herbstluftwm.enable = true;
-  services.xserver.windowManager.herbstluftwm.configFile = builtins.toPath "/etc/nixos/extras/herbstluftwm/autostart";
+  services.xserver.windowManager.herbstluftwm.configFile = /etc/nixos/extras/herbstluftwm/autostart;
   services.xserver.layout = "ca,fr";
 
   services.xserver.dpi = 144;
@@ -505,7 +507,8 @@ in {
     # muh games
     #
     brogue
-    master.discord
+    # master.discord
+    discord
     steam
     minecraft
     #
