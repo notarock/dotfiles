@@ -1,122 +1,67 @@
-/**
-* ROFI Color theme
-* User: mbfraga
-* Copyright: Martin B. Fraga
-*/
-/* global settings and color variables */
+configuration {
+  display-run: " ";
+  display-drun: "  ";
+  display-window: "  ";
+  drun-display-format: "{icon} {name}";
+  font: "JetBrainsMono Nerd Font Medium 10";
+  modi: "window,run,drun";
+  show-icons: true;
+}
+
 * {
-    maincolor:        #ed8712;
-    highlight:        bold #ed8712;
-    urgentcolor:      #e53714;
-    fgwhite:          #cfcfcf;
-    blackdarkest:     #1d1d1d;
-    blackwidget:      #262626;
-    blackentry:       #292929;
-    blackselect:      #303030;
-    darkgray:         #848484;
-    scrollbarcolor:   #505050;
-    font: "MesloLGS Nerd Font Mono 10";
-    background-color: @blackdarkest;
+  bg: #282a36;
+  bg-alt: #44475a;
+
+  fg: #f8f8f2;
+
+  blue: #6272a4;
+  purple: #bd93f9;
+
+  background-color: @bg;
+
+  border: 0;
+  margin: 0;
+  padding: 0;
+  spacing: 0;
 }
-window {
-    background-color: @blackdarkest;
-    anchor: north;
-    location: north;
-    y-offset: 20%;
-}
-mainbox {
-    background-color: @blackdarkest;
-    spacing:0px;
-    children: [inputbar, message, mode-switcher, listview];
-}
-message {
-    padding: 6px 10px;
-    background-color:@blackwidget;
-}
-textbox {
-    text-color:@darkgray;
-    background-color:@blackwidget;
-}
-listview {
-    fixed-height: false;
-    dynamic: true;
-    scrollbar: true;
-    spacing: 0px;
-    padding: 1px 0px 0px 0px;
-    margin: 0px 0px 1px 0px;
-    background: @blackdarkest;
-}
+
 element {
-    padding: 2px 15px;
+  padding: 12;
+  orientation: vertical;
+  text-color: @blue;
 }
-element normal.normal {
-    padding: 0px 15px;
-    background-color: @blackentry;
-    text-color: @fgwhite;
+
+element selected {
+  text-color: @purple;
 }
-element normal.urgent {
-    background-color: @blackentry;
-    text-color: @urgentcolor;
-}
-element normal.active {
-    background-color: @blackentry;
-    text-color: @maincolor;
-}
-element selected.normal {
-    background-color: @blackselect;
-    text-color:       @fgwhite;
-}
-element selected.urgent {
-    background-color: @urgentcolor;
-    text-color:       @blackdarkest;
-}
-element selected.active {
-    background-color: @maincolor;
-    text-color:       @blackdarkest;
-}
-element alternate.normal {
-    background-color: @blackentry;
-    text-color:       @fgwhite;
-}
-element alternate.urgent {
-    background-color: @blackentry;
-    text-color:       @urgentcolor;
-}
-element alternate.active {
-    background-color: @blackentry;
-    text-color:       @maincolor;
-}
-scrollbar {
-    background-color: @blackwidget;
-    handle-color: @darkgray;
-    handle-width: 15px;
-}
-mode-switcher {
-    background-color: @blackwidget;
-}
-button {
-    background-color: @blackwidget;
-    text-color:       @darkgray;
-}
-button selected {
-    text-color:       @maincolor;
-}
-inputbar {
-    background-color: @blackdarkest;
-    spacing: 0px;
-}
-prompt {
-    padding:6px 9px;
-    background-color: @maincolor;
-    text-color:@blackwidget;
-}
+
 entry {
-    padding:6px 10px;
-    background-color:@blackwidget;
-    text-color:@fgwhite;
+  background-color: @blue;
+  padding: 12 0 12 3;
+  text-color: @fg;
 }
-case-indicator {
-    padding:6px 10px;
-    text-color:@maincolor;
-    background-color:@blackwidget;
+
+inputbar {
+  children: [prompt, entry];
+}
+
+listview {
+  columns: 1;
+  lines: 8;
+}
+
+mainbox {
+  children: [inputbar, listview];
+}
+
+prompt {
+  background-color: @blue;
+  enabled: true;
+  font: "FontAwesome 12";
+  padding: 12 0 0 12;
+  text-color: @fg;
+}
+
+window {
+  transparency: "real";
 }

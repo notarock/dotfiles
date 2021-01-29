@@ -1,19 +1,8 @@
 #!/usr/bin/env bash
 
-
 hc() {
   herbstclient "$@"
 }
-
-getdefaultsinkname() {
-  pacmd stat | awk -F": " '/^Default sink name: /{print $2}'
-}
-
-
-vol-down() {
-  pactl -- set-sink-volume $(getdefaultsinkname) -5%
-}
-
 
 hc emit_hook reload
 
@@ -30,12 +19,14 @@ Mod=Mod4   # Use the super key as the main modifier
 hc keybind $Mod-Shift-c quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-q close
+hc keybind Mod1-F4 close
+hc keybind Mod1-F2 spawn rofi -show run -lines 0
 hc keybind $Mod-Return spawn kitty # use your $TERMINAL with xterm as fallback
 hc keybind $Mod-d spawn rofi -show run
 
 # For volume controls and stuff
-hc keybind XF86AudioRaiseVolume spawn pactl -- set-sink-volume $(getdefaultsinkname) +5%
-hc keybind XF86AudioLowerVolume spawn pactl -- set-sink-volume $(getdefaultsinkname) -5%
+hc keybind XF86AudioRaiseVolume spawn ./volume-up.sh
+hc keybind XF86AudioLowerVolume spawn ./volume-down.sh
 
 # # For display controls - either laptop, home or launch arandr
 # hc keybind $Mod+F10 spawn ~/.config/herbstluftwm/rofi-display.sh

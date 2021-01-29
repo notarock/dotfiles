@@ -356,7 +356,7 @@ in {
           extended = true;
           save = 50000;
         };
-        initExtra = " echo \"\\e[31mHello, friend.\\em \"";
+        initExtra = "echo \"\\e[31mHello, friend.\\em \"";
       };
 
 
