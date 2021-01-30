@@ -466,7 +466,7 @@ in {
   services.xserver.dpi = 144;
 
   services.redshift = {
-    enable = true;
+    enable = false;
     temperature.day = 6500;
     temperature.night = 3000;
   };
@@ -601,6 +601,7 @@ in {
     # pkglist
     killall
     pdftk
+    audacity
   ];
 
   fonts = {
@@ -640,4 +641,3 @@ in {
   environment.variables.EDITOR = "vim";
 
 }
-
