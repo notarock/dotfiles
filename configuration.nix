@@ -670,6 +670,7 @@ in {
     killall
     pdftk
     audacity
+    libnotify
   ];
 
   fonts = {
@@ -708,4 +709,14 @@ in {
   };
   environment.variables.EDITOR = "vim";
 
+  services.cron = {
+    enable = true;
+    systemCronJobs = let
+      dodocron = "notarock  XDG_RUNTIME_DIR=/run/user/$(id -u) notify-send BEDTIME 'Time to go to sleep'";
+    in [
+      "*/1 0-5 * * 0-5  ${dodocron}"
+      "30/1 23 * * 0-5  ${dodocron}"
+      "* 3 * * 5-6      ${dodocron}"
+    ];
+  };
 }
