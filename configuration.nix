@@ -6,23 +6,22 @@ let
   unstableTarball = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
   masterTarball = fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
   my-theme = {
-    color0 = "#272822";
-    color1 = "#f92672";
-    color2 = "#a6e22e";
-    color3 = "#f4bf75";
-    color4 = "#66d9ef";
-    color5 = "#ae81ff";
-    color6 = "#a1efe4";
-    color7 = "#f8f8f2";
-    # bright
-    color8  = "#75715e";
-    color9  = "#fd971f";
-    color10 = "#383830";
-    color11 = "#49483e";
-    color12 = "#a59f85";
-    color13 = "#f5f4f1";
-    color14 = "#cc6633";
-    color15 = "#f9f8f5";
+    color0 = "#0c0d0e";
+    color1 = "#e31a1c";
+    color2 = "#31a354";
+    color3 = "#dca060";
+    color4 = "#3182bd";
+    color5 = "#756bb1";
+    color6 = "#80b1d3";
+    color7 = "#b7b8b9";
+    color8 = "#737475";
+    color9 = "#e6550d";
+    color10 = "#2e2f30";
+    color11 = "#515253";
+    color12 = "#959697";
+    color13 = "#dadbdc";
+    color14 = "#b15928";
+    color15 = "#fcfdfe";
   };
 in {
   system.stateVersion = "20.09";
@@ -257,6 +256,75 @@ in {
         '';
       };
 
+  services.dunst = {
+    enable = true;
+    settings = {
+      global = {
+        font = "Essential PragmataPro 16";
+        markup = "full";
+        format = "<b>%s</b>\\n%b";
+        sort = "no";
+        indicate_hidden = "yes";
+        alignment = "left";
+        bounce_freq = 0;
+        show_age_threshold = -1;
+        word_wrap = "yes";
+        ignore_newline = "no";
+        stack_duplicates = "yes";
+        hide_duplicate_count = "yes";
+        geometry = "600x100-1620+50";
+        shrink = "no";
+        transparency = 3;
+        idle_threshold = 0;
+        monitor = 0;
+        follow = "none";
+        sticky_history = "yes";
+        history_length = 15;
+        show_indicators = "no";
+        line_height = 3;
+        separator_height = 2;
+        padding = 6;
+        horizontal_padding = 6;
+        separator_color = "frame";
+        startup_notification = "false";
+        dmenu = "${pkgs.rofi}/bin/rofi -p dunst -dmenu";
+        browser = "${pkgs.firefox}/bin/firefox -new-tab";
+        icon_position = "left";
+        max_icon_size = 80;
+        frame_width = 2;
+        frame_color = my-theme.color5;
+        corner_radius = 2;
+      };
+      shortcuts = {
+        close = "esc";
+      };
+      urgency_low = {
+        frame_color = my-theme.color2;
+        foreground = my-theme.color7;
+        background = my-theme.color10;
+        timeout = 8;
+      };
+      urgency_normal = {
+        frame_color = my-theme.color4;
+        foreground = my-theme.color7;
+        background = my-theme.color10;
+        timeout = 8;
+      };
+      urgency_critical = {
+        frame_color = my-theme.color1;
+        foreground = my-theme.color7;
+        background = my-theme.color10;
+        timeout = 8;
+      };
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+      size = "128x128";
+    };
+  };
+
+
       xresources.properties = {
         "xft.dpi" = "144";
         "XTerm*faceName" = "dejavu sans mono";
@@ -311,7 +379,7 @@ in {
         extraConfig = ''
       rofi.dpi: 0
     '';
-      };
+    };
 
       programs.fzf = {
         enable = true;
@@ -356,7 +424,7 @@ in {
           extended = true;
           save = 50000;
         };
-        initExtra = "echo \"\\e[31mHello, friend.\\em \"";
+        # initExtra = "echo \"\\e[31mHello, friend.\\em \"";
       };
 
 
