@@ -1,0 +1,3 @@
+{
+  mainMonitor = "eDP-1";
+}

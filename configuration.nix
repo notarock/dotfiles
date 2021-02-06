@@ -3,6 +3,7 @@
 { config, pkgs, ... }:
 
 let
+  hostSpecific = import ./host/hostvar.nix ;
   unstableTarball = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
   masterTarball = fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
   my-theme = {
@@ -123,7 +124,7 @@ in {
 
           "bar/main" = {
             font-0 = "Essential PragmataPro:size=14";
-            monitor = "\${env:MONITOR:DP-1}";
+            monitor = hostSpecific.mainMonitor;
             width = "100%";
             height = "1.5%";
             radius = 0;
@@ -252,7 +253,7 @@ in {
         };
 
         script = ''
-        sleep 3 && MONITOR=$(polybar -m | grep primary | awk '{print $1}' | sed '$s/.$//'); USER=$(whoami); polybar main &
+        sleep 3 && USER=$(whoami); polybar main &
         '';
       };
 
@@ -671,6 +672,8 @@ in {
     pdftk
     audacity
     libnotify
+    vegeta
+    jq
   ];
 
   fonts = {
