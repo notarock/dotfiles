@@ -1,11 +1,11 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page and in the NixOS manual (accessible by running ‘nixos-help’).
 { config, pkgs, ... }:
 
 let
-  hostSpecific = import ./host/hostvar.nix ;
-  unstableTarball = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-  masterTarball = fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
+  hostSpecific = import ./host/variables.nix;
+  unstableTarball = fetchTarball
+    "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+  masterTarball =
+    fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
   my-theme = {
     color0 = "#0c0d0e";
     color1 = "#e31a1c";
@@ -31,12 +31,8 @@ in {
     allowUnfree = true;
     allowBroken = false;
     packageOverrides = pkgs: {
-      unstable = import unstableTarball {
-        config = config.nixpkgs.config;
-      };
-      master = import masterTarball {
-        config = config.nixpkgs.config;
-      };
+      unstable = import unstableTarball { config = config.nixpkgs.config; };
+      master = import masterTarball { config = config.nixpkgs.config; };
     };
   };
   imports = [ # Include the results of the hardware scan.
@@ -58,8 +54,8 @@ in {
 
   networking.nameservers = [
     "65.39.166.132" # Cogeco Montréal
-    "1.1.1.1"       # Cloudflare
-    "9.9.9.9"       # Quad-9
+    "1.1.1.1" # Cloudflare
+    "9.9.9.9" # Quad-9
   ];
 
   i18n.defaultLocale = "en_CA.UTF-8";
@@ -95,7 +91,7 @@ in {
     isNormalUser = true;
     home = "/home/notarock";
     description = "Notarock";
-    extraGroups = [ "wheel" "docker"];
+    extraGroups = [ "wheel" "docker" ];
     shell = pkgs.zsh;
     initialPassword = "Ch4ngeMoi%%%";
   };
@@ -126,7 +122,7 @@ in {
             font-0 = "Essential PragmataPro:size=14";
             monitor = hostSpecific.mainMonitor;
             width = "100%";
-            height = "1.5%";
+            height = 30;
             radius = 0;
             top = true;
             # bottom = true;
@@ -157,60 +153,25 @@ in {
           "module/cpu" = {
             type = "internal/cpu";
             interval = 2;
-            format = "<label> <ramp-coreload>";
+            format = "<label>";
             format-background = my-theme.color2;
             format-foreground = my-theme.color0;
             format-underline = my-theme.color2;
             format-overline = my-theme.color2;
             format-padding = 2;
-            label = "cpu %percentage%%";
-            label-font = 3;
-            ramp-coreload-0 = "▁";
-            ramp-coreload-0-font = 5;
-            ramp-coreload-0-foreground = my-theme.color0;
-            ramp-coreload-1 = "▂";
-            ramp-coreload-1-font = 5;
-            ramp-coreload-1-foreground = my-theme.color0;
-            ramp-coreload-2 = "▃";
-            ramp-coreload-2-font = 5;
-            ramp-coreload-2-foreground = my-theme.color0;
-            ramp-coreload-3 = "▄";
-            ramp-coreload-3-font = 5;
-            ramp-coreload-3-foreground = my-theme.color0;
-            ramp-coreload-4 = "▅";
-            ramp-coreload-4-font = 5;
-            ramp-coreload-4-foreground = my-theme.color11;
-            ramp-coreload-5 = "▆";
-            ramp-coreload-5-font = 5;
-            ramp-coreload-5-foreground = my-theme.color11;
-            ramp-coreload-6 = "▇";
-            ramp-coreload-6-font = 5;
-            ramp-coreload-6-foreground = my-theme.color1;
-            ramp-coreload-7 = "█";
-            ramp-coreload-7-font = 5;
-            ramp-coreload-7-foreground = my-theme.color1;
+            label = "CPU %percentage%%";
           };
 
           "module/memory" = {
             type = "internal/memory";
-            format = "<label> <bar-used>";
+            format = "<label>";
             format-padding = 2;
             format-background = my-theme.color6;
             format-foreground = my-theme.color0;
             format-underline = my-theme.color6;
             format-overline = my-theme.color6;
-            label = "memory %percentage_used%%";
+            label = "RAM %percentage_used%%";
             label-font = 3;
-            bar-used-width = 10;
-            bar-used-indicator = "|";
-            bar-used-indicator-font = 4;
-            bar-used-indicator-foreground = my-theme.color0;
-            bar-used-fill = "─";
-            bar-used-fill-font = 4;
-            bar-used-fill-foreground = my-theme.color0;
-            bar-used-empty = "─";
-            bar-used-empty-font = 4;
-            bar-used-empty-foreground = my-theme.color5;
           };
 
           "module/clock" = {
@@ -253,84 +214,81 @@ in {
         };
 
         script = ''
-        sleep 3 && USER=$(whoami); polybar main &
+          sleep 3 && USER=$(whoami); polybar main &
         '';
       };
 
-  services.dunst = {
-    enable = true;
-    settings = {
-      global = {
-        font = "Essential PragmataPro 16";
-        markup = "full";
-        format = "<b>%s</b>\\n%b";
-        sort = "no";
-        indicate_hidden = "yes";
-        alignment = "left";
-        bounce_freq = 0;
-        show_age_threshold = -1;
-        word_wrap = "yes";
-        ignore_newline = "no";
-        stack_duplicates = "yes";
-        hide_duplicate_count = "yes";
-        geometry = "600x100-1620+50";
-        shrink = "no";
-        transparency = 3;
-        idle_threshold = 0;
-        monitor = 0;
-        follow = "none";
-        sticky_history = "yes";
-        history_length = 15;
-        show_indicators = "no";
-        line_height = 3;
-        separator_height = 2;
-        padding = 6;
-        horizontal_padding = 6;
-        separator_color = "frame";
-        startup_notification = "false";
-        dmenu = "${pkgs.rofi}/bin/rofi -p dunst -dmenu";
-        browser = "${pkgs.firefox}/bin/firefox -new-tab";
-        icon_position = "left";
-        max_icon_size = 80;
-        frame_width = 2;
-        frame_color = my-theme.color5;
-        corner_radius = 2;
+      services.dunst = {
+        enable = true;
+        settings = {
+          global = {
+            font = "Essential PragmataPro 12";
+            markup = "full";
+            format = "<b>%s</b>\\n%b";
+            sort = "no";
+            indicate_hidden = "yes";
+            alignment = "left";
+            bounce_freq = 0;
+            show_age_threshold = -1;
+            word_wrap = "yes";
+            ignore_newline = "no";
+            stack_duplicates = "yes";
+            hide_duplicate_count = "yes";
+            geometry = "600x100-1620+50";
+            shrink = "no";
+            transparency = 3;
+            idle_threshold = 0;
+            monitor = 0;
+            follow = "none";
+            sticky_history = "yes";
+            history_length = 15;
+            show_indicators = "no";
+            line_height = 3;
+            separator_height = 2;
+            padding = 6;
+            horizontal_padding = 6;
+            separator_color = "frame";
+            startup_notification = "false";
+            dmenu = "${pkgs.rofi}/bin/rofi -p dunst -dmenu";
+            browser = "${pkgs.firefox}/bin/firefox -new-tab";
+            icon_position = "left";
+            max_icon_size = 80;
+            frame_width = 2;
+            frame_color = my-theme.color5;
+            corner_radius = 2;
+          };
+          shortcuts = { close = "esc"; };
+          urgency_low = {
+            frame_color = my-theme.color2;
+            foreground = my-theme.color7;
+            background = my-theme.color10;
+            timeout = 8;
+          };
+          urgency_normal = {
+            frame_color = my-theme.color4;
+            foreground = my-theme.color7;
+            background = my-theme.color10;
+            timeout = 8;
+          };
+          urgency_critical = {
+            frame_color = my-theme.color1;
+            foreground = my-theme.color7;
+            background = my-theme.color10;
+            timeout = 8;
+          };
+        };
+        iconTheme = {
+          name = "Papirus-Dark";
+          package = pkgs.papirus-icon-theme;
+          size = "128x128";
+        };
       };
-      shortcuts = {
-        close = "esc";
-      };
-      urgency_low = {
-        frame_color = my-theme.color2;
-        foreground = my-theme.color7;
-        background = my-theme.color10;
-        timeout = 8;
-      };
-      urgency_normal = {
-        frame_color = my-theme.color4;
-        foreground = my-theme.color7;
-        background = my-theme.color10;
-        timeout = 8;
-      };
-      urgency_critical = {
-        frame_color = my-theme.color1;
-        foreground = my-theme.color7;
-        background = my-theme.color10;
-        timeout = 8;
-      };
-    };
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-      size = "128x128";
-    };
-  };
-
 
       xresources.properties = {
         "xft.dpi" = "144";
         "XTerm*faceName" = "dejavu sans mono";
-        "Xcursor.size"= "32";
-        "Xcursor.theme"= "Bibata Oil";
+        "Xcursor.size" = "32";
+        "Xcursor.theme" = "Bibata Oil";
       };
 
       programs.vim = {
@@ -365,11 +323,9 @@ in {
       programs.git = {
         delta.enable = true;
         enable = true;
-        userName  = "Roch D'Amour";
+        userName = "Roch D'Amour";
         userEmail = "roch.damour@gmail.com";
-        extraConfig = {
-          pull.rebase = false;
-        };
+        extraConfig = { pull.rebase = false; };
       };
 
       programs.rofi = {
@@ -378,14 +334,15 @@ in {
         font = "Essential PragmataPro 14";
         theme = "/etc/nixos/extras/rofi/conf";
         extraConfig = ''
-      rofi.dpi: 0
-    '';
-    };
+          rofi.dpi: 0
+        '';
+      };
 
       programs.fzf = {
         enable = true;
         enableZshIntegration = true;
-        defaultCommand = ''${pkgs.fd}/bin/fd --follow --type f --exclude="'.git'" .'';
+        defaultCommand =
+          ''${pkgs.fd}/bin/fd --follow --type f --exclude="'.git'" .'';
         defaultOptions = [ "--exact" "--cycle" "--layout=reverse" ];
         enableFishIntegration = false;
       };
@@ -404,7 +361,7 @@ in {
           "...." = "cd ../../..";
           "....." = "cd ../../../..";
           vi = "vim";
-          vif = "vim \$\(fzf\)";
+          vif = "vim $(fzf)";
           lla = "ls -lah";
           lt = "ls -larth";
           dstop = "docker stop $(docker ps -a -q)";
@@ -416,9 +373,11 @@ in {
           nbsu = "sudo nixos-rebuild switch --upgrade";
           wttr = "curl wttr.in";
           k = "kubectl";
-          randpw = "dd if=/dev/urandom bs=1 count=64 2>/dev/null | base64 -w 0 | rev | cut -b 2- | rev";
+          randpw =
+            "dd if=/dev/urandom bs=1 count=64 2>/dev/null | base64 -w 0 | rev | cut -b 2- | rev";
           gitwtf = "echo 'git reset $(git merge-base master current)'";
-          yolo = "git commit -m \"$(curl -s http://whatthecommit.com/index.txt)\" ";
+          yolo =
+            ''git commit -m "$(curl -s http://whatthecommit.com/index.txt)" '';
         };
         history = {
           ignoreSpace = true;
@@ -427,7 +386,6 @@ in {
         };
         # initExtra = "echo \"\\e[31mHello, friend.\\em \"";
       };
-
 
       programs.kitty = {
         enable = true;
@@ -444,7 +402,7 @@ in {
           copy_on_select = "no";
           mouse_hide_wait = "3.0";
           sync_to_monitor = "yes";
-          enabled_layouts =  "Vertical";
+          enabled_layouts = "Vertical";
 
           background = my-theme.color0;
           foreground = my-theme.color7;
@@ -471,8 +429,8 @@ in {
           color7 = my-theme.color7;
 
           # bright
-          color8 =  my-theme.color8;
-          color9 =  my-theme.color9;
+          color8 = my-theme.color8;
+          color9 = my-theme.color9;
           color10 = my-theme.color10;
           color11 = my-theme.color11;
           color12 = my-theme.color12;
@@ -502,11 +460,8 @@ in {
           "python"
           "golang"
         ];
-        extraConfig = "
-          export PATH=$HOME/bin:/usr/local/bin:$PATH
-          export PATH=$HOME/snap:$PATH
-          export PATH=$HOME/.emacs.d/bin/:$PATH
-        ";
+        extraConfig =
+          "\n          export PATH=$HOME/bin:/usr/local/bin:$PATH\n          export PATH=$HOME/snap:$PATH\n          export PATH=$HOME/.emacs.d/bin/:$PATH\n        ";
 
       };
 
@@ -514,7 +469,7 @@ in {
         enable = true;
         iconTheme.package = pkgs.numix-icon-theme-square;
         iconTheme.name = "Numix-Square";
-        theme.package = pkgs.amber-theme ;
+        theme.package = pkgs.amber-theme;
         theme.name = "Amber";
       };
 
@@ -529,7 +484,8 @@ in {
   services.xserver.windowManager.stumpwm.enable = false;
   services.xserver.windowManager.xmonad.enable = false;
   services.xserver.windowManager.herbstluftwm.enable = true;
-  services.xserver.windowManager.herbstluftwm.configFile = /etc/nixos/extras/herbstluftwm/autostart;
+  services.xserver.windowManager.herbstluftwm.configFile =
+    /etc/nixos/extras/herbstluftwm/autostart;
   services.xserver.layout = "ca,fr";
 
   services.xserver.dpi = 144;
@@ -544,15 +500,50 @@ in {
   location.longitude = -73.5;
 
   environment.systemPackages = with pkgs; [
-    qemu_kvm wget curl vim neovim git tig ack tree exa fd ripgrep bc bat
-    finger_bsd gnupg pass zip unzip colordiff rsync htop gotop lsof pstree nmap
-    parted ranger stow traceroute telnet tcpdump whois dnsutils mtr
-    docker-compose vagrant xorg.xhost
+    qemu_kvm
+    wget
+    curl
+    vim
+    neovim
+    git
+    tig
+    ack
+    tree
+    exa
+    fd
+    ripgrep
+    bc
+    bat
+    finger_bsd
+    gnupg
+    pass
+    zip
+    unzip
+    colordiff
+    rsync
+    htop
+    gotop
+    lsof
+    pstree
+    nmap
+    parted
+    ranger
+    stow
+    traceroute
+    telnet
+    tcpdump
+    whois
+    dnsutils
+    mtr
+    docker-compose
+    vagrant
+    xorg.xhost
 
     #
     # Programs
     #
-    libreoffice evince
+    libreoffice
+    evince
     gnome3.cheese
     gnome3.evolution
     gnome3.gedit
@@ -621,7 +612,8 @@ in {
       nativeOnly = true;
     }).run
     # Gnome ext
-    gnomeExtensions.dash-to-dock gnomeExtensions.caffeine
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.caffeine
     gnomeExtensions.system-monitor
     gnomeExtensions.appindicator
     tldr
@@ -674,14 +666,12 @@ in {
     libnotify
     vegeta
     jq
+    nixfmt
   ];
 
   fonts = {
     enableDefaultFonts = true;
-    fonts = with pkgs; [
-      dejavu_fonts
-      opensans-ttf
-    ];
+    fonts = with pkgs; [ dejavu_fonts opensans-ttf ];
   };
 
   # G-word (g*ming)
@@ -708,18 +698,21 @@ in {
   # https://github.com/NixOS/nixpkgs/issues/13537#issuecomment-332327760
   # Use librsvg's gdk-pixbuf loader cache file as it enables gdk-pixbuf to load SVG files (important for icons)
   environment.sessionVariables = {
-    GDK_PIXBUF_MODULE_FILE = "$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)";
+    GDK_PIXBUF_MODULE_FILE =
+      "$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)";
   };
   environment.variables.EDITOR = "vim";
 
   services.cron = {
     enable = true;
     systemCronJobs = let
-      dodocron = "notarock  XDG_RUNTIME_DIR=/run/user/$(id -u) notify-send BEDTIME 'Time to go to sleep'";
+      dodocron =
+        "notarock  XDG_RUNTIME_DIR=/run/user/$(id -u) notify-send BEDTIME 'Time to go to sleep'";
     in [
       "*/1 0-5 * * 0-5  ${dodocron}"
       "30/1 23 * * 0-5  ${dodocron}"
       "* 3 * * 5-6      ${dodocron}"
     ];
   };
+
 }
