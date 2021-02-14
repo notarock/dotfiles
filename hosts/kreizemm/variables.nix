@@ -1,0 +1,3 @@
+{
+  mainMonitor = "DP-1";
+}
