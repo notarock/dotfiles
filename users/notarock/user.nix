@@ -14,15 +14,6 @@ in {
 
   home-manager = {
     users.notarock = { pkgs, ... }: {
-      gtk = {
-        enable = true;
-        iconTheme.package = pkgs.numix-icon-theme-square;
-        iconTheme.name = "Numix-Square";
-        theme.package = pkgs.amber-theme;
-        theme.name = "Amber";
-      };
-
-
       imports = [
         ./home-manager/herbstluftwm.nix
         ./home-manager/polybar.nix
@@ -34,27 +25,44 @@ in {
         ./home-manager/kitty.nix
       ];
 
-      programs.emacs = {
+      gtk = {
         enable = true;
-        package = pkgs.emacs27;
+        iconTheme.package = pkgs.numix-icon-theme-square;
+        iconTheme.name = "Numix-Square";
+        theme.package = pkgs.amber-theme;
+        theme.name = "Amber";
       };
 
-      programs.rofi = {
-        enable = true;
-        separator = "solid";
-        font = "Essential PragmataPro 14";
-        theme = "/etc/nixos/extras/rofi/conf";
-        extraConfig = ''
+      home.keyboard.layout = "ca,fr";
+
+      programs = {
+        emacs = {
+          enable = true;
+          package = pkgs.emacs27;
+        };
+
+        rofi = {
+          enable = true;
+          separator = "solid";
+          font = "Essential PragmataPro 14";
+          theme = "/etc/nixos/extras/rofi/conf";
+          extraConfig = ''
           rofi.dpi: 0
         '';
+        };
+
+        git = {
+          delta.enable = true;
+          enable = true;
+          userName = "Roch D'Amour";
+          userEmail = "roch.damour@gmail.com";
+          extraConfig = { pull.rebase = false; };
+        };
       };
 
-      programs.git = {
-        delta.enable = true;
-        enable = true;
-        userName = "Roch D'Amour";
-        userEmail = "roch.damour@gmail.com";
-        extraConfig = { pull.rebase = false; };
+      services = {
+        nextcloud-client.enable = true;
+        picom.enable = true;
       };
 
       xresources.properties = {
@@ -63,9 +71,6 @@ in {
         "Xcursor.size" = "32";
         "Xcursor.theme" = "Bibata Oil";
       };
-
-      home.keyboard.layout = "ca,fr";
-      services.nextcloud-client.enable = true;
 
     };
   };
