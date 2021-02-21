@@ -18,6 +18,7 @@
         wakatime texlive.combined.scheme-medium go gocode gopls pandoc zoom-us
         yubioath-desktop virt-manager gnome3.dconf nitrogen xorg.xmessage ghc slack
         gdk-pixbuf librsvg gnumake cmake youtube-dl flameshot amber-theme
+        python39
         python-language-server leiningen clojure kdenlive hunspell
         hunspellDicts.en-ca hunspellDicts.fr-any aspell aspellDicts.en
         aspellDicts.fr gitAndTools.delta dive gitlab-runner geogebra6 picom sbcl

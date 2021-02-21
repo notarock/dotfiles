@@ -4,6 +4,10 @@ let
   my-theme = import ../theme.nix;
 in {
   programs.vim = {
+    plugins = with pkgs.vimPlugins; [
+      vim-wakatime
+    ];
+
     enable = true;
     extraConfig = ''
           set number

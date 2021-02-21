@@ -19,7 +19,6 @@ in {
             height = 30;
             radius = 0;
             top = true;
-            # bottom = true;
             background = my-theme.color0;
             foreground = my-theme.color7;
             overline-size = 0;
@@ -32,17 +31,10 @@ in {
             module-margin-right = 2;
             modules-left = "ewmh";
             modules-center = "clock";
-            modules-right = "volume cpu memory clock";
+            modules-right = "volume cpu memory";
             tray-position = "right";
             tray-detached = false;
           };
-
-          # "module/my-hostname" = {
-          #   type = "custom/text";
-          #   content = "notarock @ ${config.networking.hostName}";
-          #   format-foreground = my-theme.color7;
-          #   format-background = my-theme.color4;
-          # };
 
           "module/cpu" = {
             type = "internal/cpu";
