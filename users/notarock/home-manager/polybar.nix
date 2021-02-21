@@ -14,24 +14,25 @@ in {
 
           "bar/main" = {
             font-0 = "Essential PragmataPro:size=14";
+            font-1 = "FontAwesome:pixelsize=16";
             monitor = hostSpecific.mainMonitor;
             width = "100%";
             height = 30;
             radius = 0;
             top = true;
             background = my-theme.color0;
-            foreground = my-theme.color7;
+            foreground = my-theme.color15;
             overline-size = 0;
             overline-color = my-theme.color6;
-            underline-size = 2;
+            underline-size = 0;
             underline-color = my-theme.color6;
             spacing = 1;
             padding-right = 2;
             module-margin-left = 0;
             module-margin-right = 2;
             modules-left = "ewmh";
-            modules-center = "clock";
-            modules-right = "volume cpu memory";
+            modules-center = "date";
+            modules-right = "filesystem volume cpu memory wired-network time";
             tray-position = "right";
             tray-detached = false;
           };
@@ -40,61 +41,130 @@ in {
             type = "internal/cpu";
             interval = 2;
             format = "<label>";
-            format-background = my-theme.color2;
-            format-foreground = my-theme.color0;
-            format-underline = my-theme.color2;
-            format-overline = my-theme.color2;
+            format-background = my-theme.color10;
+            format-foreground = my-theme.color15;
+            format-underline = my-theme.color10;
+            format-overline = my-theme.color10;
             format-padding = 2;
-            label = "CPU %percentage%%";
+            label = " CPU %percentage%%";
           };
 
           "module/memory" = {
             type = "internal/memory";
-            format = "<label>";
             format-padding = 2;
-            format-background = my-theme.color6;
-            format-foreground = my-theme.color0;
-            format-underline = my-theme.color6;
-            format-overline = my-theme.color6;
-            label = "RAM %percentage_used%%";
+            format-background = my-theme.color10;
+            format-foreground = my-theme.color15;
+            format-underline = my-theme.color10;
+            format-overline = my-theme.color10;
+            label = " RAM %percentage_used%%";
             label-font = 3;
           };
 
-          "module/clock" = {
+          "module/filesystem" = {
+            type = "internal/fs";
+            # Mountpoints to display
+            mount-0 = "/";
+
+            # Seconds to sleep between updates
+            # Default: 30
+            interval = "60";
+
+            # Display fixed precision values
+            # Default: false
+            fixed-values = "true";
+
+            # Spacing between entries
+            # Default: 2
+            spacing = "4";
+            format-padding = 2;
+            label-mounted = " %free% free (%percentage_free%%) ";
+
+            format-mounted-background = my-theme.color10;
+            format-mounted-foreground = my-theme.color15;
+            format-mounted-underline = my-theme.color10;
+            format-mounted-overline = my-theme.color10;
+          };
+
+          "module/wired-network" = {
+            type = "internal/network";
+            interface = "enp7s0";
+            # Default: %ifname% %local_ip%
+            label-connected = " %local_ip%%downspeed:9%%upspeed:9% ";
+            label-connected-foreground = my-theme.color15;
+            label-connected-background = my-theme.color10;
+            format-padding = 2;
+
+            # Default: (none)
+            label-disconnected = "not connected";
+            label-disconnected-background = my-theme.color1;
+            label-disconnected-foreground = my-theme.color0;
+
+          };
+
+          # "module/wireless-network" = {
+          #   type = "internal/network";
+          #   interface = "enp7s0";
+          #   # Default: %ifname% %local_ip%
+          #   label-connected = "%local_ip%%downspeed:9%%upspeed:9%";
+          #   label-connected-foreground = "#eefafafa";
+
+          #   # Default: (none)
+          #   label-disconnected = "not connected";
+          #   label-disconnected-foreground = "#66ffffff";
+          # };
+
+          "module/date" = {
             type = "internal/date";
-            date = "%%{T3}%Y-%m-%d %H:%M%%{T-}";
+            date = "%%{T3}%Y-%m-%d";
             format-padding = 2;
             format-background = my-theme.color1;
             format-foreground = my-theme.color0;
             format-underline = my-theme.color1;
             format-overline = my-theme.color1;
+            format = " <label>";
           };
+
+          "module/time" = {
+            type = "internal/date";
+            date = "%H:%M%%{T-}";
+            format-padding = 2;
+            format-background = my-theme.color1;
+            format-foreground = my-theme.color0;
+            format-underline = my-theme.color1;
+            format-overline = my-theme.color1;
+            format = " <label>";
+          };
+
 
           "module/volume" = {
             type = "internal/alsa";
             master-mixer = "Master";
             headphone-id = 9;
             format-volume-padding = 2;
-            format-volume-background = my-theme.color3;
-            format-volume-foreground = "#43433a";
-            format-volume-underline = my-theme.color3;
-            format-volume-overline = my-theme.color3;
+            format-volume-background = my-theme.color10;
+            format-volume-foreground = my-theme.color15;
+            format-volume-underline = my-theme.color10;
+            format-volume-overline = my-theme.color10;
             format-muted-padding = 2;
-            format-muted-background = "#77ffff";
-            format-muted-foreground = "#666666";
+            format-muted-background = my-theme.color1;
+            format-muted-foreground = my-theme.color0;
+            format-volume = "<ramp-volume> <label-volume>";
             label-volume = "volume %percentage%%";
             label-volume-font = 3;
-            label-muted = "sound muted";
+            label-muted = " Muted";
             label-muted-font = 3;
+            ramp-volume-0 = "";
+            ramp-volume-1 = "";
+            ramp-volume-2 = "";
           };
 
           "module/ewmh" = {
             type = "internal/xworkspaces";
             enable-click = false;
             enable-scroll = false;
-            label-active-foreground = "#ffffff";
-            label-active-background = "#3f3f3f";
-            label-active-padding = 4;
+            label-active-foreground = my-theme.color15;
+            label-active-background = my-theme.color12;
+            label-active-padding = 3;
             label-empty-padding = 1;
           };
         };

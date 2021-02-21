@@ -36,7 +36,7 @@ in {
 
   fonts = {
     enableDefaultFonts = true;
-    fonts = with pkgs; [ dejavu_fonts opensans-ttf ];
+    fonts = with pkgs; [ dejavu_fonts opensans-ttf font-awesome ];
   };
 
   environment.variables.EDITOR = "vim";
