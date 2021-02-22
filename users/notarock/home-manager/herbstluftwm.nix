@@ -2,6 +2,7 @@
 
 let
   my-theme = import ../theme.nix;
+  gapWidth = "20";
 in {
   xdg.configFile."herbstluftwm/autostart" = { executable = true; text = ''
 #!/usr/bin/env bash
@@ -34,6 +35,10 @@ hc keybind $Mod-d spawn rofi -show drun
 hc keybind XF86AudioRaiseVolume spawn ${pkgs.alsaUtils}/bin/amixer set -q Master 5%+
 hc keybind XF86AudioLowerVolume spawn ${pkgs.alsaUtils}/bin/amixer set -q Master 5%-
 hc keybind XF86AudioMute spawn ${pkgs.alsaUtils}/bin/amixer set Master toggle
+
+# Brightness using Light
+hc keybind XF86MonBrightnessUp spawn ${pkgs.light}/bin/light -A 5%
+hc keybind XF86MonBrightnessDown spawn ${pkgs.light}/bin/light -U 5%
 
 # # For display controls - either laptop, home or launch arandr
 # hc keybind $Mod+F10 spawn ~/.config/herbstluftwm/rofi-display.sh
@@ -145,7 +150,7 @@ hc set frame_border_width 0
 hc set always_show_frame 0
 hc set frame_bg_transparent 1
 hc set frame_transparent_width 3
-hc set frame_gap 0
+hc set frame_gap ${gapWidth}
 
 hc attr theme.active.color $SELECT
 hc attr theme.normal.color '#000000'
@@ -193,7 +198,7 @@ hc detect_monitors
 hc spawn feh --bg-fill ~/Pictures/wallpaper/selected*
 hc spawn picom
 hc keybind $Mod-n set frame_gap 0
-hc keybind $Mod-g set frame_gap 25
+hc keybind $Mod-g set frame_gap ${gapWidth}
   '';};
 
 }

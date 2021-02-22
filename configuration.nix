@@ -40,6 +40,7 @@ in {
   };
 
   environment.variables.EDITOR = "vim";
+  programs.light.enable = true;
 
   # Fixes svg icon-theme
   # https://github.com/NixOS/nixpkgs/issues/13537#issuecomment-332327760

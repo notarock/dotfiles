@@ -5,14 +5,14 @@ let
   doom-emacs = pkgs.callPackage (builtins.fetchTarball {
     url = https://github.com/vlaci/nix-doom-emacs/archive/master.tar.gz;
   }) {
-    doomPrivateDir = ./doom.d;  # Directory containing your config.el init.el and packages.el files
+    doomPrivateDir = ./doom.d;
   };
 in {
   users.users.notarock = {
     isNormalUser = true;
     home = "/home/notarock";
     description = "Notarock";
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" "docker" "video" ];
     shell = pkgs.zsh;
     initialPassword = "Ch4ngeMoi%%%";
   };

@@ -183,7 +183,7 @@ in {
         };
 
         script = ''
-          sleep 3 && USER=$(whoami); polybar main &
+          sleep 5 && USER=$(whoami); polybar main &
         '';
       };
 }
