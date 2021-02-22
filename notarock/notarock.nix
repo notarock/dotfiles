@@ -20,14 +20,14 @@ in {
   home-manager = {
     users.notarock = { pkgs, ... }: {
       imports = [
-        ./home-manager/herbstluftwm.nix
-        ./home-manager/polybar.nix
-        ./home-manager/udiskie.nix
-        ./home-manager/dunst.nix
-        ./home-manager/vim.nix
-        ./home-manager/zsh.nix
-        ./home-manager/fzf.nix
-        ./home-manager/kitty.nix
+        ./extras/herbstluftwm.nix
+        ./extras/polybar.nix
+        ./extras/udiskie.nix
+        ./extras/dunst.nix
+        ./extras/vim.nix
+        ./extras/zsh.nix
+        ./extras/fzf.nix
+        ./extras/kitty.nix
       ];
 
       gtk = {

@@ -16,7 +16,7 @@ in {
     ./core/services.nix
     ./core/systemPackages.nix
     ./host/hardware-configuration.nix
-    ./users/notarock/user.nix
+    ./notarock/notarock.nix
   ];
 
   programs = {

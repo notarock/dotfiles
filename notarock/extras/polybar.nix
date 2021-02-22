@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-    hostSpecific = import ../../../host/variables.nix;
+    hostSpecific = import ../../host/variables.nix;
     my-theme = import ../theme.nix;
 in {
       services.polybar = {
