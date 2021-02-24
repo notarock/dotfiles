@@ -38,14 +38,14 @@ in {
         theme.name = "Amber";
       };
 
+      home.packages = [ doom-emacs ];
+      home.file.".emacs.d/init.el".text = ''
+        (load "default.el")
+      '';
+
       home.keyboard.layout = "ca,fr";
 
       programs = {
-        emacs = {
-          enable = true;
-          package = pkgs.emacs27;
-        };
-
         rofi = {
           enable = true;
           separator = "solid";

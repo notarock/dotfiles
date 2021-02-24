@@ -10,7 +10,7 @@
 
 (setq display-line-numbers-type t)
 
-(setq fancy-splash-image "/etc/nixos/users/notarock/doom.d/notarock.png")
+(setq fancy-splash-image "/etc/nixos/notarock/doom.d/notarock.png")
 
 (setq frame-resize-pixelwise t)
 
