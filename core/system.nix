@@ -18,7 +18,6 @@ in {
 
   nix.autoOptimiseStore = true;
 
-  # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.cleanTmpDir = true;
@@ -27,9 +26,9 @@ in {
   hardware.bluetooth.enable = true;
 
   networking.nameservers = [
-    "65.39.166.132" # Cogeco Montréal
-    "1.1.1.1" # Cloudflare
-    "9.9.9.9" # Quad-9
+    "65.39.166.132"        # Cogeco Montréal
+    "1.1.1.1"              # Cloudflare
+    "9.9.9.9"              # Quad-9
   ];
 
   i18n.defaultLocale = "en_CA.UTF-8";

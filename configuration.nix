@@ -6,13 +6,11 @@ let
 in {
   system.stateVersion = "20.09";
 
-  imports = [ # Include the results of the hardware scan.
-    # Contains host-specific configuration.
-    # In order for this import to work, you have to link the desired
-    # host folder to `host` in this repo's root. Like this:
-    # ln -s hosts/zonnarth host
+  imports = [
     <home-manager/nixos>
+    # <sop-nix/sops>
     ./core/system.nix
+    ./core/keychron.nix
     ./core/services.nix
     ./core/systemPackages.nix
     ./host/hardware-configuration.nix
@@ -49,19 +47,5 @@ in {
     GDK_PIXBUF_MODULE_FILE =
       "$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)";
   };
-
-  # Turns out it's quite annoying
-  #
-  # services.cron = {
-  #   enable = true;
-  #   systemCronJobs = let
-  #     dodocron =
-  #       "notarock  XDG_RUNTIME_DIR=/run/user/$(id -u) notify-send BEDTIME 'Time to go to sleep'";
-  #   in [
-  #     "*/1 0-5 * * 0-5  ${dodocron}"
-  #     "30/1 23 * * 0-5  ${dodocron}"
-  #     "* 3 * * 5-6      ${dodocron}"
-  #   ];
-  # };
 
 }

@@ -62,19 +62,9 @@ in {
 
           "module/filesystem" = {
             type = "internal/fs";
-            # Mountpoints to display
             mount-0 = "/";
-
-            # Seconds to sleep between updates
-            # Default: 30
             interval = "60";
-
-            # Display fixed precision values
-            # Default: false
             fixed-values = "true";
-
-            # Spacing between entries
-            # Default: 2
             spacing = "4";
             format-padding = 2;
             label-mounted = " %free% free (%percentage_free%%) ";
@@ -89,12 +79,10 @@ in {
             format-padding = 2;
             type = "internal/network";
             interface = "enp7s0";
-            # Default: %ifname% %local_ip%
             label-connected = " %local_ip%%downspeed:9%%upspeed:9% ";
             label-connected-foreground = my-theme.color15;
             label-connected-background = my-theme.color10;
 
-            # Default: (none)
             label-disconnected = "not connected";
             label-disconnected-background = my-theme.color1;
             label-disconnected-foreground = my-theme.color0;
@@ -116,11 +104,9 @@ in {
             type = "internal/network";
             interface = "wlp3s0";
             format-padding = 2;
-            # Default: %ifname% %local_ip%
             label-connected = " %local_ip%%downspeed:9%%upspeed:9% %essid% ";
             label-connected-foreground = my-theme.color15;
             label-connected-background = my-theme.color10;
-            # Default: (none)
             label-disconnected = "not connected";
             label-disconnected-background = my-theme.color1;
             label-disconnected-foreground = my-theme.color0;
