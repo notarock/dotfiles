@@ -3,7 +3,7 @@
 let
   my-theme = import ./theme.nix;
   doom-emacs = pkgs.callPackage (builtins.fetchTarball {
-    url = https://github.com/vlaci/nix-doom-emacs/archive/master.tar.gz;
+    url = https://github.com/vlaci/nix-doom-emacs/archive/239b847a548315016b1282c6cfe447b0ba908c5f.tar.gz;
   }) {
     doomPrivateDir = ./doom.d;
   };
