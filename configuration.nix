@@ -9,6 +9,7 @@ in {
   imports = [
     <home-manager/nixos>
     # <sop-nix/sops>
+    ./core/flake.nix
     ./core/system.nix
     ./core/keychron.nix
     ./core/services.nix
