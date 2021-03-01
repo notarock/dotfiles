@@ -2,18 +2,18 @@
 
 
 let
-  unstableTarball = fetchTarball
-    "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-  masterTarball =
-    fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
+  # unstableTarball = fetchTarball
+  #   "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+  # masterTarball =
+  #   fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
 in {
   nixpkgs.config = {
     allowUnfree = true;
     allowBroken = false;
-    packageOverrides = pkgs: {
-      unstable = import unstableTarball { config = config.nixpkgs.config; };
-      master = import masterTarball { config = config.nixpkgs.config; };
-    };
+    # packageOverrides = pkgs: {
+    #   unstable = import unstableTarball { config = config.nixpkgs.config; };
+    #   master = import masterTarball { config = config.nixpkgs.config; };
+    # };
   };
 
   nix.autoOptimiseStore = true;

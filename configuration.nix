@@ -7,14 +7,13 @@ in {
   system.stateVersion = "20.09";
 
   imports = [
-    <home-manager/nixos>
     # <sop-nix/sops>
-    ./core/flake.nix
+    ./core/enableFlake.nix
     ./core/system.nix
     ./core/keychron.nix
     ./core/services.nix
     ./core/systemPackages.nix
-    ./host/hardware-configuration.nix
+    ./hosts/kreizemm/hardware-configuration.nix
     ./notarock/notarock.nix
   ];
 
