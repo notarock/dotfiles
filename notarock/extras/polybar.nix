@@ -1,7 +1,7 @@
-{ config, lib, pkgs, ... }:
+{ nixosConfig, config, lib, pkgs, ... }:
 
 let
-    hostSpecific = import ../../hosts/kreizemm/variables.nix;
+    hostSpecific = import (../../hosts + "/${nixosConfig.networking.hostName}/variables.nix");
     my-theme = import ../theme.nix;
 in {
       services.polybar = {

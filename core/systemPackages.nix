@@ -30,7 +30,6 @@
     nmap
     parted
     ranger
-    stow
     traceroute
     telnet
     tcpdump
@@ -98,8 +97,12 @@
     wakatime
     texlive.combined.scheme-medium
     go
+    gomodifytags
     gocode
     gopls
+    gore
+    gotests
+    goimports
     pandoc
     zoom-us
     yubioath-desktop
@@ -143,6 +146,7 @@
     nixfmt
     gcc
     nix-index
+    figlet
     (steam.override {
       extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
       nativeOnly = true;

@@ -10,34 +10,34 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nix-doom-emacs, ... }: {
-    nixosConfigurations = {
-      Zonnarth = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          home-manager.nixosModules.home-manager
-          ./configuration.nix
-        ];
-        specialArgs = {inherit inputs;};
-      };
-      Kreizemm = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.users.notarock = {pkgs, ...}: {
-              imports = [ nix-doom-emacs.hmModule ];
-              programs.doom-emacs = {
-                enable = true;
-                doomPrivateDir = ./notarock/doom.d;
+  outputs = inputs@{ self, nixpkgs, home-manager, nix-doom-emacs, ... }:
+    let
+      mkNixosConfiguration = { hostname }:
+        let
+          hardwareConfig = ./hosts + "/${hostname}/hardware-configuration.nix";
+        in nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          system = "x86_64-linux";
+          modules = [
+            hardwareConfig
+            ./configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.users.notarock = { pkgs, ... }: {
+                imports = [ nix-doom-emacs.hmModule ];
+                programs.doom-emacs = {
+                  enable = true;
+                  doomPrivateDir = ./notarock/doom.d;
+                };
               };
-            };
-          }
-          ./configuration.nix
-        ];
-        specialArgs = {inherit inputs;};
+            }
+          ];
+        };
+    in {
+      nixosConfigurations = {
+        Zonnarth = mkNixosConfiguration { hostname = "Zonnarth"; };
+        Kreizemm = mkNixosConfiguration { hostname = "Kreizemm"; };
       };
-    };
 
-  };
+    };
 }

@@ -1,21 +1,22 @@
 { config, pkgs, ... }:
 
-let
-  hostSpecific = import ./host/variables.nix;
-  my-theme = import ./users/notarock/theme.nix;
-in {
+{
   system.stateVersion = "20.09";
 
   imports = [
-    # <sop-nix/sops>
+    # <sop-nix/sops> TODO: Sopsify stuff
     ./core/enableFlake.nix
     ./core/system.nix
     ./core/keychron.nix
     ./core/services.nix
     ./core/systemPackages.nix
-    ./hosts/kreizemm/hardware-configuration.nix
     ./notarock/notarock.nix
   ];
+
+  home-manager = {
+    useUserPackages = true;
+    useGlobalPkgs = true;
+  };
 
   programs = {
     zsh.enable = true;
@@ -25,11 +26,6 @@ in {
       enableSSHSupport = true;
       pinentryFlavor = "gtk2";
     };
-  };
-
-  home-manager = {
-    useUserPackages = true;
-    useGlobalPkgs = true;
   };
 
   fonts = {
