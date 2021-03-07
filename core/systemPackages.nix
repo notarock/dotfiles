@@ -71,7 +71,6 @@
     bibata-cursors
     capitaine-cursors
     element-desktop
-    nextcloud-client
     pkgs.numix-icon-theme-square
     pkgs.numix-gtk-theme
     woeusb
