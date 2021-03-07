@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  my-theme = import ../theme.nix;
+  my-theme = import ../../themes/base16-brewer.nix;
 in {
   programs.vim = {
     plugins = with pkgs.vimPlugins; [

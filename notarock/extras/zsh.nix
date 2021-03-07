@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let my-theme = import ../theme.nix;
+let my-theme = import ../../themes/base16-brewer.nix;
 in {
   programs.zsh = {
     enable = true;

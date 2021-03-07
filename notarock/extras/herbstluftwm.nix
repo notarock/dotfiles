@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  my-theme = import ../theme.nix;
+  my-theme = import ../../themes/base16-brewer.nix;
   layoutFolder = "/etc/nixos/notarock/extras/hlwm-layouts";
   gapWidth = "20";
 in {

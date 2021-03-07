@@ -1,4 +1,5 @@
 {
+  # Base16 Brewer
   color0 = "#0c0d0e";
   color1 = "#e31a1c";
   color2 = "#31a354";
