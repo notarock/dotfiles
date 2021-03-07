@@ -2,11 +2,6 @@
 
 let
   my-theme = import ./theme.nix;
-  # doom-emacs = pkgs.callPackage (builtins.fetchTarball {
-  #   url = https://github.com/vlaci/nix-doom-emacs/archive/239b847a548315016b1282c6cfe447b0ba908c5f.tar.gz;
-  # }) {
-  #   doomPrivateDir = ./doom.d;
-  # };
 in {
   users.users.notarock = {
     isNormalUser = true;
@@ -25,6 +20,7 @@ in {
         ./extras/udiskie.nix
         ./extras/dunst.nix
         ./extras/vim.nix
+        ./extras/emacs.nix
         ./extras/zsh.nix
         ./extras/fzf.nix
         ./extras/kitty.nix
@@ -37,11 +33,6 @@ in {
         theme.package = pkgs.amber-theme;
         theme.name = "Amber";
       };
-
-      # home.packages = [ doom-emacs ];
-      # home.file.".emacs.d/init.el".text = ''
-      #   (load "default.el")
-      # '';
 
       home.keyboard.layout = "ca,fr";
 

@@ -25,10 +25,6 @@
             {
               home-manager.users.notarock = { pkgs, ... }: {
                 imports = [ nix-doom-emacs.hmModule ];
-                programs.doom-emacs = {
-                  enable = true;
-                  doomPrivateDir = ./notarock/doom.d;
-                };
               };
             }
           ];
