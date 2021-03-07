@@ -5,16 +5,16 @@ configuration {
   drun-display-format: "{icon} {name}";
   font: "Essential PragmataPro 10";
   modi: "window,run,drun";
-  show-icons: true;
+  show-icons: false;
 }
 
 * {
-  bg: #2e2f30;
-  bg-alt: #515253;
-  fg: #fcfdfe;
+  bg: #282c34;
+  bg-alt: #565c64;
+  fg: #abb2bf;
 
-  accent: #959697;
-  selection: #dca060;
+  accent: #565c64;
+  selection: #e5c07b;
 
   background-color: @bg;
 
