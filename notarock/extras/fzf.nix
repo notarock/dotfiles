@@ -2,7 +2,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  my-theme = import ../../themes/base16-brewer.nix;
+  my-theme = import ../../themes/base16-bright.nix;
 in {
   programs.fzf = {
     enable = true;

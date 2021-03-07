@@ -17,7 +17,7 @@ some email clients, file templates and snippets.
 THis function is probably the most important peice of configuration in this
 whole repository.
 #+BEGIN_SRC emacs-lisp
-(setq doom-theme 'base16-brewer)
+(setq doom-theme 'base16-bright)
 #+END_SRC
 
 *** Font
