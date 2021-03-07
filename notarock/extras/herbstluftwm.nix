@@ -61,7 +61,7 @@ in {
       # TODO: Revisit this. Have composable keybindings?
 
       hc keybind $Mod-F3 spawn firefox
-      hc keybind $Mod-Shift-e spawn emacs
+      hc keybind $Mod-Shift-e spawn emacsclient -c
       hc keybind $Mod-Shift-s spawn flameshot gui
       hc keybind $Mod-Insert spawn rofi-pass
       hc keybind $Mod-t spawn ~/.config/herbstluftwm/layout-menu
@@ -251,7 +251,23 @@ in {
     '';
   };
 
-  xdg.configFile."herbstluftwm/layouts/master-left" = {
+  xdg.configFile."herbstluftwm/layouts/masterleft-side" = {
+    executable = true;
+    text = ''
+      #!/usr/bin/env bash
+
+      herbstclient chain \
+          . remove \
+          . remove \
+          . remove \
+          . remove \
+          . remove \
+          . remove \
+          . split right 0.67 \
+    '';
+  };
+
+  xdg.configFile."herbstluftwm/layouts/masterleft-2side" = {
     executable = true;
     text = ''
       #!/usr/bin/env bash
@@ -265,8 +281,25 @@ in {
           . remove \
           . split right 0.67 \
           . focus right \
-          . split bottom \
+          . split bottom 0.67 \
           . focus left
+    '';
+  };
+
+  xdg.configFile."herbstluftwm/layouts/masterleft-bot-side" = {
+    executable = true;
+    text = ''
+      #!/usr/bin/env bash
+
+      herbstclient chain \
+          . remove \
+          . remove \
+          . remove \
+          . remove \
+          . remove \
+          . remove \
+          . split right 0.67 \
+          . split bottom 0.80 \
     '';
   };
 
