@@ -14,8 +14,4 @@
     enable = true;
     doomPrivateDir = ../doom.d;
   };
-
-  home.file.".emacs.d/init.el".text = ''
-      (load "default.el")
-  '';
 }
