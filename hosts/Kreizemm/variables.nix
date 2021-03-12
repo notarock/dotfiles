@@ -1,3 +1,3 @@
 {
-  mainMonitor = "DP-1";
+  mainMonitor = "DisplayPort-0";
 }
