@@ -155,4 +155,20 @@
       enableFPS = false;
     })
   ];
+  nixpkgs.overlays = [
+    (final: prev: {
+      nextcloud-client = (prev.nextcloud-client.overrideAttrs (o: rec {
+        # does not find password
+        # https://github.com/NixOS/nixpkgs/pull/113731
+        # In case nextcloud will not remember passwords...
+        qtWrapperArgs = [
+          "--prefix LD_LIBRARY_PATH : ${
+            prev.lib.makeLibraryPath [ prev.libsecret ]
+          }"
+        ];
+      }));
+    })
+
+  ];
+
 }
