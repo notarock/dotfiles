@@ -34,6 +34,5 @@
         Zonnarth = mkNixosConfiguration { hostname = "Zonnarth"; };
         Kreizemm = mkNixosConfiguration { hostname = "Kreizemm"; };
       };
-
     };
 }
