@@ -210,6 +210,7 @@ in {
       # Backgrounds and term colors
       hc spawn feh --bg-fill ~/Pictures/wallpaper/selected*
       hc spawn picom
+      hc spawn flameshot
       hc keybind $Mod-n set frame_gap 0
       hc keybind $Mod-g set frame_gap ${gapWidth}
         '';
