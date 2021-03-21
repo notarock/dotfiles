@@ -5,6 +5,7 @@ in {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
+    # To keep using zsh with nix-shells
     plugins = [{
       name = "zsh-nix-shell";
       file = "nix-shell.plugin.zsh";
@@ -46,14 +47,13 @@ in {
       gitwtf = "echo 'git reset $(git merge-base master current)'";
       yolo = ''git commit -m "$(curl -s http://whatthecommit.com/index.txt)" '';
       recent = "ls -Art | tail -n 1";
+      cdnix = "cd /etc/nixos";
     };
     history = {
       ignoreSpace = true;
       extended = true;
       save = 50000;
     };
-
-    # initExtra = "echo \"\\e[31mHello, friend.\\em \"";
   };
 
   programs.zsh.oh-my-zsh = {
@@ -76,6 +76,8 @@ in {
       "golang"
     ];
     extraConfig = ''
+            setopt HIST_IGNORE_SPACE
+
             export PATH=$HOME/bin:/usr/local/bin:$PATH
             export PATH=$HOME/snap:$PATH
             export PATH=$HOME/.emacs.d/bin/:$PATH
