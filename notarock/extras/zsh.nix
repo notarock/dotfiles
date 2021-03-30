@@ -17,7 +17,6 @@ in {
       };
     }];
     shellAliases = {
-      c-mot = "sudo nix-channel --update";
       ll = "ls -alF";
       la = "ls -A";
       l = "ls -CF";
@@ -37,9 +36,8 @@ in {
       dclear = "docker rmi $(docker images -q)";
       open = "$FILEMANAGER";
       nixc = "sudo $EDITOR /etc/nixos/configuration.nix";
-      nbs = "sudo nixos-rebuild switch";
       nbsf = "sudo nixos-rebuild switch --flake '.#' -v -L";
-      nbsu = "sudo nixos-rebuild switch --upgrade";
+      f-mot = "nix flake update";
       wttr = "curl wttr.in";
       k = "kubectl";
       randpw =
