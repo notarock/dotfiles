@@ -3,7 +3,7 @@
 let
   my-theme = import ../../themes/base16-onedark.nix;
   layoutFolder = "/etc/nixos/notarock/extras/hlwm-layouts";
-  gapWidth = "20";
+  gapWidth = "25";
 in {
 
   #########################################################################
@@ -167,7 +167,7 @@ in {
       hc set always_show_frame 0
       hc set frame_bg_transparent 1
       hc set frame_transparent_width 3
-      hc set frame_gap ${gapWidth}
+      hc set frame_gap 0
 
       hc attr theme.active.color $SELECT
       hc attr theme.normal.color '#000000'
