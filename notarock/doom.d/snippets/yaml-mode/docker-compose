@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: docker-compose
+# key:
+# --
+
+version: '3.7'
+
+services:
+  $1:
+    build: .
+    ports:
+      - 3000:3000
+    restart: always
+    environment:
+      $2
+
+  database:
+    image: postgres:12.3
+    environment:
+      POSTGRES_USER: "$1_user"
+      POSTGRES_PASSWORD: "secret"
+      POSTGRES_DB: "$1"
