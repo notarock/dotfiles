@@ -2,6 +2,7 @@
 
 {
   environment.systemPackages = with pkgs; [
+    dbeaver
     qemu_kvm
     wget
     curl
@@ -154,6 +155,7 @@
     gcc
     nix-index
     figlet
+    python38Packages.python-language-server
     (steam.override {
       extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
       nativeOnly = true;
