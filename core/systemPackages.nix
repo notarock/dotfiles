@@ -121,8 +121,13 @@
     juno-theme
     equilux-theme
     yaru-theme
-    python39
-    python-language-server
+    python38
+    python38Packages.isort
+    python38Packages.pytest
+    python38Packages.black
+    python38Packages.pyflakes
+    python38Packages.python-language-server
+    # python-language-server
     leiningen
     clojure
     kdenlive
