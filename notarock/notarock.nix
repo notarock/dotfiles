@@ -30,8 +30,8 @@ in {
         enable = true;
         iconTheme.package = pkgs.numix-icon-theme-square;
         iconTheme.name = "Numix-Square";
-        theme.package = pkgs.amber-theme;
-        theme.name = "Amber";
+        theme.package = pkgs.yaru-theme;
+        theme.name = "Yaru-dark";
       };
 
       home.keyboard.layout = "ca,fr";

@@ -118,6 +118,9 @@
     youtube-dl
     flameshot
     amber-theme
+    juno-theme
+    equilux-theme
+    yaru-theme
     python39
     python-language-server
     leiningen
