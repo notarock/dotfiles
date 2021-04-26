@@ -19,7 +19,7 @@ in {
         ignore_newline = "no";
         stack_duplicates = "yes";
         hide_duplicate_count = "yes";
-        geometry = "0x5-250+50";
+        geometry = "800x5-250+50";
         shrink = "no";
         transparency = 20;
         idle_threshold = 0;
