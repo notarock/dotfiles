@@ -34,6 +34,12 @@ in {
         theme.name = "Yaru-dark";
       };
 
+      xsession = {
+        pointerCursor.package = pkgs.bibata-cursors;
+        pointerCursor.name = "Bibata_Oil";
+        pointerCursor.size = 48;
+      };
+
       home.keyboard.layout = "ca,fr";
 
       programs = {
@@ -64,8 +70,6 @@ in {
       xresources.properties = {
         "xft.dpi" = "144";
         "XTerm*faceName" = "dejavu sans mono";
-        "Xcursor.size" = "32";
-        "Xcursor.theme" = "Bibata Oil";
       };
 
     };
