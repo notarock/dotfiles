@@ -90,7 +90,7 @@
     gnomeExtensions.system-monitor
     gnomeExtensions.appindicator
     tldr
-    nodejs-14_x
+    nodejs-16_x
     spotify
     ccls
     clang-tools
