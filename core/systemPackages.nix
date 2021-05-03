@@ -127,6 +127,8 @@
     python38Packages.pytest
     python38Packages.black
     python38Packages.pyflakes
+    python38Packages.jupyter_core
+    python38Packages.notebook
     python38Packages.python-language-server
     # python-language-server
     leiningen
