@@ -177,7 +177,6 @@ in {
     };
 
     script = ''
-      sleep 5 && USER=$(whoami); polybar main &
     '';
   };
 }

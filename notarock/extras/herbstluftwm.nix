@@ -60,6 +60,11 @@ in {
       hc keybind $Mod-0 spawn ~/.config/herbstluftwm/window-menu
       hc keybind $Mod-Shift-Return spawn ~/.config/herbstluftwm/scratchpad
 
+      hc keybind $Mod-Shift-Home spawn ${pkgs.systemd}/bin/loginctl lock-session
+
+
+
+
       # basic movement
       # focusing clients
       hc keybind $Mod-Left  focus left
@@ -209,15 +214,40 @@ in {
       # or simply:
       hc detect_monitors
 
-      # Startup programs
+      # Kill Startup programs
+      hc spawn pkill xsecurelock
+      hc spawn pkill xss-lock
+      hc spawn pkill polybar
+      hc spawn pkill flameshot
+      hc spawn pkill picom
 
-      # Backgrounds and term colors
+      hc spawn ${pkgs.xss-lock}/bin/xss-lock \
+          ${pkgs.coreutils}/bin/env \
+          XSECURELOCK_AUTH_BACKGROUND_COLOR="${my-theme.color11}" \
+          XSECURELOCK_PASSWORD_PROMPT=time \
+          XSECURELOCK_AUTH_CURSOR_BLINK=0 \
+          XSECURELOCK_NO_COMPOSITE=1 \
+          XSECURELOCK_BLANK_DPMS_STATE=off \
+          XSECURELOCK_BLANK_TIMEOUT=30 \
+          ${pkgs.xsecurelock}/bin/xsecurelock
+
+      # Startup programs
       hc spawn feh --bg-fill ~/Pictures/wallpaper/selected*
       hc spawn picom
       hc spawn flameshot
+      hc spawn ${pkgs.polybar}/bin/polybar main;
+
+      # gaps are based
+      #   __ _  __ _ _ __  ___
+      #  / _` |/ _` | '_ \/ __|
+      # | (_| | (_| | |_) \__ \
+      #  \__, |\__,_| .__/|___/
+      #  |___/      |_|
+
       hc keybind $Mod-n set frame_gap 0
       hc keybind $Mod-g set frame_gap ${gapWidth}
-        '';
+
+    '';
   };
 
   ########################################
@@ -334,116 +364,116 @@ in {
   xdg.configFile."herbstluftwm/window-menu" = {
     executable = true;
     text = ''
-          #!/usr/bin/env bash
-          set -e
+      #!/usr/bin/env bash
+      set -e
 
-          # offer a window menu offering possible actions on that window like
-          # moving to a different tag or toggling its fullscreen state
+      # offer a window menu offering possible actions on that window like
+      # moving to a different tag or toggling its fullscreen state
 
-          action_list() {
-              local a="$1"
-              "$a" "Close" herbstclient close
-              "$a" "Toggle fullscreen" herbstclient fullscreen toggle
-              "$a" "Toggle pseudotile" herbstclient pseudotile toggle
-              for tag in $(herbstclient complete 1 move) ; do
-                  "$a" "Move to tag $tag" herbstclient move "$tag"
-              done
-          }
+      action_list() {
+          local a="$1"
+          "$a" "Close" herbstclient close
+          "$a" "Toggle fullscreen" herbstclient fullscreen toggle
+          "$a" "Toggle pseudotile" herbstclient pseudotile toggle
+          for tag in $(herbstclient complete 1 move) ; do
+              "$a" "Move to tag $tag" herbstclient move "$tag"
+          done
+      }
 
-          print_menu() {
-              echo "$1"
-          }
+      print_menu() {
+          echo "$1"
+      }
 
-          title=$(herbstclient attr clients.focus.title)
-          title=''${title//&/&amp;}
-          rofiflags=(
-              -p "herbstclient:"
-              -mesg "<i>$title</i>"
-              -columns 3
-              -location 2
-              -width 100
-              -no-custom
-          )
-          result=$(action_list print_menu | ${pkgs.rofi}/bin/rofi -i -dmenu -m -2 "''${rofiflags[@]}")
-          [ $? -ne 0 ] && exit 0
+      title=$(herbstclient attr clients.focus.title)
+      title=''${title//&/&amp;}
+      rofiflags=(
+          -p "herbstclient:"
+          -mesg "<i>$title</i>"
+          -columns 3
+          -location 2
+          -width 100
+          -no-custom
+      )
+      result=$(action_list print_menu | ${pkgs.rofi}/bin/rofi -i -dmenu -m -2 "''${rofiflags[@]}")
+      [ $? -ne 0 ] && exit 0
 
-          exec_entry() {
-              if [ "$1" = "$result" ] ; then
-                  shift
-                  "$@"
-                  exit 0
-              fi
-          }
+      exec_entry() {
+          if [ "$1" = "$result" ] ; then
+              shift
+              "$@"
+              exit 0
+          fi
+      }
 
-          action_list exec_entry      '';
+      action_list exec_entry      '';
   };
 
   xdg.configFile."herbstluftwm/scratchpad" = {
     executable = true;
     text = ''
-        #!/usr/bin/env bash
+      #!/usr/bin/env bash
 
-        # a i3-like scratchpad for arbitrary applications.
-        #
-        # this lets a new monitor called "scratchpad" appear in from the top into the
-        # current monitor. There the "scratchpad" will be shown (it will be created if
-        # it doesn't exist yet). If the monitor already exists it is scrolled out of
-        # the screen and removed again.
-        #
-        # Warning: this uses much resources because herbstclient is forked for each
-        # animation step.
-        #
-        # If a tag name is supplied, this is used instead of the scratchpad
+      # a i3-like scratchpad for arbitrary applications.
+      #
+      # this lets a new monitor called "scratchpad" appear in from the top into the
+      # current monitor. There the "scratchpad" will be shown (it will be created if
+      # it doesn't exist yet). If the monitor already exists it is scrolled out of
+      # the screen and removed again.
+      #
+      # Warning: this uses much resources because herbstclient is forked for each
+      # animation step.
+      #
+      # If a tag name is supplied, this is used instead of the scratchpad
 
-        tag="''${1:-s}"
-        hc() { "''${herbstclient_command[@]:-herbstclient}" "$@" ;}
+      tag="''${1:-s}"
+      hc() { "''${herbstclient_command[@]:-herbstclient}" "$@" ;}
 
-        mrect=( $(hc monitor_rect "" ) )
+      mrect=( $(hc monitor_rect "" ) )
 
-        width=''${mrect[2]}
-        height=''${mrect[3]}
+      width=''${mrect[2]}
+      height=''${mrect[3]}
 
-        rect=(
-            $((width/2))
-            $((height/2))
-            $((''${mrect[0]}+(width/4)))
-            $((''${mrect[1]}+(height/4)))
-        )
+      rect=(
+          $((width/2))
+          $((height/2))
+          $((''${mrect[0]}+(width/4)))
+          $((''${mrect[1]}+(height/4)))
+      )
 
-        hc add "$tag"
+      hc add "$tag"
 
-        monitor=scratchpad
+      monitor=scratchpad
 
-        exists=false
-        if ! hc add_monitor $(printf "%dx%d%+d%+d" "''${rect[@]}") \
-                            "$tag" $monitor 2> /dev/null ; then
-            exists=true
-        else
-            # remember which monitor was focused previously
-            hc chain \
-                , new_attr string monitors.by-name."$monitor".my_prev_focus \
-                , substitute M monitors.focus.index \
-                    set_attr monitors.by-name."$monitor".my_prev_focus M
-        fi
+      exists=false
+      if ! hc add_monitor $(printf "%dx%d%+d%+d" "''${rect[@]}") \
+                          "$tag" $monitor 2> /dev/null ; then
+          exists=true
+      else
+          # remember which monitor was focused previously
+          hc chain \
+              , new_attr string monitors.by-name."$monitor".my_prev_focus \
+              , substitute M monitors.focus.index \
+                  set_attr monitors.by-name."$monitor".my_prev_focus M
+      fi
 
-        show() {
-            hc lock
-            hc raise_monitor "$monitor"
-            hc focus_monitor "$monitor"
-            hc unlock
-            hc lock_tag "$monitor"
-        }
+      show() {
+          hc lock
+          hc raise_monitor "$monitor"
+          hc focus_monitor "$monitor"
+          hc unlock
+          hc lock_tag "$monitor"
+      }
 
-        hide() {
-            # if q3terminal still is focused, then focus the previously focused monitor
-            # (that mon which was focused when starting q3terminal)
-            hc substitute M monitors.by-name."$monitor".my_prev_focus \
-                and + compare monitors.focus.name = "$monitor" \
-                    + focus_monitor M
-            hc remove_monitor "$monitor"
-        }
+      hide() {
+          # if q3terminal still is focused, then focus the previously focused monitor
+          # (that mon which was focused when starting q3terminal)
+          hc substitute M monitors.by-name."$monitor".my_prev_focus \
+              and + compare monitors.focus.name = "$monitor" \
+                  + focus_monitor M
+          hc remove_monitor "$monitor"
+      }
 
-                  [ $exists = true ] && hide || show
-        '';
+                [ $exists = true ] && hide || show
+    '';
   };
 }

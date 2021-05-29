@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let
-  my-theme = import ../themes/base16-onedark.nix;
+let my-theme = import ../themes/base16-onedark.nix;
 in {
   users.users.notarock = {
     isNormalUser = true;
@@ -26,6 +25,8 @@ in {
         ./extras/kitty.nix
       ];
 
+      home.packages = with pkgs; [ xss-lock xsecurelock ];
+
       gtk = {
         enable = true;
         iconTheme.package = pkgs.numix-icon-theme-square;
@@ -48,9 +49,7 @@ in {
           separator = "solid";
           font = "Essential PragmataPro 14";
           theme = "/etc/nixos/extras/rofi/conf";
-          extraConfig = {
-            dpi = 0;
-          };
+          extraConfig = { dpi = 0; };
         };
 
         git = {
