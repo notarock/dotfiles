@@ -8,7 +8,7 @@ in {
     enable = true;
     font.name = "Essential PragmataPro";
     settings = {
-      font_size = "16.0";
+      font_size = "18.0";
       enable_audio_bell = false;
       open_url_with = "firefox";
       scrollback_lines = 5000;
