@@ -8,6 +8,7 @@
 
   services.emacs = {
     enable = true;
+    package = config.programs.emacs.package;
   };
 
   programs.doom-emacs = {
