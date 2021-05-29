@@ -66,13 +66,13 @@
        ;;parinfer          ; turn lisp into python, sort of
        rotate-text       ; cycle region at point between text candidates
        snippets          ; my elves. They type so I don't have to
-       ;;word-wrap         ; soft wrapping with language-aware indent
+       word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
        dired             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
        ibuffer           ; interactive buffer management
-       undo
+       undo              ; persistent, smarter undo for your inevitable mistakes
        vc                ; version-control and Emacs, sitting in a tree
 
        :term
@@ -82,13 +82,16 @@
        ;; vterm                ; another terminals in Emacs
 
        :checkers
-       ;; syntax              ; tasing you for every semicolon you forget
-       (spell +flyspell +everywhere +hunspell) ; tasing you for misspelling mispelling
-       ;;grammar              ; tasing grammar mistake every you make
+       syntax              ; tasing you for every semicolon you forget
+       (spel               ; tasing you for misspelling mispellingl
+        +flyspell
+        +everywhere
+        +hunspell)
+       ;;grammar           ; tasing grammar mistake every you make
 
        :tools
        ansible
-       debugger          ; FIXME stepping through code, to help you add bugs
+       debugger          ; stepping through code, to help you add bugs
        ;;direnv
        docker
        editorconfig      ; let someone else argue about tabs vs spaces
@@ -102,8 +105,8 @@
        magit             ; a git porcelain for Emacs
        make              ; run make tasks from Emacs
        pass              ; password manager for nerds
-       ;; pdf               ; pdf enhancements
-       ;;prodigy           ; FIXME managing external services & code builders
+       pdf               ; pdf enhancements
+       ;;prodigy           ; managing external services & code builders
        rgb               ; creating color strings
        terraform         ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
@@ -119,11 +122,13 @@
        ;;crystal           ; ruby at the speed of c
        ;; csharp            ; unity, .NET, and mono shenanigans
        data              ; config/data formats
-       elixir            ; erlang done right
+       ;;(dart +flutter)   ; paint ui and not much else
+       ;;elixir            ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses
        erlang            ; an elegant language for a more civilized age
        ;;ess               ; emacs speaks statistics
+       ;;factor
        ;;faust             ; dsp, but you get to keep your soul
        ;;fsharp           ; ML stands for Microsoft's Language
        (go +lsp)                ; the hipster dialect
@@ -136,8 +141,7 @@
        ;;kotlin            ; a better, slicker Java(Script)
        ;;latex             ; writing papers in Emacs has never been so fun
        ;;lean
-       ;;factor
-       ;;ledger            ; an accounting system in Emacs
+       ledger            ; an accounting system in Emacs
        ;;lua               ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
@@ -173,6 +177,8 @@
        ;;swift             ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
        web               ; the tubes
+       yaml              ; JSON, but readable
+       ;;zig               ; C, but simpler
 
        :email
        ;;(mu4e +gmail)
@@ -181,6 +187,8 @@
 
        :app
        ;;calendar
+       ;;emms
+       ;;everywhere        ; *leave* Emacs!? You must be joking
        ;;irc               ; how neckbeards socialize
        ;;(rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
