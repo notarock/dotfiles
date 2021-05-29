@@ -5,7 +5,7 @@
 
 (setq font-family "Essential PragmataPro")
 
-(setq doom-font (font-spec :family font-family :size 22)
+(setq doom-font (font-spec :family font-family :size 24)
     doom-big-font (font-spec :family font-family :size 34))
 
 (setq display-line-numbers-type t)
@@ -81,31 +81,34 @@
   (map! :map org-mode-map
         :n "m-j" #'org-metadown
         :n "m-k" #'org-metaup)
-  (setq ispell-local-dictionary "fr-toutesvariantes"
-        org-directory "~/org/"
-        org-journal-file (concat org-directory "journal.org")
-        org-todos-file (concat org-directory "todos.org")
-        org-capture-templates       (doct '(("Journal" :keys "j"
-                                             :file org-journal-file
-                                             :datetree t
-                                             :todo nil
-                                             :template ("* %^{description}"
-                                                        ":properties:"
-                                                        ":created: %u"
-                                                        ":end:"
-                                                        "%?"))
-                                            ("Todos" :keys "t"
-                                             :file org-todos-file
-                                             :todo-state "TODO"
-                                             :template ("* TODO: %^{description}"
-                                                        ":properties:"
-                                                        ":created: %u"
-                                                        ":end:"))
-                                            ))
-        org-todo-keyword-faces (quote (("todo" :foreground "#ff6347" :weight bold)
-                                       ("done" :foreground "#006400" :weight bold :strike-through t)))
-        org-todo-keywords '((sequence "todo(t)" "done(d)"))
-        org-log-done t))
+  (add-hook 'org-mode-hook 'org-appear-mode)
+  (add-hook 'org-mode-hook (lambda ()
+                             (setq show-trailing-whitespace t)))
+  (setq  ispell-local-dictionary "fr-toutesvariantes"
+         org-directory "~/org/"
+         org-journal-file (concat org-directory "journal.org")
+         org-todos-file (concat org-directory "todos.org")
+         org-capture-templates       (doct '(("Journal" :keys "j"
+                                              :file org-journal-file
+                                              :datetree t
+                                              :todo nil
+                                              :template ("* %^{description}"
+                                                         ":properties:"
+                                                         ":created: %u"
+                                                         ":end:"
+                                                         "%?"))
+                                             ("Todos" :keys "t"
+                                              :file org-todos-file
+                                              :todo-state "TODO"
+                                              :template ("* TODO: %^{description}"
+                                                         ":properties:"
+                                                         ":created: %u"
+                                                         ":end:"))
+                                             ))
+         org-todo-keyword-faces (quote (("todo" :foreground "#ff6347" :weight bold)
+                                        ("done" :foreground "#006400" :weight bold :strike-through t)))
+         org-todo-keywords '((sequence "todo(t)" "done(d)"))
+         org-log-done t))
 
 (after! markdown
   (setq ispell-local-dictionary "fr-toutesvariantes"))
@@ -133,4 +136,4 @@
 
 (global-wakatime-mode +1)
 
-(setq ispell-dictionary "en_US")
+(setq ispell-dictionary "en_CA")

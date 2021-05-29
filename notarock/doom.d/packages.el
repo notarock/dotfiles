@@ -61,4 +61,4 @@
 (package! dimmer)
 (package! highlight-indent-guides)
 (package! doct)
-(package! evil-escape :disable t)
+;; (package! evil-escape :disable t)
