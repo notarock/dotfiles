@@ -8,7 +8,7 @@
     xserver = {
       enable = true;
       displayManager.gdm.enable = true;
-      desktopManager.gnome3.enable = true;
+      desktopManager.gnome.enable = true;
       windowManager.herbstluftwm.enable = true;
       layout = "ca,fr";
       dpi = 144;
