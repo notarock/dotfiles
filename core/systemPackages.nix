@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -57,7 +57,6 @@
     chromium
     firefox
     brogue
-    discord
     steam
     minecraft
     scrot
@@ -159,6 +158,9 @@
     nix-index
     figlet
     python38Packages.python-language-server
+    (import inputs.nixpkgs-discord {
+        inherit (pkgs) config system;
+    }).discord
     (steam.override {
       extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
       nativeOnly = true;
@@ -166,6 +168,7 @@
     (pkgs.dwarf-fortress-packages.dwarf-fortress-full.override {
       theme = "spacefox";
       enableFPS = false;
+      enableDFHack = false;
     })
   ];
   nixpkgs.overlays = [

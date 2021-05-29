@@ -8,6 +8,7 @@
     nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
     nix-doom-emacs.inputs.doom-emacs.follows = "doom-emacs";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-discord.url = "github:nixos/nixpkgs/nixpkgs-unstable";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, nix-doom-emacs, ... }:
@@ -25,6 +26,11 @@
             {
               home-manager.users.notarock = { pkgs, ... }: {
                 imports = [ nix-doom-emacs.hmModule ];
+              };
+            }
+            {
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
               };
             }
           ];
