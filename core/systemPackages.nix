@@ -2,6 +2,7 @@
 
 {
   environment.systemPackages = with pkgs; [
+    openvpn
     dbeaver
     qemu_kvm
     wget
