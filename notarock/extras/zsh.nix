@@ -79,6 +79,8 @@ in {
             export PATH=$HOME/bin:/usr/local/bin:$PATH
             export PATH=$HOME/snap:$PATH
             export PATH=$HOME/.emacs.d/bin/:$PATH
+
+            bci () { <<<"$*" bc -l; }
           '';
 
   };
