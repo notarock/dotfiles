@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  my-theme = import ../../themes/base16-onedark.nix;
+  my-theme = import ../../themes/base16-solarflare.nix;
   layoutFolder = "/etc/nixos/notarock/extras/hlwm-layouts";
   gapWidth = "25";
 in {

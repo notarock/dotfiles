@@ -2,7 +2,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  my-theme = import ../../themes/base16-onedark.nix;
+  my-theme = import ../../themes/base16-solarflare.nix;
 in {
   programs.kitty = {
     enable = true;

@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let my-theme = import ../themes/base16-onedark.nix;
+let my-theme = import ../themes/base16-solarflare.nix;
 in {
   users.users.notarock = {
     isNormalUser = true;
@@ -8,7 +8,7 @@ in {
     description = "Notarock";
     extraGroups = [ "wheel" "docker" "video" ];
     shell = pkgs.zsh;
-    initialPassword = "Ch4ngeMoi%%%";
+   initialPassword = "Ch4ngeMoi%%%";
   };
 
   home-manager = {
@@ -31,8 +31,8 @@ in {
         enable = true;
         iconTheme.package = pkgs.numix-icon-theme-square;
         iconTheme.name = "Numix-Square";
-        theme.package = pkgs.yaru-theme;
-        theme.name = "Yaru-dark";
+        theme.package = pkgs.juno-theme;
+        theme.name = "Juno";
       };
 
       xsession = {

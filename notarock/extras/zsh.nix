@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let my-theme = import ../../themes/base16-onedark.nix;
+let my-theme = import ../../themes/base16-solarflare.nix;
 in {
   programs.zsh = {
     enable = true;
