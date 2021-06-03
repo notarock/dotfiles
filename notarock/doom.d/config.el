@@ -47,6 +47,7 @@
     (indent-region (point-min) (point-max) nil)))
 
 (defun insert-random-hash ()
+  "Insert garbage retrived from /dev/urandom"
   (interactive)
   (insert (string-trim (shell-command-to-string "< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-64};echo;"))))
 
@@ -130,10 +131,21 @@
 
 (map! [remap org-capture] nil)
 
-;;  (shell-command "pandoc config.org -o README.md")
-
 (global-git-gutter-mode +1)
 
 (global-wakatime-mode +1)
 
 (setq ispell-dictionary "en_CA")
+
+(require 'kubel)
+(require 'kubel-evil)
+
+(defun my/kubel ()
+  "Opens kubel inside a new buffer."
+  (interactive)
+  (switch-to-buffer "*kubel-mode*")
+  (kubel-mode))
+
+(map! :ne "SPC o k" #'my/kubel)
+
+;;; config.el ends here

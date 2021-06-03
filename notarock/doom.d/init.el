@@ -196,3 +196,5 @@
        :config
        ;; literate
        (default +bindings +smartparens))
+
+;;; init.el ends here
