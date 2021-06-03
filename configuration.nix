@@ -2,7 +2,6 @@
 
 {
   system.stateVersion = "21.11";
-
   nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
 
   imports = [
