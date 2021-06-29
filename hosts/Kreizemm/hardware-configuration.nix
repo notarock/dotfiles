@@ -49,7 +49,7 @@
       monitorConfig = ''
         Option "PreferredMode" "1920x1080"
         Option "Position" "0 0"
-        Option "Rotate" "left"
+        Option "Rotate" "right"
       '';
     }
   ];
