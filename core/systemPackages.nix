@@ -157,6 +157,13 @@
     gcc
     nix-index
     figlet
+
+    
+
+    (retroarch.override
+    { cores = with libretro; [ bsnes-mercury beetle-snes mgba mupen64plus parallel-n64 snes9x snes9x2010 yabause ]; })
+
+
     python38Packages.python-language-server
     (import inputs.nixpkgs-discord {
         inherit (pkgs) config system;
