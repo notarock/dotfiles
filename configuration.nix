@@ -1,7 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  system.stateVersion = "20.09";
+  system.stateVersion = "21.11";
+
+  nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
 
   imports = [
     # <sop-nix/sops> TODO: Sopsify stuff
