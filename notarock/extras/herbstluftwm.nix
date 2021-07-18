@@ -57,7 +57,7 @@ in {
       hc keybind $Mod-Shift-s spawn flameshot gui
       hc keybind $Mod-Insert spawn rofi-pass
       hc keybind $Mod-t spawn ~/.config/herbstluftwm/layout-menu
-      hc keybind $Mod-0 spawn ~/.config/herbstluftwm/window-menu
+      hc keybind $Mod-Shift-0 spawn ~/.config/herbstluftwm/window-menu
       hc keybind $Mod-Shift-Return spawn ~/.config/herbstluftwm/scratchpad
 
       hc keybind $Mod-Shift-Home spawn ${pkgs.systemd}/bin/loginctl lock-session
