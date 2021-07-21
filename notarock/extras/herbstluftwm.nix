@@ -53,7 +53,7 @@ in {
       hc keybind XF86MonBrightnessDown spawn ${pkgs.light}/bin/light -U 5%
 
       hc keybind $Mod-F3 spawn firefox
-      hc keybind $Mod-Shift-e spawn emacsclient -c
+      hc keybind $Mod-Shift-e spawn emacs
       hc keybind $Mod-Shift-s spawn flameshot gui
       hc keybind $Mod-Insert spawn rofi-pass
       hc keybind $Mod-t spawn ~/.config/herbstluftwm/layout-menu

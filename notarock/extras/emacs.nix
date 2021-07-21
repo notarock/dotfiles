@@ -6,10 +6,10 @@
     yaml-language-server
   ];
 
-  services.emacs = {
-    enable = true;
-    package = config.programs.emacs.package;
-  };
+  # services.emacs = {
+  #   enable = true;
+  #   package = config.programs.emacs.package;
+  # };
 
   programs.doom-emacs = {
     enable = true;
