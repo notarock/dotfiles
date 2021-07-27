@@ -158,7 +158,7 @@
     nix-index
     figlet
 
-    
+    tmux
 
     (retroarch.override
     { cores = with libretro; [ bsnes-mercury beetle-snes mgba mupen64plus parallel-n64 snes9x snes9x2010 yabause ]; })

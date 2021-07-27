@@ -45,4 +45,10 @@
       "$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)";
   };
 
+  # Minimal configuration for NFS support with Vagrant.
+  services.nfs.server.enable = true;
+  networking.firewall.extraCommands = ''
+    ip46tables -I INPUT 1 -i vboxnet+ -p tcp -m tcp --dport 2049 -j ACCEPT
+  '';
+
 }
