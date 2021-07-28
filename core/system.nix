@@ -57,9 +57,12 @@ in {
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   virtualisation = {
-    libvirtd.enable = true;
+    libvirtd.enable = false;
+    virtualbox.host.enable = true;
     docker.enable = true;
   };
+
+  users.extraGroups.vboxusers.members = [ "notarock" ];
 
   # G-word (g*ming) stuff
   hardware = {

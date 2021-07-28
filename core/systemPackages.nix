@@ -106,7 +106,7 @@
     pandoc
     zoom-us
     yubioath-desktop
-    virt-manager
+    # virt-manager
     gnome3.dconf
     nitrogen
     xorg.xmessage
@@ -127,6 +127,9 @@
     python38Packages.pytest
     python38Packages.black
     python38Packages.pyflakes
+    python38Packages.pyaudio
+    python38Packages.virtualenv
+    python38Packages.wheel
     python38Packages.jupyter_core
     python38Packages.notebook
     python38Packages.python-language-server
