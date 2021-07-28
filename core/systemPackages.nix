@@ -161,6 +161,7 @@
     nix-index
     figlet
 
+    asciinema
     tmux
 
     (retroarch.override
