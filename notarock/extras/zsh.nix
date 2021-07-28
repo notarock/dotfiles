@@ -46,6 +46,9 @@ in {
       yolo = ''git commit -m "$(curl -s http://whatthecommit.com/index.txt)" '';
       recent = "ls -Art | tail -n 1";
       cdnix = "cd /etc/nixos";
+      gitc = "git commit -m";
+      gitch = "git checkout";
+      gits = "git status";
     };
     history = {
       ignoreSpace = true;
