@@ -3,7 +3,7 @@
 let
   my-theme = import ../../themes/base16-solarflare.nix;
   layoutFolder = "/etc/nixos/notarock/extras/hlwm-layouts";
-  gapWidth = "25";
+  gapWidth = "15";
 in {
 
   #########################################################################
@@ -59,6 +59,7 @@ in {
       hc keybind $Mod-t spawn ~/.config/herbstluftwm/layout-menu
       hc keybind $Mod-Shift-0 spawn ~/.config/herbstluftwm/window-menu
       hc keybind $Mod-Shift-Return spawn ~/.config/herbstluftwm/scratchpad
+      hc keybind $Mod-Shift-y spawn ~/.config/herbstluftwm/sticky
 
       hc keybind $Mod-Shift-Home spawn ${pkgs.systemd}/bin/loginctl lock-session
 
@@ -169,7 +170,7 @@ in {
       hc set always_show_frame 0
       hc set frame_bg_transparent 1
       hc set frame_transparent_width 3
-      hc set frame_gap 0
+      hc set frame_gap ${gapWidth}
 
       hc attr theme.active.color $SELECT
       hc attr theme.normal.color '#000000'
@@ -391,7 +392,7 @@ in {
           -location 2
           -width 100
           -no-custom
-      )
+            )
       result=$(action_list print_menu | ${pkgs.rofi}/bin/rofi -i -dmenu -m -2 "''${rofiflags[@]}")
       [ $? -ne 0 ] && exit 0
 
@@ -474,4 +475,74 @@ in {
                 [ $exists = true ] && hide || show
     '';
   };
+
+  xdg.configFile."herbstluftwm/sticky" = {
+    executable = true;
+    text = ''
+      #!/usr/bin/env bash
+
+      # a i3-like sticky for arbitrary applications.
+      #
+      # this lets a new monitor called "sticky" appear in from the top into the
+      # current monitor. There the "sticky" will be shown (it will be created if
+      # it doesn't exist yet). If the monitor already exists it is scrolled out of
+      # the screen and removed again.
+      #
+      # Warning: this uses much resources because herbstclient is forked for each
+      # animation step.
+      #
+      # If a tag name is supplied, this is used instead of the sticky
+
+      tag="''${1:-°}"
+      hc() { "''${herbstclient_command[@]:-herbstclient}" "$@" ;}
+
+      mrect=( $(hc monitor_rect "" ) )
+
+      width=''${mrect[2]}
+      height=''${mrect[3]}
+
+      rect=(
+          $((width/3))
+          $((height/2))
+          $((''${mrect[0]}+(width-(width/3)-(width/30))))
+          $((''${mrect[1]}+(height/25)))
+             )
+
+      hc add "$tag"
+
+      monitor=sticky
+
+      exists=false
+      if ! hc add_monitor $(printf "%dx%d%+d%+d" "''${rect[@]}") \
+                          "$tag" $monitor 2> /dev/null ; then
+          exists=true
+      else
+          # remember which monitor was focused previously
+          hc chain \
+              , new_attr string monitors.by-name."$monitor".my_prev_focus \
+              , substitute M monitors.focus.index \
+                  set_attr monitors.by-name."$monitor".my_prev_focus M
+      fi
+
+      show() {
+          hc lock
+          hc raise_monitor "$monitor"
+          hc focus_monitor "$monitor"
+          hc unlock
+          hc lock_tag "$monitor"
+      }
+
+      hide() {
+          # if q3terminal still is focused, then focus the previously focused monitor
+          # (that mon which was focused when starting q3terminal)
+          hc substitute M monitors.by-name."$monitor".my_prev_focus \
+              and + compare monitors.focus.name = "$monitor" \
+                  + focus_monitor M
+          hc remove_monitor "$monitor"
+      }
+
+          [ $exists = true ] && hide || show
+    '';
+  };
+
 }
