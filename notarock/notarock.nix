@@ -44,6 +44,11 @@ in {
       home.keyboard.layout = "ca,fr";
 
       programs = {
+        broot = {
+          enable = true;
+          enableZshIntegration = true;
+        };
+
         rofi = {
           enable = true;
           separator = "solid";
