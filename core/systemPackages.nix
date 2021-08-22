@@ -90,6 +90,7 @@
     gnomeExtensions.system-monitor
     gnomeExtensions.appindicator
     tldr
+    nodePackages.prettier
     nodejs-16_x
     spotify
     ccls
@@ -132,8 +133,6 @@
     python38Packages.wheel
     python38Packages.jupyter_core
     python38Packages.notebook
-    python38Packages.python-language-server
-    # python-language-server
     leiningen
     clojure
     kdenlive

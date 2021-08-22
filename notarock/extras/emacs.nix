@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    python-language-server
+    nodePackages.pyright
     yaml-language-server
   ];
 
