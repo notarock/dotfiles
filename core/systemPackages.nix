@@ -75,7 +75,6 @@
     pkgs.numix-icon-theme-square
     pkgs.numix-gtk-theme
     woeusb
-    jdk11
     jre
     kubectl
     minikube
@@ -159,17 +158,17 @@
     gcc
     nix-index
     figlet
-
     asciinema
     tmux
+    jetbrains.idea-community
+    jetbrains.jdk
+    jdk
 
     jetbrains.idea-community
     jetbrains.jdk
 
     (retroarch.override
     { cores = with libretro; [ bsnes-mercury beetle-snes mgba mupen64plus parallel-n64 snes9x snes9x2010 yabause ]; })
-
-
     python38Packages.python-language-server
     (import inputs.nixpkgs-discord {
         inherit (pkgs) config system;
@@ -179,11 +178,15 @@
       nativeOnly = true;
     }).run
     (pkgs.dwarf-fortress-packages.dwarf-fortress-full.override {
-      theme = "spacefox";
-      enableFPS = false;
-      enableDFHack = false;
+      theme = "cla";
+      enableFPS = true;
+      enableSound = false;
+      enableIntro = false;
+      enableDFHack = true;
     })
+
   ];
+
   nixpkgs.overlays = [
     (final: prev: {
       nextcloud-client = (prev.nextcloud-client.overrideAttrs (o: rec {
