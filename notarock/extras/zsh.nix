@@ -49,6 +49,7 @@ in {
       gitc = "git commit -m";
       gitch = "git checkout";
       gits = "git status";
+      ssh="TERM=xterm-color ssh";
     };
     history = {
       ignoreSpace = true;
