@@ -233,7 +233,6 @@ in {
       hc spawn feh --bg-fill ~/Pictures/wallpaper/selected*
       hc spawn picom
       hc spawn flameshot
-      hc spawn element-desktop
       hc spawn ${pkgs.polybar}/bin/polybar main;
 
       # gaps are based

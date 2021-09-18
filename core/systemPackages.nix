@@ -161,11 +161,8 @@
     asciinema
     tmux
     jetbrains.idea-community
-    jetbrains.jdk
-    jdk
-
-    jetbrains.idea-community
-    jetbrains.jdk
+    kotlin
+    adoptopenjdk-openj9-bin-16
 
     (retroarch.override
     { cores = with libretro; [ bsnes-mercury beetle-snes mgba mupen64plus parallel-n64 snes9x snes9x2010 yabause ]; })
@@ -180,6 +177,7 @@
     (pkgs.dwarf-fortress-packages.dwarf-fortress-full.override {
       theme = "cla";
       enableFPS = true;
+      enableDwarfTherapist = false;
       enableSound = false;
       enableIntro = false;
       enableDFHack = true;
