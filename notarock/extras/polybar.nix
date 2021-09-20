@@ -9,172 +9,273 @@ in {
     enable = true;
     config = {
       "settings" = {
-        throttle-ms = 50;
-        throttle-limit = 5;
+        # throttle-ms = 50;
+        # throttle-limit = 5;
+        screenchange-reload = true;
+      };
+
+      "global/wm" = {
+        margin-top = 0;
+          margin-bottom = 0;
       };
 
       "bar/main" = {
-        font-0 = "Essential PragmataPro:size=14";
-        font-1 = "FontAwesome:pixelsize=16";
-        monitor = hostSpecific.mainMonitor;
-        width = "100%";
-        height = 30;
-        radius = 0;
-        top = true;
-        background = my-theme.color0;
-        foreground = my-theme.color15;
-        overline-size = 0;
-        overline-color = my-theme.color6;
-        underline-size = 0;
-        underline-color = my-theme.color6;
-        spacing = 1;
-        padding-right = 2;
-        module-margin-left = 0;
-        module-margin-right = 2;
-        modules-left = "ewmh wired-network wireless-network";
-        modules-center = "date";
-        modules-right = "volume backlight cpu memory filesystem time battery";
+        enable-ipc= "true";
+        height = 42;
+        line-size = 2;
+        border-size = 2;
+        border-color = my-theme.color11;
+
         tray-position = "right";
         tray-detached = false;
+
+        background = my-theme.color0;
+        foreground = my-theme.color15;
+
+        padding= 3;
+        font-0 = "Essential PragmataPro:size=12";
+        font-1 = "FontAwesome:pixelsize=12";
+        monitor = hostSpecific.mainMonitor;
+
+        modules-left = "ewmh";
+        modules-center = "time";
+        modules-right = "cpu memory pulseaudio wlan battery battery2";
+
+        wm-restack = "ewmh";
+        override-redirect = "false";
       };
 
-      "module/battery" = {
-        type = "internal/battery";
-        full-at = "99";
-        battery = "BAT0";
-        adapter = "ADP1";
-        poll-interval = 5;
+      "module/ewmh" = {
+        type = "internal/xworkspaces";
+        format = "<label-state>";
+        enable-click = "true";
+        reverse-scroll = "false";
+
+        label-active-underline = my-theme.color2;
+        label-occupied-underline = my-theme.color6;
+        label-empty-padding = 1;
+        label-active-padding = 1;
+        label-occupied-padding = 1;
       };
 
       "module/cpu" = {
         type = "internal/cpu";
         interval = 2;
-        format = "<label>";
-        format-background = my-theme.color10;
-        format-foreground = my-theme.color15;
-        format-underline = my-theme.color10;
-        format-overline = my-theme.color10;
+        format-prefix = " ";
         format-padding = 2;
-        label = " CPU %percentage%%";
+        format-foreground = my-theme.color2;
+        label = "%percentage%%";
       };
 
       "module/memory" = {
         type = "internal/memory";
+        interval = 2;
         format-padding = 2;
-        format-background = my-theme.color10;
-        format-foreground = my-theme.color15;
-        format-underline = my-theme.color10;
-        format-overline = my-theme.color10;
-        label = " RAM %percentage_used%%";
-        label-font = 3;
+        format-prefix = " ";
+        format-foreground = my-theme.color3;
+        label = "%percentage_used%%";
       };
 
-      "module/filesystem" = {
-        type = "internal/fs";
-        mount-0 = "/";
-        interval = "60";
-        fixed-values = "true";
-        spacing = "4";
-        format-padding = 2;
-        label-mounted = " %free% free (%percentage_free%%) ";
-
-        format-mounted-background = my-theme.color10;
-        format-mounted-foreground = my-theme.color15;
-        format-mounted-underline = my-theme.color10;
-        format-mounted-overline = my-theme.color10;
-      };
-
-      "module/wired-network" = {
-        format-padding = 2;
-        type = "internal/network";
-        interface = "enp7s0";
-        label-connected = " %local_ip%%downspeed:9%%upspeed:9% ";
-        label-connected-foreground = my-theme.color15;
-        label-connected-background = my-theme.color10;
-
-        label-disconnected = "not connected";
-        label-disconnected-background = my-theme.color1;
-        label-disconnected-foreground = my-theme.color0;
-
-      };
-      "module/backlight" = {
-        format-padding = 2;
-        enable-scroll = true;
-        card = "intel_backlight";
-        type = "internal/backlight";
-        label = " %percentage%%";
-        format-background = my-theme.color10;
-        format-foreground = my-theme.color15;
-        format-underline = my-theme.color10;
-        format-overline = my-theme.color10;
-      };
-
-      "module/wireless-network" = {
+      "module/wlan" = {
         type = "internal/network";
         interface = "wlp3s0";
-        format-padding = 2;
-        label-connected = " %local_ip%%downspeed:9%%upspeed:9% %essid% ";
-        label-connected-foreground = my-theme.color15;
-        label-connected-background = my-theme.color10;
-        label-disconnected = "not connected";
-        label-disconnected-background = my-theme.color1;
-        label-disconnected-foreground = my-theme.color0;
+        interval = 3;
+        format-connected-margin =2;
+        format-connected-foreground = my-theme.color4;
+
+        format-connected = " <label-connected>";
+        label-connected = "%essid%";
+
+        format-disconnected = "<label-disconnected>";
+        format-disconnected-margin = "2";
+        format-disconnected-foreground = my-theme.color5;
+        label-disconnected = "%ifname% disconnected";
       };
 
-      "module/date" = {
-        type = "internal/date";
-        date = "%%{T3}%Y-%m-%d";
-        format-padding = 2;
-        format-background = my-theme.color1;
-        format-foreground = my-theme.color0;
-        format-underline = my-theme.color1;
-        format-overline = my-theme.color1;
-        format = " <label>";
+
+      "module/eth"={
+        type = "internal/network";
+        interface = "eno1";
+        interval = 3;
+
+        format-connected-prefix = " ";
+        format-connected-prefix-color1 = my-theme.color1;
+        label-connected = "%local_ip%";
+
+        format-disconnected = "";
+        # ;format-disconnected = <label-disconnected>
+        # ;format-disconnected-underline = ${self.format-connected-underline}
+        # ;label-disconnected = %ifname% disconnected
+        # ;label-disconnected-color1 = ${colors.color1-alt}
       };
 
       "module/time" = {
         type = "internal/date";
-        date = "%H:%M%%{T-}";
-        format-padding = 2;
-        format-background = my-theme.color1;
-        format-foreground = my-theme.color0;
-        format-underline = my-theme.color1;
-        format-overline = my-theme.color1;
-        format = " <label>";
+        interval = 10;
+        format-padding = 3;
+
+        time = "%H:%M";
+        date = "%A %d %b";
+
+        label = "%date%, %time%";
+        label-padding = 2;
       };
 
-      "module/volume" = {
+      "module/pulseaudio" = {
         type = "internal/alsa";
         master-mixer = "Master";
         headphone-id = 9;
         format-volume-padding = 2;
-        format-volume-background = my-theme.color10;
-        format-volume-foreground = my-theme.color15;
-        format-volume-underline = my-theme.color10;
-        format-volume-overline = my-theme.color10;
         format-muted-padding = 2;
-        format-muted-background = my-theme.color1;
-        format-muted-foreground = my-theme.color0;
-        format-volume = "<ramp-volume> <label-volume>";
-        label-volume = "volume %percentage%%";
         label-volume-font = 3;
         label-muted = " Muted";
         label-muted-font = 3;
         ramp-volume-0 = "";
         ramp-volume-1 = "";
         ramp-volume-2 = "";
+
+        format-volume-margin = 2;
+        format-volume-foreground = my-theme.color6;
+        format-volume = "<ramp-volume> <label-volume>";
+        label-volume = "%percentage%%";
+        use-ui-max = "false";
+        interval = 5;
+
+        label-muted-background = my-theme.color0;
+        label-muted-foreground = my-theme.color7;
       };
 
-      "module/ewmh" = {
-        type = "internal/xworkspaces";
-        enable-click = false;
-        enable-scroll = false;
-        label-active-foreground = my-theme.color15;
-        label-active-background = my-theme.color12;
-        label-active-padding = 3;
-        label-empty-padding = 1;
+      "module/powermenu" = {
+        type = "custom/menu";
+
+        expand-right = "true";
+
+        format-spacing = 1;
+        format-margin = 0;
+        format-background = my-theme.color0;
+        format-foreground = my-theme.color15;
+        format-padding = 2;
+
+        label-open = "";
+        label-close = "";
+        label-separator = "|";
+
+        #; reboot
+          menu-0-1 = "";
+        menu-0-1-exec = "menu-open-2";
+        #; poweroff
+          menu-0-2 = "";
+        menu-0-2-exec = "menu-open-3";
+        #; logout
+          menu-0-0 = "";
+        menu-0-0-exec = "menu-open-1";
+
+        menu-2-0 = "";
+        menu-2-0-exec = "reboot";
+
+        menu-3-0 = "";
+        menu-3-0-exec = "poweroff";
+
+        menu-1-0 = "";
+        menu-1-0-exec = "";
+
       };
+
+
+      "module/battery" = {
+        type = "internal/battery";
+        format-charging-margin = 2;
+        format-charging-foreground = my-theme.color2;
+        format-discharging-margin = 2;
+        format-discharging-foreground = my-theme.color1;
+        format-full-margin = 2;
+        format-full-foreground = my-theme.color3;
+        full-at = 99;
+        time-format = "%H:%M";
+        battery = "BAT0";
+        adapter = "ADP0";
+        format-charging = "<animation-charging> <label-charging>";
+        label-charging = "%percentage%% (%time%)";
+        # label-charging = "%percentage%%";
+        format-discharging = "<ramp-capacity> <label-discharging>";
+        # label-discharging = "%percentage%% (%time%)";
+        label-discharging = "%percentage%%";
+        format-full = "<label-full>";
+        label-charging-underline = my-theme.color3;
+        label-discharging-underline = my-theme.color3;
+
+        # format-charging-underline = my-theme.color0;
+        # format-discharging-underline = "#ffffff";
+        format-full-prefix = " ";
+        ramp-capacity-0 = "";
+        ramp-capacity-1 = "";
+        ramp-capacity-2 = "";
+        ramp-capacity-3 = "";
+        ramp-capacity-4 = "";
+
+        ramp-capacity-0-foreground = my-theme.color0;
+        ramp-capacity-foreground   = my-theme.color15;
+        bar-capacity-width = 10;
+
+        animation-charging-0 = "";
+        animation-charging-1 = "";
+        animation-charging-2 = "";
+        animation-charging-3 = "";
+        animation-charging-4 = "";
+
+        animation-charging-framerate = 750;
+
+        label-font = 1;
+      };
+      "module/battery2" = {
+        type = "internal/battery";
+        format-charging-margin = 2;
+        format-charging-foreground = my-theme.color2;
+        format-discharging-margin = 2;
+        format-discharging-foreground = my-theme.color1;
+        format-full-margin = 2;
+        format-full-foreground = my-theme.color3;
+        full-at = 99;
+        time-format = "%H:%M";
+        battery = "BAT1";
+        adapter = "ADP1";
+        format-charging = "<animation-charging> <label-charging>";
+        label-charging = "%percentage%% (%time%)";
+        # label-charging = "%percentage%%";
+        format-discharging = "<ramp-capacity> <label-discharging>";
+        label-discharging = "%percentage%% (%time%)";
+        # label-discharging = "%percentage%%";
+        format-full = "<label-full>";
+        label-charging-underline = my-theme.color3;
+        label-discharging-underline = my-theme.color3;
+
+        # format-charging-underline = my-theme.color0;
+        # format-discharging-underline = "#ffffff";
+        format-full-prefix = " ";
+        ramp-capacity-0 = "";
+        ramp-capacity-1 = "";
+        ramp-capacity-2 = "";
+        ramp-capacity-3 = "";
+        ramp-capacity-4 = "";
+
+        ramp-capacity-0-foreground = my-theme.color0;
+        ramp-capacity-foreground   = my-theme.color15;
+        bar-capacity-width = 10;
+
+        animation-charging-0 = "";
+        animation-charging-1 = "";
+        animation-charging-2 = "";
+        animation-charging-3 = "";
+        animation-charging-4 = "";
+
+        animation-charging-framerate = 750;
+
+        label-font = 1;
+      };
+
+
     };
+
 
     script = ''
     '';
