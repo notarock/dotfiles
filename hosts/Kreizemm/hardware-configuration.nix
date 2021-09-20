@@ -39,6 +39,7 @@
   services.xserver.xrandrHeads = [
     {
       output = "DisplayPort-0";
+      primary = true;
       monitorConfig = ''
         Option "PreferredMode" "3840x2160"
         Option "Position" "1080 0"
@@ -46,6 +47,7 @@
     }
     {
       output = "DisplayPort-1";
+      primary = false;
       monitorConfig = ''
         Option "PreferredMode" "1920x1080"
         Option "Position" "0 0"
