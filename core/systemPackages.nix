@@ -198,6 +198,11 @@
         ];
       }));
     })
+    (final: prev: {
+      virtualbox = prev.virtualbox.overrideAttrs (attrs: {
+          patches = attrs.patches ++ [ ./patches/virtualbox ];
+      });
+    })
   ];
 
 }
