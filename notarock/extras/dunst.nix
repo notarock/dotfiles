@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  my-theme = import ../../themes/base16-synth-midnight-dark.nix;
+  my-theme = import ../../themes/base16-ia-dark.nix;
 in {
   services.dunst = {
     enable = true;

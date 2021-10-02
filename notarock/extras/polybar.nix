@@ -3,7 +3,7 @@
 let
   hostSpecific =
     import (../../hosts + "/${nixosConfig.networking.hostName}/variables.nix");
-  my-theme = import ../../themes/base16-synth-midnight-dark.nix;
+  my-theme = import ../../themes/base16-ia-dark.nix;
 in {
   services.polybar = {
     enable = true;

@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let my-theme = import ../themes/base16-synth-midnight-dark.nix;
+let my-theme = import ../themes/base16-ia-dark.nix;
 in {
   users.users.notarock = {
     isNormalUser = true;
