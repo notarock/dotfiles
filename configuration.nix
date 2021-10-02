@@ -65,16 +65,16 @@
       users = [ "ALL" ];
       commands = [
         {
-        command = "${pkgs.docker}/bin/docker ps -qf status=dead";
-        options = [ "NOPASSWD" ];
+          command = "${pkgs.docker}/bin/docker ps -qf status=dead";
+          options = [ "NOPASSWD" ];
         }
         {
-        command = "${pkgs.docker}/bin/docker ps -qf status=running";
-        options = [ "NOPASSWD" ];
+          command = "${pkgs.docker}/bin/docker ps -qf status=running";
+          options = [ "NOPASSWD" ];
         }
         {
-        command = "${pkgs.docker}/bin/docker ps -qf status=restarting";
-        options = [ "NOPASSWD" ];
+          command = "${pkgs.docker}/bin/docker ps -qf status=restarting";
+          options = [ "NOPASSWD" ];
         }
       ];
     }
