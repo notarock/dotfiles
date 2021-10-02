@@ -1,10 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    nodePackages.pyright
-    yaml-language-server
-  ];
+  home.packages = with pkgs; [ nodePackages.pyright yaml-language-server ];
 
   # services.emacs = {
   #   enable = true;

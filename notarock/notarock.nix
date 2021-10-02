@@ -8,7 +8,7 @@ in {
     description = "Notarock";
     extraGroups = [ "wheel" "docker" "video" ];
     shell = pkgs.zsh;
-   initialPassword = "Ch4ngeMoi%%%";
+    initialPassword = "Ch4ngeMoi%%%";
   };
 
   home-manager = {

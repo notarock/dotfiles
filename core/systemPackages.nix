@@ -164,12 +164,20 @@
     kotlin
     adoptopenjdk-openj9-bin-16
 
-    (retroarch.override
-    { cores = with libretro; [ bsnes-mercury beetle-snes mgba mupen64plus parallel-n64 snes9x snes9x2010 yabause ]; })
+    (retroarch.override {
+      cores = with libretro; [
+        bsnes-mercury
+        beetle-snes
+        mgba
+        mupen64plus
+        parallel-n64
+        snes9x
+        snes9x2010
+        yabause
+      ];
+    })
     python38Packages.python-language-server
-    (import inputs.nixpkgs-discord {
-        inherit (pkgs) config system;
-    }).discord
+    (import inputs.nixpkgs-discord { inherit (pkgs) config system; }).discord
     (steam.override {
       extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
       nativeOnly = true;
@@ -199,9 +207,8 @@
       }));
     })
     (final: prev: {
-      virtualbox = prev.virtualbox.overrideAttrs (attrs: {
-          patches = attrs.patches ++ [ ./patches/virtualbox ];
-      });
+      virtualbox = prev.virtualbox.overrideAttrs
+        (attrs: { patches = attrs.patches ++ [ ./patches/virtualbox ]; });
     })
   ];
 

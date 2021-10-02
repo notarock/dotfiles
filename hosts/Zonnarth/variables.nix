@@ -1,3 +1,1 @@
-{
-  mainMonitor = "eDP-1";
-}
+{ mainMonitor = "eDP-1"; }

@@ -4,36 +4,35 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   # This machine has a dragon name: Zonnarth, Lord of the Blue
   networking.hostName = "Zonnarth";
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/1f6b6c66-5dc8-47a6-8848-34fb05d574dd";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/1f6b6c66-5dc8-47a6-8848-34fb05d574dd";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/D5D3-EFC0";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/D5D3-EFC0";
+    fsType = "vfat";
+  };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/932048db-0a27-4d06-805e-ede0813d8a08"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/932048db-0a27-4d06-805e-ede0813d8a08"; }];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
 
-  boot.initrd.luks.devices."root".device =  "/dev/disk/by-uuid/3bc1c2ad-2183-49e4-8db5-b797af069ef2";
+  boot.initrd.luks.devices."root".device =
+    "/dev/disk/by-uuid/3bc1c2ad-2183-49e4-8db5-b797af069ef2";
 
 }

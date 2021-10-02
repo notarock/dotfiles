@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }:
 
-
 let
   # unstableTarball = fetchTarball
   #   "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
@@ -26,9 +25,9 @@ in {
   hardware.bluetooth.enable = true;
 
   networking.nameservers = [
-    "65.39.166.132"        # Cogeco Montréal
-    "1.1.1.1"              # Cloudflare
-    "9.9.9.9"              # Quad-9
+    "65.39.166.132" # Cogeco Montréal
+    "1.1.1.1" # Cloudflare
+    "9.9.9.9" # Quad-9
   ];
 
   i18n.defaultLocale = "en_CA.UTF-8";

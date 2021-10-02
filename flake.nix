@@ -28,11 +28,7 @@
                 imports = [ nix-doom-emacs.hmModule ];
               };
             }
-            {
-              home-manager.extraSpecialArgs = {
-                inherit inputs;
-              };
-            }
+            { home-manager.extraSpecialArgs = { inherit inputs; }; }
           ];
         };
     in {

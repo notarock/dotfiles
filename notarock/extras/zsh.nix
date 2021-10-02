@@ -36,8 +36,6 @@ in {
       dclear = "docker rmi $(docker images -q)";
       open = "$FILEMANAGER";
       nixc = "sudo $EDITOR /etc/nixos/configuration.nix";
-      nbsf = "sudo nixos-rebuild switch --flake '.#' -v -L";
-      f-mot = "nix flake update";
       wttr = "curl wttr.in";
       k = "kubectl";
       randpw =
@@ -49,7 +47,7 @@ in {
       gitc = "git commit -m";
       gitch = "git checkout";
       gits = "git status";
-      ssh="TERM=xterm-color ssh";
+      ssh = "TERM=xterm-color ssh";
     };
     history = {
       ignoreSpace = true;
@@ -78,14 +76,14 @@ in {
       "golang"
     ];
     extraConfig = ''
-            setopt HIST_IGNORE_SPACE
+      setopt HIST_IGNORE_SPACE
 
-            export PATH=$HOME/bin:/usr/local/bin:$PATH
-            export PATH=$HOME/snap:$PATH
-            export PATH=$HOME/.emacs.d/bin/:$PATH
+      export PATH=$HOME/bin:/usr/local/bin:$PATH
+      export PATH=$HOME/snap:$PATH
+      export PATH=$HOME/.emacs.d/bin/:$PATH
 
-            bci () { <<<"$*" bc -l; }
-          '';
+      bci () { <<<"$*" bc -l; }
+    '';
 
   };
 
