@@ -16,11 +16,11 @@ in {
 
       "global/wm" = {
         margin-top = 0;
-          margin-bottom = 0;
+        margin-bottom = 0;
       };
 
       "bar/main" = {
-        enable-ipc= "true";
+        enable-ipc = "true";
         height = 42;
         line-size = 2;
         border-size = 2;
@@ -32,14 +32,14 @@ in {
         background = my-theme.color0;
         foreground = my-theme.color15;
 
-        padding= 3;
+        padding = 3;
         font-0 = "Essential PragmataPro:size=12";
         font-1 = "FontAwesome:pixelsize=12";
         monitor = hostSpecific.mainMonitor;
 
         modules-left = "ewmh";
         modules-center = "time";
-        modules-right = "cpu memory pulseaudio wlan battery battery2";
+        modules-right = "info-docker cpu memory pulseaudio wlan battery battery2";
 
         wm-restack = "ewmh";
         override-redirect = "false";
@@ -80,7 +80,7 @@ in {
         type = "internal/network";
         interface = "wlp3s0";
         interval = 3;
-        format-connected-margin =2;
+        format-connected-margin = 2;
         format-connected-foreground = my-theme.color4;
 
         format-connected = " <label-connected>";
@@ -92,8 +92,7 @@ in {
         label-disconnected = "%ifname% disconnected";
       };
 
-
-      "module/eth"={
+      "module/eth" = {
         type = "internal/network";
         interface = "eno1";
         interval = 3;
@@ -161,13 +160,13 @@ in {
         label-separator = "|";
 
         #; reboot
-          menu-0-1 = "";
+        menu-0-1 = "";
         menu-0-1-exec = "menu-open-2";
         #; poweroff
-          menu-0-2 = "";
+        menu-0-2 = "";
         menu-0-2-exec = "menu-open-3";
         #; logout
-          menu-0-0 = "";
+        menu-0-0 = "";
         menu-0-0-exec = "menu-open-1";
 
         menu-2-0 = "";
@@ -180,7 +179,6 @@ in {
         menu-1-0-exec = "";
 
       };
-
 
       "module/battery" = {
         type = "internal/battery";
@@ -214,7 +212,7 @@ in {
         ramp-capacity-4 = "";
 
         ramp-capacity-0-foreground = my-theme.color0;
-        ramp-capacity-foreground   = my-theme.color15;
+        ramp-capacity-foreground = my-theme.color15;
         bar-capacity-width = 10;
 
         animation-charging-0 = "";
@@ -259,7 +257,7 @@ in {
         ramp-capacity-4 = "";
 
         ramp-capacity-0-foreground = my-theme.color0;
-        ramp-capacity-foreground   = my-theme.color15;
+        ramp-capacity-foreground = my-theme.color15;
         bar-capacity-width = 10;
 
         animation-charging-0 = "";
@@ -273,11 +271,30 @@ in {
         label-font = 1;
       };
 
-
+      "module/info-docker" = {
+        type = "custom/script";
+        exec = "~/.config/polybar/scripts/info-docker";
+        interval = 10;
+        format-foreground = my-theme.color6;
+      };
     };
 
-
-    script = ''
-    '';
+    script = "";
   };
+
+  xdg.configFile."polybar/scripts/info-docker" = {
+    executable = true;
+    text = ''
+      #!/bin/sh
+
+      STATUS="running restarting dead"
+
+      for stat in $STATUS; do
+          output="$output $(sudo docker ps -qf status="$stat" | wc -l) |"
+      done
+
+      echo "|$output"
+          '';
+  };
+
 }

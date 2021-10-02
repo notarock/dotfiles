@@ -53,4 +53,31 @@
 
   programs.noisetorch.enable = true;
 
+  security.sudo.extraRules = [
+    {
+      users = [ "notarock" ];
+      commands = [{
+        command = "/run/current-system/sw/bin/nixos-rebuild";
+        options = [ "NOPASSWD" ];
+      }];
+    }
+    {
+      users = [ "ALL" ];
+      commands = [
+        {
+        command = "${pkgs.docker}/bin/docker ps -qf status=dead";
+        options = [ "NOPASSWD" ];
+        }
+        {
+        command = "${pkgs.docker}/bin/docker ps -qf status=running";
+        options = [ "NOPASSWD" ];
+        }
+        {
+        command = "${pkgs.docker}/bin/docker ps -qf status=restarting";
+        options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
+
 }
