@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  my-theme = import ../../themes/base16-solarflare.nix;
+  my-theme = import ../../themes/base16-synth-midnight-dark.nix;
 in {
   programs.vim = {
     plugins = with pkgs.vimPlugins; [
