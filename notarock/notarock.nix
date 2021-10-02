@@ -31,8 +31,8 @@ in {
         enable = true;
         iconTheme.package = pkgs.numix-icon-theme-square;
         iconTheme.name = "Numix-Square";
-        theme.package = pkgs.juno-theme;
-        theme.name = "Juno";
+        theme.package = pkgs.plata-theme;
+        theme.name = "Plata";
       };
 
       xsession = {
