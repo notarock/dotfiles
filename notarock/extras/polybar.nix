@@ -37,9 +37,9 @@ in {
         font-1 = "FontAwesome:pixelsize=12";
         monitor = hostSpecific.mainMonitor;
 
-        modules-left = "ewmh";
+        modules-left = "ewmh info-docker";
         modules-center = "time";
-        modules-right = "info-docker cpu memory pulseaudio wlan battery battery2";
+        modules-right = "cpu memory pulseaudio wlan battery battery2";
 
         wm-restack = "ewmh";
         override-redirect = "false";

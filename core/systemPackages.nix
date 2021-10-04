@@ -144,7 +144,6 @@
     gitAndTools.delta
     dive
     gitlab-runner
-    geogebra6
     picom
     sbcl
     pciutils
@@ -176,7 +175,6 @@
         yabause
       ];
     })
-    python38Packages.python-language-server
     (import inputs.nixpkgs-discord { inherit (pkgs) config system; }).discord
     (steam.override {
       extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
@@ -206,10 +204,10 @@
         ];
       }));
     })
-    (final: prev: {
-      virtualbox = prev.virtualbox.overrideAttrs
-        (attrs: { patches = attrs.patches ++ [ ./patches/virtualbox ]; });
-    })
+    # (final: prev: {
+    #   virtualbox = prev.virtualbox.overrideAttrs
+    #     (attrs: { patches = attrs.patches ++ [ ./patches/virtualbox ]; });
+    # })
   ];
 
 }

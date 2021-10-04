@@ -3,7 +3,7 @@
 #
 
 build:
-	nixos-rebuild switch --flake '.#' -v -L
+	sudo nixos-rebuild switch --flake '.#' -v -L
 
 fmt:
 	nixfmt **/*.nix
