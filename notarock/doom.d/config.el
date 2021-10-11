@@ -6,7 +6,7 @@
 (setq font-family "Essential PragmataPro")
 
 (setq doom-font (font-spec :family font-family :size 24)
-    doom-big-font (font-spec :family font-family :size 34))
+      doom-big-font (font-spec :family font-family :size 34))
 
 (setq display-line-numbers-type t)
 
@@ -14,19 +14,19 @@
 
 (setq frame-resize-pixelwise t)
 
-; (feebleline-mode +1)
+                                        ; (feebleline-mode +1)
 (dimmer-configure-magit)
 (dimmer-configure-org)
 (dimmer-mode t)
-(setq highlight-indent-guides-method 'fill)
+(setq highlight-indent-guides-method 'column)
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
 (add-hook 'prog-mode-hook (lambda ()
-                             (setq show-trailing-whitespace t)))
+                            (setq show-trailing-whitespace t)))
 (add-hook 'org-mode-hook (lambda ()
-                             (setq show-trailing-whitespace t)))
+                           (setq show-trailing-whitespace t)))
 (add-hook 'markdown-mode-hook (lambda ()
-                             (setq show-trailing-whitespace t)))
+                                (setq show-trailing-whitespace t)))
 
 (defun my/set-initial-frame ()
   "Set initial frame size and position"
@@ -59,10 +59,10 @@
 ;; (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 ;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
 ;; (after! flycheck
-  ;; (flycheck-add-mode 'javascript-eslint 'typescript-mode)
-  ;; (flycheck-add-mode 'css-stylelint 'typescript-mode)
-  ;; (add-hook 'typescript-mode-hook (lambda () (flycheck-add-next-checker 'lsp-ui 'javascript-eslint)))
-  ;; (add-hook 'typescript-mode-hook (lambda () (flycheck-add-next-checker 'javascript-eslint 'css-stylelint))))
+;; (flycheck-add-mode 'javascript-eslint 'typescript-mode)
+;; (flycheck-add-mode 'css-stylelint 'typescript-mode)
+;; (add-hook 'typescript-mode-hook (lambda () (flycheck-add-next-checker 'lsp-ui 'javascript-eslint)))
+;; (add-hook 'typescript-mode-hook (lambda () (flycheck-add-next-checker 'javascript-eslint 'css-stylelint))))
 
 (add-hook 'js2-mode-hook 'prettier-js-mode)
 (add-hook 'web-mode-hook 'prettier-js-mode)
@@ -149,6 +149,6 @@
 (map! :ne "SPC o k" #'my/kubel)
 
 (fset 'env-to-yaml
-   (kmacro-lambda-form [?0 ?f ?= ?r ?: ?a ?  escape ?w ?y ?s ?i ?W ?\" ?0 ?j] 0 "%d"))
+      (kmacro-lambda-form [?0 ?f ?= ?r ?: ?a ?  escape ?w ?y ?s ?i ?W ?\" ?0 ?j] 0 "%d"))
 
 ;;; config.el ends here

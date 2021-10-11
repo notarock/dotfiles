@@ -175,6 +175,10 @@
         yabause
       ];
     })
+
+
+  openconnect
+
     (import inputs.nixpkgs-discord { inherit (pkgs) config system; }).discord
     (steam.override {
       extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
@@ -190,6 +194,7 @@
     })
 
   ];
+
 
   nixpkgs.overlays = [
     (final: prev: {

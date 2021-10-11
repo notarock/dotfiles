@@ -33,7 +33,7 @@ in {
       lt = "ls -larth";
       dstop = "docker stop $(docker ps -a -q)";
       dclean = "docker rm $(docker ps -a -q)";
-      dclear = "docker rmi $(docker images -q)";
+      dclear = "docker rmi --force $(docker images -q)";
       open = "$FILEMANAGER";
       nixc = "sudo $EDITOR /etc/nixos/configuration.nix";
       wttr = "curl wttr.in";
