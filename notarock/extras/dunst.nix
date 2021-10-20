@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let my-theme = import ../../themes/base16-ia-dark.nix;
-in {
+{
   services.dunst = {
     enable = true;
     settings = {
@@ -39,26 +38,26 @@ in {
         text_icon_padding = 40;
         max_icon_size = 90;
         frame_width = 6;
-        frame_color = my-theme.color5;
+        frame_color = config.myTheme.color5;
         corner_radius = 2;
       };
       shortcuts = { close = "esc"; };
       urgency_low = {
-        frame_color = my-theme.color2;
-        foreground = my-theme.color7;
-        background = my-theme.color10;
+        frame_color = config.myTheme.color2;
+        foreground = config.myTheme.color7;
+        background = config.myTheme.color10;
         timeout = 8;
       };
       urgency_normal = {
-        frame_color = my-theme.color4;
-        foreground = my-theme.color7;
-        background = my-theme.color10;
+        frame_color = config.myTheme.color4;
+        foreground = config.myTheme.color7;
+        background = config.myTheme.color10;
         timeout = 8;
       };
       urgency_critical = {
-        frame_color = my-theme.color1;
-        foreground = my-theme.color7;
-        background = my-theme.color10;
+        frame_color = config.myTheme.color1;
+        foreground = config.myTheme.color7;
+        background = config.myTheme.color10;
         timeout = 8;
       };
     };

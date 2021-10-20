@@ -3,7 +3,6 @@
 let
   hostSpecific =
     import (../../hosts + "/${nixosConfig.networking.hostName}/variables.nix");
-  my-theme = import ../../themes/base16-ia-dark.nix;
 in {
   services.polybar = {
     enable = true;
@@ -24,13 +23,13 @@ in {
         height = 42;
         line-size = 2;
         border-size = 2;
-        border-color = my-theme.color11;
+        border-color = config.myTheme.color11;
 
         tray-position = "right";
         tray-detached = false;
 
-        background = my-theme.color0;
-        foreground = my-theme.color15;
+        background = config.myTheme.color0;
+        foreground = config.myTheme.color15;
 
         padding = 3;
         font-0 = "Essential PragmataPro:size=12";
@@ -51,8 +50,8 @@ in {
         enable-click = "true";
         reverse-scroll = "false";
 
-        label-active-underline = my-theme.color2;
-        label-occupied-underline = my-theme.color6;
+        label-active-underline = config.myTheme.color2;
+        label-occupied-underline = config.myTheme.color6;
         label-empty-padding = 1;
         label-active-padding = 1;
         label-occupied-padding = 1;
@@ -63,7 +62,7 @@ in {
         interval = 2;
         format-prefix = " ";
         format-padding = 2;
-        format-foreground = my-theme.color2;
+        format-foreground = config.myTheme.color2;
         label = "%percentage%%";
       };
 
@@ -72,7 +71,7 @@ in {
         interval = 2;
         format-padding = 2;
         format-prefix = " ";
-        format-foreground = my-theme.color3;
+        format-foreground = config.myTheme.color3;
         label = "%percentage_used%%";
       };
 
@@ -81,14 +80,14 @@ in {
         interface = "wlp3s0";
         interval = 3;
         format-connected-margin = 2;
-        format-connected-foreground = my-theme.color4;
+        format-connected-foreground = config.myTheme.color4;
 
         format-connected = " <label-connected>";
         label-connected = "%essid%";
 
         format-disconnected = "<label-disconnected>";
         format-disconnected-margin = "2";
-        format-disconnected-foreground = my-theme.color5;
+        format-disconnected-foreground = config.myTheme.color5;
         label-disconnected = "%ifname% disconnected";
       };
 
@@ -98,7 +97,7 @@ in {
         interval = 3;
 
         format-connected-prefix = " ";
-        format-connected-prefix-color1 = my-theme.color1;
+        format-connected-prefix-color1 = config.myTheme.color1;
         label-connected = "%local_ip%";
 
         format-disconnected = "";
@@ -134,14 +133,14 @@ in {
         ramp-volume-2 = "";
 
         format-volume-margin = 2;
-        format-volume-foreground = my-theme.color6;
+        format-volume-foreground = config.myTheme.color6;
         format-volume = "<ramp-volume> <label-volume>";
         label-volume = "%percentage%%";
         use-ui-max = "false";
         interval = 5;
 
-        label-muted-background = my-theme.color0;
-        label-muted-foreground = my-theme.color7;
+        label-muted-background = config.myTheme.color0;
+        label-muted-foreground = config.myTheme.color7;
       };
 
       "module/powermenu" = {
@@ -151,8 +150,8 @@ in {
 
         format-spacing = 1;
         format-margin = 0;
-        format-background = my-theme.color0;
-        format-foreground = my-theme.color15;
+        format-background = config.myTheme.color0;
+        format-foreground = config.myTheme.color15;
         format-padding = 2;
 
         label-open = "";
@@ -183,11 +182,11 @@ in {
       "module/battery" = {
         type = "internal/battery";
         format-charging-margin = 2;
-        format-charging-foreground = my-theme.color2;
+        format-charging-foreground = config.myTheme.color2;
         format-discharging-margin = 2;
-        format-discharging-foreground = my-theme.color1;
+        format-discharging-foreground = config.myTheme.color1;
         format-full-margin = 2;
-        format-full-foreground = my-theme.color3;
+        format-full-foreground = config.myTheme.color3;
         full-at = 99;
         time-format = "%H:%M";
         battery = "BAT0";
@@ -199,10 +198,10 @@ in {
         # label-discharging = "%percentage%% (%time%)";
         label-discharging = "%percentage%%";
         format-full = "<label-full>";
-        label-charging-underline = my-theme.color3;
-        label-discharging-underline = my-theme.color3;
+        label-charging-underline = config.myTheme.color3;
+        label-discharging-underline = config.myTheme.color3;
 
-        # format-charging-underline = my-theme.color0;
+        # format-charging-underline = config.myTheme.color0;
         # format-discharging-underline = "#ffffff";
         format-full-prefix = " ";
         ramp-capacity-0 = "";
@@ -211,8 +210,8 @@ in {
         ramp-capacity-3 = "";
         ramp-capacity-4 = "";
 
-        ramp-capacity-0-foreground = my-theme.color0;
-        ramp-capacity-foreground = my-theme.color15;
+        ramp-capacity-0-foreground = config.myTheme.color0;
+        ramp-capacity-foreground = config.myTheme.color15;
         bar-capacity-width = 10;
 
         animation-charging-0 = "";
@@ -228,11 +227,11 @@ in {
       "module/battery2" = {
         type = "internal/battery";
         format-charging-margin = 2;
-        format-charging-foreground = my-theme.color2;
+        format-charging-foreground = config.myTheme.color2;
         format-discharging-margin = 2;
-        format-discharging-foreground = my-theme.color1;
+        format-discharging-foreground = config.myTheme.color1;
         format-full-margin = 2;
-        format-full-foreground = my-theme.color3;
+        format-full-foreground = config.myTheme.color3;
         full-at = 99;
         time-format = "%H:%M";
         battery = "BAT1";
@@ -244,10 +243,10 @@ in {
         label-discharging = "%percentage%% (%time%)";
         # label-discharging = "%percentage%%";
         format-full = "<label-full>";
-        label-charging-underline = my-theme.color3;
-        label-discharging-underline = my-theme.color3;
+        label-charging-underline = config.myTheme.color3;
+        label-discharging-underline = config.myTheme.color3;
 
-        # format-charging-underline = my-theme.color0;
+        # format-charging-underline = config.myTheme.color0;
         # format-discharging-underline = "#ffffff";
         format-full-prefix = " ";
         ramp-capacity-0 = "";
@@ -256,8 +255,8 @@ in {
         ramp-capacity-3 = "";
         ramp-capacity-4 = "";
 
-        ramp-capacity-0-foreground = my-theme.color0;
-        ramp-capacity-foreground = my-theme.color15;
+        ramp-capacity-0-foreground = config.myTheme.color0;
+        ramp-capacity-foreground = config.myTheme.color15;
         bar-capacity-width = 10;
 
         animation-charging-0 = "";
@@ -275,7 +274,7 @@ in {
         type = "custom/script";
         exec = "~/.config/polybar/scripts/info-docker";
         interval = 10;
-        format-foreground = my-theme.color6;
+        format-foreground = config.myTheme.color6;
       };
     };
 

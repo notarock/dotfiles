@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let my-theme = import ../../themes/base16-ia-dark.nix;
-in {
+{
   programs.kitty = {
     enable = true;
     font.name = "Essential PragmataPro";
@@ -19,39 +18,39 @@ in {
       sync_to_monitor = "yes";
       enabled_layouts = "Vertical";
 
-      background = my-theme.color0;
-      foreground = my-theme.color7;
-      selection_background = my-theme.color7;
-      selection_foreground = my-theme.color0;
-      url_color = my-theme.color12;
-      cursor = my-theme.color1;
-      active_border_color = my-theme.color8;
-      inactive_border_color = my-theme.color10;
-      active_tab_background = my-theme.color12;
-      active_tab_foreground = my-theme.color7;
-      inactive_tab_background = my-theme.color8;
-      inactive_tab_foreground = my-theme.color7;
-      tab_bar_background = my-theme.color10;
+      background = config.myTheme.color0;
+      foreground = config.myTheme.color7;
+      selection_background = config.myTheme.color7;
+      selection_foreground = config.myTheme.color0;
+      url_color = config.myTheme.color12;
+      cursor = config.myTheme.color1;
+      active_border_color = config.myTheme.color8;
+      inactive_border_color = config.myTheme.color10;
+      active_tab_background = config.myTheme.color12;
+      active_tab_foreground = config.myTheme.color7;
+      inactive_tab_background = config.myTheme.color8;
+      inactive_tab_foreground = config.myTheme.color7;
+      tab_bar_background = config.myTheme.color10;
 
       # normal
-      color0 = my-theme.color0;
-      color1 = my-theme.color1;
-      color2 = my-theme.color2;
-      color3 = my-theme.color3;
-      color4 = my-theme.color4;
-      color5 = my-theme.color5;
-      color6 = my-theme.color6;
-      color7 = my-theme.color7;
+      color0 = config.myTheme.color0;
+      color1 = config.myTheme.color1;
+      color2 = config.myTheme.color2;
+      color3 = config.myTheme.color3;
+      color4 = config.myTheme.color4;
+      color5 = config.myTheme.color5;
+      color6 = config.myTheme.color6;
+      color7 = config.myTheme.color7;
 
       # bright
-      color8 = my-theme.color8;
-      color9 = my-theme.color9;
-      color10 = my-theme.color10;
-      color11 = my-theme.color11;
-      color12 = my-theme.color12;
-      color13 = my-theme.color13;
-      color14 = my-theme.color14;
-      color15 = my-theme.color15;
+      color8 = config.myTheme.color8;
+      color9 = config.myTheme.color9;
+      color10 = config.myTheme.color10;
+      color11 = config.myTheme.color11;
+      color12 = config.myTheme.color12;
+      color13 = config.myTheme.color13;
+      color14 = config.myTheme.color14;
+      color15 = config.myTheme.color15;
     };
 
   };

@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
 let
-  my-theme = import ../../themes/base16-ia-dark.nix;
   layoutFolder = "/etc/nixos/notarock/extras/hlwm-layouts";
   gapWidth = "15";
 in {
@@ -157,14 +156,14 @@ in {
       hc keybind $Mod-c cycle
       hc keybind $Mod-i jumpto urgent
 
-      SELECT="${my-theme.color3}"
+      SELECT="${config.myTheme.color3}"
 
       # theme
       hc attr theme.tiling.reset 1
       hc attr theme.floating.reset 1
-      hc set frame_border_active_color '${my-theme.color10}'
-      hc set frame_border_normal_color '${my-theme.color10}'
-      hc set frame_bg_normal_color '${my-theme.color10}'
+      hc set frame_border_active_color '${config.myTheme.color10}'
+      hc set frame_border_normal_color '${config.myTheme.color10}'
+      hc set frame_bg_normal_color '${config.myTheme.color10}'
       hc set frame_bg_active_color $SELECT
       hc set frame_border_width 0
       hc set always_show_frame 0
@@ -174,7 +173,7 @@ in {
 
       hc attr theme.active.color $SELECT
       hc attr theme.normal.color '#000000'
-      hc attr theme.urgent.color '${my-theme.color1}'
+      hc attr theme.urgent.color '${config.myTheme.color1}'
       hc attr theme.inner_width 0
       hc attr theme.inner_color black
       hc attr theme.border_width 2
@@ -221,7 +220,7 @@ in {
 
       hc spawn ${pkgs.xss-lock}/bin/xss-lock \
           ${pkgs.coreutils}/bin/env \
-          XSECURELOCK_AUTH_BACKGROUND_COLOR="${my-theme.color11}" \
+          XSECURELOCK_AUTH_BACKGROUND_COLOR="${config.myTheme.color11}" \
           XSECURELOCK_PASSWORD_PROMPT=time \
           XSECURELOCK_AUTH_CURSOR_BLINK=0 \
           XSECURELOCK_NO_COMPOSITE=1 \

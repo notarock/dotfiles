@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let my-theme = import ../../themes/base16-ia-dark.nix;
-in {
+{
   programs.zsh = {
     enable = true;
     enableCompletion = true;

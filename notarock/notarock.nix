@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let my-theme = import ../themes/base16-ia-dark.nix;
-in {
+{
   users.users.notarock = {
     isNormalUser = true;
     home = "/home/notarock";
@@ -23,7 +22,10 @@ in {
         ./extras/zsh.nix
         ./extras/fzf.nix
         ./extras/kitty.nix
+        ./myTheme.nix
       ];
+
+      myTheme = import ../themes/base16-ia-dark.nix;
 
       home.packages = with pkgs; [ xss-lock xsecurelock ];
 
