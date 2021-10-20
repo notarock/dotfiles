@@ -51,7 +51,7 @@ in {
 
         rofi = {
           enable = true;
-          separator = "solid";
+          # separator = "solid";
           font = "Essential PragmataPro 14";
           theme = "/etc/nixos/extras/rofi/conf";
           extraConfig = { dpi = 0; };

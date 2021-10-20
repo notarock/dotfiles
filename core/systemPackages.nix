@@ -176,7 +176,7 @@
       ];
     })
 
-
+    pkg-config
   openconnect
 
     (import inputs.nixpkgs-discord { inherit (pkgs) config system; }).discord
