@@ -30,7 +30,6 @@ in {
       hc keyunbind --all
 
       # keybindings
-      # if you have a super key you will be much happier with Mod set to Mod4
       # Mod=Mod1    # Use alt as the main modifier
       Mod=Mod4   # Use the super key as the main modifier
 
@@ -42,7 +41,7 @@ in {
       hc keybind $Mod-Return spawn kitty # use your $TERMINAL with xterm as fallback
       hc keybind $Mod-d spawn rofi -show drun
 
-      # For volume controls and stuff
+      # For volume controls and mute
       hc keybind XF86AudioRaiseVolume spawn ${pkgs.alsaUtils}/bin/amixer set -q Master 5%+
       hc keybind XF86AudioLowerVolume spawn ${pkgs.alsaUtils}/bin/amixer set -q Master 5%-
       hc keybind XF86AudioMute spawn ${pkgs.alsaUtils}/bin/amixer set Master toggle
@@ -134,6 +133,7 @@ in {
       hc keybind $Mod-s floating toggle
       hc keybind $Mod-f fullscreen toggle
       hc keybind $Mod-p pseudotile toggle
+      hc keybind $Mod-Shift-f set_attr clients.focus.floating toggle
 
       # The following cycles through the available layouts within a frame, but skips
       # layouts, if the layout change wouldn't affect the actual window positions.
@@ -189,14 +189,26 @@ in {
       hc set smart_window_surroundings 0
       hc set smart_frame_surroundings 0
       hc set mouse_recenter_gap 0
+      hc set default_frame_layout grid
+      hc set focus_follows_mouse 1
 
       # rules
       hc unrule -F
-      #hc rule class=XTerm tag=3 # move all xterms to tag 3
+
       hc rule focus=on # normally focus new clients
+
+      # Workspace rules for common programs
+
+      hc rule class=Firefox tag=1 focus=on switchtag=on
+      hc rule class=Emacs tag=2 focus=on switchtag=on
+      hc rule class=Spotify tag=8 focus=on switchtag=on
+      hc rule class=discord tag=9 focus=on # move Discord to tag 9
+      hc rule class=Slack tag=9 focus=on # move Discord to tag 9
+
       #hc rule focus=off # normally do not focus new clients
       # give focus to most common terminals
       #hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole)' focus=on
+
       hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
       hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
       hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
