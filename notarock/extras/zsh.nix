@@ -42,6 +42,7 @@
       gitch = "git checkout";
       gits = "git status";
       ssh = "TERM=xterm-color ssh";
+      svp = "sudo !!";
     };
     history = {
       ignoreSpace = true;
