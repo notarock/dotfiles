@@ -229,6 +229,7 @@ in {
       hc spawn pkill polybar
       hc spawn pkill flameshot
       hc spawn pkill picom
+      hc spawn pkill Discord
 
       hc spawn ${pkgs.xss-lock}/bin/xss-lock \
           ${pkgs.coreutils}/bin/env \
@@ -245,6 +246,8 @@ in {
       hc spawn picom
       hc spawn flameshot
       hc spawn ${pkgs.polybar}/bin/polybar main;
+      hc spawn ${pkgs.discord}/bin/discord
+      hc spawn ${pkgs.slack}/bin/slack
 
       # gaps are based
       #   __ _  __ _ _ __  ___
