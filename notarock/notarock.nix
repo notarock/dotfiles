@@ -27,7 +27,17 @@
 
       myTheme = import ../themes/base16-ia-dark.nix;
 
-      home.packages = with pkgs; [ xss-lock xsecurelock ];
+      manual = {
+        html.enable = true;
+        manpages.enable = true;
+      };
+
+      home = {
+        stateVersion = "21.11";
+        username = "notarock";
+        packages = with pkgs; [ xss-lock xsecurelock ];
+        enableNixpkgsReleaseCheck = true;
+      };
 
       gtk = {
         enable = true;
@@ -46,6 +56,33 @@
       home.keyboard.layout = "ca,fr";
 
       programs = {
+        command-not-found.enable = true;
+
+        direnv = {
+          enable = true;
+          enableZshIntegration = true;
+          nix-direnv = {
+            enable = true;
+            enableFlakes = true;
+          };
+        };
+
+        exa = {
+          enable = true;
+          enableAliases = true;
+        };
+
+        feh.enable = true;
+
+        gh = {
+          enable = true;
+          settings = {
+            git_protocol = "ssh";
+
+            prompt = "enabled";
+          };
+        };
+
         broot = {
           enable = true;
           enableZshIntegration = true;

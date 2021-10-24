@@ -62,7 +62,6 @@
     scrot
     rofi
     rofi-pass
-    feh
     rhythmbox
     screenkey
     scrot

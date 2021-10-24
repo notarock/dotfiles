@@ -16,9 +16,6 @@
       };
     }];
     shellAliases = {
-      ll = "ls -alF";
-      la = "ls -A";
-      l = "ls -CF";
       cp = "cp -i";
       df = "df -h";
       cdsrc = "cd ~/src/";
@@ -28,8 +25,6 @@
       "....." = "cd ../../../..";
       vi = "vim";
       vif = "vim $(fzf)";
-      lla = "ls -lah";
-      lt = "ls -larth";
       dstop = "docker stop $(docker ps -a -q)";
       dclean = "docker rm $(docker ps -a -q)";
       dclear = "docker rmi --force $(docker images -q)";
