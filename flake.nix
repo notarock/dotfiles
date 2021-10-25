@@ -5,8 +5,11 @@
     home-manager.url = "github:nix-community/home-manager/master";
     doom-emacs.url = "github:hlissner/doom-emacs/develop";
     doom-emacs.flake = false;
-    nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
+    nix-doom-emacs.url = "github:he-la/nix-doom-emacs/develop";
     nix-doom-emacs.inputs.doom-emacs.follows = "doom-emacs";
+    nix-doom-emacs.inputs.nixpkgs.follows = "nixpkgs";
+    nix-doom-emacs.inputs.emacs-overlay.follows = "emacs-overlay";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/master";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-discord.url = "github:nixos/nixpkgs/nixos-unstable";
   };
