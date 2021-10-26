@@ -32,6 +32,7 @@
               };
             }
             { home-manager.extraSpecialArgs = { inherit inputs; }; }
+            { nixpkgs.overlays = [ inputs.emacs-overlay.overlay ]; }
           ];
         };
     in {
