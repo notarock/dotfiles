@@ -88,29 +88,33 @@
                              (setq show-trailing-whitespace t)))
   (setq  ispell-local-dictionary "fr-toutesvariantes"
          org-directory "~/org/"
-         org-journal-file (concat org-directory "journal.org")
+         org-journal-file-type 'daily
+         org-journal-dir (concat org-directory "journals")
          org-todos-file (concat org-directory "todos.org")
-         org-capture-templates       (doct '(("Journal" :keys "j"
-                                              :file org-journal-file
-                                              :datetree t
-                                              :todo nil
-                                              :template ("* %^{description}"
-                                                         ":properties:"
-                                                         ":created: %u"
-                                                         ":end:"
-                                                         "%?"))
-                                             ("Todos" :keys "t"
+         org-journal-file-format "%Y-%m-%d.org"
+         org-journal-date-format "%e %b %Y (%A)"
+         org-journal-time-format "%H:%M"
+         org-extend-today-until 4
+         org-capture-templates       (doct '(("Todos" :keys "t"
                                               :file org-todos-file
                                               :todo-state "TODO"
                                               :template ("* TODO: %^{description}"
                                                          ":properties:"
                                                          ":created: %u"
-                                                         ":end:"))
-                                             ))
+                                                         ":end:"))))
          org-todo-keyword-faces (quote (("todo" :foreground "#ff6347" :weight bold)
                                         ("done" :foreground "#006400" :weight bold :strike-through t)))
          org-todo-keywords '((sequence "todo(t)" "done(d)"))
          org-log-done t))
+
+(defun org-journal-file-header-func (time)
+  "Custom function to create journal header."
+  (concat
+   (pcase org-journal-file-type
+     (`daily "#+TITLE: Daily Journal\n#+STARTUP: showeverything")
+     (`weekly "#+TITLE: Weekly Journal\n#+STARTUP: folded")
+     (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded")
+     (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded"))))
 
 (after! markdown
   (setq ispell-local-dictionary "fr-toutesvariantes"))
