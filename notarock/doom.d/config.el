@@ -14,7 +14,8 @@
 
 (setq frame-resize-pixelwise t)
 
-                                        ; (feebleline-mode +1)
+(setq scroll-margin 10)
+
 (dimmer-configure-magit)
 (dimmer-configure-org)
 (dimmer-mode t)
