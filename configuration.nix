@@ -18,6 +18,8 @@
     useGlobalPkgs = true;
   };
 
+  services.sshd.enable = true;
+
   # Sops config
   sops.defaultSopsFile = ./secrets/notarock.yaml;
   sops.secrets.password = {};
