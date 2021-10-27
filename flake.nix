@@ -1,7 +1,8 @@
 {
-  description = "A very basic flake";
+  description = "Notarock's modest flake";
   inputs = {
-    # nixos.url = "nixpkgs/nixos-unstable";
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager/master";
     doom-emacs.url = "github:hlissner/doom-emacs/develop";
     doom-emacs.flake = false;
@@ -14,7 +15,7 @@
     nixpkgs-discord.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nix-doom-emacs, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, nix-doom-emacs, sops-nix, ... }:
     let
       mkNixosConfiguration = { hostname }:
         let
@@ -33,6 +34,7 @@
             }
             { home-manager.extraSpecialArgs = { inherit inputs; }; }
             { nixpkgs.overlays = [ inputs.emacs-overlay.overlay ]; }
+            sops-nix.nixosModules.sops
           ];
         };
     in {

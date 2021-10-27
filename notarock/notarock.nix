@@ -4,7 +4,7 @@
   users.users.notarock = {
     isNormalUser = true;
     home = "/home/notarock";
-    description = "Notarock";
+    description = "${config.sops.secrets.password.path}";
     extraGroups = [ "wheel" "docker" "video" ];
     shell = pkgs.zsh;
     initialPassword = "Ch4ngeMoi%%%";

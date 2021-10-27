@@ -5,7 +5,6 @@
   nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
 
   imports = [
-    # <sop-nix/sops> TODO: Sopsify stuff
     ./core/enableFlake.nix
     ./core/system.nix
     ./core/keychron.nix
@@ -18,6 +17,12 @@
     useUserPackages = true;
     useGlobalPkgs = true;
   };
+
+  # Sops config
+  sops.defaultSopsFile = ./secrets/notarock.yaml;
+  sops.secrets.password = {};
+  sops.gnupg.home = "/home/notarock/.gnupg";
+  sops.gnupg.sshKeyPaths = [];
 
   programs = {
     zsh.enable = true;
