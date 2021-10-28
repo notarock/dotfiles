@@ -37,7 +37,7 @@
                         ~/.local/share/fonts/Essential\ PragmataPro-B_1.2.ttf
             '';
         wakatime-cfg = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-              ln -s ${osConfig.sops.secrets.wakatime.path} \
+              ln -sf ${osConfig.sops.secrets.wakatime.path} \
                         ~/.wakatime.cfg
             '';
       };
