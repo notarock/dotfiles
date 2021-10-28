@@ -11,7 +11,7 @@ creation_rules:
     - pgp:
       - *notarock
       - *zonnarth
-  - path_regex: 'secrets/[^/]+\.ttf$'
+  - path_regex: 'secrets/*'
     key_groups:
     - pgp:
       - *notarock

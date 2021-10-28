@@ -33,6 +33,13 @@
     sopsFile = ./secrets/EssentialPragmataPro-R_1.2.ttf;
     owner = "notarock";
   };
+  sops.secrets.wakatime = {
+    format = "binary";
+    sopsFile = ./secrets/wakatime.cfg;
+    owner = "notarock";
+  };
+
+
 
   programs = {
     zsh.enable = true;
