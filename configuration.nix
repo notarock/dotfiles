@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   system.stateVersion = "21.11";
@@ -23,8 +23,16 @@
   # Sops config
   sops.defaultSopsFile = ./secrets/notarock.yaml;
   sops.secrets.password = {};
-  sops.gnupg.home = "/home/notarock/.gnupg";
-  sops.gnupg.sshKeyPaths = [];
+  sops.secrets.pragmatapro-bold = {
+    format = "binary";
+    sopsFile = ./secrets/EssentialPragmataPro-B_1.2.ttf;
+    owner = "notarock";
+  };
+  sops.secrets.pragmatapro-reg = {
+    format = "binary";
+    sopsFile = ./secrets/EssentialPragmataPro-R_1.2.ttf;
+    owner = "notarock";
+  };
 
   programs = {
     zsh.enable = true;

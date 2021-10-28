@@ -1,17 +1,17 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   users.users.notarock = {
     isNormalUser = true;
     home = "/home/notarock";
-    description = "${config.sops.secrets.password.path}";
+    description = "Nickname for root";
     extraGroups = [ "wheel" "docker" "video" ];
     shell = pkgs.zsh;
     initialPassword = "Ch4ngeMoi%%%";
   };
 
   home-manager = {
-    users.notarock = { pkgs, ... }: {
+    users.notarock = { pkgs, config, osConfig, ... }: {
       imports = [
         ./extras/herbstluftwm.nix
         ./extras/polybar.nix
@@ -24,6 +24,19 @@
         ./extras/kitty.nix
         ./myTheme.nix
       ];
+
+      home.activation = {
+        setupPragmataProReg = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+              mkdir -p ~/.local/share/fonts
+              ln -sf ${osConfig.sops.secrets.pragmatapro-reg.path} \
+                        ~/.local/share/fonts/Essential\ PragmataPro-R_1.2.ttf
+            '';
+        setupPragmataProBold = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+              mkdir -p ~/.local/share/fonts
+              ln -sf ${osConfig.sops.secrets.pragmatapro-bold.path} \
+                        ~/.local/share/fonts/Essential\ PragmataPro-B_1.2.ttf
+            '';
+      };
 
       myTheme = import ../themes/base16-ia-dark.nix;
 

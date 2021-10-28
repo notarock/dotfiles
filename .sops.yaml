@@ -4,8 +4,15 @@
 # for a more complex example
 keys:
   - &notarock 134FCC2ED75E912E9FB3BF052D7A7E5ABB96084F
+  - &zonnarth 4c5f4e0f0b821b67f9e001409f4f63f595e00182
 creation_rules:
   - path_regex: 'secrets/[^/]+\.yaml$'
     key_groups:
     - pgp:
       - *notarock
+      - *zonnarth
+  - path_regex: 'secrets/[^/]+\.ttf$'
+    key_groups:
+    - pgp:
+      - *notarock
+      - *zonnarth
