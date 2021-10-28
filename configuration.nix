@@ -39,8 +39,6 @@
     owner = "notarock";
   };
 
-
-
   programs = {
     zsh.enable = true;
     ssh.startAgent = false;

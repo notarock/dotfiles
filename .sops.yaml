@@ -3,16 +3,22 @@
 # Also see https://github.com/Mic92/dotfiles/blob/master/nixos/.sops.yaml
 # for a more complex example
 keys:
-  - &notarock 134FCC2ED75E912E9FB3BF052D7A7E5ABB96084F
+  - &notarockZ 134FCC2ED75E912E9FB3BF052D7A7E5ABB96084F
+  - &notarockK 5c58c6808c7d8e3eb98a458040b936af37aee1eb
   - &zonnarth 4c5f4e0f0b821b67f9e001409f4f63f595e00182
+  - &kreizemm 5C58C6808C7D8E3EB98A458040B936AF37AEE1EB
 creation_rules:
   - path_regex: 'secrets/[^/]+\.yaml$'
     key_groups:
     - pgp:
-      - *notarock
+      - *notarockZ
+      - *notarockK
       - *zonnarth
+      - *kreizemm
   - path_regex: 'secrets/*'
     key_groups:
     - pgp:
-      - *notarock
+      - *notarockZ
+      - *notarockK
       - *zonnarth
+      - *kreizemm
