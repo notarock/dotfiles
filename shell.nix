@@ -7,8 +7,8 @@ let
 in
 mkShell {
   sopsPGPKeys = [
-    "./secrets/keys/users/notarockK.asc"
-    "./secrets/keys/users/notarockZ.asc"
+    "./secrets/keys/users/yubikey-K.asc"
+    "./secrets/keys/users/yubikey-Z.asc"
   ];
 
   # This hook can also import gpg keys into its own seperate
