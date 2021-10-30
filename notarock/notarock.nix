@@ -124,7 +124,10 @@
 
       services = {
         nextcloud-client.enable = true;
-        picom.enable = true;
+        picom = {
+          enable = true;
+          shadow = true;
+        };
       };
 
       xresources.properties = {

@@ -228,7 +228,6 @@ in {
       hc spawn pkill xss-lock
       hc spawn pkill polybar
       hc spawn pkill flameshot
-      hc spawn pkill picom
       hc spawn pkill Discord
 
       hc spawn ${pkgs.xss-lock}/bin/xss-lock \
@@ -243,7 +242,6 @@ in {
 
       # Startup programs
       hc spawn feh --bg-fill ~/Pictures/wallpaper/selected*
-      hc spawn picom
       hc spawn flameshot
       hc spawn ${pkgs.polybar}/bin/polybar main;
       hc spawn ${pkgs.discord}/bin/discord
