@@ -22,6 +22,7 @@
         ./extras/zsh.nix
         ./extras/fzf.nix
         ./extras/kitty.nix
+        ./extras/starship.nix
         ./myTheme.nix
       ];
 
