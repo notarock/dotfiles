@@ -10,7 +10,7 @@
 
   programs.doom-emacs = {
     enable = true;
-    emacsPackage = pkgs.emacsGcc;
+    emacsPackage = pkgs.emacsGit;
     doomPrivateDir = ../doom.d;
   };
 }
