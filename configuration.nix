@@ -13,6 +13,8 @@
     ./notarock/notarock.nix
   ];
 
+  services.xserver.displayManager.defaultSession = "none+herbstluftwm";
+
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
