@@ -40,6 +40,7 @@ in {
       hc keybind Mod1-F2 spawn rofi -show run -lines 0
       hc keybind $Mod-Return spawn kitty # use your $TERMINAL with xterm as fallback
       hc keybind $Mod-d spawn rofi -show drun
+      hc keybind $Mod-e spawn rofi -show emoji -modi emoji
 
       # For volume controls and mute
       hc keybind XF86AudioRaiseVolume spawn ${pkgs.alsaUtils}/bin/amixer set -q Master 5%+
