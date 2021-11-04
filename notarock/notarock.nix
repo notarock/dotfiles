@@ -13,6 +13,8 @@
   home-manager = {
     users.notarock = { pkgs, config, osConfig, ... }: {
       imports = [
+        ./myTheme.nix
+        # ./packages.nix
         ./extras/herbstluftwm.nix
         ./extras/polybar.nix
         ./extras/udiskie.nix
@@ -23,7 +25,6 @@
         ./extras/fzf.nix
         ./extras/kitty.nix
         ./extras/starship.nix
-        ./myTheme.nix
       ];
 
       home.activation = {
