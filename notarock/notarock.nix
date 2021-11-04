@@ -131,7 +131,7 @@
         nextcloud-client.enable = true;
         picom = {
           enable = true;
-          shadow = true;
+          shadow = false;
         };
       };
 
