@@ -31,8 +31,6 @@
     steam
     minecraft
     scrot
-    rofi
-    rofi-pass
     rhythmbox
     screenkey
     scrot

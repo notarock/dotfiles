@@ -14,7 +14,7 @@
     users.notarock = { pkgs, config, osConfig, ... }: {
       imports = [
         ./myTheme.nix
-        # ./packages.nix
+        ./packages.nix
         ./extras/herbstluftwm.nix
         ./extras/polybar.nix
         ./extras/udiskie.nix
