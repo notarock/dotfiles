@@ -89,7 +89,6 @@
     audacity
     jetbrains.idea-community
     kotlin
-    adoptopenjdk-openj9-bin-16
     figlet
 
     (retroarch.override {

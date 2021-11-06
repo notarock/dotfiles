@@ -49,8 +49,9 @@
     pkg-config
   openconnect
 
+      jre
+    adoptopenjdk-openj9-bin-16
   ];
-
 
   nixpkgs.overlays = [
     (final: prev: {
