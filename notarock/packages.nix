@@ -58,14 +58,8 @@
     wakatime
     texlive.combined.scheme-medium
 
-    go
-    gomodifytags
-    gocode
-    gopls
-    gore
-    gotests
-    goimports
     pandoc
+
     zoom-us
     slack
     nitrogen
