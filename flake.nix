@@ -13,6 +13,15 @@
     emacs-overlay.url = "github:nix-community/emacs-overlay/master";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-discord.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    gore.url = "github:motemen/gore/main";
+    gore.flake = false;
+    gotools.url = "git+https://go.googlesource.com/tools";
+    gotools.flake = false;
+    gotests.url = "github:cweill/gotests/develop";
+    gotests.flake = false;
+    gomodifytags.url = "github:fatih/gomodifytags/master";
+    gomodifytags.flake = false;
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, nix-doom-emacs, sops-nix, ... }:
