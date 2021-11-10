@@ -3,7 +3,7 @@ configuration {
   display-drun: "  ";
   display-window: "  ";
   drun-display-format: "{icon} {name}";
-  font: "Essential PragmataPro 10";
+  font: "Essential PragmataPro 13";
   modi: "window,run,drun";
   show-icons: false;
 }
@@ -46,7 +46,7 @@ inputbar {
 
 listview {
   columns: 1;
-  lines: 8;
+  lines: 9;
 }
 
 mainbox {
@@ -56,12 +56,13 @@ mainbox {
 prompt {
   background-color: @accent;
   enabled: true;
-  font: "FontAwesome 12";
+  font: "Font Awesome 5 Free Regular 13";
   padding: 12 0 0 12;
   text-color: @fg;
 }
 
 window {
+  width: 25%;
   transparency: "real";
 }
 

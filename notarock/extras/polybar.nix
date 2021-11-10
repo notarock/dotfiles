@@ -277,6 +277,7 @@ in {
         type = "custom/script";
         exec = "~/.config/polybar/scripts/info-docker";
         interval = 10;
+        format-padding = 2;
         format-foreground = config.myTheme.color6;
       };
     };
