@@ -33,8 +33,10 @@ in {
         foreground = config.myTheme.color15;
 
         padding = 3;
-        font-0 = "Essential PragmataPro:size=12";
-        font-1 = "FontAwesome:pixelsize=12";
+        font-0 = "Essential PragmataPro:size=10";
+        font-1 = "Font Awesome 5 Free Regular:pixelsize=10";
+        font-2 = "Font Awesome 5 Free Solid:pixelsize=10";
+        font-3 = "Font Awesome 5 Brands:pixelsize=10";
         monitor = hostSpecific.mainMonitor;
 
         modules-left = "ewmh info-docker";
