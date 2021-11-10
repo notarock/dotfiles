@@ -129,7 +129,7 @@
           font = "Essential PragmataPro 14";
           theme = "/etc/nixos/extras/rofi/conf";
           plugins = with pkgs; [ rofi-emoji ];
-          extraConfig = { dpi = 0; };
+          extraConfig = { dpi = osConfig.my.dpi; };
         };
 
         git = {
@@ -150,7 +150,7 @@
       };
 
       xresources.properties = {
-        "xft.dpi" = "144";
+        "xft.dpi" = toString osConfig.my.dpi;
         "XTerm*faceName" = "dejavu sans mono";
       };
 

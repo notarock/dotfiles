@@ -1,4 +1,4 @@
-{ nixosConfig, config, lib, pkgs, ... }:
+{ nixosConfig, config, osConfig, lib, pkgs, ... }:
 
 let
   hostSpecific =
@@ -20,6 +20,7 @@ in {
 
       "bar/main" = {
         enable-ipc = "true";
+        dpi = osConfig.my.dpi;
         height = 42;
         line-size = 2;
         border-size = 2;

@@ -15,6 +15,10 @@ in {
     # };
   };
 
+  imports = [
+    ./my/dpi.nix
+  ];
+
   nix.autoOptimiseStore = true;
 
   boot.loader.systemd-boot.enable = true;
@@ -72,5 +76,7 @@ in {
     pulseaudio.enable = true;
     pulseaudio.support32Bit = true;
   };
+
+
 
 }

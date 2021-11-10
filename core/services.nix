@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }:
 
+with lib;
 {
   location.latitude = 45.5;
   location.longitude = -73.5;
@@ -11,7 +12,7 @@
       desktopManager.gnome.enable = true;
       windowManager.herbstluftwm.enable = true;
       layout = "ca,fr";
-      dpi = 144;
+      dpi = config.my.dpi;
     };
 
     redshift = {
