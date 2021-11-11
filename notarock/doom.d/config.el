@@ -5,8 +5,8 @@
 
 (setq font-family "Essential PragmataPro")
 
-(setq doom-font (font-spec :family font-family :size 24)
-      doom-big-font (font-spec :family font-family :size 34))
+(setq doom-font (font-spec :family font-family)
+      doom-big-font (font-spec :family font-family))
 
 (setq display-line-numbers-type t)
 
