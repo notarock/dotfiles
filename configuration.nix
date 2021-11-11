@@ -10,7 +10,7 @@
     ./core/keychron.nix
     ./core/services.nix
     ./core/systemPackages.nix
-    ./notarock/notarock.nix
+    ./notarock
   ];
 
   services.xserver.displayManager.defaultSession = "none+herbstluftwm";
@@ -53,7 +53,7 @@
 
   fonts = {
     enableDefaultFonts = true;
-    fonts = with pkgs; [ dejavu_fonts opensans-ttf font-awesome ];
+    fonts = with pkgs; [ dejavu_fonts opensans-ttf font-awesome ibm-plex ];
   };
 
   environment.variables.EDITOR = "vim";

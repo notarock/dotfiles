@@ -62,6 +62,9 @@
         enable = true;
         iconTheme.package = pkgs.numix-icon-theme-square;
         iconTheme.name = "Numix-Square";
+        font.name= "IBM Plex Sans Text";
+        font.package = pkgs.ibm-plex;
+        font.size = 11;
         theme.package = pkgs.plata-theme;
         theme.name = "Plata";
       };

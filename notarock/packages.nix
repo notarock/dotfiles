@@ -84,6 +84,7 @@
     jetbrains.idea-community
     kotlin
     figlet
+    lxappearance
 
     (retroarch.override {
       cores = with libretro; [
