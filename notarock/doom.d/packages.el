@@ -61,4 +61,5 @@
 (package! dimmer)
 (package! highlight-indent-guides)
 (package! doct)
+(package! mixed-pitch)
 ;; (package! evil-escape :disable t)

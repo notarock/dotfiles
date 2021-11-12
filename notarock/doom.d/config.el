@@ -5,7 +5,8 @@
 
 (setq font-family "Essential PragmataPro")
 
-(setq doom-font (font-spec :family font-family)
+(setq doom-variable-pitch-font (font-spec :family "IBM Plex Sans Condensed" )
+      doom-font (font-spec :family font-family)
       doom-big-font (font-spec :family font-family))
 
 (setq display-line-numbers-type t)
@@ -21,6 +22,7 @@
 (dimmer-mode t)
 (setq highlight-indent-guides-method 'column)
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(add-hook 'text-mode-hook 'mixed-pitch-mode)
 
 (add-hook 'prog-mode-hook (lambda ()
                             (setq show-trailing-whitespace t)))
@@ -76,9 +78,11 @@
         :n "m-j" #'org-metadown
         :n "m-k" #'org-metaup)
   (add-hook 'org-mode-hook 'org-appear-mode)
+  (add-hook 'org-mode-hook 'visual-line-mode)
   (add-hook 'org-mode-hook (lambda ()
                              (setq show-trailing-whitespace t)))
   (setq  ispell-local-dictionary "fr-toutesvariantes"
+         org-hide-emphasis-markers t
          org-directory "~/org/"
          org-journal-file-type 'daily
          org-journal-dir (concat org-directory "journals")
