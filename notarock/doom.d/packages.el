@@ -61,6 +61,4 @@
 (package! dimmer)
 (package! highlight-indent-guides)
 (package! doct)
-(package! kubel)
-(package! kubel-evil)
 ;; (package! evil-escape :disable t)

@@ -134,17 +134,6 @@
 
 (setq ispell-dictionary "en_CA")
 
-(require 'kubel)
-(require 'kubel-evil)
-
-(defun my/kubel ()
-  "Opens kubel inside a new buffer."
-  (interactive)
-  (switch-to-buffer "*kubel-mode*")
-  (kubel-mode))
-
-(map! :ne "SPC o k" #'my/kubel)
-
 (fset 'env-to-yaml
       (kmacro-lambda-form [?0 ?f ?= ?r ?: ?a ?  escape ?w ?y ?s ?i ?W ?\" ?0 ?j] 0 "%d"))
 
