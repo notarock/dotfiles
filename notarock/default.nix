@@ -149,6 +149,7 @@
         picom = {
           enable = true;
           shadow = false;
+          vSync = true;
         };
       };
 
