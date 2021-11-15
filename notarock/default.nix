@@ -27,6 +27,29 @@
         ./extras/starship.nix
       ];
 
+      xdg.mimeApps = {
+        enable = true;
+        defaultApplications = let
+          pdf = [ "Evince.desktop" ];
+          browser = [ "firefox.desktop" ];
+          image = [ "org.nomacs.ImageLounge.desktop" ];
+        in {
+          "image/png" = image;
+          "image/jpeg" = image;
+          "image/pjpeg" = image;
+          "image/bmp" = image;
+          "image/fif" = image;
+          "image/gif" = image;
+          "application/pdf" = pdf;
+          "text/html" = browser;
+          "x-scheme-handler/http" = browser;
+          "x-scheme-handler/https" = browser;
+          "x-scheme-handler/about" = browser;
+          "x-scheme-handler/slack" = [ "slack.desktop" ];
+          "x-scheme-handler/zoommtg" = [ "us.zoom.Zoom.desktop" ];
+        };
+      };
+
       home.file.".background-image".source = let
         background = ../resources/bsd-grid.png;
         bgOut = "bgOut.png";

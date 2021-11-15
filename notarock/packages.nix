@@ -36,6 +36,7 @@
     screenkey
     scrot
     neofetch
+    nomacs
 
     # kubectl
     # minikube
