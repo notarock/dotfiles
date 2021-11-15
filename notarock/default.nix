@@ -30,7 +30,7 @@
       xdg.mimeApps = {
         enable = true;
         defaultApplications = let
-          pdf = [ "Evince.desktop" ];
+          pdf = [ "org.gnome.Evince.desktop" ];
           browser = [ "firefox.desktop" ];
           image = [ "org.nomacs.ImageLounge.desktop" ];
         in {
@@ -38,8 +38,8 @@
           "image/jpeg" = image;
           "image/pjpeg" = image;
           "image/bmp" = image;
-          "image/fif" = image;
           "image/gif" = image;
+          "image/fif" = image;
           "application/pdf" = pdf;
           "text/html" = browser;
           "x-scheme-handler/http" = browser;
