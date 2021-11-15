@@ -3,7 +3,7 @@
 
 (setq doom-theme 'base16-twilight)
 
-(font-family "Essential PragmataPro")
+(setq font-family "Essential PragmataPro")
 
 (setq doom-variable-pitch-font (font-spec :family "IBM Plex Sans Condensed" )
       doom-font (font-spec :family font-family)
@@ -22,7 +22,6 @@
 (dimmer-mode t)
 (setq highlight-indent-guides-method 'column)
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-(add-hook 'text-mode-hook 'mixed-pitch-mode)
 
 (add-hook 'prog-mode-hook (lambda ()
                             (setq show-trailing-whitespace t)))
@@ -30,6 +29,8 @@
                            (setq show-trailing-whitespace t)))
 (add-hook 'markdown-mode-hook (lambda ()
                                 (setq show-trailing-whitespace t)))
+(add-hook 'markdown-mode-hook 'mixed-pitch-mode)
+(add-hook 'latex-mode-hook 'mixed-pitch-mode)
 
 (defun my/set-initial-frame ()
   "Set initial frame size and position"
@@ -79,6 +80,7 @@
         :n "m-k" #'org-metaup)
   (add-hook 'org-mode-hook 'org-appear-mode)
   (add-hook 'org-mode-hook 'visual-line-mode)
+  (add-hook 'org-mode-hook 'mixed-pitch-mode)
   (add-hook 'org-mode-hook (lambda ()
                              (setq show-trailing-whitespace t)))
   (setq  ispell-local-dictionary "fr-toutesvariantes"
