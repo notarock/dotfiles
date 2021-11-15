@@ -14,6 +14,7 @@
   ];
 
   services.xserver.displayManager.defaultSession = "none+herbstluftwm";
+  services.xserver.desktopManager.wallpaper.mode = "tile";
 
   home-manager = {
     useUserPackages = true;

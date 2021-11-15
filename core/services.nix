@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
-with lib;
-{
+with lib; {
   location.latitude = 45.5;
   location.longitude = -73.5;
 

@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    python
     openvpn
     dbeaver
     git
@@ -36,14 +37,13 @@
     scrot
     neofetch
 
-    kubectl
-    minikube
-    kompose
-    k9s
-    terraform
-    kubernetes-helm
-    google-cloud-sdk
-    ansible
+    # kubectl
+    # minikube
+    # kompose
+    # k9s
+    # kubernetes-helm
+    # google-cloud-sdk
+    # ansible
 
     gnomeExtensions.dash-to-dock
     gnomeExtensions.caffeine
@@ -64,7 +64,6 @@
     slack
     nitrogen
     youtube-dl
-    flameshot
     hunspell
     hunspellDicts.en-ca
     hunspellDicts.fr-any

@@ -15,9 +15,7 @@ in {
     # };
   };
 
-  imports = [
-    ./my/dpi.nix
-  ];
+  imports = [ ./my/dpi.nix ];
 
   nix.autoOptimiseStore = true;
 
@@ -76,7 +74,5 @@ in {
     pulseaudio.enable = true;
     pulseaudio.support32Bit = true;
   };
-
-
 
 }

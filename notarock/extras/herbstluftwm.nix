@@ -228,8 +228,6 @@ in {
       hc spawn pkill xsecurelock
       hc spawn pkill xss-lock
       hc spawn pkill polybar
-      hc spawn pkill flameshot
-      hc spawn pkill Discord
 
       hc spawn ${pkgs.xss-lock}/bin/xss-lock \
           ${pkgs.coreutils}/bin/env \
@@ -242,11 +240,9 @@ in {
           ${pkgs.xsecurelock}/bin/xsecurelock
 
       # Startup programs
-      hc spawn feh --bg-fill ~/Pictures/wallpaper/selected*
-      hc spawn flameshot
       hc spawn ${pkgs.polybar}/bin/polybar main;
       hc spawn ${pkgs.discord}/bin/discord
-      hc spawn ${pkgs.slack}/bin/slack
+      hc spawn feh --bg-tile ~/.background-image
 
       # gaps are based
       #   __ _  __ _ _ __  ___

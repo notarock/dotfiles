@@ -47,9 +47,9 @@
     gcc
 
     pkg-config
-  openconnect
+    openconnect
 
-      jre
+    jre
     adoptopenjdk-openj9-bin-16
   ];
 

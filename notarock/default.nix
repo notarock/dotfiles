@@ -27,6 +27,18 @@
         ./extras/starship.nix
       ];
 
+      home.file.".background-image".source = let
+        background = ../resources/bsd-grid.png;
+        bgOut = "bgOut.png";
+        wallpaper = pkgs.runCommandNoCC "wallpaper" { } ''
+          mkdir -p $out/share;
+          ${pkgs.imagemagick}/bin/convert ${background} \
+          -fill "${config.myTheme.color4}" -opaque white \
+          -fill "${config.myTheme.color0}" -opaque black ${bgOut} ;
+          cp -Lr ${bgOut} $out/share;
+        '';
+      in "${wallpaper}/share/${bgOut}";
+
       home.activation = {
         setupPragmataProReg = config.lib.dag.entryAfter [ "writeBoundary" ] ''
           mkdir -p ~/.local/share/fonts
@@ -42,9 +54,12 @@
           ln -sf ${osConfig.sops.secrets.wakatime.path} \
                     ~/.wakatime.cfg
         '';
+        set-wallpaper = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+          feh --bg-tile ~/.background-image
+        '';
       };
 
-      myTheme = import ../themes/base16-ia-dark.nix;
+      myTheme = import ../themes/base16-twilight.nix;
 
       manual = {
         html.enable = true;
@@ -62,7 +77,7 @@
         enable = true;
         iconTheme.package = pkgs.numix-icon-theme-square;
         iconTheme.name = "Numix-Square";
-        font.name= "IBM Plex Sans Text";
+        font.name = "IBM Plex Sans Text";
         font.package = pkgs.ibm-plex;
         font.size = 11;
         theme.package = pkgs.plata-theme;
@@ -89,7 +104,7 @@
             "golang.org/x/tools/cmd/goimports" = inputs.gotools;
             "golang.org/x/tools/cmd/gorename" = inputs.gotools;
             "golang.org/x/tools/cmd/guru" = inputs.gotools;
-            "github.com/cweill/gotests/..." =  inputs.gotests;
+            "github.com/cweill/gotests/..." = inputs.gotests;
             "github.com/fatih/gomodifytags" = inputs.gomodifytags;
           };
         };
@@ -151,6 +166,7 @@
           shadow = false;
           vSync = true;
         };
+        flameshot = { enable = true; };
       };
 
       xresources.properties = {
