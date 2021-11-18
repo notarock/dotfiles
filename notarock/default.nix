@@ -82,7 +82,7 @@
         '';
       };
 
-      myTheme = import ../themes/base16-twilight.nix;
+      myTheme = import ../themes/base16-snazzy.nix;
 
       manual = {
         html.enable = true;
@@ -119,12 +119,11 @@
         go = {
           enable = true;
           package = pkgs.go_1_17;
-          goPath = ".go";
           packages = {
             "github.com/motemen/gore/cmd/gore" = inputs.gore;
             "github.com/mdempsky/gocode" = inputs.gotools;
-            "golang.org/x/tools/cmd/godoc" = inputs.gotools;
             "golang.org/x/tools/cmd/goimports" = inputs.gotools;
+            "golang.org/x/tools/cmd/godoc" = inputs.gotools;
             "golang.org/x/tools/cmd/gorename" = inputs.gotools;
             "golang.org/x/tools/cmd/guru" = inputs.gotools;
             "github.com/cweill/gotests/..." = inputs.gotests;

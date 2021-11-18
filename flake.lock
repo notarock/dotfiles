@@ -198,11 +198,11 @@
     "gotools": {
       "flake": false,
       "locked": {
-        "lastModified": 1636157324,
-        "narHash": "sha256-EAruYUCof/bVQrJ3T3PDkRJuM3yn5j/gTbcOUWC7rTE=",
+        "lastModified": 1637025028,
+        "narHash": "sha256-oxmSp2Ye8dlAMDSOk1H9YGuUwgmXlieeEqC+3gW+Vyk=",
         "ref": "master",
-        "rev": "0c60b7c5c272ccd0f66ee1fda8b8090d59700dd9",
-        "revCount": 6166,
+        "rev": "4adea5033c5c6f39a900d4b963c4b496448b1655",
+        "revCount": 6182,
         "type": "git",
         "url": "https://go.googlesource.com/tools"
       },
