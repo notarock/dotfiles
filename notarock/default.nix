@@ -56,7 +56,7 @@
         wallpaper = pkgs.runCommandNoCC "wallpaper" { } ''
           mkdir -p $out/share;
           ${pkgs.imagemagick}/bin/convert ${background} \
-          -fill "${config.myTheme.color4}" -opaque white \
+          -fill "${config.myTheme.color14}" -opaque white \
           -fill "${config.myTheme.color0}" -opaque black ${bgOut} ;
           cp -Lr ${bgOut} $out/share;
         '';

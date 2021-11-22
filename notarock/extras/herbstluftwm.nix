@@ -2,7 +2,7 @@
 
 let
   layoutFolder = "/etc/nixos/notarock/extras/hlwm-layouts";
-  gapWidth = "15";
+  gapWidth = "10";
 in {
 
   #########################################################################
@@ -54,7 +54,7 @@ in {
       hc keybind $Mod-F3 spawn firefox
       hc keybind $Mod-Shift-e spawn emacs
       hc keybind $Mod-Shift-s spawn flameshot gui
-      hc keybind $Mod-Insert spawn rofi-pass
+      hc keybind $Mod-Insert spawn ${pkgs.rofi-pass}/bin/rofi-pass
       hc keybind $Mod-t spawn ~/.config/herbstluftwm/layout-menu
       hc keybind $Mod-Shift-0 spawn ~/.config/herbstluftwm/window-menu
       hc keybind $Mod-Shift-Return spawn ~/.config/herbstluftwm/scratchpad
@@ -177,9 +177,9 @@ in {
       hc attr theme.urgent.color '${config.myTheme.color1}'
       hc attr theme.inner_width 0
       hc attr theme.inner_color black
-      hc attr theme.border_width 2
-      hc attr theme.floating.border_width 2
-      hc attr theme.floating.outer_width 2
+      hc attr theme.border_width 1
+      hc attr theme.floating.border_width 1
+      hc attr theme.floating.outer_width 1
       hc attr theme.floating.outer_color black
       hc attr theme.active.inner_color $SELECT
       hc attr theme.active.outer_color $SELECT
@@ -188,7 +188,7 @@ in {
       hc set window_gap 0
       hc set frame_padding 0
       hc set smart_window_surroundings 0
-      hc set smart_frame_surroundings 0
+      hc set smart_frame_surroundings 1
       hc set mouse_recenter_gap 0
       hc set default_frame_layout grid
       hc set focus_follows_mouse 1
@@ -205,10 +205,6 @@ in {
       hc rule class=Spotify tag=8 focus=on switchtag=on
       hc rule class=discord tag=9 focus=on # move Discord to tag 9
       hc rule class=Slack tag=9 focus=on # move Discord to tag 9
-
-      #hc rule focus=off # normally do not focus new clients
-      # give focus to most common terminals
-      #hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole)' focus=on
 
       hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
       hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
@@ -242,7 +238,7 @@ in {
       # Startup programs
       hc spawn ${pkgs.polybar}/bin/polybar main;
       hc spawn ${pkgs.discord}/bin/discord
-      hc spawn feh --bg-tile ~/.background-image
+      hc spawn ${pkgs.feh}/bin/feh --bg-tile ~/.background-image
 
       # gaps are based
       #   __ _  __ _ _ __  ___
@@ -253,6 +249,9 @@ in {
 
       hc keybind $Mod-n set frame_gap 0
       hc keybind $Mod-g set frame_gap ${gapWidth}
+
+      setxkbmap ${config.home.keyboard.layout}
+      xsetroot -curser_name ${config.xsession.pointerCursor.name}
 
     '';
   };
