@@ -1,7 +1,7 @@
 (setq user-full-name "Roch D'Amour"
       user-mail-address "roch.damour@gmail.com")
 
-(setq doom-theme 'base16-twilight)
+(setq doom-theme 'doom-gruvbox)
 
 (setq font-family "Essential PragmataPro")
 
