@@ -13,6 +13,7 @@
 
 (setq fancy-splash-image "/etc/nixos/notarock/doom.d/notarock.png")
 
+
 (setq frame-resize-pixelwise t)
 
 (setq scroll-margin 10)

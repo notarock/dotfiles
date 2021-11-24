@@ -40,7 +40,6 @@
     (cons 340 "#555556")
     (cons 360 "#555556")))
  '(vc-annotate-very-old-color nil)
- '(wakatime-cli-path "/etc/profiles/per-user/notarock/bin/wakatime")
  '(wakatime-python-bin nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
