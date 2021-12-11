@@ -1,18 +1,22 @@
+;;; config --- Main config file
+;;; Commentary:
+;;; I only have this header here so flycheck stops complaining
+;;;
+;;; Code:
+
 (setq user-full-name "Roch D'Amour"
       user-mail-address "roch.damour@gmail.com")
 
-(setq doom-theme 'doom-gruvbox)
+(setq doom-theme 'base16-gruvbox-dark-medium)
 
-(setq font-family "Essential PragmataPro")
-
-(setq doom-variable-pitch-font (font-spec :family "IBM Plex Sans Condensed" )
-      doom-font (font-spec :family font-family)
-      doom-big-font (font-spec :family font-family))
+(let ((font-family "Essential PragmataPro"))
+  (setq doom-variable-pitch-font (font-spec :family "IBM Plex Sans Condensed" )
+        doom-font (font-spec :family font-family)
+        doom-big-font (font-spec :family font-family)))
 
 (setq display-line-numbers-type t)
 
-(setq fancy-splash-image "/etc/nixos/notarock/doom.d/notarock.png")
-
+(setq fancy-splash-image (concat (getenv "DOOMDIR") "/notarock.png"))
 
 (setq frame-resize-pixelwise t)
 

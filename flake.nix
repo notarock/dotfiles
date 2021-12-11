@@ -3,10 +3,10 @@
   inputs = {
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager/master";
+    home-manager.url = "github:nix-community/home-manager";
     doom-emacs.url = "github:hlissner/doom-emacs/develop";
     doom-emacs.flake = false;
-    emacs-overlay.url = "github:nix-community/emacs-overlay/master";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-discord.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -16,7 +16,7 @@
     gotools.flake = false;
     gotests.url = "github:cweill/gotests/develop";
     gotests.flake = false;
-    gomodifytags.url = "github:fatih/gomodifytags/master";
+    gomodifytags.url = "github:fatih/gomodifytags";
     gomodifytags.flake = false;
   };
 
