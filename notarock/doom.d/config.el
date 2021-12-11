@@ -144,4 +144,5 @@
 (fset 'env-to-yaml
       (kmacro-lambda-form [?0 ?f ?= ?r ?: ?a ?  escape ?w ?y ?s ?i ?W ?\" ?0 ?j] 0 "%d"))
 
+(load-file (concat (getenv "DOOMDIR") "/extra.el"))
 ;;; config.el ends here
