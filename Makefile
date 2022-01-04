@@ -10,6 +10,6 @@ fmt:
 	nixfmt **/*.nix
 
 update:
-	nix flake update
+	nix flake update --commit-lock-file
 
 # end
