@@ -7,7 +7,7 @@
 (setq user-full-name "Roch D'Amour"
       user-mail-address "roch.damour@gmail.com")
 
-(setq doom-theme 'base16-gruvbox-dark-medium)
+(setq doom-theme 'base16-ia-dark)
 
 (let ((font-family "Essential PragmataPro"))
   (setq doom-variable-pitch-font (font-spec :family "IBM Plex Sans Condensed" )
@@ -94,6 +94,7 @@
          org-journal-file-type 'daily
          org-journal-dir (concat org-directory "journals")
          org-todos-file (concat org-directory "todos.org")
+         org-timesheet-dir (concat org-directory "timesheet.org")
          org-journal-file-format "%Y-%m-%d.org"
          org-journal-date-format "%e %b %Y (%A)"
          org-journal-time-format "%H:%M"
@@ -104,7 +105,9 @@
                                               :template ("* TODO: %^{description}"
                                                          ":properties:"
                                                          ":created: %u"
-                                                         ":end:"))))
+                                                         ":end:"))
+                                             ("Timesheet" :keys "T"
+                                              :file )))
          org-todo-keyword-faces (quote (("todo" :foreground "#ff6347" :weight bold)
                                         ("done" :foreground "#006400" :weight bold :strike-through t)))
          org-todo-keywords '((sequence "todo(t)" "done(d)"))

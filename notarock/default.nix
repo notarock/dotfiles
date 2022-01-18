@@ -56,7 +56,7 @@
         wallpaper = pkgs.runCommandNoCC "wallpaper" { } ''
           mkdir -p $out/share;
           ${pkgs.imagemagick}/bin/convert ${background} \
-          -fill "${config.myTheme.color14}" -opaque white \
+          -fill "${config.myTheme.color4}" -opaque white \
           -fill "${config.myTheme.color0}" -opaque black ${bgOut} ;
           cp -Lr ${bgOut} $out/share;
         '';
@@ -82,7 +82,7 @@
         '';
       };
 
-      myTheme = import ../themes/base16-gruvbox-dark-medium.nix;
+      myTheme = import ../themes/base16-ia-dark.nix;
 
       manual = {
         html.enable = true;
