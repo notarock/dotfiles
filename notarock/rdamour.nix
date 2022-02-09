@@ -45,7 +45,6 @@
     };
   };
 
-
   home.file.".background-image".source = let
     background = ../resources/bsd-grid.png;
     bgOut = "bgOut.png";
@@ -58,7 +57,7 @@
     '';
   in "${wallpaper}/share/${bgOut}";
 
-  myTheme = import ../themes/base16-gruvbox-dark-medium.nix;
+  myTheme = import ../themes/base16-ia-dark.nix;
 
   manual = {
     html.enable = true;
@@ -149,7 +148,14 @@
       enable = true;
       userName = "Roch D'Amour";
       userEmail = "rdamour@stingray.com";
-      extraConfig = { pull.rebase = true; };
+      extraConfig = {
+        pull.rebase = true;
+        url = {
+          "ssh://git@gitlab.stingray-tooling.com/" = {
+            insteadOf = "https://gitlab.stingray-tooling.com/";
+          };
+        };
+      };
     };
   };
 

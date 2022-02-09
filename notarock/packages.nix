@@ -53,7 +53,6 @@
     vagrant
     libreoffice
     evince
-    gnome3.cheese
     gnome3.gedit
     gnome3.pomodoro
     gimp

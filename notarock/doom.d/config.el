@@ -105,9 +105,7 @@
                                               :template ("* TODO: %^{description}"
                                                          ":properties:"
                                                          ":created: %u"
-                                                         ":end:"))
-                                             ("Timesheet" :keys "T"
-                                              :file )))
+                                                         ":end:"))))
          org-todo-keyword-faces (quote (("todo" :foreground "#ff6347" :weight bold)
                                         ("done" :foreground "#006400" :weight bold :strike-through t)))
          org-todo-keywords '((sequence "todo(t)" "done(d)"))
