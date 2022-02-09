@@ -82,7 +82,7 @@
         '';
       };
 
-      myTheme = import ../themes/base16-ia-dark.nix;
+      myTheme = import ../themes/base16-classic-dark.nix;
 
       manual = {
         html.enable = true;

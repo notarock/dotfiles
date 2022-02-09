@@ -7,7 +7,7 @@
 (setq user-full-name "Roch D'Amour"
       user-mail-address "roch.damour@gmail.com")
 
-(setq doom-theme 'base16-ia-dark)
+(setq doom-theme 'base16-classic-dark)
 
 (let ((font-family "Essential PragmataPro"))
   (setq doom-variable-pitch-font (font-spec :family "IBM Plex Sans Condensed" )
