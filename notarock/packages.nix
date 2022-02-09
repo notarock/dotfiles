@@ -26,10 +26,10 @@
     mtr
     docker-compose
     xorg.xhost
+    mage
     unrar
     woeusb
     tldr
-    gnome3.dconf
     xorg.xmessage
     librsvg
     gnumake

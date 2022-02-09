@@ -20,8 +20,10 @@
   targets.genericLinux.enable = true;
   programs.bash.enable = true;
 
+  home.keyboard.layout = "ca,fr";
+
   xdg.mimeApps = {
-    enable = true;
+    enable = false;
     defaultApplications = let
       pdf = [ "org.gnome.Evince.desktop" ];
       browser = [ "firefox.desktop" ];
@@ -42,6 +44,7 @@
       "x-scheme-handler/zoommtg" = [ "us.zoom.Zoom.desktop" ];
     };
   };
+
 
   home.file.".background-image".source = let
     background = ../resources/bsd-grid.png;
@@ -87,8 +90,6 @@
     pointerCursor.name = "Bibata_Oil";
     pointerCursor.size = 48;
   };
-
-  home.keyboard.layout = "ca,fr";
 
   programs = {
     go = {
@@ -147,8 +148,8 @@
       delta.enable = true;
       enable = true;
       userName = "Roch D'Amour";
-      userEmail = "roch.damour@gmail.com";
-      extraConfig = { pull.rebase = false; };
+      userEmail = "rdamour@stingray.com";
+      extraConfig = { pull.rebase = true; };
     };
   };
 
