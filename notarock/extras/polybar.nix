@@ -1,9 +1,6 @@
 { nixosConfig, config, osConfig, lib, pkgs, ... }:
 
-let
-  hostSpecific =
-    import (../../hosts + "/${nixosConfig.networking.hostName}/variables.nix");
-in {
+{
   services.polybar = {
     enable = true;
     config = {
@@ -20,7 +17,6 @@ in {
 
       "bar/main" = {
         enable-ipc = "true";
-        dpi = osConfig.my.dpi;
         height = 42;
         line-size = 2;
         border-size = 2;
@@ -37,7 +33,6 @@ in {
         font-1 = "Font Awesome 5 Free Regular:pixelsize=10";
         font-2 = "Font Awesome 5 Free Solid:pixelsize=10";
         font-3 = "Font Awesome 5 Brands:pixelsize=10";
-        monitor = hostSpecific.mainMonitor;
 
         modules-left = "ewmh info-docker";
         modules-center = "time";

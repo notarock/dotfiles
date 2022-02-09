@@ -2,6 +2,45 @@
 
 {
   home.packages = with pkgs; [
+
+    wget
+    curl
+    ack
+    tree
+    fd
+    ripgrep
+    bc
+    finger_bsd
+    gnupg
+    zip
+    unzip
+    rsync
+    htop
+    gotop
+    lsof
+    pstree
+    parted
+    telnet
+    tcpdump
+    dnsutils
+    mtr
+    docker-compose
+    xorg.xhost
+    unrar
+    woeusb
+    tldr
+    gnome3.dconf
+    xorg.xmessage
+    librsvg
+    gnumake
+    cmake
+    pciutils
+    killall
+    libnotify
+    gcc
+    pkg-config
+    openconnect
+    jre
     python
     openvpn
     dbeaver
@@ -12,7 +51,6 @@
     colordiff
     nmap
     vagrant
-
     libreoffice
     evince
     gnome3.cheese
@@ -38,13 +76,13 @@
     neofetch
     nomacs
 
-    # kubectl
-    # minikube
-    # kompose
-    # k9s
-    # kubernetes-helm
-    # google-cloud-sdk
-    # ansible
+    kubectl
+    minikube
+    kompose
+    k9s
+    kubernetes-helm
+    google-cloud-sdk
+    ansible
 
     gnomeExtensions.dash-to-dock
     gnomeExtensions.caffeine
@@ -115,7 +153,6 @@
       enableIntro = false;
       enableDFHack = true;
     })
-
   ];
 
 }
