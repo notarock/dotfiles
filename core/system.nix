@@ -17,7 +17,7 @@ in {
 
   imports = [ ./my/dpi.nix ];
 
-  nix.autoOptimiseStore = true;
+  nix.settings.auto-optimise-store = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

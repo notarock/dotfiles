@@ -35,7 +35,6 @@
     tldr
     yubioath-desktop
     # virt-manager
-    gnome3.dconf
     xorg.xmessage
     gdk-pixbuf
     librsvg
@@ -51,7 +50,6 @@
 
     jre
     adoptopenjdk-openj9-bin-16
-
 
     openmoji-color
   ];
