@@ -7,8 +7,8 @@
     doom-emacs.url = "github:hlissner/doom-emacs/develop";
     doom-emacs.flake = false;
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
-    nixpkgs-discord.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-discord.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     gore.url = "github:motemen/gore/main";
     gore.flake = false;

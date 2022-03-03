@@ -25,7 +25,7 @@
 
   # Sops config
   sops.defaultSopsFile = ./secrets/notarock.yaml;
-  sops.secrets.password = {};
+  sops.secrets.password = { };
   sops.secrets.pragmatapro-bold = {
     format = "binary";
     sopsFile = ./secrets/EssentialPragmataPro-B_1.2.ttf;
@@ -54,7 +54,7 @@
 
   fonts = {
     enableDefaultFonts = true;
-    fonts = with pkgs; [ dejavu_fonts opensans-ttf font-awesome ibm-plex ];
+    fonts = with pkgs; [ dejavu_fonts open-sans font-awesome ibm-plex ];
   };
 
   environment.variables.EDITOR = "vim";

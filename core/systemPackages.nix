@@ -22,7 +22,7 @@
     pstree
     parted
     traceroute
-    telnet
+    inetutils
     tcpdump
     whois
     dnsutils
