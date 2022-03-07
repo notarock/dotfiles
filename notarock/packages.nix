@@ -43,7 +43,7 @@
     jre
     python
     openvpn
-    dbeaver
+    # dbeaver
     git
     tig
     bat
