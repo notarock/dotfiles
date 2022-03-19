@@ -250,7 +250,6 @@ in {
       hc keybind $Mod-n set frame_gap 0
       hc keybind $Mod-g set frame_gap ${gapWidth}
 
-      setxkbmap ${config.home.keyboard.layout}
       xsetroot -curser_name ${config.xsession.pointerCursor.name}
 
     '';

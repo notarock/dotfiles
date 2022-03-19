@@ -2,9 +2,48 @@
 
 {
   home.packages = with pkgs; [
+
+    wget
+    curl
+    ack
+    tree
+    fd
+    ripgrep
+    bc
+    finger_bsd
+    gnupg
+    zip
+    unzip
+    rsync
+    htop
+    gotop
+    lsof
+    pstree
+    parted
+    telnet
+    tcpdump
+    dnsutils
+    mtr
+    docker-compose
+    xorg.xhost
+    mage
+    unrar
+    woeusb
+    tldr
+    xorg.xmessage
+    librsvg
+    gnumake
+    cmake
+    pciutils
+    killall
+    libnotify
+    gcc
+    pkg-config
+    openconnect
+    jre
     python
     openvpn
-    dbeaver
+    # dbeaver
     git
     tig
     bat
@@ -12,10 +51,8 @@
     colordiff
     nmap
     vagrant
-
     libreoffice
     evince
-    gnome3.cheese
     gnome3.gedit
     gnome3.pomodoro
     gimp
@@ -38,13 +75,13 @@
     neofetch
     nomacs
 
-    # kubectl
-    # minikube
-    # kompose
-    # k9s
-    # kubernetes-helm
-    # google-cloud-sdk
-    # ansible
+    kubectl
+    minikube
+    kompose
+    k9s
+    kubernetes-helm
+    google-cloud-sdk
+    ansible
 
     gnomeExtensions.dash-to-dock
     gnomeExtensions.caffeine
@@ -86,13 +123,17 @@
     figlet
     lxappearance
 
+    ripgrep
+    sqlite
+    wordnet
+
     (retroarch.override {
       cores = with libretro; [
         bsnes-mercury
         beetle-snes
         mgba
         mupen64plus
-        parallel-n64
+
         snes9x
         snes9x2010
         yabause
@@ -115,7 +156,6 @@
       enableIntro = false;
       enableDFHack = true;
     })
-
   ];
 
 }
