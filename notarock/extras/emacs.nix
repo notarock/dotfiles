@@ -11,6 +11,14 @@ in {
     solc
     yaml-language-server
     gopls
+
+    (pkgs.makeDesktopItem {
+      name = "Emacs";
+      exec = "emacs";
+      comment = "Editor";
+      desktopName = "Emacs";
+      genericName = "Editor";
+    })
   ];
 
   programs.emacs = { enable = true; };

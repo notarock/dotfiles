@@ -65,6 +65,17 @@
 
 (setq lsp-python-ms-executable (executable-find "python-language-server"))
 
+(setq lsp-enable-symbol-highlighting t
+      lsp-ui-doc-enable t
+      lsp-ui-doc-show-with-cursor t
+      lsp-ui-doc-show-with-mouse t
+      lsp-lens-enable t
+      lsp-headerline-breadcrumb-enable t
+      lsp-ui-sideline-enable t
+      lsp-modeline-code-actions-enable t
+      lsp-modeline-diagnostics-enable t)
+
+
 (add-hook 'js2-mode-hook 'prettier-js-mode)
 (add-hook 'web-mode-hook 'prettier-js-mode)
 
@@ -105,9 +116,7 @@
                                               :template ("* TODO: %^{description}"
                                                          ":properties:"
                                                          ":created: %u"
-                                                         ":end:"))
-                                             ("Timesheet" :keys "T"
-                                              :file )))
+                                                         ":end:"))))
          org-todo-keyword-faces (quote (("todo" :foreground "#ff6347" :weight bold)
                                         ("done" :foreground "#006400" :weight bold :strike-through t)))
          org-todo-keywords '((sequence "todo(t)" "done(d)"))
