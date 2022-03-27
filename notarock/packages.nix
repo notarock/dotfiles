@@ -20,7 +20,7 @@
     lsof
     pstree
     parted
-    telnet
+    inetutils
     tcpdump
     dnsutils
     mtr
@@ -145,7 +145,6 @@
 
     (steam.override {
       extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
-      nativeOnly = true;
     }).run
 
     (pkgs.dwarf-fortress-packages.dwarf-fortress-full.override {

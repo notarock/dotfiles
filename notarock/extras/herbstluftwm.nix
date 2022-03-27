@@ -3,6 +3,7 @@
 let
   layoutFolder = "/etc/nixos/notarock/extras/hlwm-layouts";
   gapWidth = "10";
+  tags = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
 in {
 
   #########################################################################
@@ -13,9 +14,14 @@ in {
   #  |_| |_|\___|_|  |_.__/|___/\__|_|\__,_|_|  \__| \_/\_/ |_| |_| |_|  #
   #########################################################################
 
-  xdg.configFile."herbstluftwm/autostart" = {
-    executable = true;
-    text = ''
+  xsession.windowManager.herbstluftwm = {
+    enable = true;
+    tags = tags;
+    settings = {
+      frame_border_active_color = config.myTheme.color10;
+      frame_gap = gapWidth;
+    };
+    extraConfig = ''
       #!/usr/bin/env bash
 
       hc() {
@@ -117,7 +123,7 @@ in {
 
       hc rename default "''${tag_names[0]}" || true
       for i in "''${!tag_names[@]}" ; do
-          hc add "''${tag_names[$i]}"
+          # hc add "''${tag_names[$i]}"
           key="''${tag_keys[$i]}"
           if ! [ -z "$key" ] ; then
               hc keybind "$Mod-$key" use_index "$i"
@@ -170,7 +176,6 @@ in {
       hc set always_show_frame 0
       hc set frame_bg_transparent 1
       hc set frame_transparent_width 3
-      hc set frame_gap ${gapWidth}
 
       hc attr theme.active.color $SELECT
       hc attr theme.normal.color '#000000'
