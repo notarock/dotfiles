@@ -34,7 +34,7 @@
         font-2 = "Font Awesome 5 Free Solid:pixelsize=10";
         font-3 = "Font Awesome 5 Brands:pixelsize=10";
 
-        modules-left = "ewmh info-docker";
+        modules-left = "ewmh"; # "ewmh info-docker";
         modules-center = "time";
         modules-right = "cpu memory pulseaudio wlan battery battery2";
 
@@ -277,7 +277,7 @@
       };
     };
 
-    script = "";
+    script = "sleep 5 && ${pkgs.polybar}/bin/polybar main";
   };
 
   xdg.configFile."polybar/scripts/info-docker" = {
@@ -288,7 +288,7 @@
       STATUS="running restarting dead"
 
       for stat in $STATUS; do
-          output="$output $(sudo docker ps -qf status="$stat" | wc -l) |"
+          output="$output $(sudo docker ps -qf status="$stat" | ${pkgs.coreutils}/bin/wc -l) |"
       done
 
       echo "|$output"

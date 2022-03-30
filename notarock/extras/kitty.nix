@@ -2,7 +2,7 @@
 
 {
   programs.kitty = {
-    package = pkgs.runCommandLocal "" {} "mkdir $out";
+    # package = pkgs.runCommandLocal "" { } "mkdir $out";
     enable = true;
     font.name = "Essential PragmataPro";
     settings = {
