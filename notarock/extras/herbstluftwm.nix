@@ -245,6 +245,8 @@ in {
       # Startup programs
       herbstclient spawn ${pkgs.discord}/bin/discord
       herbstclient spawn ${pkgs.feh}/bin/feh --bg-tile ~/.background-image
+
+      herbstclient spawn ${pkgs.polybar}/bin/polybar main
     '';
   };
 
