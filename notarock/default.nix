@@ -170,7 +170,12 @@
         };
 
         git = {
-          delta.enable = true;
+          difftastic = {
+            enable = true;
+            background = "light";
+            color = "always";
+          };
+          delta.enable = false;
           enable = true;
           userName = "Roch D'Amour";
           userEmail = "roch.damour@gmail.com";
