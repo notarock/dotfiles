@@ -62,6 +62,7 @@
             { home-manager.extraSpecialArgs = { inherit inputs; }; }
             { nixpkgs.overlays = [ inputs.emacs-overlay.overlay ]; }
             sops-nix.nixosModules.sops
+            ./extras/stumpwm-wrapper.nix
           ];
           inherit pkgs;
         };
