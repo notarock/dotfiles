@@ -51,7 +51,7 @@
     jre
     adoptopenjdk-openj9-bin-16
 
-    openmoji-color
+    noto-fonts-emoji
   ];
 
   nixpkgs.overlays = [

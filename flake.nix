@@ -22,12 +22,39 @@
 
   outputs = inputs@{ self, nixpkgs, home-manager, sops-nix, ... }:
     let
+      system = "x86_64-linux";
+
+      nixpkgsPatched = let pkgs = (import nixpkgs { inherit system; });
+      in pkgs.stdenv.mkDerivation {
+        name = "nixpkgs-patched";
+        src = nixpkgs;
+        patches = with pkgs;
+          [
+            # Fix pycurl build
+            (fetchpatch { # https://github.com/NixOS/nixpkgs/pull/166335
+              url =
+                "https://github.com/NixOS/nixpkgs/commit/c270defab79e46b4c98039b09ab6209d1a69ffb3.patch";
+              sha256 = "0higphrwvrkxrhq4qg7ip37x5iq64jpyfzw97il5x1zvfpcpwj05";
+            })
+          ];
+        dontFixup = true;
+        installPhase = ''
+          mv $(realpath .) $out
+        '';
+      };
+
+      pkgs = import nixpkgsPatched {
+        inherit system;
+        config.allowUnfree = true;
+        overlays = [ ];
+      };
+
       mkNixosConfiguration = { hostname }:
         let
           hardwareConfig = ./hosts + "/${hostname}/hardware-configuration.nix";
         in nixpkgs.lib.nixosSystem {
+          inherit system;
           specialArgs = { inherit inputs; };
-          system = "x86_64-linux";
           modules = [
             hardwareConfig
             ./configuration.nix
@@ -36,7 +63,9 @@
             { nixpkgs.overlays = [ inputs.emacs-overlay.overlay ]; }
             sops-nix.nixosModules.sops
           ];
+          inherit pkgs;
         };
+
     in {
       nixosConfigurations = {
         Zonnarth = mkNixosConfiguration { hostname = "Zonnarth"; };
