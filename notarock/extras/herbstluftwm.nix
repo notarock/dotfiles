@@ -14,28 +14,51 @@ in {
   #  |_| |_|\___|_|  |_.__/|___/\__|_|\__,_|_|  \__| \_/\_/ |_| |_| |_|  #
   #########################################################################
 
-  xsession.windowManager.herbstluftwm = {
+  xsession.windowManager.herbstluftwm = let selectColor = config.myTheme.color3;
+  in {
     enable = true;
     tags = tags;
-    settings = {
-      frame_border_active_color = config.myTheme.color10;
-      frame_gap = gapWidth;
+    mousebinds = {
+      Mod4-Button1 = "move";
+      Mod4-Button2 = "zoom";
+      Mod4-Button3 = "resize";
     };
-    keybinds = { Mod4-Return = "spawn ${pkgs.kitty}/bin/kitty"; };
+    settings = {
+      frame_gap = gapWidth;
+      frame_border_active_color = config.myTheme.color10;
+      frame_border_normal_color = config.myTheme.color10;
+      frame_bg_normal_color = config.myTheme.color10;
+      frame_bg_active_color = selectColor;
+      frame_border_width = 0;
+      always_show_frame = 0;
+      frame_bg_transparent = 1;
+      frame_transparent_width = 3;
+
+      window_gap = 0;
+      frame_padding = 0;
+      smart_window_surroundings = 0;
+      smart_frame_surroundings = 1;
+      mouse_recenter_gap = 0;
+      default_frame_layout = "grid";
+      focus_follows_mouse = 1;
+    };
+    keybinds = {
+      Mod4-Return = "spawn ${pkgs.kitty}/bin/kitty";
+      Mod4-Shift-c = "quit";
+      Mod4-Shift-r = "reload";
+      Mod4-Shift-q = "close";
+      Mod1-F4 = "close";
+      Mod1-F2 = "spawn rofi -show run -lines 0";
+      Mod4-d = "spawn rofi -show drun";
+      Mod4-e = "spawn rofi -show emoji -modi emoji";
+
+    };
     extraConfig = ''
       xsetroot -solid '#000'
 
       # keybindings
       # Mod=Mod1    # Use alt as the main modifier
       Mod=Mod4   # Use the super key as the main modifier
-
-      herbstclient keybind $Mod-Shift-c quit
-      herbstclient keybind $Mod-Shift-r reload
-      herbstclient keybind $Mod-Shift-q close
-      herbstclient keybind Mod1-F4 close
-      herbstclient keybind Mod1-F2 spawn rofi -show run -lines 0
-      herbstclient keybind $Mod-d spawn rofi -show drun
-      herbstclient keybind $Mod-e spawn rofi -show emoji -modi emoji
 
       # For volume controls and mute
       herbstclient keybind XF86AudioRaiseVolume spawn ${pkgs.alsaUtils}/bin/amixer set -q Master 5%+
@@ -139,12 +162,6 @@ in {
           . cycle_layout +1 vertical horizontal max vertical grid    \
           , cycle_layout +1
 
-      # mouse
-      herbstclient mouseunbind --all
-      herbstclient mousebind $Mod-Button1 move
-      herbstclient mousebind $Mod-Button2 zoom
-      herbstclient mousebind $Mod-Button3 resize
-
       # focus
       herbstclient keybind $Mod-BackSpace   cycle_monitor
       herbstclient keybind $Mod-Tab         cycle_all +1
@@ -157,14 +174,6 @@ in {
       # theme
       herbstclient attr theme.tiling.reset 1
       herbstclient attr theme.floating.reset 1
-      herbstclient set frame_border_active_color '${config.myTheme.color10}'
-      herbstclient set frame_border_normal_color '${config.myTheme.color10}'
-      herbstclient set frame_bg_normal_color '${config.myTheme.color10}'
-      herbstclient set frame_bg_active_color $SELECT
-      herbstclient set frame_border_width 0
-      herbstclient set always_show_frame 0
-      herbstclient set frame_bg_transparent 1
-      herbstclient set frame_transparent_width 3
 
       herbstclient attr theme.active.color $SELECT
       herbstclient attr theme.normal.color '#000000'
@@ -178,14 +187,6 @@ in {
       herbstclient attr theme.active.inner_color $SELECT
       herbstclient attr theme.active.outer_color $SELECT
       herbstclient attr theme.background_color '#141414'
-
-      herbstclient set window_gap 0
-      herbstclient set frame_padding 0
-      herbstclient set smart_window_surroundings 0
-      herbstclient set smart_frame_surroundings 1
-      herbstclient set mouse_recenter_gap 0
-      herbstclient set default_frame_layout grid
-      herbstclient set focus_follows_mouse 1
 
       # rules
       herbstclient unrule -F
