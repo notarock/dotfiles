@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
     pkgs.lispPackages.stumpwm
     pkgs.lispPackages.xembed
     pkgs.lispPackages.clwrapper
-    pkgs.lispPackages.swank
+    pkgs.lispPackages.slynk
     pkgs.lispPackages.clx-truetype
   ];
 
@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
     echo "#! ${stdenv.shell}" >> "$script"
     echo "source ${pkgs.lispPackages.stumpwm}/lib/common-lisp-settings/stumpwm-shell-config.sh" >> "$script"
     echo "source ${pkgs.lispPackages.clx-truetype}/lib/common-lisp-settings/clx-truetype-shell-config.sh" >> "$script"
-    echo "source ${pkgs.lispPackages.swank}/lib/common-lisp-settings/swank-shell-config.sh" >> "$script"
+    echo "source ${pkgs.lispPackages.slynk}/lib/common-lisp-settings/slynk-shell-config.sh" >> "$script"
     echo "source ${pkgs.lispPackages.xembed}/lib/common-lisp-settings/xembed-shell-config.sh" >> "$script"
     echo '"${pkgs.lispPackages.clwrapper}/bin/common-lisp.sh" --quit --eval "(require :stumpwm)" --eval "(stumpwm:stumpwm)"' >> "$script"
   '';
