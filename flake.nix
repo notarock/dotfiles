@@ -95,5 +95,19 @@
         Zonnarth = mkNixosConfiguration { hostname = "Zonnarth"; };
         Kreizemm = mkNixosConfiguration { hostname = "Kreizemm"; };
       };
+      homeConfigurations = {
+        # NixOS desktop config
+        rdamour = home-manager.lib.homeManagerConfiguration {
+          inherit system;
+          extraSpecialArgs = { inherit inputs; };
+          configuration = {
+            nixpkgs.config = { allowUnfree = true; };
+            imports = [ ./notarock/rdamour.nix ];
+          };
+          homeDirectory = "/home/rdamour";
+          username = "rdamour";
+        };
+      };
+      rdamour = self.homeConfigurations.bogdb.activationPackage;
     };
 }
