@@ -18,6 +18,9 @@
     gotests.flake = false;
     gomodifytags.url = "github:fatih/gomodifytags";
     gomodifytags.flake = false;
+
+    stumpwm.url = "github:/stumpwm/stumpwm/master";
+    stumpwm.flake = false;
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, sops-nix, ... }:
@@ -46,9 +49,13 @@
       pkgs = import nixpkgsPatched {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ ];
+        overlays = [
+          (final: prev: {
+            stumpwm =
+              (prev.stumpwm.overrideAttrs (o: rec { src = inputs.stumpwm; }));
+          })
+        ];
       };
-
       mkNixosConfiguration = { hostname }:
         let
           hardwareConfig = ./hosts + "/${hostname}/hardware-configuration.nix";

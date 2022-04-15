@@ -1,0 +1,80 @@
+; -*- mode: lisp; -*-
+;                                   _            ,__ __
+;    ()                            (_|   |   |_//|  |  |
+;    /\_|_         _  _  _     _     |   |   |   |  |  |
+;   /  \|  |   |  / |/ |/ |  |/ \_   |   |   |   |  |  |
+;  /(__/|_/ \_/|_/  |  |  |_/|__/     \_/ \_/    |  |  |_/
+;                           /|
+;                           \|
+;    __
+;   / ()  _        |\ o  _,
+;  |     / \_/|/|  |/ | / |
+;   \___/\_/  | |_/|_/|/\/|/
+;                  |)    (|
+;
+;; Copyright © 2018, 2019 Roch D'amour (notarock)
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;; Thansk to everyone who made their stumpwm config public.
+;; Without you, this wouldn't be a thing :)
+
+;;; Code:
+
+;;;; change the prefix key to something else
+(in-package :stumpwm)
+
+;;;; Defaults programs
+(setq *terminal* "kitty")
+(setq *browser* "firefox")
+
+;;; Load extra configuration files
+
+(load (concat (getenv "HOME") "/.config/stumpwm/modules.lisp")) ;; load all modules
+(load (concat (getenv "HOME") "/.config/stumpwm/theme.lisp")) ;; color-scheme
+(load (concat (getenv "HOME") "/.config/stumpwm/groups.lisp")) ;; Frame-preferences and groups mapping
+(load (concat (getenv "HOME") "/.config/stumpwm/defcommands.lisp")) ;; utils
+(load (concat (getenv "HOME") "/.config/stumpwm/keybinding.lisp")) ;; shortcuts
+
+(if *initializing*
+    (load (concat (getenv "HOME") "/.config/stumpwm/on-init.lisp")));; Frame-preferences and groups mapping
+
+;; Set stumpwm values
+;; (setf *startup-message                 "Here we go." )
+(setf *mouse-focus-policy*             :sloppy )
+(setf *shell-program* (stumpwm:getenv "SHELL") )
+(setf *maxsize-border-width*           1 )
+(setf *normal-border-width*            3 )
+(setf *transient-border-width*         3 )
+(setf *window-border-style*            :thin )
+(setf *message-window-gravity*         :center )
+(setf *timeout-wait*                   10 )
+(setf *input-window-gravity*           :center )
+
+(setf *grab-pointer-foreground* (xlib:make-color :red 0.1 :green 0.25 :blue 0.5))
+(setf *grab-pointer-background* (lookup-color (current-screen) "DeepSkyBlue"))
+
+(setf *grab-pointer-character*         71 )
+(setf *grab-pointer-character-mask*    71 )
+
+;; Recount windows number on kill
+(stumpwm:add-hook stumpwm:*destroy-window-hook*
+                  #'(lambda (win) (stumpwm:repack-window-numbers)))
+
+;; Load mode-line configuration and activate system tray
+(load (concat (getenv "HOME") "/.config/stumpwm/mode-line.lisp"))
+
+;; End of file

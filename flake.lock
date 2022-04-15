@@ -173,7 +173,8 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-discord": "nixpkgs-discord",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "stumpwm": "stumpwm"
       }
     },
     "sops-nix": {
@@ -193,6 +194,23 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+    "stumpwm": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1645917042,
+        "narHash": "sha256-tMg5g5Qk3Tq2HuvbCuIX6D1HuQyc9TOlImEcV0QCJak=",
+        "owner": "stumpwm",
+        "repo": "stumpwm",
+        "rev": "9bfb9686e1185ec676489e610108ea50c12fd513",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stumpwm",
+        "ref": "master",
+        "repo": "stumpwm",
         "type": "github"
       }
     }

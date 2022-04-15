@@ -25,6 +25,7 @@
         ./extras/fzf.nix
         ./extras/kitty.nix
         ./extras/starship.nix
+        ./stumpwm.nix
       ];
 
       xdg.mimeApps = {
