@@ -44,8 +44,8 @@
 ;;; Load extra configuration files
 
 (load (concat (getenv "HOME") "/.config/stumpwm/colors.lisp")) ;; color-scheme
-(load (concat (getenv "HOME") "/.config/stumpwm/theme.lisp")) ;; color-scheme
 (load (concat (getenv "HOME") "/.config/stumpwm/modules.lisp")) ;; load all modules
+(load (concat (getenv "HOME") "/.config/stumpwm/theme.lisp")) ;; color-scheme
 (load (concat (getenv "HOME") "/.config/stumpwm/groups.lisp")) ;; Frame-preferences and groups mapping
 (load (concat (getenv "HOME") "/.config/stumpwm/defcommands.lisp")) ;; utils
 (load (concat (getenv "HOME") "/.config/stumpwm/keybinding.lisp")) ;; shortcuts

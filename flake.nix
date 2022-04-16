@@ -51,8 +51,12 @@
         config.allowUnfree = true;
         overlays = [
           (final: prev: {
-            stumpwm =
-              (prev.stumpwm.overrideAttrs (o: rec { src = inputs.stumpwm; }));
+            lispPackages = prev.lispPackages // {
+              stumpwm = (prev.lispPackages.stumpwm.overrideAttrs (o: rec {
+                src = inputs.stumpwm;
+                version = "git-2022-04";
+              }));
+            };
           })
         ];
       };

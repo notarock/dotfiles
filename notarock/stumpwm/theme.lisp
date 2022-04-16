@@ -50,8 +50,6 @@
 
 (update-color-map (current-screen))
 
-(setf *which-key-format* (concat *key-seq-color* "*~5a^n ~a"))
-
 (require :ttf-fonts)
 (defun add-font-folder (folder)
   (setq clx-truetype::*font-dirs*
