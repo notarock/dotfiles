@@ -1,15 +1,5 @@
-# notarock-nixconfig
-NixOS Configurations files
+# My based dotfiles repo, entirely managed using Nix
 
-## To install
+This sets up everything I need.
 
-If the hardware-configuration is already generated, simply simlink the
-corresponding `/hosts/<host>` to the folder `host` like this:
-
-``` sh
-ln -s hosts/<name> host
-```
-
-Otherwise, follow the nixos installation guide and keep the
-*hardware-configuration.nix* file inside of a corresponding folder under
-*hosts*.
+All of this works and I just keep piling up stuff on top of it.

@@ -54,7 +54,13 @@
 
   fonts = {
     enableDefaultFonts = true;
-    fonts = with pkgs; [ dejavu_fonts open-sans font-awesome ibm-plex ];
+    fonts = with pkgs; [
+      nerdfonts
+      dejavu_fonts
+      open-sans
+      font-awesome
+      ibm-plex
+    ];
   };
 
   environment.variables.EDITOR = "vim";

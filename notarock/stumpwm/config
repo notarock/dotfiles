@@ -49,8 +49,7 @@
 (load (concat (getenv "HOME") "/.config/stumpwm/defcommands.lisp")) ;; utils
 (load (concat (getenv "HOME") "/.config/stumpwm/keybinding.lisp")) ;; shortcuts
 
-(if *initializing*
-    (load (concat (getenv "HOME") "/.config/stumpwm/on-init.lisp")));; Frame-preferences and groups mapping
+(load (concat (getenv "HOME") "/.config/stumpwm/on-init.lisp"));; Frame-preferences and groups mapping
 
 ;; Set stumpwm values
 ;; (setf *startup-message                 "Here we go." )

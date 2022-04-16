@@ -2,7 +2,19 @@
 
 {
   services.polybar = {
-    enable = true;
+    enable = false;
+    package = ((pkgs.polybar.overrideAttrs (old: {
+      version = "3.6.2";
+      buildInputs = old.buildInputs ++ (with pkgs; [ libuv ]);
+      src = pkgs.fetchFromGitHub {
+        owner = "polybar";
+        repo = "polybar";
+        rev = "3.6.2";
+        sha256 = "sha256-mLAcA8afGLNhRRU/x/TngCMcSRXdEM5wKWoYZhezJqU=";
+        fetchSubmodules = true;
+      };
+      cmakeFlags = [ "-DBUILD_CONFIG=no" ];
+    })).override { });
     config = {
       "settings" = {
         # throttle-ms = 50;
@@ -38,7 +50,7 @@
         modules-center = "time";
         modules-right = "cpu memory pulseaudio wlan battery battery2";
 
-        wm-restack = "ewmh";
+        wm-restack = "generic";
         override-redirect = "false";
       };
 
@@ -292,7 +304,7 @@
       done
 
       echo "|$output"
-          '';
+    '';
   };
 
 }

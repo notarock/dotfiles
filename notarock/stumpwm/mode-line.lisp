@@ -48,28 +48,30 @@
        "^B[^b"                      ; [
        "^1*%n^n"                    ; Current Group
        "^B]^b"                      ; ]
-       " ^2*/^n "                   ; ---
+       " ^2*"
+       *separator-left*
+       "^n "                   ; ---
        "^7*^B%W^b^n"                ; Focused frame
        *separator-left*             ; ---
        "^>"                         ; middle
        *separator-right*            ; ---
-       "^3*^b%C"                    ; cpu
-       *separator-right*            ; ---
-       "^2*^b%M"                    ; Memory
-       *separator-right*            ; ---
-       "^6*[^n^B%I^b^6*]^n %l"      ; Wifi
-       *separator-right*            ; ---
+       ;; "^3*^b%C"                    ; cpu
+       ;; *separator-right*            ; ---
+      ;;  "^2*^b%M"                    ; Memory
+      ;;  *separator-right*            ; ---
+      ;;  "^6*[^n^B%I^b^6*]^n %l"      ; Wifi
+      ;;  *separator-right*            ; ---
        '(:eval (string-right-trim '(#\Newline) (run-shell-command
                                                 "date +'^B%m-%d ^6*%R^b'" t)))
        *separator-right*            ; ---
-       "          "                 ; free space for stumptray
+       "%T"                 ; free space for stumptray
        ))
 
-(dolist (head
-         (list (first (screen-heads (current-screen)))))
-  (enable-mode-line (current-screen) head
-                    t *screen-mode-line-format*))
-
-(stumptray:stumptray)
+;; (dolist (head
+;;          (list (first (screen-heads (current-screen)))))
+;;   (enable-mode-line (current-screen) head
+;;                     t *screen-mode-line-format*))
+;; 
+;; (stumptray:stumptray)
 
 ;; End of file
