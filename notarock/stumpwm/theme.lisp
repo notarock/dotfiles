@@ -35,27 +35,13 @@
 
 (in-package :stumpwm)
 
-;; Current Color Scheme :
-;; Gruvbox-dark
-(setf *colors* (list "#1d2021"      ; 0 black
-                     "#fb543f"      ; 1 Red
-                     "#95c085"      ; 2 Green
-                     "#fac03b"      ; 3 Yellow
-                     "#0d6678"      ; 4 Blue
-                     "#8ba59b"      ; 5 Cyan
-                     "#8f4673"      ; 6 Magenta
-                     "#a89984"      ; 7 White
-                     "#665c54"      ; 8 Gray
-                     "#fe8625"      ; 9 orange
-                     "#32302f"))    ; 10 bg
-
 (set-fg-color        (nth 7 *colors*))
 (set-bg-color        (nth 0 *colors*))
 (set-border-color    (nth 3 *colors*))
-(set-focus-color     (nth 3 *colors* ))
-(set-unfocus-color    (nth 8 *colors* ))
-(set-float-focus-color      (nth 3 *colors* ))
-(set-float-unfocus-color    (nth 8 *colors* ))
+(set-focus-color     (nth 3 *colors*))
+(set-unfocus-color    (nth 8 *colors*))
+(set-float-focus-color      (nth 3 *colors*))
+(set-float-unfocus-color    (nth 8 *colors*))
 
 ;; (setf *grab-pointer-foreground* (nth 7 *colors*))
 ;; (setf *grab-pointer-background* (nth 7 *colors*))
@@ -63,6 +49,8 @@
 (setf *grab-pointer-character-mask*    71 )
 
 (update-color-map (current-screen))
+
+(setf *which-key-format* (concat *key-seq-color* "*~5a^n ~a"))
 
 (require :ttf-fonts)
 (defun add-font-folder (folder)
