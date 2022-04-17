@@ -1,5 +1,5 @@
-# My based dotfiles repo, entirely managed using Nix
+# My dotfiles repo, entirely managed using Nix
 
-This sets up everything I need.
+This repository contains all of my configurations for doom-emacs, stumpwm, and many more.
 
-All of this works and I just keep piling up stuff on top of it.
+It is all managed by Nix, mostly home-manager.
