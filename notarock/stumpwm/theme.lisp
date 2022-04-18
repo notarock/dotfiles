@@ -59,8 +59,7 @@
 (add-font-folder "/run/current-system/profile/share/fonts/")
 (setf clx-truetype::+font-cache-filename+ (concat (getenv "HOME") "/.fonts/font-cache.sexp"))
 (xft:cache-fonts)
-(set-font (make-instance 'xft:font :family "Essential PragmataPro" :subfamily "Regular" :size 10))
 
-(stumpwm::single-frame-p)
+(set-font (make-instance 'xft:font :family "Essential PragmataPro" :subfamily "Regular" :size 12))
 
 ;; End of file

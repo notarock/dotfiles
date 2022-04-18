@@ -34,44 +34,40 @@
 ;;; Code:
 
 (in-package :stumpwm)
-(setf *time-modeline-string* "%a %m-%d ^5*^B%l:%M^b^n")
 
 (setq stumpwm:*mode-line-position* :top)
 
+(setq *separator-right* " ^7*^b«^7 ")
+(setq *separator-left* " ^7*^b»^7 ")
+
+(setf *group-format* "[%t]")
+(setf *time-modeline-string* "%m-^B%d ^3^b%R^b^n")
 (setf *mode-line-background-color* (nth 10 *colors*))
 
-(setq *separator-right* " ^7*^B««^b ")
-(setq *separator-left* " ^7*^B»»^b ")
+(setf *no-battery-info* "")
 
 (setf stumpwm:*screen-mode-line-format*
       (list
-       "^B[^b"                      ; [
-       "^1*%n^n"                    ; Current Group
-       "^B]^b"                      ; ]
-       " ^2*"
-       *separator-left*
-       "^n "                   ; ---
-       "^7*^B%W^b^n"                ; Focused frame
+       "^7*^B%g^b^n"                ; Focused frame
        *separator-left*             ; ---
        "^>"                         ; middle
        *separator-right*            ; ---
-       ;; "^3*^b%C"                    ; cpu
-       ;; *separator-right*            ; ---
-      ;;  "^2*^b%M"                    ; Memory
-      ;;  *separator-right*            ; ---
-      ;;  "^6*[^n^B%I^b^6*]^n %l"      ; Wifi
-      ;;  *separator-right*            ; ---
-       '(:eval (string-right-trim '(#\Newline) (run-shell-command
-                                                "date +'^B%m-%d ^6*%R^b'" t)))
+       "^9*^b%C"                    ; cpu
        *separator-right*            ; ---
-       "%T"                 ; free space for stumptray
+       "^4*^b%M"                    ; Memory
+       *separator-right*            ; ---
+       "^2*^b%l"                         ; Wifi
+       *separator-right*            ; ---
+       "%d"                         ; Date
+       *separator-right*            ; ---
+       "%T"                         ; free space for stumptray
        ))
 
-;; (dolist (head
-;;          (list (first (screen-heads (current-screen)))))
-;;   (enable-mode-line (current-screen) head
-;;                     t *screen-mode-line-format*))
-;; 
-;; (stumptray:stumptray)
+(dolist (head
+         (list (first (screen-heads (current-screen)))))
+  (enable-mode-line (current-screen) head
+                    t *screen-mode-line-format*))
+
+(stumptray:stumptray)
 
 ;; End of file

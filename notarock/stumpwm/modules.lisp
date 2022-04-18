@@ -48,10 +48,11 @@
 (set-module-dir
  (pathname-as-directory (concat (getenv "HOME") "/src/stumpwm-contrib/modeline")))
 
-;; (load-module "cpu")
-;; (load-module "mem")
-;; (load-module "net")
-;; (load-module "wifi")
+(load-module "cpu")
+(load-module "mem")
+(load-module "net")
+(load-module "wifi")
+(load-module "battery-portable")
 (load-module "stumptray")
 
 ;; Additionnal lisp modules extensions
