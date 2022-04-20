@@ -111,6 +111,7 @@
     aspellDicts.fr
     gitAndTools.delta
     dive
+    delve
     kdenlive
     pdftk
     jq

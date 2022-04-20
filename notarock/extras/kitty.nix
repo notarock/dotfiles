@@ -2,11 +2,11 @@
 
 {
   programs.kitty = {
-    # package = pkgs.runCommandLocal "" { } "mkdir $out";
+    package = pkgs.runCommandLocal "" { } "mkdir $out";
     enable = true;
     font.name = "Essential PragmataPro";
     settings = {
-      font_size = "16.0";
+      font_size = "11.0";
       enable_audio_bell = false;
       open_url_with = "firefox";
       scrollback_lines = 5000;
