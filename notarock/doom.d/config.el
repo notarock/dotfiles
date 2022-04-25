@@ -122,6 +122,8 @@
          org-todo-keywords '((sequence "todo(t)" "done(d)"))
          org-log-done t))
 
+
+
 (defun org-journal-file-header-func (time)
   "Custom function to create journal header."
   (concat
@@ -162,5 +164,9 @@
 
 (setq projectile-project-search-path '("~/src/"))
 
+(add-hook! 'go-mode-hook
+  (add-hook 'before-save-hook #'lsp-organize-imports nil 'local))
+
 (load-file (concat (getenv "DOOMDIR") "/extra.el"))
+
 ;;; config.el ends here

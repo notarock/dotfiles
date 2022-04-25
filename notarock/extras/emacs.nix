@@ -11,6 +11,15 @@ in {
     solc
     yaml-language-server
     gopls
+    shellcheck
+    solc
+    editorconfig-checker
+    editorconfig-core-c
+
+    gocode
+    gomodifytags
+    gotests
+    gore
 
     (pkgs.makeDesktopItem {
       name = "Emacs";

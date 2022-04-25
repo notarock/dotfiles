@@ -126,6 +126,7 @@
     ripgrep
     sqlite
     wordnet
+    delve
 
     (retroarch.override {
       cores = with libretro; [

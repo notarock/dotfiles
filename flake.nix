@@ -10,14 +10,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-discord.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
-    gore.url = "github:motemen/gore/main";
-    gore.flake = false;
     gotools.url = "git+https://go.googlesource.com/tools";
     gotools.flake = false;
-    gotests.url = "github:cweill/gotests/develop";
-    gotests.flake = false;
-    gomodifytags.url = "github:fatih/gomodifytags";
-    gomodifytags.flake = false;
 
     stumpwm.url = "github:/stumpwm/stumpwm/master";
     stumpwm.flake = false;
