@@ -51,8 +51,8 @@
        "^7*^B%g^b^n"                ; Focused frame
        *separator-left*             ; ---
        "^>"                         ; middle
-       *separator-right*            ; ---
-       "^9*^b%C"                    ; cpu
+       ;; *separator-right*            ; ---
+       ;; "^9*^b%C"                    ; cpu
        *separator-right*            ; ---
        "^4*^b%M"                    ; Memory
        *separator-right*            ; ---
