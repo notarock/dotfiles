@@ -135,6 +135,7 @@
     blueman
 
     cheminot-ets
+    awscli2
 
     (retroarch.override {
       cores = with libretro; [
