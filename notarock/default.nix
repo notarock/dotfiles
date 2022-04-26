@@ -181,6 +181,12 @@
       };
 
       services = {
+        cbatticon = {
+          enable = true;
+          commandCriticalLevel = ''
+            notify-send "battery critical!"
+          '';
+        };
         nextcloud-client.enable = true;
         picom = {
           enable = true;
