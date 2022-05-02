@@ -181,6 +181,7 @@
       };
 
       services = {
+        volnoti = { enable = true; };
         cbatticon = {
           enable = true;
           commandCriticalLevel = ''

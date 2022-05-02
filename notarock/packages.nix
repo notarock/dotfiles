@@ -128,6 +128,8 @@
     wordnet
     delve
 
+    cheminot-ets
+
     (retroarch.override {
       cores = with libretro; [
         bsnes-mercury
