@@ -25,15 +25,7 @@
       in pkgs.stdenv.mkDerivation {
         name = "nixpkgs-patched";
         src = nixpkgs;
-        patches = with pkgs;
-          [
-            # Fix pycurl build
-            (fetchpatch { # https://github.com/NixOS/nixpkgs/pull/166335
-              url =
-                "https://github.com/NixOS/nixpkgs/commit/c270defab79e46b4c98039b09ab6209d1a69ffb3.patch";
-              sha256 = "0higphrwvrkxrhq4qg7ip37x5iq64jpyfzw97il5x1zvfpcpwj05";
-            })
-          ];
+        patches = with pkgs; [ ];
         dontFixup = true;
         installPhase = ''
           mv $(realpath .) $out

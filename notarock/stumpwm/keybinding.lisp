@@ -69,10 +69,13 @@
 
 ;; Launcher && terminal
 (define-key *top-map* (kbd "s-RET") (concat "run-shell-command exec " "kitty"))
-(define-key *top-map* (kbd "s-d") "run-shell-command rofi -show run")
+(define-key *top-map* (kbd "s-d") "run-shell-command rofi -show drun")
+
+(define-key *top-map* (kbd "M-F2") "run-shell-command rofi -show drun")
+(define-key *top-map* (kbd "M-F4") "kill")
 
 ;; Brightness
-(define-key *top-map* (kbd "XF86MonBrightnessUp") "backlight-up")
+(Define-key *top-map* (kbd "XF86MonBrightnessUp") "backlight-up")
 (define-key *top-map* (kbd "XF86MonBrightnessDown") "backlight-down")
 
 ;; Volume

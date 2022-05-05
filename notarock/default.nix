@@ -11,6 +11,12 @@
   };
 
   home-manager = {
+
+    users.root.programs.git = {
+      enable = true;
+      extraConfig.safe.directory = "/home/notarock/src/dotfiles";
+    };
+
     users.notarock = { pkgs, config, osConfig, ... }: {
       imports = [
         ./myTheme.nix
@@ -108,13 +114,12 @@
         theme.name = "Plata";
       };
 
-      xsession = {
-        pointerCursor.package = pkgs.bibata-cursors;
-        pointerCursor.name = "Bibata_Oil";
-        pointerCursor.size = 48;
-      };
-
       home.keyboard.layout = "ca,fr";
+      home.pointerCursor = {
+        package = pkgs.bibata-cursors;
+        name = "Bibata_Oil";
+        size = 48;
+      };
 
       programs = {
         go = {

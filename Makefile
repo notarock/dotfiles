@@ -3,7 +3,7 @@
 #
 
 build:
-	sudo nixos-rebuild switch --flake '.#' -v -L
+	nixos-rebuild --use-remote-sudo switch --flake '.#' -v -L
 	doom sync
 
 hm:

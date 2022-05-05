@@ -127,6 +127,9 @@
     sqlite
     wordnet
     delve
+    volumeicon
+    networkmanager_dmenu
+    blueman
 
     cheminot-ets
 

@@ -38,15 +38,14 @@
 
 ;; Stuff to run on startup ;; TODO use initialize
 (run-shell-command "volumeicon")
-(run-shell-command "xfce4-power-manager")
 (run-shell-command "nm-applet")
 (run-shell-command "blueman-adapter")
 (run-shell-command "blueman-applet")
 (run-shell-command "dunst")
-(run-shell-command "xrdb .Xresources")
-(run-shell-command "xset b off")
-(run-shell-command "bash ~/.screenlayout/bureau.sh ")
-(run-shell-command "picom --backend=xrender")
+;; (run-shell-command "xrdb .Xresources")
+;; (run-shell-command "xset b off")
+;; (run-shell-command "bash ~/.screenlayout/bureau.sh ")
+;; (run-shell-command "picom --backend=xrender")
 
 ;; (set-selected-wallpaper)
 
