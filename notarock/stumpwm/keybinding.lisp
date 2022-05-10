@@ -34,8 +34,28 @@
 ;;; Code:
 (in-package :stumpwm)
 
-;;; Code:
 (set-prefix-key (kbd "s-c"))
+
+;;;
+;;; Groups and navigation-related stuff
+;;;
+
+;; Groups selection
+(loop for number in '(1 2 3 4 5 6 7 8 9)
+      do (let ((key-combo (format nil "s-~A" number)))
+           (define-key *top-map* (kbd key-combo)
+             (format nil "gselect ~A" number))))
+
+(define-key *top-map* (kbd "s-m") "gmove")
+(define-key *top-map* (kbd "s--") "gprev")
+(define-key *top-map* (kbd "s-=") "gnext")
+
+;; Show programs in every workspaces
+(define-key *top-map* (kbd "s-0") "vgroups")
+
+(define-key *top-map* (kbd "s-1") "firefox")
+(define-key *top-map* (kbd "s-2") "emacs")
+(define-key *top-map* (kbd "s-3") "terminal")
 
 ;; Frames navigation using HJKL
 (loop for (vi-key name) in '(("k" "up")
@@ -68,7 +88,7 @@
 (define-key *top-map* (kbd "s-b") "banish")
 
 ;; Launcher && terminal
-(define-key *top-map* (kbd "s-RET") (concat "run-shell-command exec " "kitty"))
+(define-key *top-map* (kbd "s-RET") (concat "run-shell-command exec " *terminal*))
 (define-key *top-map* (kbd "s-d") "run-shell-command rofi -show drun")
 
 (define-key *top-map* (kbd "M-F2") "run-shell-command rofi -show drun")
@@ -92,24 +112,18 @@
 (define-key *root-map* (kbd "s-t")            "thunderbird")
 (define-key *root-map* (kbd "p")            "pass-copy-menu")
 (define-key *root-map* (kbd "s-p")            "pass-copy-menu")
-
-(define-key *top-map* (kbd "s-1") "gselect 1")
-(define-key *top-map* (kbd "s-2") "gselect 2")
-(define-key *top-map* (kbd "s-3") "gselect 3")
-(define-key *top-map* (kbd "s-4") "gselect 4")
-
 (define-key *top-map* (kbd "s-Delete") "productivity-mode-toggle")
 
 ;; Quit menu
 (define-key *top-map* (kbd "s-)") "end-session")
 (define-key *top-map* (kbd "XF86PowerOff") "end-session")
 ;; Web search
-(define-key *top-map* (kbd "s-s") "duckduckgo")
-;; Select xrandr configuration (uses ~/.screensession folder)
+(define-key *top-map* (kbd "s-s") "google")
 (define-key *top-map* (kbd "XF86Display") "choose-display-layout")
 
 (define-key *top-map* (kbd "s-R") "ask-confirmation-loadrc")
 
 (define-key *root-map* (kbd "s-l")            "lock-screen")
+
 
 ;; End of file

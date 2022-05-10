@@ -36,30 +36,25 @@
 
 (in-package :stumpwm)
 
-;; Stuff to run on startup ;; TODO use initialize
+;;      DEFAUT
+(gnewbg "Extras")
+(gnewbg-float "Floating")
+(gnewbg-dynamic "Dynamic")
+
+;; Stuff to run on startup
 (run-shell-command "volumeicon")
 (run-shell-command "nm-applet")
 (run-shell-command "blueman-adapter")
 (run-shell-command "blueman-applet")
 (run-shell-command "dunst")
-;; (run-shell-command "xrdb .Xresources")
-;; (run-shell-command "xset b off")
-;; (run-shell-command "bash ~/.screenlayout/bureau.sh ")
-;; (run-shell-command "picom --backend=xrender")
 
-;; (set-selected-wallpaper)
-
-;; Open and focus mail client
-;; (run-or-raise "thunderbird" '(:class "Thunderbird"))
+(set-selected-wallpaper)
 
 (require 'slynk)
-
 (defcommand slynk (port) ((:string "Port number: "))
   (sb-thread:make-thread
    (lambda ()
      (slynk:create-server :port (parse-integer port) :dont-close t))
    :name "slynk-manual"))
-
-
 
 ;; End of file

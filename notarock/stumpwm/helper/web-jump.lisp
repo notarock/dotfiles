@@ -43,6 +43,6 @@
 
 ;; Define a duckduckgo search in firefox
 ;;;; TODO: Make uses of global var *browser*
-(make-web-jump "duckduckgo" "firefox 'https://duckduckgo.com/?q=")
+(make-web-jump "google" "firefox 'https://google.ca/search?q=")
 
 ;; End of file

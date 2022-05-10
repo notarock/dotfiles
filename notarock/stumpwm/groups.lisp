@@ -50,20 +50,5 @@
 
 ;;;; Define groups
 
-;;      DEFAUT              ;; 1
-(gnewbg "ONE")            ;; 2
-(gnewbg "TWO")             ;; 3
-
-;; TODO: Move all keybindings in another file
-(define-key *top-map* (kbd "s-1") "gselect 1")
-(define-key *top-map* (kbd "s-2") "gselect 2")
-
-(define-key *top-map* (kbd "s-m") "gmove")
-(define-key *top-map* (kbd "s--") "gprev")
-(define-key *top-map* (kbd "s-=") "gnext")
-
-;; Show programs in every workspaces
-(define-key *top-map* (kbd "s-0") "vgroups")
-
 
 ;; End of file

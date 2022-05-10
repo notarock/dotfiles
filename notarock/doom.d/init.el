@@ -91,7 +91,7 @@
 
        :tools
        ansible
-       debugger          ; stepping through code, to help you add bugs
+       (debugger +lsp)          ; stepping through code, to help you add bugs
        ;;direnv
        docker
        editorconfig      ; let someone else argue about tabs vs spaces

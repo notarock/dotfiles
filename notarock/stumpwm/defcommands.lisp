@@ -42,11 +42,15 @@
 
 (defcommand firefox () ()
   "Run-or-Raise Firefox"
-  (run-or-raise "firefox" '(:class "Firefox")))
+  (run-or-raise "firefox" '(:class "firefox")))
 
 (defcommand emacs () ()
   "Run-or-Raise Emacs"
   (run-or-raise "emacs" '(:class "Emacs")))
+
+(defcommand terminal () ()
+  "Run-or-Raise Terminal"
+  (run-or-raise "kitty" '(:class "kitty")))
 
 ;; Brightness control
 (defcommand backlight-up () ()
