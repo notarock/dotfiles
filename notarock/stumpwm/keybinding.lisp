@@ -75,10 +75,6 @@
 (define-key *top-map* (kbd "s-r") "remove")
 (define-key *top-map* (kbd "s-f") "fullscreen")
 
-;; Switching groups (workspaces)
-(define-key *top-map* (kbd "s-1") "gselect 1")
-(define-key *top-map* (kbd "s-2") "gselect 2")
-
 (define-key *top-map* (kbd "s-m") "gmove")
 
 ;; Show programs in every workspaces
