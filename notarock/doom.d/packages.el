@@ -62,4 +62,5 @@
 (package! highlight-indent-guides)
 (package! doct)
 (package! mixed-pitch)
+(package! protobuf-mode)
 ;; (package! evil-escape :disable t)

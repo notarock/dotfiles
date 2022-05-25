@@ -81,7 +81,7 @@
     k9s
     kubernetes-helm
     google-cloud-sdk
-    ansible
+    # ansible
 
     gnomeExtensions.dash-to-dock
     gnomeExtensions.caffeine
