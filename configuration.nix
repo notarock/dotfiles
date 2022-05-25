@@ -13,7 +13,7 @@
     ./notarock
   ];
 
-  services.xserver.displayManager.defaultSession = "none+herbstluftwm";
+  services.xserver.displayManager.defaultSession = "none+stumpwm-wrapper";
   services.xserver.desktopManager.wallpaper.mode = "tile";
 
   home-manager = {
