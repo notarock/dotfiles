@@ -7,18 +7,21 @@ keys:
   - &yubi-Z 5c58c6808c7d8e3eb98a458040b936af37aee1eb
   - &zonnarth 4c5f4e0f0b821b67f9e001409f4f63f595e00182
   - &kreizemm 5C58C6808C7D8E3EB98A458040B936AF37AEE1EB
+  - &biergoro 210D582939C750089F7442B63CE71DA1E6F114D2
 creation_rules:
   - path_regex: 'secrets/[^/]+\.yaml$'
     key_groups:
-    - pgp:
-      - *yubi-Z
-      - *yubi-K
-      - *zonnarth
-      - *kreizemm
-  - path_regex: 'secrets/*'
+      - pgp:
+          - *yubi-Z
+          - *yubi-K
+          - *zonnarth
+          - *kreizemm
+          - *biergoro
+  - path_regex: "secrets/*"
     key_groups:
-    - pgp:
-      - *yubi-Z
-      - *yubi-K
-      - *zonnarth
-      - *kreizemm
+      - pgp:
+          - *yubi-Z
+          - *yubi-K
+          - *zonnarth
+          - *kreizemm
+          - *biergoro

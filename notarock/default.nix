@@ -89,7 +89,7 @@
         '';
       };
 
-      myTheme = import ../themes/base16-classic-dark.nix;
+      myTheme = import ../themes/monokai-ristretto.nix;
 
       manual = {
         html.enable = true;

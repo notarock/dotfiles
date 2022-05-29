@@ -63,4 +63,5 @@
 (package! doct)
 (package! mixed-pitch)
 (package! protobuf-mode)
+(package! moe-theme)
 ;; (package! evil-escape :disable t)
