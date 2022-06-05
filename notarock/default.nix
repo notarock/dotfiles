@@ -75,6 +75,12 @@
           ln -sf ${osConfig.sops.secrets.pragmatapro-reg.path} \
                     ~/.local/share/fonts/Essential\ PragmataPro-R_1.2.ttf
         '';
+        setupPragmataProRegOTF =
+          config.lib.dag.entryAfter [ "writeBoundary" ] ''
+            mkdir -p ~/.local/share/fonts
+            ln -sf ${osConfig.sops.secrets.pragmatapro-reg-otf.path} \
+                      ~/.local/share/fonts/Essential\ PragmataPro-R_1.2.otf
+          '';
         setupPragmataProBold = config.lib.dag.entryAfter [ "writeBoundary" ] ''
           mkdir -p ~/.local/share/fonts
           ln -sf ${osConfig.sops.secrets.pragmatapro-bold.path} \
@@ -117,7 +123,7 @@
       home.keyboard.layout = "ca,fr";
       home.pointerCursor = {
         package = pkgs.bibata-cursors;
-        name = "Bibata_Oil";
+        name = "Bibata-Modern-Ice";
         size = 48;
       };
 

@@ -80,11 +80,19 @@
 
 (defcommand lock-screen () ()
   "Uses ~/bin/lockscreen.sh to lock the screen"
-  (run-shell-command "~/bin/lockscreen.sh"))
+  (run-shell-command ""))
 
 (defcommand screenshot () ()
   "Launch flameshot"
   (run-shell-command "flameshot gui"))
+
+(defcommand rofi-run () ()
+  "Launch rofi -show run"
+  (run-shell-command (concat *rofi-store* " " "-show run")))
+
+(defcommand rofi-drun () ()
+  "Launch rofi -show run"
+  (run-shell-command (concat *rofi-store* " " "-show drun")))
 
 ;; Load helpers
 (load (concat (getenv "HOME") "/.config/stumpwm/helper/xrandr.lisp")) ;; Frame-preferences and groups mapping

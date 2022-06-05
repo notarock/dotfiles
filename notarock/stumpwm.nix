@@ -26,4 +26,17 @@
     '';
   };
 
+  xdg.configFile."stumpwm/storepath.lisp" = {
+    executable = true;
+    text = ''
+      (in-package :stumpwm)
+
+      (setf *rofi-store* "${pkgs.rofi}/bin/rofi")
+
+      (run-shell-command "${pkgs.xss-lock}/bin/xss-lock ${pkgs.coreutils}/bin/env XSECURELOCK_AUTH_BACKGROUND_COLOR=\"${config.myTheme.color11}\" XSECURELOCK_PASSWORD_PROMPT=time XSECURELOCK_AUTH_CURSOR_BLINK=0 XSECURELOCK_NO_COMPOSITE=1 XSECURELOCK_BLANK_DPMS_STATE=off XSECURELOCK_BLANK_TIMEOUT=30 ${pkgs.xsecurelock}/bin/xsecurelock")
+
+      ;; End of file
+    '';
+  };
+
 }

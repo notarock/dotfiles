@@ -36,6 +36,11 @@
     sopsFile = ./secrets/EssentialPragmataPro-R_1.2.ttf;
     owner = "notarock";
   };
+  sops.secrets.pragmatapro-reg-otf = {
+    format = "binary";
+    sopsFile = ./secrets/EssentialPragmataPro-R_1.2.otf;
+    owner = "notarock";
+  };
   sops.secrets.wakatime = {
     format = "binary";
     sopsFile = ./secrets/wakatime.cfg;

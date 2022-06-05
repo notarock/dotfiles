@@ -44,6 +44,7 @@
 ;;; Load extra configuration files
 
 (load (concat (getenv "HOME") "/.config/stumpwm/colors.lisp")) ;; color-scheme
+(load (concat (getenv "HOME") "/.config/stumpwm/storepath.lisp")) ;; color-scheme
 (load (concat (getenv "HOME") "/.config/stumpwm/modules.lisp")) ;; load all modules
 (load (concat (getenv "HOME") "/.config/stumpwm/theme.lisp")) ;; color-scheme
 (load (concat (getenv "HOME") "/.config/stumpwm/groups.lisp")) ;; Frame-preferences and groups mapping
@@ -64,11 +65,11 @@
 (setf *timeout-wait*                   10 )
 (setf *input-window-gravity*           :center )
 
-(setf *grab-pointer-foreground* (xlib:make-color :red 0.1 :green 0.25 :blue 0.5))
-(setf *grab-pointer-background* (lookup-color (current-screen) "DeepSkyBlue"))
+;; (setf *grab-pointer-foreground* (xlib:make-color :red 0.1 :green 0.25 :blue 0.5))
+;; (setf *grab-pointer-background* (lookup-color (current-screen) "DeepSkyBlue"))
 
-(setf *grab-pointer-character*         71 )
-(setf *grab-pointer-character-mask*    71 )
+;; (setf *grab-pointer-character*         71 )
+;; (setf *grab-pointer-character-mask*    71 )
 
 (setf *message-window-padding* 10)
 (setf *message-window-y-padding* 10)

@@ -40,6 +40,14 @@
 ;;; Groups and navigation-related stuff
 ;;;
 
+(defmacro make-web-jump (name prefix)
+  `(defcommand ,(intern name) (search) ((:rest ,(concatenate 'string name " search: ")))
+     (substitute #\+ #\Space search)
+     (run-shell-command (concatenate 'string ,prefix search "'"))))
+
+(defmacro make-shellcmd-keybinding (keyseq path args)
+  `(define-key *top-map* (kbd ,keyseq) (concatenate 'string "run-shell-command" " " ,path " ",args )))
+
 ;; Groups selection
 (loop for number in '(1 2 3 4 5 6 7 8 9)
       do (let ((key-combo (format nil "s-~A" number)))
@@ -85,9 +93,13 @@
 
 ;; Launcher && terminal
 (define-key *top-map* (kbd "s-RET") (concat "run-shell-command exec " *terminal*))
-(define-key *top-map* (kbd "s-d") "run-shell-command rofi -show drun")
 
-(define-key *top-map* (kbd "M-F2") "run-shell-command rofi -show drun")
+(define-key *top-map* (kbd "s-d") "rofi-run")
+(define-key *top-map* (kbd "M-F2") "rofi-drun")
+
+(make-shellcmd-keybinding "s-i" *rofi-store* "-show run")
+
+
 (define-key *top-map* (kbd "M-F4") "kill")
 
 ;; Brightness

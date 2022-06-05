@@ -44,9 +44,9 @@
 (set-float-unfocus-color    (nth 8 *colors*))
 
 ;; (setf *grab-pointer-foreground* (nth 7 *colors*))
-;; (setf *grab-pointer-background* (nth 7 *colors*))
-(setf *grab-pointer-character*         71 )
-(setf *grab-pointer-character-mask*    71 )
+;; (setf *grab-pointer-background* (nth 8 *colors*))
+;; (setf *grab-pointer-character*         71 )
+;; (setf *grab-pointer-character-mask*    71 )
 
 (update-color-map (current-screen))
 
