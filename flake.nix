@@ -98,6 +98,7 @@
       homeConfigurations = {
         # NixOS desktop config
         rdamour = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
           inherit system;
           extraSpecialArgs = { inherit inputs; };
           configuration = {

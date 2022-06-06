@@ -90,7 +90,7 @@
     gnomeExtensions.paperwm
 
     nodePackages.prettier
-    nodejs-16_x
+    # nodejs-16_x
     spotify
     ccls
     clang-tools
