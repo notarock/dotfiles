@@ -103,7 +103,7 @@
       };
 
       home = {
-        stateVersion = "21.11";
+        stateVersion = "22.11";
         username = "notarock";
         packages = with pkgs; [ xss-lock xsecurelock ];
         enableNixpkgsReleaseCheck = true;
