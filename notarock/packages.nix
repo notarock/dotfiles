@@ -147,7 +147,9 @@
     })
 
     # Discord doesnt work? fix is where in this line lol
-    (import inputs.nixpkgs-discord { inherit (pkgs) config system; }).discord
+    (import inputs.nixpkgs-stable { inherit (pkgs) config system; }).ansible
+    # (import inputs.nixpkgs-discord { inherit (pkgs) config system; }).discord
+    discord
 
     (steam.override {
       extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
