@@ -9,7 +9,7 @@
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-21.11";
-    nixpkgs-discord.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     gotools.url = "git+https://go.googlesource.com/tools";
     gotools.flake = false;
@@ -30,12 +30,11 @@
           #   url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/#####.patch";
           #   sha256 = "sha256-someshaxd";
           # })
-          # Discord patch
-          # (originPkgs.fetchpatch { # https://github.com/NixOS/nixpkgs/pull/176957
-          #   url =
-          #     "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/176957.patch";
-          #   sha256 = "sha256-F2PC52yOyK8gUT9TR+6sIW+YPBSIyPbL4ZZaWlKzqWw=";
-          # })
+          (originPkgs.fetchpatch { # https://github.com/NixOS/nixpkgs/pull/178576
+            url =
+              "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/178576.patch";
+            sha256 = "sha256-7soCSNjtXJin6gvX97TFUHfOGTW8+hyOvSqOeH4By+8=";
+          })
         ];
       };
 

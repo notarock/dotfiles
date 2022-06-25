@@ -41,6 +41,12 @@
 (setq *terminal* "kitty")
 (setq *browser* "firefox")
 
+(require 'slynk)
+(defcommand slynk (port) ((:string "Port number: "))
+  (sb-thread:make-thread
+   (lambda ()
+     (slynk:create-server :port (parse-integer port) :dont-close t))
+   :name "slynk-manual"))
 ;;; Load extra configuration files
 
 (load (concat (getenv "HOME") "/.config/stumpwm/colors.lisp")) ;; color-scheme

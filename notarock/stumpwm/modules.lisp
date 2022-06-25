@@ -53,7 +53,7 @@
 (load-module "net")
 (load-module "wifi")
 (load-module "battery-portable")
-(load-module "stumptray")
+;; (load-module "stumptray")
 
 ;; Additionnal lisp modules extensions
 ; (ql:quickload "clx-truetype") ;; Used for font rendering

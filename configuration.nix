@@ -26,19 +26,24 @@
   # Sops config
   sops.defaultSopsFile = ./secrets/notarock.yaml;
   sops.secrets.password = { };
-  sops.secrets.pragmatapro-bold = {
-    format = "binary";
-    sopsFile = ./secrets/EssentialPragmataPro-B_1.2.ttf;
-    owner = "notarock";
-  };
   sops.secrets.pragmatapro-reg = {
     format = "binary";
-    sopsFile = ./secrets/EssentialPragmataPro-R_1.2.ttf;
+    sopsFile = ./secrets/EssentialPragmataPro-R.ttf;
     owner = "notarock";
   };
   sops.secrets.pragmatapro-reg-otf = {
     format = "binary";
-    sopsFile = ./secrets/EssentialPragmataPro-R_1.2.otf;
+    sopsFile = ./secrets/EssentialPragmataPro-R.otf;
+    owner = "notarock";
+  };
+  sops.secrets.pragmatapro-bold = {
+    format = "binary";
+    sopsFile = ./secrets/EssentialPragmataPro-B.ttf;
+    owner = "notarock";
+  };
+  sops.secrets.pragmatapro-bold-otf = {
+    format = "binary";
+    sopsFile = ./secrets/EssentialPragmataPro-B.otf;
     owner = "notarock";
   };
   sops.secrets.wakatime = {
