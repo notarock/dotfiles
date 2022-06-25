@@ -12,6 +12,7 @@
 
   home-manager = {
 
+    users.root.home.stateVersion = "22.11";
     users.root.programs.git = {
       enable = true;
       extraConfig.safe.directory = "/home/notarock/src/dotfiles";
@@ -73,18 +74,23 @@
         setupPragmataProReg = config.lib.dag.entryAfter [ "writeBoundary" ] ''
           mkdir -p ~/.local/share/fonts
           ln -sf ${osConfig.sops.secrets.pragmatapro-reg.path} \
-                    ~/.local/share/fonts/Essential\ PragmataPro-R_1.2.ttf
+                    ~/.local/share/fonts/Essential\ PragmataPro-R.ttf
         '';
         setupPragmataProRegOTF =
           config.lib.dag.entryAfter [ "writeBoundary" ] ''
             mkdir -p ~/.local/share/fonts
             ln -sf ${osConfig.sops.secrets.pragmatapro-reg-otf.path} \
-                      ~/.local/share/fonts/Essential\ PragmataPro-R_1.2.otf
+                      ~/.local/share/fonts/Essential\ PragmataPro-R.otf
           '';
         setupPragmataProBold = config.lib.dag.entryAfter [ "writeBoundary" ] ''
           mkdir -p ~/.local/share/fonts
           ln -sf ${osConfig.sops.secrets.pragmatapro-bold.path} \
-                    ~/.local/share/fonts/Essential\ PragmataPro-B_1.2.ttf
+                    ~/.local/share/fonts/Essential\ PragmataPro-B.ttf
+        '';
+        setupPragmataProBoldOTF = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+          mkdir -p ~/.local/share/fonts
+          ln -sf ${osConfig.sops.secrets.pragmatapro-bold-otf.path} \
+                    ~/.local/share/fonts/Essential\ PragmataPro-B.otf
         '';
         wakatime-cfg = config.lib.dag.entryAfter [ "writeBoundary" ] ''
           ln -sf ${osConfig.sops.secrets.wakatime.path} \

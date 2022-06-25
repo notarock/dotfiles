@@ -35,7 +35,7 @@
 
 (in-package :stumpwm)
 
-(setq stumpwm:*mode-line-position* :top)
+;; (setq stumpwm:*mode-line-position* :top)
 
 (setq *separator-right* " ^7*^b«^7 ")
 (setq *separator-left* " ^7*^b»^7 ")
@@ -60,7 +60,7 @@
        *separator-right*            ; ---
        "%d"                         ; Date
        *separator-right*            ; ---
-       "%T"                         ; free space for stumptray
+       ;; "%T"                         ; free space for stumptray
        ))
 
 (dolist (head
@@ -68,6 +68,6 @@
   (enable-mode-line (current-screen) head
                     t *screen-mode-line-format*))
 
-(stumptray:stumptray)
+;; (stumptray:stumptray)
 
 ;; End of file

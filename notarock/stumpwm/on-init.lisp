@@ -50,11 +50,4 @@
 
 (set-selected-wallpaper)
 
-(require 'slynk)
-(defcommand slynk (port) ((:string "Port number: "))
-  (sb-thread:make-thread
-   (lambda ()
-     (slynk:create-server :port (parse-integer port) :dont-close t))
-   :name "slynk-manual"))
-
 ;; End of file

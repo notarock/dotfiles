@@ -55,9 +55,9 @@
   (if
    (equal resolution "1080p")(set-dpi-1080p))
   (refresh-heads)         ;; Refresh mode-line and heads size after xrandr update
-  (stumptray:stumptray)   ;; Disable strumptray
+  ;; (stumptray:stumptray)   ;; Disable strumptray
   (refresh-heads)
-  (stumptray:stumptray)   ;; Enable strumptray, centered on the newly-placed mode-line
+  ;; (stumptray:stumptray)   ;; Enable strumptray, centered on the newly-placed mode-line
   (set-selected-wallpaper)
   )
 
