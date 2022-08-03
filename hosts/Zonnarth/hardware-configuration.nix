@@ -8,7 +8,9 @@
 
   # This machine has a dragon name: Zonnarth, Lord of the Blue
   networking.hostName = "Zonnarth";
-  my.dpi = 120;
+  my.dpi = 144;
+  my.emacs.fontSize = 20;
+  my.emacs.fontSizeBig = 28;
 
   boot.initrd.availableKernelModules =
     [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];

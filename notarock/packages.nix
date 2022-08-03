@@ -87,6 +87,7 @@
     gnomeExtensions.caffeine
     gnomeExtensions.system-monitor
     gnomeExtensions.appindicator
+    gnomeExtensions.paperwm
 
     nodePackages.prettier
     nodejs-16_x
@@ -118,7 +119,8 @@
     asciinema
     tmux
     audacity
-    jetbrains.idea-community
+    jetbrains.idea-ultimate
+    jetbrains.goland
     kotlin
     figlet
     lxappearance

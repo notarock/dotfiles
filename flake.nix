@@ -30,11 +30,11 @@
           #   url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/#####.patch";
           #   sha256 = "sha256-someshaxd";
           # })
-          (originPkgs.fetchpatch { # https://github.com/NixOS/nixpkgs/pull/178576
-            url =
-              "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/178576.patch";
-            sha256 = "sha256-7soCSNjtXJin6gvX97TFUHfOGTW8+hyOvSqOeH4By+8=";
-          })
+          #(originPkgs.fetchpatch { # https://github.com/NixOS/nixpkgs/pull/178576
+          #  url =
+          #    "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/178576.patch";
+          #  sha256 = "sha256-7soCSNjtXJin6gvX97TFUHfOGTW8+hyOvSqOeH4By+8=";
+          #})
         ];
       };
 
