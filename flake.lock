@@ -217,17 +217,17 @@
     "stumpwm": {
       "flake": false,
       "locked": {
-        "lastModified": 1659055832,
-        "narHash": "sha256-/dZ7ux8qSkROx1ZQSB8s9IDsemucGTf0j6UwOHlXLho=",
+        "lastModified": 1654917891,
+        "narHash": "sha256-NHk4RO3XetLIl1kGHU97yyPZ3CFRxmPaaRTdPWU7lSI=",
         "owner": "stumpwm",
         "repo": "stumpwm",
-        "rev": "1ff764328d32c999a5568190315fae67609a1a4f",
+        "rev": "70e9b29844a7eed44818cfd02f5c70c56df55434",
         "type": "github"
       },
       "original": {
         "owner": "stumpwm",
-        "ref": "master",
         "repo": "stumpwm",
+        "rev": "70e9b29844a7eed44818cfd02f5c70c56df55434",
         "type": "github"
       }
     },

@@ -14,7 +14,8 @@
     gotools.url = "git+https://go.googlesource.com/tools";
     gotools.flake = false;
 
-    stumpwm.url = "github:/stumpwm/stumpwm/master";
+    stumpwm.url =
+      "github:/stumpwm/stumpwm/70e9b29844a7eed44818cfd02f5c70c56df55434";
     stumpwm.flake = false;
   };
 
