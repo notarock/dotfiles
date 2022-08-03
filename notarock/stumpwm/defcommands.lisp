@@ -88,11 +88,11 @@
 
 (defcommand rofi-run () ()
   "Launch rofi -show run"
-  (run-shell-command (concat *rofi-store* " " "-show run")))
+  (run-shell-command (concat *rofi-path* " " "-show run")))
 
 (defcommand rofi-drun () ()
   "Launch rofi -show run"
-  (run-shell-command (concat *rofi-store* " " "-show drun")))
+  (run-shell-command (concat *rofi-path* " " "-show drun")))
 
 ;; Load helpers
 (load (concat (getenv "HOME") "/.config/stumpwm/helper/xrandr.lisp")) ;; Frame-preferences and groups mapping

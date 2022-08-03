@@ -97,7 +97,7 @@
 (define-key *top-map* (kbd "s-d") "rofi-run")
 (define-key *top-map* (kbd "M-F2") "rofi-drun")
 
-(make-shellcmd-keybinding "s-i" *rofi-store* "-show run")
+(make-shellcmd-keybinding "s-i" *rofi-path* "-show run")
 
 
 (define-key *top-map* (kbd "M-F4") "kill")
