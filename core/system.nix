@@ -15,7 +15,7 @@ in {
     # };
   };
 
-  imports = [ ./my/dpi.nix ];
+  imports = [ ./my/dpi.nix ./my/emacs.fontSize.nix ./my/emacs.fontSizeBig.nix ];
 
   nix.settings.auto-optimise-store = true;
 

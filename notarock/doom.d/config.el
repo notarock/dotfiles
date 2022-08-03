@@ -9,11 +9,6 @@
 
 (setq doom-theme 'doom-monokai-ristretto)
 
-(let ((font-family "Essential PragmataPro"))
-  (setq doom-variable-pitch-font (font-spec :family "IBM Plex Sans Condensed" )
-        doom-font (font-spec :family font-family)
-        doom-big-font (font-spec :family font-family)))
-
 (setq display-line-numbers-type t)
 
 (setq fancy-splash-image (concat (getenv "DOOMDIR") "/notarock.png"))
