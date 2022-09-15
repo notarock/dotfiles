@@ -67,7 +67,6 @@
     firefox
     brogue
     steam
-    minecraft
     scrot
     rhythmbox
     screenkey
