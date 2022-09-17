@@ -13,7 +13,7 @@
     ./notarock
   ];
 
-  services.xserver.displayManager.defaultSession = "none+stumpwm-wrapper";
+  services.xserver.displayManager.defaultSession = "none+herbstluftwm";
   services.xserver.desktopManager.wallpaper.mode = "tile";
 
   home-manager = {
@@ -118,5 +118,6 @@
       ];
     }
   ];
+  systemd.services.NetworkManager-wait-online.enable = false;
 
 }
