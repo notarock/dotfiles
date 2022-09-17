@@ -87,11 +87,12 @@
           ln -sf ${osConfig.sops.secrets.pragmatapro-bold.path} \
                     ~/.local/share/fonts/Essential\ PragmataPro-B.ttf
         '';
-        setupPragmataProBoldOTF = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-          mkdir -p ~/.local/share/fonts
-          ln -sf ${osConfig.sops.secrets.pragmatapro-bold-otf.path} \
-                    ~/.local/share/fonts/Essential\ PragmataPro-B.otf
-        '';
+        setupPragmataProBoldOTF =
+          config.lib.dag.entryAfter [ "writeBoundary" ] ''
+            mkdir -p ~/.local/share/fonts
+            ln -sf ${osConfig.sops.secrets.pragmatapro-bold-otf.path} \
+                      ~/.local/share/fonts/Essential\ PragmataPro-B.otf
+          '';
         wakatime-cfg = config.lib.dag.entryAfter [ "writeBoundary" ] ''
           ln -sf ${osConfig.sops.secrets.wakatime.path} \
                     ~/.wakatime.cfg
@@ -136,12 +137,16 @@
       programs = {
         go = {
           enable = true;
-          package = pkgs.go_1_17;
+          package = pkgs.go_1_18;
           packages = {
+            "github.com/motemen/gore/cmd/gore" = inputs.gore;
+            "github.com/mdempsky/gocode" = inputs.gotools;
             "golang.org/x/tools/cmd/goimports" = inputs.gotools;
             "golang.org/x/tools/cmd/godoc" = inputs.gotools;
             "golang.org/x/tools/cmd/gorename" = inputs.gotools;
             "golang.org/x/tools/cmd/guru" = inputs.gotools;
+            "github.com/cweill/gotests/..." = inputs.gotests;
+            "github.com/fatih/gomodifytags" = inputs.gomodifytags;
           };
         };
 

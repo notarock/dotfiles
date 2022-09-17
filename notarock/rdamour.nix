@@ -93,7 +93,7 @@
   programs = {
     go = {
       enable = true;
-      package = pkgs.go_1_17;
+      package = pkgs.go_1_18;
       packages = {
         "github.com/motemen/gore/cmd/gore" = inputs.gore;
         "github.com/mdempsky/gocode" = inputs.gotools;

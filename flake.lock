@@ -51,6 +51,56 @@
         "type": "github"
       }
     },
+    "gomodifytags": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1652534789,
+        "narHash": "sha256-zRYsGsofLxTBs4phhJYRKIO/0Ba3c2k4AfcAxWne6RY=",
+        "owner": "fatih",
+        "repo": "gomodifytags",
+        "rev": "450757f48200a18f62f8abf51fc337b236049f97",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fatih",
+        "repo": "gomodifytags",
+        "type": "github"
+      }
+    },
+    "gore": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1651985977,
+        "narHash": "sha256-6ZMJmH8xJ2pM9v98P3Hn/Nu9SW7EUZDhHc28aAr+V6Y=",
+        "owner": "motemen",
+        "repo": "gore",
+        "rev": "cf1e667ddddbcb22a73490b19c4ae475aa90de8d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "motemen",
+        "ref": "main",
+        "repo": "gore",
+        "type": "github"
+      }
+    },
+    "gotests": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1621798522,
+        "narHash": "sha256-/23DWiw8bQqf49/8KEKe/z8w7FC+yjbDr29bjrGQd7w=",
+        "owner": "cweill",
+        "repo": "gotests",
+        "rev": "16a93f6eb6519118b1d282e2f233596a98dd7e96",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cweill",
+        "ref": "develop",
+        "repo": "gotests",
+        "type": "github"
+      }
+    },
     "gotools": {
       "flake": false,
       "locked": {
@@ -184,6 +234,9 @@
       "inputs": {
         "doom-emacs": "doom-emacs",
         "emacs-overlay": "emacs-overlay",
+        "gomodifytags": "gomodifytags",
+        "gore": "gore",
+        "gotests": "gotests",
         "gotools": "gotools",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_3",
