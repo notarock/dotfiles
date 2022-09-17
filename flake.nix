@@ -14,6 +14,13 @@
     gotools.url = "git+https://go.googlesource.com/tools";
     gotools.flake = false;
 
+    gore.url = "github:motemen/gore/main";
+    gore.flake = false;
+    gotests.url = "github:cweill/gotests/develop";
+    gotests.flake = false;
+    gomodifytags.url = "github:fatih/gomodifytags";
+    gomodifytags.flake = false;
+
     stumpwm.url =
       "github:/stumpwm/stumpwm/70e9b29844a7eed44818cfd02f5c70c56df55434";
     stumpwm.flake = false;
