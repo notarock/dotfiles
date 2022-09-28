@@ -46,7 +46,7 @@
         ];
       };
 
-      pkgs = import nixpkgsPatched {
+      myPkgs = import nixpkgsPatched {
         inherit system;
         config.allowUnfree = true;
         overlays = [
@@ -87,7 +87,7 @@
             sops-nix.nixosModules.sops
             ./extras/stumpwm-wrapper.nix
           ];
-          inherit pkgs;
+          pkgs = myPkgs;
         };
 
     in {
@@ -98,15 +98,20 @@
       homeConfigurations = {
         # NixOS desktop config
         rdamour = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          inherit system;
           extraSpecialArgs = { inherit inputs; };
-          configuration = {
-            nixpkgs.config = { allowUnfree = true; };
-            imports = [ ./notarock/rdamour.nix ];
-          };
-          homeDirectory = "/home/rdamour";
-          username = "rdamour";
+          pkgs = myPkgs;
+          modules = [
+            ./notarock/rdamour.nix
+            {
+              home = {
+                username = "rdamour";
+                homeDirectory = "/home/rdamour";
+                stateVersion = "22.11";
+              };
+              nixpkgs.config = { allowUnfree = true; };
+
+            }
+          ];
         };
       };
       rdamour = self.homeConfigurations.bogdb.activationPackage;

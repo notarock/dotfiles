@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: ci-flow
+# key:
+# --
+
+---
+type: simple
+version: 3.0.0
+maintainers:
+  - name: Security team
+    email: securityteam@stingray.com
+  - email: rdamour@stingray.com
+    name: Roch D'Amour
