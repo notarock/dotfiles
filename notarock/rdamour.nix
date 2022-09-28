@@ -3,6 +3,10 @@
 {
 
   imports = [
+    ../core/my/dpi.nix
+    ../core/my/emacs.fontSize.nix
+    ../core/my/emacs.fontSizeBig.nix
+
     ./myTheme.nix
     ./packages.nix
     ./extras/herbstluftwm.nix
@@ -57,7 +61,7 @@
     '';
   in "${wallpaper}/share/${bgOut}";
 
-  myTheme = import ../themes/monokai-ristretto.nix;
+  myTheme = import ../themes/base16-cupertino.nix;
 
   manual = {
     html.enable = true;
@@ -84,7 +88,8 @@
 
   fonts.fontconfig.enable = true;
 
-  xsession = {
+  home = {
+    pointerCursor.x11.enable = true;
     pointerCursor.package = pkgs.bibata-cursors;
     pointerCursor.name = "Bibata_Oil";
     pointerCursor.size = 48;
@@ -100,6 +105,10 @@
         "golang.org/x/tools/cmd/godoc" = inputs.gotools;
         "golang.org/x/tools/cmd/gorename" = inputs.gotools;
         "golang.org/x/tools/cmd/guru" = inputs.gotools;
+
+        "github.com/motemen/gore/cmd/gore" = inputs.gore;
+        "github.com/cweill/gotests/..." = inputs.gotests;
+        "github.com/fatih/gomodifytags" = inputs.gomodifytags;
       };
     };
 

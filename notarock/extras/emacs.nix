@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, osConfig, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let
   DOOMLOCALDIR = "${config.xdg.dataHome}/doom";
@@ -53,19 +53,7 @@ in {
   };
 
   xdg.configFile."doom/extra.el".text = ''
-
     (setq wakatime-cli-path "${pkgs.wakatime}/bin/wakatime-cli")
-
-    (let ((font-family "Essential PragmataPro"))
-      (setq doom-variable-pitch-font (font-spec :family "IBM Plex Sans Condensed" :size ${
-        toString osConfig.my.emacs.fontSize
-      } )
-            doom-font (font-spec :family font-family :size ${
-              toString osConfig.my.emacs.fontSize
-            })
-            doom-big-font (font-spec :family font-family :size ${
-              toString osConfig.my.emacs.fontSizeBig
-            } )))
   '';
 
 }
