@@ -54,6 +54,11 @@ in {
 
   xdg.configFile."doom/extra.el".text = ''
     (setq wakatime-cli-path "${pkgs.wakatime}/bin/wakatime-cli")
+
+    (let ((font-family "Essential PragmataPro"))
+      (setq doom-variable-pitch-font (font-spec :family "IBM Plex Sans Condensed")
+            doom-font (font-spec :family font-family :size 14)
+            doom-big-font (font-spec :family font-family :size 24)))
   '';
 
 }
