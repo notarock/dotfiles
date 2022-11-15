@@ -7,7 +7,7 @@
 (setq user-full-name "Roch D'Amour"
       user-mail-address "roch.damour@gmail.com")
 
-(setq doom-theme 'base16-cupertino)
+(setq doom-theme 'leuven)
 
 (setq display-line-numbers-type t)
 
@@ -95,6 +95,7 @@
   (add-hook 'org-mode-hook (lambda ()
                              (setq show-trailing-whitespace t)))
   (setq  ispell-local-dictionary "fr-toutesvariantes"
+         org-fontify-whole-heading-line t
          org-hide-emphasis-markers t
          org-directory "~/org/"
          org-journal-file-type 'daily

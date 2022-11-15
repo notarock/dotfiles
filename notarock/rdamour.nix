@@ -12,7 +12,7 @@
     ./extras/herbstluftwm.nix
     ./extras/polybar.nix
     ./extras/udiskie.nix
-    ./extras/dunst.nix
+    # ./extras/dunst.nix
     ./extras/vim.nix
     ./extras/emacs.nix
     ./extras/zsh.nix
@@ -98,7 +98,7 @@
   programs = {
     go = {
       enable = true;
-      package = pkgs.go_1_18;
+      package = pkgs.go_1_19;
       packages = {
         "github.com/mdempsky/gocode" = inputs.gotools;
         "golang.org/x/tools/cmd/goimports" = inputs.gotools;
