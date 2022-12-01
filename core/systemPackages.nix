@@ -33,7 +33,7 @@
     element-desktop
     woeusb
     tldr
-    yubioath-desktop
+    # yubioath-flutter TODO: Package this? Or enable if someone else does it
     # virt-manager
     xorg.xmessage
     gdk-pixbuf
