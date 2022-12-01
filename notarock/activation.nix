@@ -27,7 +27,7 @@
                 ~/.wakatime.cfg
     '';
     set-wallpaper = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-      feh --bg-tile ~/.background-image
+      ${pkgs.feh}/bin/feh --bg-tile ~/.background-image
     '';
   };
 

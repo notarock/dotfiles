@@ -94,7 +94,6 @@
           enable = true;
           shadow = false;
           vSync = true;
-          experimentalBackends = true;
           fade = true;
           fadeDelta = 2;
         };
