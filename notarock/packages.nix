@@ -66,7 +66,6 @@
     chromium
     firefox
     brogue
-    steam
     scrot
     rhythmbox
     screenkey
@@ -121,6 +120,7 @@
     audacity
     jetbrains.idea-ultimate
     jetbrains.goland
+    jetbrains.datagrip
     kotlin
     figlet
     lxappearance
@@ -154,18 +154,6 @@
     # (import inputs.nixpkgs-discord { inherit (pkgs) config system; }).discord
     discord
 
-    (steam.override {
-      extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
-    }).run
-
-    (pkgs.dwarf-fortress-packages.dwarf-fortress-full.override {
-      theme = "cla";
-      enableFPS = true;
-      enableDwarfTherapist = false;
-      enableSound = false;
-      enableIntro = false;
-      enableDFHack = true;
-    })
   ];
 
 }

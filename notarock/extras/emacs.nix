@@ -21,6 +21,8 @@ in {
     gotests
     gore
 
+    terraform-ls
+
     (pkgs.makeDesktopItem {
       name = "Emacs";
       exec = "emacs";

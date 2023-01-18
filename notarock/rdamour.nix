@@ -150,8 +150,8 @@
     };
 
     git = {
-      delta.enable = false;
-      difftastic.enable = true;
+      delta.enable = true;
+      difftastic.enable = false;
       enable = true;
       userName = "Roch D'Amour";
       userEmail = "rdamour@stingray.com";
