@@ -7,7 +7,7 @@
 (setq user-full-name "Roch D'Amour"
       user-mail-address "roch.damour@gmail.com")
 
-(setq doom-theme 'leuven)
+(setq doom-theme 'base16-solarflare-light)
 
 (setq display-line-numbers-type t)
 

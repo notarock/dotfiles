@@ -61,7 +61,7 @@
     '';
   in "${wallpaper}/share/${bgOut}";
 
-  myTheme = import ../themes/base16-cupertino.nix;
+  myTheme = import ../themes/base16-solarflare-light.nix;
 
   manual = {
     html.enable = true;
