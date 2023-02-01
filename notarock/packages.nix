@@ -41,7 +41,7 @@
     pkg-config
     openconnect
     jre
-    python
+    # python
     openvpn
     # dbeaver
     git
