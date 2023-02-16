@@ -34,7 +34,7 @@
         ./extras/fzf.nix
         ./extras/kitty.nix
         ./extras/starship.nix
-        ./stumpwm.nix
+        ./extras/xmonad.nix
       ];
 
       home.file.".background-image".source = let

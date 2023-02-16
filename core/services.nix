@@ -10,6 +10,9 @@ with lib; {
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
       windowManager.herbstluftwm.enable = true;
+      windowManager.xmonad.enable = true;
+      windowManager.stumpwm.enable = false;
+      windowManager.ratpoison.enable = false;
       windowManager.stumpwm-wrapper.enable = false;
       layout = "ca,fr";
       dpi = config.my.dpi;
