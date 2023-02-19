@@ -164,4 +164,12 @@
 
 (load-file (concat (getenv "DOOMDIR") "/extra.el"))
 
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (("C-TAB" . 'copilot-next-completion)
+         ("C-<tab>" . 'copilot-next-completion)
+         :map copilot-completion-map
+         ("<tab>" . 'copilot-accept-completion)
+         ("TAB" . 'copilot-accept-completion)))
+
 ;;; config.el ends here
