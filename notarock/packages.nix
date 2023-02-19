@@ -130,6 +130,7 @@
     delve
     volumeicon
     networkmanager_dmenu
+    dmenu
     blueman
 
     cheminot-ets
