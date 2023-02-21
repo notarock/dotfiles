@@ -10,6 +10,33 @@ in {
     recursive = true;
   };
 
+  # services.trayer = {
+  #   enable = true;
+  #   settings = {
+  #     edge = "top";
+  #     widthtype = "request";
+  #     height = "20";
+  #     width = "100";
+  #     alpha = "0";
+  #     transparent = "true";
+  #     monitor = "primary";
+  #     distance = "0";
+  #     distancefrom = "top";
+  #     setdocktype = "true";
+  #     expand = "true";
+  #     padding = "0";
+  #     tint = "0x000000";
+  #     iconspacing = "0";
+  #     font = "xft:DejaVu Sans Mono:size=10";
+  #     foreground = "0xFFFFFF";
+  #     background = "0x000000";
+  #     alignment = "right";
+  #     setpartialstrut = "true";
+  #     usepango = "true";
+  #     override-redirect = "true";
+  #   };
+  # };
+
   programs.xmobar = {
     enable = true;
     extraConfig = ''
@@ -45,6 +72,6 @@ in {
   xsession.windowManager.xmonad = {
     enable = true;
     enableContribAndExtras = true;
-    # config = lib.mkDefault /home/.xmonad/xmonad.hs
+    # config = lib.mkDefault /home/.xmonad/xmonad.hs;
   };
 }

@@ -14,7 +14,7 @@ main :: IO ()
 main = xmonad
      . ewmhFullscreen
      . ewmh
-     . withEasySB (statusBarProp "xmobar" (pure def)) toggleStrutsKey
+     . withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) toggleStrutsKey
      $ myConfig
   where
     toggleStrutsKey :: XConfig Layout -> (KeyMask, KeySym)
