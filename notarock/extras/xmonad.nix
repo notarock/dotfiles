@@ -10,41 +10,32 @@ in {
     recursive = true;
   };
 
-  # services.trayer = {
-  #   enable = true;
-  #   settings = {
-  #     edge = "top";
-  #     widthtype = "request";
-  #     height = "20";
-  #     width = "100";
-  #     alpha = "0";
-  #     transparent = "true";
-  #     monitor = "primary";
-  #     distance = "0";
-  #     distancefrom = "top";
-  #     setdocktype = "true";
-  #     expand = "true";
-  #     padding = "0";
-  #     tint = "0x000000";
-  #     iconspacing = "0";
-  #     font = "xft:DejaVu Sans Mono:size=10";
-  #     foreground = "0xFFFFFF";
-  #     background = "0x000000";
-  #     alignment = "right";
-  #     setpartialstrut = "true";
-  #     usepango = "true";
-  #     override-redirect = "true";
-  #   };
-  # };
+  services.trayer = {
+    enable = true;
+    # package = pkgs.trayer-srg;
+    settings = {
+      edge = "top";
+      height = "16";
+      align = "center";
+      width = "10";
+      transparent = "true";
+      # background = "0x5f5f5f";
+      # setdocktype = "true";
+      # expand = "true";
+      tint = "0x5f5f5f";
+      # iconspacing = "0";
+      # setpartialstrut = "true";
+    };
+  };
 
   programs.xmobar = {
     enable = true;
     extraConfig = ''
       Config { overrideRedirect = False
-              , font     = "xft:Essential PragmataPro-14"
+              , font     = "xft:Essential PragmataPro-12"
               , bgColor  = "#5f5f5f"
               , fgColor  = "#f8f8f2"
-              , position = TopW L 90
+              , position = TopW L 100
               , commands = [ Run Cpu
                               [ "-L", "3"
                               , "-H", "50"
