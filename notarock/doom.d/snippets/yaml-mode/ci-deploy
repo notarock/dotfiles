@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: ci-deploy
+# key:
+# --
+
+---
+type: kubernetes
+version: 4.0.0
+config:
+  target: k8s-aws-sandbox-04
+  values:
+    preset: go
+    image:
+      port: 8080
+    resources:
+      preset: pico
+    health:
+      enabled: true
+      ready:
+        path: /
+        port: 8080
+      live:
+        path: /
+        port: 8080

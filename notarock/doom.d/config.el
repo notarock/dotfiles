@@ -7,7 +7,7 @@
 (setq user-full-name "Roch D'Amour"
       user-mail-address "roch.damour@gmail.com")
 
-(setq doom-theme 'doom-monokai-ristretto)
+(setq doom-theme 'base16-brewer)
 
 (setq display-line-numbers-type t)
 
@@ -95,6 +95,7 @@
   (add-hook 'org-mode-hook (lambda ()
                              (setq show-trailing-whitespace t)))
   (setq  ispell-local-dictionary "fr-toutesvariantes"
+         org-fontify-whole-heading-line t
          org-hide-emphasis-markers t
          org-directory "~/org/"
          org-journal-file-type 'daily
@@ -148,7 +149,7 @@
 
 (map! [remap org-capture] nil)
 
-(global-git-gutter-mode +1)
+;; (global-git-gutter-mode +1)
 
 (global-wakatime-mode +1)
 

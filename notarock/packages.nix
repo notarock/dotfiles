@@ -66,8 +66,6 @@
     chromium
     firefox
     brogue
-    steam
-    minecraft
     scrot
     rhythmbox
     scrot
@@ -89,7 +87,7 @@
     gnomeExtensions.paperwm
 
     nodePackages.prettier
-    nodejs-16_x
+    # nodejs-16_x
     spotify
     ccls
     clang-tools
@@ -110,6 +108,7 @@
     aspellDicts.fr
     gitAndTools.delta
     dive
+    delve
     kdenlive
     pdftk
     jq
@@ -120,6 +119,7 @@
     audacity
     jetbrains.idea-ultimate
     jetbrains.goland
+    jetbrains.datagrip
     kotlin
     figlet
     lxappearance
@@ -134,6 +134,7 @@
     blueman
 
     cheminot-ets
+    awscli2
 
     (retroarch.override {
       cores = with libretro; [
@@ -155,18 +156,6 @@
     # (import inputs.nixpkgs-discord { inherit (pkgs) config system; }).discord
     discord
 
-    (steam.override {
-      extraPkgs = pkgs: [ mono gtk3 gtk3-x11 libgdiplus zlib ];
-    }).run
-
-    (pkgs.dwarf-fortress-packages.dwarf-fortress-full.override {
-      theme = "cla";
-      enableFPS = true;
-      enableDwarfTherapist = false;
-      enableSound = false;
-      enableIntro = false;
-      enableDFHack = true;
-    })
   ];
 
 }

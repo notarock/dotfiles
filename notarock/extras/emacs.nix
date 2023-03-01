@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, osConfig, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let
   DOOMLOCALDIR = "${config.xdg.dataHome}/doom";
@@ -19,6 +19,10 @@ in {
     gotests
     gore
 
+    nodejs-19_x
+
+    terraform-ls
+
     (pkgs.makeDesktopItem {
       name = "Emacs";
       exec = "emacs";
@@ -37,7 +41,6 @@ in {
     source = pkgs.applyPatches {
       name = "doom-emacs-source";
       src = inputs.doom-emacs;
-      patches = [ ../patches/disable_install_hooks.patch ];
     };
     recursive = true;
   };
@@ -51,19 +54,12 @@ in {
   };
 
   xdg.configFile."doom/extra.el".text = ''
-
     (setq wakatime-cli-path "${pkgs.wakatime}/bin/wakatime-cli")
 
     (let ((font-family "Essential PragmataPro"))
-      (setq doom-variable-pitch-font (font-spec :family "IBM Plex Sans Condensed" :size ${
-        toString osConfig.my.emacs.fontSize
-      } )
-            doom-font (font-spec :family font-family :size ${
-              toString osConfig.my.emacs.fontSize
-            })
-            doom-big-font (font-spec :family font-family :size ${
-              toString osConfig.my.emacs.fontSizeBig
-            } )))
+      (setq doom-variable-pitch-font (font-spec :family "IBM Plex Sans Condensed")
+            doom-font (font-spec :family font-family :size 14)
+            doom-big-font (font-spec :family font-family :size 24)))
   '';
 
 }

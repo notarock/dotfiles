@@ -43,6 +43,7 @@
       gits = "git status";
       ssh = "TERM=xterm-color ssh";
       svp = "sudo !!";
+      cdtmp = "cd $(mktemp -d)";
     };
     history = {
       ignoreSpace = true;

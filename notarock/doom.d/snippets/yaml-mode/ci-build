@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: ci-build
+# key:
+# --
+
+---
+type: no-build
+version: 2.0.0

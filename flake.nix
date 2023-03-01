@@ -4,7 +4,7 @@
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
-    doom-emacs.url = "github:hlissner/doom-emacs/develop";
+    doom-emacs.url = "github:hlissner/doom-emacs/master";
     doom-emacs.flake = false;
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -46,7 +46,7 @@
         ];
       };
 
-      pkgs = import nixpkgsPatched {
+      myPkgs = import nixpkgsPatched {
         inherit system;
         config.allowUnfree = true;
         overlays = [
@@ -87,7 +87,7 @@
             sops-nix.nixosModules.sops
             ./extras/stumpwm-wrapper.nix
           ];
-          inherit pkgs;
+          pkgs = myPkgs;
         };
 
     in {
@@ -95,5 +95,25 @@
         Zonnarth = mkNixosConfiguration { hostname = "Zonnarth"; };
         Kreizemm = mkNixosConfiguration { hostname = "Kreizemm"; };
       };
+      homeConfigurations = {
+        # NixOS desktop config
+        rdamour = home-manager.lib.homeManagerConfiguration {
+          extraSpecialArgs = { inherit inputs; };
+          pkgs = myPkgs;
+          modules = [
+            ./notarock/rdamour.nix
+            {
+              home = {
+                username = "rdamour";
+                homeDirectory = "/home/rdamour";
+                stateVersion = "22.11";
+              };
+              nixpkgs.config = { allowUnfree = true; };
+
+            }
+          ];
+        };
+      };
+      rdamour = self.homeConfigurations.bogdb.activationPackage;
     };
 }

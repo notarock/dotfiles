@@ -3,12 +3,16 @@
 {
 
   imports = [
+    ../core/my/dpi.nix
+    ../core/my/emacs.fontSize.nix
+    ../core/my/emacs.fontSizeBig.nix
+
     ./myTheme.nix
     ./packages.nix
     ./extras/herbstluftwm.nix
     ./extras/polybar.nix
     ./extras/udiskie.nix
-    ./extras/dunst.nix
+    # ./extras/dunst.nix
     ./extras/vim.nix
     ./extras/emacs.nix
     ./extras/zsh.nix
@@ -57,7 +61,7 @@
     '';
   in "${wallpaper}/share/${bgOut}";
 
-  myTheme = import ../themes/base16-classic-dark.nix;
+  myTheme = import ../themes/base16-brewer.nix;
 
   manual = {
     html.enable = true;
@@ -84,7 +88,8 @@
 
   fonts.fontconfig.enable = true;
 
-  xsession = {
+  home = {
+    pointerCursor.x11.enable = true;
     pointerCursor.package = pkgs.bibata-cursors;
     pointerCursor.name = "Bibata_Oil";
     pointerCursor.size = 48;
@@ -93,14 +98,15 @@
   programs = {
     go = {
       enable = true;
-      package = pkgs.go_1_18;
+      package = pkgs.go_1_19;
       packages = {
-        "github.com/motemen/gore/cmd/gore" = inputs.gore;
         "github.com/mdempsky/gocode" = inputs.gotools;
         "golang.org/x/tools/cmd/goimports" = inputs.gotools;
         "golang.org/x/tools/cmd/godoc" = inputs.gotools;
         "golang.org/x/tools/cmd/gorename" = inputs.gotools;
         "golang.org/x/tools/cmd/guru" = inputs.gotools;
+
+        "github.com/motemen/gore/cmd/gore" = inputs.gore;
         "github.com/cweill/gotests/..." = inputs.gotests;
         "github.com/fatih/gomodifytags" = inputs.gomodifytags;
       };
@@ -144,7 +150,9 @@
     };
 
     git = {
-      delta.enable = true;
+      delta.enable = false;
+      diff-so-fancy.enable = true;
+      difftastic.enable = false;
       enable = true;
       userName = "Roch D'Amour";
       userEmail = "rdamour@stingray.com";
