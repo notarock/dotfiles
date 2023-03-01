@@ -21,6 +21,8 @@ in {
     gotests
     gore
 
+    nodejs-19_x
+
     terraform-ls
 
     (pkgs.makeDesktopItem {
@@ -41,7 +43,6 @@ in {
     source = pkgs.applyPatches {
       name = "doom-emacs-source";
       src = inputs.doom-emacs;
-      patches = [ ../patches/disable_install_hooks.patch ];
     };
     recursive = true;
   };

@@ -2,7 +2,10 @@
 
 {
   programs.vim = {
-    plugins = with pkgs.vimPlugins; [ vim-wakatime ];
+    plugins = with pkgs.vimPlugins;
+      [
+        #vim-wakatime
+      ];
 
     enable = true;
     extraConfig = ''

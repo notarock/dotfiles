@@ -61,7 +61,7 @@
     '';
   in "${wallpaper}/share/${bgOut}";
 
-  myTheme = import ../themes/base16-solarflare-light.nix;
+  myTheme = import ../themes/base16-brewer.nix;
 
   manual = {
     html.enable = true;
@@ -150,7 +150,8 @@
     };
 
     git = {
-      delta.enable = true;
+      delta.enable = false;
+      diff-so-fancy.enable = true;
       difftastic.enable = false;
       enable = true;
       userName = "Roch D'Amour";

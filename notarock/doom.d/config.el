@@ -7,7 +7,7 @@
 (setq user-full-name "Roch D'Amour"
       user-mail-address "roch.damour@gmail.com")
 
-(setq doom-theme 'base16-solarflare-light)
+(setq doom-theme 'base16-brewer)
 
 (setq display-line-numbers-type t)
 
@@ -149,7 +149,7 @@
 
 (map! [remap org-capture] nil)
 
-(global-git-gutter-mode +1)
+;; (global-git-gutter-mode +1)
 
 (global-wakatime-mode +1)
 
@@ -164,5 +164,14 @@
   (add-hook 'before-save-hook #'lsp-organize-imports nil 'local))
 
 (load-file (concat (getenv "DOOMDIR") "/extra.el"))
+
+;; accept completion from copilot and fallback to company
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (("C-TAB" . 'copilot-accept-completion-by-word)
+         ("C-<tab>" . 'copilot-accept-completion-by-word)
+         :map copilot-completion-map
+         ("<tab>" . 'copilot-accept-completion)
+         ("TAB" . 'copilot-accept-completion)))
 
 ;;; config.el ends here
