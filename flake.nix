@@ -22,7 +22,7 @@
     gomodifytags.flake = false;
 
     stumpwm.url =
-      "github:/stumpwm/stumpwm/70e9b29844a7eed44818cfd02f5c70c56df55434";
+      "github:/stumpwm/stumpwm/fff2508fd54b4035b0d80bafbd75a13f1756130f";
     stumpwm.flake = false;
   };
 
@@ -38,10 +38,10 @@
           #   url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/#####.patch";
           #   sha256 = "sha256-someshaxd";
           # })
-          #(originPkgs.fetchpatch { # https://github.com/NixOS/nixpkgs/pull/178576
+          #(originPkgs.fetchpatch { # https://github.com/NixOS/nixpkgs/pull/216051
           #  url =
-          #    "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/178576.patch";
-          #  sha256 = "sha256-7soCSNjtXJin6gvX97TFUHfOGTW8+hyOvSqOeH4By+8=";
+          #    "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/216051.patch";
+          #  sha256 = "sha256-aVjt5MZ+lYhKXfFhNHSP/PunhPILjw70mfdTynhE1yc=";
           #})
         ];
       };
@@ -66,7 +66,7 @@
             lispPackages = prev.lispPackages // {
               stumpwm = (prev.lispPackages.stumpwm.overrideAttrs (o: rec {
                 src = inputs.stumpwm;
-                version = "git-2022-04";
+                version = "22.11";
               }));
             };
           })

@@ -41,7 +41,7 @@
     pkg-config
     openconnect
     jre
-    python
+    # python
     openvpn
     # dbeaver
     git
@@ -68,7 +68,6 @@
     brogue
     scrot
     rhythmbox
-    screenkey
     scrot
     neofetch
     nomacs
@@ -131,6 +130,7 @@
     delve
     volumeicon
     networkmanager_dmenu
+    dmenu
     blueman
 
     cheminot-ets
@@ -149,8 +149,10 @@
       ];
     })
 
-    # Discord doesnt work? fix is where in this line lol
     (import inputs.nixpkgs-stable { inherit (pkgs) config system; }).ansible
+    (import inputs.nixpkgs-stable { inherit (pkgs) config system; }).screenkey
+
+    # Discord doesnt work? fix is where in this line lol
     # (import inputs.nixpkgs-discord { inherit (pkgs) config system; }).discord
     discord
 

@@ -21,9 +21,9 @@
 
        :completion
        (company +childframe)           ; the ultimate code completion backend
-       ;;helm              ; the *other* search engine for love and life
-       ;;ido               ; the other *other* search engine...
-       (ivy +icons +fuzzy) ; a search engine for love and life
+       ;;helm                          ; the *other* search engine for love and life
+       ;;ido                           ; the other *other* search engine...
+       (ivy +icons +fuzzy)             ; a search engine for love and life
 
        :ui
        ;;deft              ; notational velocity for Emacs
@@ -110,7 +110,7 @@
        pdf               ; pdf enhancements
        ;;prodigy           ; managing external services & code builders
        rgb               ; creating color strings
-       ( terraform +lsp )         ; infrastructure as code
+       (terraform +lsp)   ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
        ;;upload            ; map local to remote projects via ssh/ftp
 

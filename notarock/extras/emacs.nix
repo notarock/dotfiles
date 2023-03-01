@@ -8,11 +8,9 @@ in {
   home.packages = with pkgs; [
     nixfmt
     nodePackages.pyright
-    solc
     yaml-language-server
     gopls
     shellcheck
-    solc
     editorconfig-checker
     editorconfig-core-c
 
