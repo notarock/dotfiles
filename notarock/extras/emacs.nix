@@ -7,19 +7,35 @@ let
 in {
   home.packages = with pkgs; [
     nixfmt
-    nodePackages.pyright
-    yaml-language-server
-    gopls
+
     shellcheck
+    shfmt
+
+    yaml-language-server
     editorconfig-checker
     editorconfig-core-c
 
+    gopls
     gocode
     gomodifytags
     gotests
     gore
 
     nodejs-19_x
+
+    python3
+    nodePackages.pyright
+    terraform
+
+    haskellPackages.haskell-language-server
+    haskellPackages.hoogle
+    haskellPackages.cabal-install
+
+    rustc
+    cargo
+    html-tidy
+    nodePackages.stylelint
+    nodePackages.js-beautify
 
     terraform-ls
 

@@ -49,7 +49,7 @@
         '';
       in "${wallpaper}/share/${bgOut}";
 
-      myTheme = import ../themes/monokai-ristretto.nix;
+      myTheme = import ../themes/base16-twilights.nix;
 
       manual = {
         html.enable = true;
