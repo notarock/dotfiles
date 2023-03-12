@@ -49,7 +49,7 @@
         '';
       in "${wallpaper}/share/${bgOut}";
 
-      myTheme = import ../themes/base16-twilights.nix;
+      myTheme = import ../themes/base16-snazzy.nix;
 
       manual = {
         html.enable = true;

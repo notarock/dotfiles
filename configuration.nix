@@ -79,10 +79,10 @@
   # Fixes svg icon-theme
   # https://github.com/NixOS/nixpkgs/issues/13537#issuecomment-332327760
   # Use librsvg's gdk-pixbuf loader cache file as it enables gdk-pixbuf to load SVG files (important for icons)
-  environment.sessionVariables = {
-    GDK_PIXBUF_MODULE_FILE =
-      "$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)";
-  };
+  # environment.sessionVariables = {
+  #   GDK_PIXBUF_MODULE_FILE =
+  #     "$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)";
+  # };
 
   # Minimal configuration for NFS support with Vagrant.
   services.nfs.server.enable = true;

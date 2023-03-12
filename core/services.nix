@@ -4,11 +4,26 @@ with lib; {
   location.latitude = 45.5;
   location.longitude = -73.5;
 
+  programs.dconf.enable = true;
+
   services = {
     xserver = {
       enable = true;
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
+      displayManager.sddm.enable = true;
+      desktopManager.plasma5.enable = true;
+      desktopManager.plasma5.excludePackages = with pkgs.libsForQt5; [
+        elisa
+        gwenview
+        okular
+        oxygen
+        khelpcenter
+        konsole
+        plasma-browser-integration
+        print-manager
+      ];
+
+      displayManager.gdm.enable = false;
+      desktopManager.gnome.enable = false;
       windowManager.herbstluftwm.enable = true;
       windowManager.xmonad.enable = true;
       windowManager.stumpwm.enable = false;
