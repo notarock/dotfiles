@@ -51,6 +51,11 @@
     sopsFile = ./secrets/wakatime.cfg;
     owner = "notarock";
   };
+  sops.secrets.openai = {
+    format = "binary";
+    sopsFile = ./secrets/openai.txt;
+    owner = "notarock";
+  };
 
   programs = {
     zsh.enable = true;

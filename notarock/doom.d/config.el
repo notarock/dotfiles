@@ -173,4 +173,8 @@
          ("<tab>" . 'copilot-accept-completion)
          ("TAB" . 'copilot-accept-completion)))
 
+(setq chatgpt-shell-openai-key
+      (lambda ()
+        (nth 0 (process-lines "cat" (concat (getenv "HOME") "/.openai.txt")))))
+
 ;;; config.el ends here

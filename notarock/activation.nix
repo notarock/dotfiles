@@ -26,6 +26,10 @@
       ln -sf ${osConfig.sops.secrets.wakatime.path} \
                 ~/.wakatime.cfg
     '';
+    openai-cfg = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+      ln -sf ${osConfig.sops.secrets.openai.path} \
+                ~/.openai.txt
+    '';
     set-wallpaper = config.lib.dag.entryAfter [ "writeBoundary" ] ''
       ${pkgs.feh}/bin/feh --bg-tile ~/.background-image
     '';

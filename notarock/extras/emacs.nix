@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, osConfig, lib, pkgs, inputs, ... }:
 
 let
   DOOMLOCALDIR = "${config.xdg.dataHome}/doom";
