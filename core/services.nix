@@ -9,8 +9,8 @@ with lib; {
   services = {
     xserver = {
       enable = true;
-      displayManager.sddm.enable = true;
-      desktopManager.plasma5.enable = true;
+      displayManager.sddm.enable = false;
+      desktopManager.plasma5.enable = false;
       desktopManager.plasma5.excludePackages = with pkgs.libsForQt5; [
         elisa
         gwenview
@@ -22,13 +22,15 @@ with lib; {
         print-manager
       ];
 
-      displayManager.gdm.enable = false;
-      desktopManager.gnome.enable = false;
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
       windowManager.herbstluftwm.enable = true;
-      windowManager.xmonad.enable = true;
+
+      windowManager.xmonad.enable = false;
       windowManager.stumpwm.enable = false;
       windowManager.ratpoison.enable = false;
       windowManager.stumpwm-wrapper.enable = false;
+
       layout = "ca,fr";
       dpi = config.my.dpi;
     };
