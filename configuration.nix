@@ -4,6 +4,8 @@
   system.stateVersion = "22.11";
   nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   imports = [
     ./core/enableFlake.nix
     ./core/system.nix
@@ -22,6 +24,7 @@
   };
 
   services.sshd.enable = true;
+
 
   # Sops config
   sops.defaultSopsFile = ./secrets/notarock.yaml;
@@ -63,7 +66,7 @@
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
-      pinentryFlavor = "gtk2";
+      pinentryFlavor = "gnome3";
     };
   };
 

@@ -5,6 +5,12 @@
     _1password
     _1password-gui
 
+    monero-cli
+
+   vscode-extensions.vscodevim.vim
+   vscode
+   
+
     wget
     curl
     ack
@@ -55,8 +61,8 @@
     vagrant
     libreoffice
     evince
-    gnome3.gedit
-    gnome3.pomodoro
+    gedit
+    pomodoro
     gimp
     krita
     vlc
@@ -64,7 +70,7 @@
     arandr
     peek
     transmission
-    postman
+    # postman
     chromium
     firefox
     brogue
@@ -82,14 +88,13 @@
     google-cloud-sdk
     # ansible
 
-    gnomeExtensions.dash-to-dock
-    gnomeExtensions.caffeine
-    gnomeExtensions.system-monitor
-    gnomeExtensions.appindicator
-    gnomeExtensions.paperwm
+    # gnomeExtensions.dash-to-dock
+    # gnomeExtensions.caffeine
+    # gnomeExtensions.system-monitor
+    # gnomeExtensions.appindicator
+    # gnomeExtensions.paperwm
 
     nodePackages.prettier
-    # nodejs-16_x
     spotify
     ccls
     clang-tools
@@ -135,21 +140,19 @@
     dmenu
     blueman
 
-    cheminot-ets
     awscli2
 
-    (retroarch.override {
-      cores = with libretro; [
-        bsnes-mercury
-        beetle-snes
-        mgba
-        mupen64plus
+    # (retroarch.override {
+    #   cores = with libretro; [
+    #     bsnes-mercury
+    #     mgba
+    #     mupen64plus
 
-        snes9x
-        snes9x2010
-        yabause
-      ];
-    })
+    #     snes9x
+    #     snes9x2010
+    #     yabause
+    #   ];
+    # })
 
     (import inputs.nixpkgs-stable { inherit (pkgs) config system; }).ansible
     (import inputs.nixpkgs-stable { inherit (pkgs) config system; }).screenkey

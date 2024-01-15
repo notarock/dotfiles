@@ -21,7 +21,7 @@ in {
     gotests
     gore
 
-    nodejs-19_x
+    nodejs_21
 
     python3
     nodePackages.pyright

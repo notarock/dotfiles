@@ -8,6 +8,15 @@
     extraGroups = [ "wheel" "docker" "video" ];
     shell = pkgs.zsh;
     initialPassword = "Ch4ngeMoi%%%";
+
+    openssh = let
+      authorizedKeys = pkgs.fetchurl {
+        url = "https://github.com/notarock.keys";
+        sha256 = "sha256-csW0RDWhKWyShy3/DzmMjRZTBS84VDdxecvpSgBTo6s=";
+      };
+    in {
+      authorizedKeys.keys =  pkgs.lib.splitString "\n" (builtins.readFile authorizedKeys);
+    };
   };
 
   home-manager = {
@@ -38,15 +47,15 @@
       ];
 
       home.file.".background-image".source = let
-        background = ../resources/bsd-grid.png;
-        bgOut = "bgOut.png";
-        wallpaper = pkgs.runCommandNoCC "wallpaper" { } ''
-          mkdir -p $out/share;
-          ${pkgs.imagemagick}/bin/convert ${background} \
-          -fill "${config.myTheme.color4}" -opaque white \
-          -fill "${config.myTheme.color0}" -opaque black ${bgOut} ;
-          cp -Lr ${bgOut} $out/share;
-        '';
+      background = ../resources/bsd-grid.png;
+      bgOut = "bgOut.png";
+      wallpaper = pkgs.runCommandNoCC "wallpaper" { } ''
+      mkdir -p $out/share;
+      ${pkgs.imagemagick}/bin/convert ${background} \
+      -fill "${config.myTheme.color4}" -opaque white \
+      -fill "${config.myTheme.color0}" -opaque black ${bgOut} ;
+      cp -Lr ${bgOut} $out/share;
+      '';
       in "${wallpaper}/share/${bgOut}";
 
       myTheme = import ../themes/base16-snazzy.nix;
@@ -86,7 +95,7 @@
         cbatticon = {
           enable = true;
           commandCriticalLevel = ''
-            notify-send "battery critical!"
+              notify-send "battery critical!"
           '';
         };
         nextcloud-client.enable = true;
@@ -103,9 +112,9 @@
       xresources.properties = {
         "xft.dpi" = toString osConfig.my.dpi;
         "XTerm*faceName" = "dejavu sans mono";
-      };
+        };
 
-    };
-  };
+        };
+        };
 
-}
+        }

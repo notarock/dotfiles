@@ -51,18 +51,6 @@
         config.allowUnfree = true;
         overlays = [
           (final: prev: {
-            # See: https://www.etsmtl.ca/en/studies/ChemiNot
-            cheminot-ets = prev.makeDesktopItem {
-              name = "ChemiNot";
-              exec = prev.writeShellScript "cheminot" ''
-                ${prev.icedtea_web}/bin/javaws <(curl 'https://cheminotjws.etsmtl.ca/ChemiNot.jnlp')
-              '';
-              comment =
-                "ChemiNot is an integrated consultation and registration system for ÉTS students";
-              desktopName = "ChemiNot";
-            };
-          })
-          (final: prev: {
             lispPackages = prev.lispPackages // {
               stumpwm = (prev.lispPackages.stumpwm.overrideAttrs (o: rec {
                 src = inputs.stumpwm;
