@@ -16,7 +16,6 @@ in {
     editorconfig-core-c
 
     gopls
-    gocode
     gomodifytags
     gotests
     gore
