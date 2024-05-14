@@ -1,10 +1,10 @@
-{ config, lib, pkgs, inputs, osConfig, ... }:
+{ confi, lib, pkgs, inputs, osConfig, ... }:
 
 {
   programs = {
     go = {
       enable = true;
-      package = pkgs.go_1_20;
+      package = pkgs.go_1_22;
       packages = {
         "github.com/motemen/gore/cmd/gore" = inputs.gore;
         "github.com/mdempsky/gocode" = inputs.gotools;
@@ -25,9 +25,8 @@
       nix-direnv = { enable = true; };
     };
 
-    exa = {
+    eza = {
       enable = true;
-      enableAliases = true;
     };
 
     feh.enable = true;

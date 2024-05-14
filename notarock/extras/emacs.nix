@@ -20,7 +20,7 @@ in {
     gotests
     gore
 
-    nodejs_21
+    # nodejs_21
 
     python3
     nodePackages.pyright
@@ -47,7 +47,10 @@ in {
     })
   ];
 
-  programs.emacs = { enable = true; };
+  programs.emacs = { 
+    enable = true;
+    package = pkgs.emacs29-pgtk;
+  };
 
   home.sessionVariables = { inherit DOOMLOCALDIR DOOMDIR; };
   systemd.user.sessionVariables = { inherit DOOMLOCALDIR DOOMDIR; };

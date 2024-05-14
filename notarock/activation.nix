@@ -31,7 +31,7 @@
                 ~/.openai.txt
     '';
     set-wallpaper = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-      ${pkgs.feh}/bin/feh --bg-tile ~/.background-image
+      ${pkgs.feh}/bin/feh --bg-tile ~/.background-image || true
     '';
   };
 
