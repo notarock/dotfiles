@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ... }:
 
 {
-  system.stateVersion = "22.11";
+  system.stateVersion = "24.11";
   nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
@@ -23,7 +23,6 @@
   };
 
   services.sshd.enable = true;
-
 
   # Sops config
   sops.defaultSopsFile = ./secrets/notarock.yaml;
@@ -69,8 +68,8 @@
   };
 
   fonts = {
-    enableDefaultFonts = true;
-    fonts = with pkgs; [
+    enableDefaultPackages = true;
+    packages = with pkgs; [
       nerdfonts
       dejavu_fonts
       open-sans
@@ -126,7 +125,6 @@
   ];
   systemd.services.NetworkManager-wait-online.enable = false;
 
-
   # Enable OpenGL
   hardware.opengl = {
     enable = true;
@@ -135,7 +133,7 @@
   };
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
 
@@ -162,12 +160,11 @@
     open = false;
 
     # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
+    # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-
 
 }

@@ -21,7 +21,7 @@ in {
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
 
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
@@ -59,7 +59,7 @@ in {
 
   virtualisation = {
     libvirtd.enable = false;
-    virtualbox.host.enable = true;
+    virtualbox.host.enable = false;
     docker.enable = true;
   };
 

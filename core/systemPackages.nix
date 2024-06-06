@@ -49,7 +49,6 @@
     openconnect
 
     jre
-    adoptopenjdk-openj9-bin-16
 
     noto-fonts-emoji
   ];
