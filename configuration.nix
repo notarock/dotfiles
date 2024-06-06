@@ -4,12 +4,12 @@
   system.stateVersion = "24.11";
   nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-
   imports = [
     ./system
     ./notarock
   ];
+
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   services.xserver.desktopManager.wallpaper.mode = "tile";
 

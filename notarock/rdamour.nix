@@ -145,7 +145,7 @@
       enable = true;
       # separator = "solid";
       font = "Essential PragmataPro 14";
-      theme = "/etc/nixos/extras/rofi/conf";
+      # theme = "/etc/nixos/extras/rofi/conf";
       plugins = with pkgs; [ rofi-emoji ];
     };
 

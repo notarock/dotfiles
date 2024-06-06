@@ -21,9 +21,9 @@
     gomodifytags.url = "github:fatih/gomodifytags";
     gomodifytags.flake = false;
 
-    stumpwm.url =
-      "github:/stumpwm/stumpwm/fff2508fd54b4035b0d80bafbd75a13f1756130f";
-    stumpwm.flake = false;
+    # stumpwm.url =
+    #   "github:/stumpwm/stumpwm/fff2508fd54b4035b0d80bafbd75a13f1756130f";
+    # stumpwm.flake = false;
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, sops-nix, ... }:
@@ -51,12 +51,12 @@
         config.allowUnfree = true;
         overlays = [
           (final: prev: {
-            lispPackages = prev.lispPackages // {
-              stumpwm = (prev.lispPackages.stumpwm.overrideAttrs (o: rec {
-                src = inputs.stumpwm;
-                version = "22.11";
-              }));
-            };
+            # lispPackages = prev.lispPackages // {
+            #   stumpwm = (prev.lispPackages.stumpwm.overrideAttrs (o: rec {
+            #     src = inputs.stumpwm;
+            #     version = "22.11";
+            #   }));
+            # };
           })
         ];
       };
@@ -73,7 +73,6 @@
             { home-manager.extraSpecialArgs = { inherit inputs; }; }
             { nixpkgs.overlays = [ inputs.emacs-overlay.overlay ]; }
             sops-nix.nixosModules.sops
-            ./extras/stumpwm-wrapper.nix
           ];
           pkgs = myPkgs;
         };
