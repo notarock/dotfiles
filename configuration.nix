@@ -7,11 +7,7 @@
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   imports = [
-    ./core/enableFlake.nix
-    ./core/system.nix
-    ./core/keychron.nix
-    ./core/services.nix
-    ./core/systemPackages.nix
+    ./system
     ./notarock
   ];
 
