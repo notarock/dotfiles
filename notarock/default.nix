@@ -46,17 +46,17 @@
         ./extras/xmonad.nix
       ];
 
-      home.file.".background-image".source = let
-      background = ../resources/bsd-grid.png;
-      bgOut = "bgOut.png";
-      wallpaper = pkgs.runCommandNoCC "wallpaper" { } ''
-      mkdir -p $out/share;
-      ${pkgs.imagemagick}/bin/convert ${background} \
-      -fill "${config.myTheme.color4}" -opaque white \
-      -fill "${config.myTheme.color0}" -opaque black ${bgOut} ;
-      cp -Lr ${bgOut} $out/share;
-      '';
-      in "${wallpaper}/share/${bgOut}";
+      # home.file.".background-image".source = let
+      # background = ../resources/bsd-grid.png;
+      # bgOut = "bgOut.png";
+      # wallpaper = pkgs.runCommandNoCC "wallpaper" { } ''
+      # mkdir -p $out/share;
+      # ${pkgs.imagemagick}/bin/convert ${background} \
+      # -fill "${config.myTheme.color4}" -opaque white \
+      # -fill "${config.myTheme.color0}" -opaque black ${bgOut} ;
+      # cp -Lr ${bgOut} $out/share;
+      # '';
+      # in "${wallpaper}/share/${bgOut}";
 
       myTheme = import ../themes/base16-snazzy.nix;
 
