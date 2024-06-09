@@ -1,8 +1,12 @@
-{ config, pkgs, inputs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 # defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 
-{
+let
+    inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+in
+
+(lib.mkIf isDarwin (builtins.trace "Base system imports was set to Darwin" {
   nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
 
   imports = [ ./core/enableFlake.nix ./core/systemPackages.nix ];
@@ -29,43 +33,6 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-  };
-
-  # Homebrew integration
-  homebrew = {
-    enable = true;
-    # brewPrefix = "/usr/local/bin";
-    brews = [ "java" ];
-    onActivation = {
-      cleanup = "zap";
-      upgrade = true;
-    };
-    taps = [
-      "homebrew/cask"
-      #      "homebrew/cask-drivers"
-    ];
-    casks = [
-      "obs"
-      "gimp"
-      "nextcloud"
-      "krita"
-      "visual-studio-code"
-      "microsoft-office"
-      # "yubico-yubikey-manager"
-      "steam"
-      "raycast"
-      "1password"
-      "discord"
-      "spotify"
-      "slack"
-      "kitty"
-      "rectangle"
-      "firefox"
-      "google-chrome"
-      "lens"
-      "mpv"
-      "yubico-authenticator"
-    ];
   };
 
   # Auto upgrade nix package and the daemon service.
@@ -126,5 +93,42 @@
 
   services.skhd.enable = false;
 
-}
 
+  # Homebrew integration
+  homebrew = {
+    enable = true;
+    # brewPrefix = "/usr/local/bin";
+    brews = [ "java" ];
+    onActivation = {
+      cleanup = "zap";
+      upgrade = true;
+    };
+    taps = [
+      "homebrew/cask"
+      #      "homebrew/cask-drivers"
+    ];
+    casks = [
+      "obs"
+      "gimp"
+      "nextcloud"
+      "krita"
+      "visual-studio-code"
+      "microsoft-office"
+      # "yubico-yubikey-manager"
+      "steam"
+      "raycast"
+      "1password"
+      "discord"
+      "spotify"
+      "slack"
+      "kitty"
+      "rectangle"
+      "firefox"
+      "google-chrome"
+      "lens"
+      "mpv"
+      "yubico-authenticator"
+    ];
+  };
+
+}))

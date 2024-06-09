@@ -12,7 +12,7 @@
     openssh = let
       authorizedKeys = pkgs.fetchurl {
         url = "https://github.com/notarock.keys";
-        sha256 = "sha256-csW0RDWhKWyShy3/DzmMjRZTBS84VDdxecvpSgBTo6s=";
+        sha256 = "sha256-Vpwl6LWnIj4K94OxxAb51gS3Ry0ZLDWJLMdV6zlArUc=";
       };
     in {
       authorizedKeys.keys =  pkgs.lib.splitString "\n" (builtins.readFile authorizedKeys);

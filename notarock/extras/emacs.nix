@@ -1,5 +1,6 @@
 { config, osConfig, lib, pkgs, inputs, ... }:
 
+
 let
   DOOMLOCALDIR = "${config.xdg.dataHome}/doom";
   DOOMDIR = "${config.xdg.configHome}/doom";
@@ -23,7 +24,6 @@ in {
     # nodejs_21
 
     python3
-    nodePackages.pyright
     terraform
 
     haskellPackages.haskell-language-server

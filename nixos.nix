@@ -1,13 +1,10 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
-{
-  system.stateVersion = "24.11";
-  nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
-
-  imports = [
-    ./system
-    ./notarock
-  ];
+let
+  inherit (lib) mkIf mkMerge optional;
+  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+in
+(mkIf isLinux (builtins.trace "Base system imports was set to Nixos" {
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
@@ -163,4 +160,4 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-}
+}))

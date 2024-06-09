@@ -75,11 +75,13 @@
           specialArgs = { inherit inputs; };
           modules = [
             hardwareConfig
-            ./configuration.nix
             home-manager.nixosModules.home-manager
             { home-manager.extraSpecialArgs = { inherit inputs; }; }
             { nixpkgs.overlays = [ inputs.emacs-overlay.overlay ]; }
             sops-nix.nixosModules.sops
+            ./nixos.nix
+            ./system
+            ./notarock
           ];
           pkgs = myPkgs;
         };
@@ -109,7 +111,8 @@
           system = system;
           specialArgs = { inherit inputs; };
           modules = [
-            ./darwin-configuration.nix
+            ./darwin.nix
+            ./configuration.nix
             home-manager.darwinModules.home-manager
             (mkBaseUser {
               inherit username;
@@ -164,7 +167,6 @@
         # NixOS desktop config
         rdamour = home-manager.lib.homeManagerConfiguration {
           extraSpecialArgs = { inherit inputs; };
-          pkgs = myPkgs;
           modules = [
             ./notarock/rdamour.nix
             {
