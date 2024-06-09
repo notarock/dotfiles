@@ -14,7 +14,6 @@ with lib; {
       windowManager.stumpwm.enable = false;
       windowManager.ratpoison.enable = false;
       # windowManager.stumpwm-wrapper.enable = false;
-      xkb.layout = "ca,fr";
       dpi = config.my.dpi;
     };
 

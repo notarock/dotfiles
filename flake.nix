@@ -11,6 +11,9 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-21.11";
     nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
+    darwin.url = "github:lnl7/nix-darwin/master";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
+
     gotools.url = "git+https://go.googlesource.com/tools";
     gotools.flake = false;
 
@@ -21,12 +24,9 @@
     gomodifytags.url = "github:fatih/gomodifytags";
     gomodifytags.flake = false;
 
-    # stumpwm.url =
-    #   "github:/stumpwm/stumpwm/fff2508fd54b4035b0d80bafbd75a13f1756130f";
-    # stumpwm.flake = false;
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, sops-nix, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, sops-nix, darwin, ... }:
     let
       system = "x86_64-linux";
       nixpkgsPatched = let originPkgs = (import nixpkgs { inherit system; });
@@ -46,21 +46,28 @@
         ];
       };
 
+      # Patched nixpkgs with add-ons
       myPkgs = import nixpkgsPatched {
         inherit system;
         config.allowUnfree = true;
         overlays = [
           (final: prev: {
-            # lispPackages = prev.lispPackages // {
-            #   stumpwm = (prev.lispPackages.stumpwm.overrideAttrs (o: rec {
-            #     src = inputs.stumpwm;
-            #     version = "22.11";
-            #   }));
-            # };
+            # See: https://www.etsmtl.ca/en/studies/ChemiNot
+            # Stolen from berbiche :trollface:
+            cheminot-ets = prev.makeDesktopItem {
+              name = "ChemiNot";
+              exec = prev.writeShellScript "cheminot" ''
+                ${prev.icedtea_web}/bin/javaws <(curl 'https://cheminotjws.etsmtl.ca/ChemiNot.jnlp')
+              '';
+              comment =
+                "ChemiNot is an integrated consultation and registration system for ÉTS dentues";
+              desktopName = "ChemiNot";
+            };
           })
         ];
       };
-      mkNixosConfiguration = { hostname }:
+
+      mkNixosConfiguration = { hostname, username }:
         let
           hardwareConfig = ./hosts + "/${hostname}/hardware-configuration.nix";
         in nixpkgs.lib.nixosSystem {
@@ -77,11 +84,82 @@
           pkgs = myPkgs;
         };
 
+      mkBaseUser = { username, email, system }:
+        let
+          isDarwin = if system == "x86_64-linux" then false else true;
+          rootUser = if isDarwin then "@admin" else "root";
+          homePath =
+            if isDarwin then "/Users/${username}" else "/home/${username}";
+        in {
+          home-manager.users.${username} = {
+            home.username = username;
+            programs.git.userEmail = email;
+          };
+          home-manager.extraSpecialArgs = { inherit inputs; };
+          nix.settings.trusted-users = [ username rootUser ];
+          users.users.${username} = {
+            home = homePath;
+            isHidden = false;
+            shell = nixpkgs.zsh;
+          };
+        };
+
+      mkDarwinConfiguration = { hostname, system, username, email }:
+        darwin.lib.darwinSystem {
+          system = system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./darwin-configuration.nix
+            home-manager.darwinModules.home-manager
+            (mkBaseUser {
+              inherit username;
+              inherit email;
+              inherit system;
+            })
+            {
+              home-manager.users.${username}.imports = [ ./notarock/roch.nix ];
+            }
+          ];
+        };
+
     in {
+
+      # NixOS configurations
+      # nixos-rebuild switch -I nixos-config=hosts/Zonnarth/configuration.nix
       nixosConfigurations = {
         Zonnarth = mkNixosConfiguration { hostname = "Zonnarth"; };
-        Kreizemm = mkNixosConfiguration { hostname = "Kreizemm"; };
+        Kreizemm = mkNixosConfiguration { hostname = "Kreizemm"; username = "notarock"; };
       };
+
+      # Darwin configurations
+      darwinConfigurations = {
+        Wistari = mkDarwinConfiguration { # Macbook Pro 16" 2019 for work
+          hostname = "Wistari";
+          username = "roch";
+          email =
+            "roch.damour@arctiq.ca"; # If you email me here I *will* ignore you.
+          system = "x86_64-darwin";
+        };
+
+        Hectasio = mkDarwinConfiguration { # Mac M2 Max
+          hostname = "Hectasio";
+          username = "notarock";
+          email =
+            "roch.damour@gmail.com"; # If you email me here I *will* ignore you.
+          system = "aarch64-darwin";
+        };
+
+        hectasio = mkDarwinConfiguration { # Mac M2 Max
+          hostname = "Hectasio";
+          username = "notarock";
+          email =
+            "roch.damour@gmail.com"; # If you email me here I *will* ignore you.
+          system = "aarch64-darwin";
+        };
+      };
+
+      # Home Manager configurations
+      # For use with non NixOS/Darwin systems.
       homeConfigurations = {
         # NixOS desktop config
         rdamour = home-manager.lib.homeManagerConfiguration {
@@ -96,7 +174,6 @@
                 stateVersion = "22.11";
               };
               nixpkgs.config = { allowUnfree = true; };
-
             }
           ];
         };
