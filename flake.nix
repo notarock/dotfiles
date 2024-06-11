@@ -67,25 +67,6 @@
         ];
       };
 
-      mkNixosConfiguration = { hostname, username }:
-        let
-          hardwareConfig = ./hosts + "/${hostname}/hardware-configuration.nix";
-        in nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [
-            hardwareConfig
-            home-manager.nixosModules.home-manager
-            { home-manager.extraSpecialArgs = { inherit inputs; }; }
-            { nixpkgs.overlays = [ inputs.emacs-overlay.overlay ]; }
-            sops-nix.nixosModules.sops
-            ./nixos.nix
-            ./system
-            ./notarock
-          ];
-          pkgs = myPkgs;
-        };
-
       mkBaseUser = { username, email, system }:
         let
           isDarwin = if system == "x86_64-linux" then false else true;
@@ -103,7 +84,31 @@
             home = homePath;
             isHidden = false;
             shell = nixpkgs.zsh;
+            imports = [ ./home ];
           };
+        };
+
+      mkNixosConfiguration = { hostname, username }:
+        let
+          hardwareConfig = ./hosts + "/${hostname}/hardware-configuration.nix";
+        in nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            hardwareConfig
+            home-manager.nixosModules.home-manager
+            { home-manager.extraSpecialArgs = { inherit inputs; }; }
+            { nixpkgs.overlays = [ inputs.emacs-overlay.overlay ]; }
+            sops-nix.nixosModules.sops
+            ./nixos.nix
+            ./system
+            (mkBaseUser {
+              inherit username;
+              inherit email;
+              inherit system;
+            })
+          ];
+          pkgs = myPkgs;
         };
 
       mkDarwinConfiguration = { hostname, system, username, email }:
@@ -119,9 +124,6 @@
               inherit email;
               inherit system;
             })
-            {
-              home-manager.users.${username}.imports = [ ./notarock/roch.nix ];
-            }
           ];
         };
 
@@ -131,7 +133,10 @@
       # nixos-rebuild switch -I nixos-config=hosts/Zonnarth/configuration.nix
       nixosConfigurations = {
         Zonnarth = mkNixosConfiguration { hostname = "Zonnarth"; };
-        Kreizemm = mkNixosConfiguration { hostname = "Kreizemm"; username = "notarock"; };
+        Kreizemm = mkNixosConfiguration {
+          hostname = "Kreizemm";
+          username = "notarock";
+        };
       };
 
       # Darwin configurations
