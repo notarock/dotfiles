@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_elb
-# key: d_aws_elb
-# --
-
-data "aws_elb" "${1:this}" {
-    name = "${2:name}"
-}

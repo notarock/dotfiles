@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_network_interface
-# key: d_aws_network_interface
-# --
-
-data "aws_network_interface" "${1:this}" {
-}

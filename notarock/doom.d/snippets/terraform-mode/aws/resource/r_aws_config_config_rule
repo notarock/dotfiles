@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: r_aws_config_config_rule
-# key: r_aws_config_config_rule
-# --
-
-resource "aws_config_config_rule" "${1:this}" {
-    name = "${2:name}"
-}

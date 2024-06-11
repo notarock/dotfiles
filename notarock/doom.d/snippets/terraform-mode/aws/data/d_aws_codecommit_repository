@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_codecommit_repository
-# key: d_aws_codecommit_repository
-# --
-
-data "aws_codecommit_repository" "${1:this}" {
-    repository_name = "${2:repository_name}"
-}
