@@ -17,8 +17,9 @@
     ./extras/emacs.nix
     ./extras/zsh.nix
     ./extras/fzf.nix
-    ./extras/kitty.nix
     ./extras/starship.nix
+
+    ./programs/kitty.nix
   ];
 
   targets.genericLinux.enable = true;

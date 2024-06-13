@@ -53,7 +53,5 @@
       color14 = config.myTheme.color14;
       color15 = config.myTheme.color15;
     };
-
   };
-
 }
