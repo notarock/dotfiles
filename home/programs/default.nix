@@ -55,6 +55,7 @@
   imports = [
     ./go.nix
     ./kitty.nix
+    ./vim.nix
   ];
 
 }

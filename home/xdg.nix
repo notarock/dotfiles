@@ -2,7 +2,7 @@
 
 {
   xdg.mimeApps = {
-    enable = true;
+    enable = false;
     defaultApplications = let
       pdf = [ "org.gnome.Evince.desktop" ];
       browser = [ "firefox.desktop" ];
@@ -23,5 +23,4 @@
       "x-scheme-handler/zoommtg" = [ "us.zoom.Zoom.desktop" ];
     };
   };
-
 }

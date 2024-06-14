@@ -4,7 +4,7 @@
   programs.vim = {
     plugins = with pkgs.vimPlugins;
       [
-        #vim-wakatime
+        vim-wakatime
       ];
 
     enable = true;

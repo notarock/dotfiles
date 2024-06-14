@@ -13,42 +13,19 @@
     ./extras/polybar.nix
     ./extras/udiskie.nix
     # ./extras/dunst.nix
-    ./extras/vim.nix
     ./extras/emacs.nix
     ./extras/zsh.nix
     ./extras/fzf.nix
     ./extras/starship.nix
 
-    ./programs/kitty.nix
+    ./programs
+    ./xdg.nix
   ];
 
   targets.genericLinux.enable = true;
   programs.bash.enable = true;
 
   home.keyboard.layout = "ca,fr";
-
-  xdg.mimeApps = {
-    enable = false;
-    defaultApplications = let
-      pdf = [ "org.gnome.Evince.desktop" ];
-      browser = [ "firefox.desktop" ];
-      image = [ "org.nomacs.ImageLounge.desktop" ];
-    in {
-      "image/png" = image;
-      "image/jpeg" = image;
-      "image/pjpeg" = image;
-      "image/bmp" = image;
-      "image/gif" = image;
-      "image/fif" = image;
-      "application/pdf" = pdf;
-      "text/html" = browser;
-      "x-scheme-handler/http" = browser;
-      "x-scheme-handler/https" = browser;
-      "x-scheme-handler/about" = browser;
-      "x-scheme-handler/slack" = [ "slack.desktop" ];
-      "x-scheme-handler/zoommtg" = [ "us.zoom.Zoom.desktop" ];
-    };
-  };
 
   home.file.".background-image".source = let
     background = ../resources/bsd-grid.png;
