@@ -53,6 +53,11 @@
   };
 
   imports = [
+    # Linux specifics
+    ./dunst.nix
+
+
+    # Cross platform
     ./go.nix
     ./kitty.nix
     ./vim.nix

@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 
-{
+let 
+  inherit (pkgs.stdenv.hostPlatform) isLinux;
+in (lib.mkIf isLinux {
   services.dunst = {
     enable = true;
     settings = {
@@ -67,4 +69,5 @@
       size = "128x128";
     };
   };
-}
+})
+
