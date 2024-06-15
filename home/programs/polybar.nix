@@ -1,6 +1,9 @@
 { nixosConfig, config, osConfig, lib, pkgs, ... }:
 
-{
+
+let 
+  inherit (pkgs.stdenv.hostPlatform) isLinux;
+in (lib.mkIf isLinux {
   services.polybar = {
     enable = false;
     package = ((pkgs.polybar.overrideAttrs (old: {
@@ -306,5 +309,5 @@
       echo "|$output"
     '';
   };
+})
 
-}

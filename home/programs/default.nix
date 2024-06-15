@@ -1,6 +1,19 @@
 { confi, lib, pkgs, inputs, osConfig, ... }:
 
 {
+  imports = [
+    # Linux specifics
+    ./dunst.nix
+    ./polybar.nix
+
+    # Cross platform
+    ./go.nix
+    ./kitty.nix
+    ./vim.nix
+    ./fzf.nix
+    ./starship.nix
+  ];
+
   programs = {
     command-not-found.enable = true;
 
@@ -51,18 +64,5 @@
       extraConfig = { pull.rebase = false; };
     };
   };
-
-  imports = [
-    # Linux specifics
-    ./dunst.nix
-
-
-    # Cross platform
-    ./go.nix
-    ./kitty.nix
-    ./vim.nix
-    ./fzf.nix
-    ./starship.nix
-  ];
 
 }
