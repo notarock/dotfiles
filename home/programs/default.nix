@@ -7,6 +7,7 @@
     ./polybar.nix
 
     # Cross platform
+    ./emacs.nix
     ./go.nix
     ./kitty.nix
     ./vim.nix
