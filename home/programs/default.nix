@@ -56,6 +56,7 @@
     ./go.nix
     ./kitty.nix
     ./vim.nix
+    ./fzf.nix
   ];
 
 }
