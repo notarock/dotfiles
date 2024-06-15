@@ -57,6 +57,7 @@
     ./kitty.nix
     ./vim.nix
     ./fzf.nix
+    ./starship.nix
   ];
 
 }
