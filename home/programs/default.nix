@@ -4,6 +4,7 @@
   imports = [
     # Linux specifics
     ./dunst.nix
+    ./herbstluftwm.nix
     ./polybar.nix
     ./xmonad.nix
     ./udiskie.nix
