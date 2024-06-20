@@ -5,10 +5,11 @@
     # Linux specifics
     ./dunst.nix
     ./polybar.nix
+    ./xmonad.nix
+    ./udiskie.nix
 
     # Cross platform
     ./emacs.nix
-    ./xmonad.nix
     ./go.nix
     ./kitty.nix
     ./vim.nix
