@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 
-{
+let 
+  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+in (lib.mkIf isLinux {
   xdg.configFile."stumpwm" = {
     source = ./stumpwm;
     recursive = true;
@@ -38,4 +40,4 @@
       ;; End of file
     '';
   };
-}
+})
