@@ -3,7 +3,8 @@
 let
   gapWidth = "10";
   tags = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
-in {
+  inherit (pkgs.stdenv.hostPlatform) isLinux;
+in (lib.mkIf isLinux {
 
   xdg.configFile."xmonad" = {
     source = ../xmonad;
@@ -65,4 +66,4 @@ in {
     enableContribAndExtras = true;
     # config = lib.mkDefault /home/.xmonad/xmonad.hs;
   };
-}
+})

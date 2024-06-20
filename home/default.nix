@@ -9,15 +9,6 @@
 
     ./myTheme.nix
     ./packages.nix
-    ./extras/herbstluftwm.nix
-    ./extras/polybar.nix
-    ./extras/udiskie.nix
-    # ./extras/dunst.nix
-    ./extras/emacs.nix
-    ./extras/zsh.nix
-    ./extras/fzf.nix
-    ./extras/starship.nix
-
     ./programs
     ./xdg.nix
   ];

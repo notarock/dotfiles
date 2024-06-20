@@ -8,6 +8,7 @@
 
     # Cross platform
     ./emacs.nix
+    ./xmonad.nix
     ./go.nix
     ./kitty.nix
     ./vim.nix
