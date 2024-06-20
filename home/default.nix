@@ -7,9 +7,10 @@
     ../core/my/emacs.fontSize.nix
     ../core/my/emacs.fontSizeBig.nix
 
+    ./programs
+
     ./myTheme.nix
     ./packages.nix
-    ./programs
     ./xdg.nix
   ];
 
