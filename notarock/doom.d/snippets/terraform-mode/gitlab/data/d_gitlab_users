@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_gitlab_users
-# key: d_gitlab_users
-# --
-
-data "gitlab_users" "${1:this}" {
-}

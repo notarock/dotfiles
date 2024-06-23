@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_servicequotas_service
-# key: d_aws_servicequotas_service
-# --
-
-data "aws_servicequotas_service" "${1:this}" {
-    service_name = "${2:service_name}"
-}

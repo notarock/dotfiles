@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_sfn_activity
-# key: d_aws_sfn_activity
-# --
-
-data "aws_sfn_activity" "${1:this}" {
-}

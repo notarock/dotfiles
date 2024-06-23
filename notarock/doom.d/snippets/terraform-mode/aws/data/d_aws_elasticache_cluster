@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_elasticache_cluster
-# key: d_aws_elasticache_cluster
-# --
-
-data "aws_elasticache_cluster" "${1:this}" {
-    cluster_id = "${2:cluster_id}"
-}

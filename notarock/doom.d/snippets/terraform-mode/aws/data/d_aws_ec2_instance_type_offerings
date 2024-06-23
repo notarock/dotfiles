@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_ec2_instance_type_offerings
-# key: d_aws_ec2_instance_type_offerings
-# --
-
-data "aws_ec2_instance_type_offerings" "${1:this}" {
-}

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_ec2_transit_gateway_vpn_attachment
-# key: d_aws_ec2_transit_gateway_vpn_attachment
-# --
-
-data "aws_ec2_transit_gateway_vpn_attachment" "${1:this}" {
-}

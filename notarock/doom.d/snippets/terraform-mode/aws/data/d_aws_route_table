@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_route_table
-# key: d_aws_route_table
-# --
-
-data "aws_route_table" "${1:this}" {
-}

@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: r_aws_lightsail_domain
-# key: r_aws_lightsail_domain
-# --
-
-resource "aws_lightsail_domain" "${1:this}" {
-    domain_name = "${2:domain_name}"
-}

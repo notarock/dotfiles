@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: r_aws_kms_key
-# key: r_aws_kms_key
-# --
-
-resource "aws_kms_key" "${1:this}" {
-}

@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: r_aws_cloudwatch_event_target
-# key: r_aws_cloudwatch_event_target
-# --
-
-resource "aws_cloudwatch_event_target" "${1:this}" {
-    arn = "${2:arn}"
-    rule = "${3:rule}"
-}

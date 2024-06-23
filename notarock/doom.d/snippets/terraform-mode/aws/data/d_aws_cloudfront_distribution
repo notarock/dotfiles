@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_cloudfront_distribution
-# key: d_aws_cloudfront_distribution
-# --
-
-data "aws_cloudfront_distribution" "${1:this}" {
-    id = "${2:id}"
-}

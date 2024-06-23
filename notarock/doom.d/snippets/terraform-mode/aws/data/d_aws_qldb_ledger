@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_qldb_ledger
-# key: d_aws_qldb_ledger
-# --
-
-data "aws_qldb_ledger" "${1:this}" {
-    name = "${2:name}"
-}

@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: r_checkpoint_management_wildcard
-# key: r_checkpoint_management_wildcard
-# --
-
-resource "checkpoint_management_wildcard" "${1:this}" {
-    name = "${2:name}"
-}

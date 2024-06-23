@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_security_groups
-# key: d_aws_security_groups
-# --
-
-data "aws_security_groups" "${1:this}" {
-}

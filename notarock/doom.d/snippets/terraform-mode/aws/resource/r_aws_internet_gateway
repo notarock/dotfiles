@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: r_aws_internet_gateway
-# key: r_aws_internet_gateway
-# --
-
-resource "aws_internet_gateway" "${1:this}" {
-}

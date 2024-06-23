@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_ecr_authorization_token
-# key: d_aws_ecr_authorization_token
-# --
-
-data "aws_ecr_authorization_token" "${1:this}" {
-}

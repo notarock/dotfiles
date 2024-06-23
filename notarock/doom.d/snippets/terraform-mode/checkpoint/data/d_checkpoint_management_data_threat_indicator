@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_checkpoint_management_data_threat_indicator
-# key: d_checkpoint_management_data_threat_indicator
-# --
-
-data "checkpoint_management_data_threat_indicator" "${1:this}" {
-}

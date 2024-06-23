@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_lex_slot_type
-# key: d_aws_lex_slot_type
-# --
-
-data "aws_lex_slot_type" "${1:this}" {
-    name = "${2:name}"
-}

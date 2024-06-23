@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_vpc_peering_connections
-# key: d_aws_vpc_peering_connections
-# --
-
-data "aws_vpc_peering_connections" "${1:this}" {
-}

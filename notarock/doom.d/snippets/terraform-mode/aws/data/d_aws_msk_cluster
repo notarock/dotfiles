@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_msk_cluster
-# key: d_aws_msk_cluster
-# --
-
-data "aws_msk_cluster" "${1:this}" {
-    cluster_name = "${2:cluster_name}"
-}
