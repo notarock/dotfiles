@@ -8,6 +8,7 @@
     ../core/my/emacs.fontSizeBig.nix
 
     ./programs
+    ./options
 
     ./myTheme.nix
     ./packages.nix
