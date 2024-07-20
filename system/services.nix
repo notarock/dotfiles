@@ -14,7 +14,7 @@ with lib; {
       windowManager.stumpwm.enable = false;
       windowManager.ratpoison.enable = false;
       # windowManager.stumpwm-wrapper.enable = false;
-      dpi = config.my.dpi;
+      # dpi = config.my.dpi;
     };
 
     redshift = {

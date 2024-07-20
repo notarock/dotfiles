@@ -1,19 +1,7 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 let inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
-in (mkIf isLinux {
-  # Wallpaper generator
-  # home.file.".background-image".source = let
-  #   background = ../resources/bsd-grid.png;
-  #   bgOut = "bgOut.png";
-  #   wallpaper = pkgs.runCommandNoCC "wallpaper" { } ''
-  #     	mkdir -p $out/share;
-  #     ${pkgs.imagemagick}/bin/convert ${background} \
-  #     	-fill "${config.myTheme.color14}" -opaque white \
-  #     	-fill "${config.myTheme.color0}" -opaque black ${bgOut} ;
-  #     cp -Lr ${bgOut} $out/share;
-  #   '';
-  # in "${wallpaper}/share/${bgOut}";
+in (lib.mkIf isLinux {
 
   gtk = {
     enable = true;

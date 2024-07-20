@@ -15,8 +15,6 @@ in {
   #  # };
   #};
 
-  imports = [ ./my/dpi.nix ./my/emacs.fontSize.nix ./my/emacs.fontSizeBig.nix ];
-
   nix.settings.auto-optimise-store = true;
 
   boot.loader.systemd-boot.enable = true;

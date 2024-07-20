@@ -1,12 +1,11 @@
 { config, osConfig, lib, pkgs, inputs, ... }:
 
-
 let
   DOOMLOCALDIR = "${config.xdg.dataHome}/doom";
   DOOMDIR = "${config.xdg.configHome}/doom";
   EMACSDIR = "${config.xdg.configHome}/emacs";
   inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
-  emacs_package = if isLinux then pkgs.emacs29-pgtk else pkgs.emacs29
+  emacs_package = if isLinux then pkgs.emacs29-pgtk else pkgs.emacs29;
 in {
   home.packages = with pkgs; [
     nixfmt
@@ -49,7 +48,7 @@ in {
     })
   ];
 
-  programs.emacs = { 
+  programs.emacs = {
     enable = true;
     package = emacs_package;
   };
@@ -69,7 +68,7 @@ in {
 
   xdg.configFile."doom" = {
     recursive = true;
-    source = ../doom.d;
+    source = ../configs/doom.d;
     force = true;
   };
 

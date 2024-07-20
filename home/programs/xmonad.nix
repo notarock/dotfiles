@@ -7,7 +7,7 @@ let
 in (lib.mkIf isLinux {
 
   xdg.configFile."xmonad" = {
-    source = ../xmonad;
+    source = ../configs/xmonad;
     recursive = true;
   };
 

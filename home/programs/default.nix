@@ -54,7 +54,7 @@ in {
       font = "Essential PragmataPro 14";
       # theme = "/etc/nixos/extras/rofi/conf";
       plugins = with pkgs; [ rofi-emoji ];
-      extraConfig = { dpi = osConfig.my.dpi; };
+      # extraConfig = { dpi = osConfig.my.dpi; };
     };
 
   };
