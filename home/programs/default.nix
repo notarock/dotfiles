@@ -1,6 +1,7 @@
 { confi, lib, pkgs, inputs, osConfig, ... }:
 
-{
+let inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+in {
   imports = [
     # Linux specifics
     ./dunst.nix
@@ -8,6 +9,7 @@
     ./polybar.nix
     ./xmonad.nix
     ./udiskie.nix
+    ./gui.nix
 
     # Cross platform
     ./emacs.nix
@@ -28,11 +30,9 @@
       nix-direnv = { enable = true; };
     };
 
-    eza = {
-      enable = true;
-    };
+    eza = { enable = true; };
 
-    feh.enable = true;
+    feh.enable = isLinux;
 
     gh = {
       enable = true;
@@ -49,7 +49,7 @@
     };
 
     rofi = {
-      enable = true;
+      enable = isLinux;
       # separator = "solid";
       font = "Essential PragmataPro 14";
       # theme = "/etc/nixos/extras/rofi/conf";
@@ -57,17 +57,6 @@
       extraConfig = { dpi = osConfig.my.dpi; };
     };
 
-    git = {
-      difftastic = {
-        enable = true;
-        background = "light";
-        color = "always";
-      };
-      delta.enable = false;
-      enable = true;
-      userName = "Roch D'Amour";
-      extraConfig = { pull.rebase = false; };
-    };
   };
 
 }

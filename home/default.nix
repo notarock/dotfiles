@@ -3,10 +3,6 @@
 {
 
   imports = [
-    ../core/my/dpi.nix
-    ../core/my/emacs.fontSize.nix
-    ../core/my/emacs.fontSizeBig.nix
-
     ./programs
     ./options
 
@@ -16,9 +12,243 @@
   ];
 
   targets.genericLinux.enable = true;
+
   programs.bash.enable = true;
 
   home.keyboard.layout = "ca,fr";
+
+  myTheme = import ../themes/base16-brewer.nix;
+
+  manual = {
+    html.enable = true;
+    manpages.enable = true;
+  };
+
+    feh.enable = true;
+
+    gh = {
+      enable = true;
+      settings = {
+        git_protocol = "ssh";
+
+        prompt = "enabled";
+      };
+    };
+
+    broot = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    rofi = {
+      enable = true;
+      # separator = "solid";
+      font = "Essential PragmataPro 14";
+      # theme = "/etc/nixos/extras/rofi/conf";
+      plugins = with pkgs; [ rofi-emoji ];
+    };
+
+    git = {
+      delta.enable = false;
+      diff-so-fancy.enable = true;
+      difftastic.enable = false;
+      enable = true;
+      userName = "Roch D'Amour";
+      userEmail = "rdamour@stingray.com";
+      extraConfig = {
+        pull.rebase = true;
+        url = {
+          "ssh://git@gitlab.stingray-tooling.com/" = {
+            insteadOf = "https://gitlab.stingray-tooling.com/";
+          };
+        };
+      };
+    };
+  };
+
+  services = {
+    picom = {
+      enable = true;
+      shadow = false;
+      vSync = true;
+    };
+    flameshot = { enable = true; };
+  };
+
+  xresources.properties = { "XTerm*faceName" = "dejavu sans mono"; };
+
+}
+{ config, pkgs, inputs, ... }:
+
+{
+  users.users.notarock = {
+    isNormalUser = true;
+    home = "/home/notarock";
+    description = "Nickname for root";
+    extraGroups = [ "wheel" "docker" "video" ];
+    shell = pkgs.zsh;
+    initialPassword = "Ch4ngeMoi%%%";
+
+    openssh = let
+      authorizedKeys = pkgs.fetchurl {
+        url = "https://github.com/notarock.keys";
+        sha256 = "sha256-Vpwl6LWnIj4K94OxxAb51gS3Ry0ZLDWJLMdV6zlArUc=";
+      };
+    in {
+      authorizedKeys.keys =
+        pkgs.lib.splitString "\n" (builtins.readFile authorizedKeys);
+    };
+  };
+
+  home-manager = {
+    users.root.home.stateVersion = "22.11";
+    users.root.programs.git = {
+      enable = true;
+      extraConfig.safe.directory = "/home/notarock/src/dotfiles";
+    };
+
+    users.notarock = { pkgs, config, osConfig, ... }: {
+      imports = [
+        ./xdg.nix
+        ./activation.nix
+        ./programs.nix
+        ./myTheme.nix
+        ./packages.nix
+        ./extras/herbstluftwm.nix
+        ./extras/polybar.nix
+        ./extras/udiskie.nix
+        ./extras/dunst.nix
+        ./extras/vim.nix
+        ./extras/emacs.nix
+        ./extras/zsh.nix
+        ./extras/fzf.nix
+        ./extras/kitty.nix
+        ./extras/starship.nix
+        ./extras/xmonad.nix
+      ];
+
+      # home.file.".background-image".source = let
+      # background = ../resources/bsd-grid.png;
+      # bgOut = "bgOut.png";
+      # wallpaper = pkgs.runCommandNoCC "wallpaper" { } ''
+      # mkdir -p $out/share;
+      # ${pkgs.imagemagick}/bin/convert ${background} \
+      # -fill "${config.myTheme.color4}" -opaque white \
+      # -fill "${config.myTheme.color0}" -opaque black ${bgOut} ;
+      # cp -Lr ${bgOut} $out/share;
+      # '';
+      # in "${wallpaper}/share/${bgOut}";
+
+      myTheme = import ../themes/base16-snazzy.nix;
+
+      manual = {
+        html.enable = true;
+        manpages.enable = true;
+      };
+
+      home = {
+        stateVersion = "22.11";
+        username = "notarock";
+        packages = with pkgs; [ xss-lock xsecurelock ];
+        enableNixpkgsReleaseCheck = true;
+      };
+
+      gtk = {
+        enable = true;
+        iconTheme.package = pkgs.numix-icon-theme-square;
+        iconTheme.name = "Numix-Square";
+        font.name = "IBM Plex Sans Text";
+        font.package = pkgs.ibm-plex;
+        font.size = 11;
+        theme.package = pkgs.plata-theme;
+        theme.name = "Plata";
+      };
+
+      home.keyboard.layout = "ca,fr";
+      home.pointerCursor = {
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Ice";
+        size = 48;
+      };
+
+      services = {
+        volnoti = { enable = true; };
+        cbatticon = {
+          enable = true;
+          commandCriticalLevel = ''
+            notify-send "battery critical!"
+          '';
+        };
+        nextcloud-client.enable = true;
+        picom = {
+          enable = true;
+          shadow = false;
+          vSync = true;
+          fade = true;
+          fadeDelta = 2;
+        };
+        flameshot = { enable = true; };
+      };
+
+      xresources.properties = {
+        "xft.dpi" = toString osConfig.my.dpi;
+        "XTerm*faceName" = "dejavu sans mono";
+      };
+
+    };
+  };
+
+}
+{ config, pkgs, inputs, ... }:
+
+{
+
+  imports = [
+    ../core/my/dpi.nix
+    ../core/my/emacs.fontSize.nix
+    ../core/my/emacs.fontSizeBig.nix
+
+    ./myTheme.nix
+    ./packages.nix
+    ./extras/herbstluftwm.nix
+    ./extras/polybar.nix
+    ./extras/udiskie.nix
+    # ./extras/dunst.nix
+    ./extras/vim.nix
+    ./extras/emacs.nix
+    ./extras/zsh.nix
+    ./extras/fzf.nix
+    ./extras/kitty.nix
+    ./extras/starship.nix
+  ];
+
+  targets.genericLinux.enable = true;
+  programs.bash.enable = true;
+
+  home.keyboard.layout = "ca,fr";
+
+  xdg.mimeApps = {
+    enable = false;
+    defaultApplications = let
+      pdf = [ "org.gnome.Evince.desktop" ];
+      browser = [ "firefox.desktop" ];
+      image = [ "org.nomacs.ImageLounge.desktop" ];
+    in {
+      "image/png" = image;
+      "image/jpeg" = image;
+      "image/pjpeg" = image;
+      "image/bmp" = image;
+      "image/gif" = image;
+      "image/fif" = image;
+      "application/pdf" = pdf;
+      "text/html" = browser;
+      "x-scheme-handler/http" = browser;
+      "x-scheme-handler/https" = browser;
+      "x-scheme-handler/about" = browser;
+      "x-scheme-handler/slack" = [ "slack.desktop" ];
+      "x-scheme-handler/zoommtg" = [ "us.zoom.Zoom.desktop" ];
+    };
+  };
 
   home.file.".background-image".source = let
     background = ../resources/bsd-grid.png;
@@ -148,5 +378,58 @@
   };
 
   xresources.properties = { "XTerm*faceName" = "dejavu sans mono"; };
+
+}
+{ config, pkgs, inputs, ... }:
+
+{
+  imports = [
+    ./programs.nix
+    ./myTheme.nix
+    ./packages.nix
+    ./extras/vim.nix
+    ./extras/emacs.nix
+    ./extras/zsh.nix
+    ./extras/fzf.nix
+    ./extras/kitty.nix
+    ./extras/starship.nix
+  ];
+
+  myTheme = import ../themes/base16-monokai.nix;
+
+  manual = {
+    html.enable = true;
+    manpages.enable = true;
+  };
+
+  home = {
+    stateVersion = "22.11";
+    enableNixpkgsReleaseCheck = true;
+  };
+
+  home.keyboard.layout = "ca,fr";
+
+  xdg.configFile."scripts/emacs.sh" = {
+    executable = true;
+    text = ''
+      #!/bin/zsh
+
+      # Required parameters:
+      # @raycast.schemaVersion 1
+      # @raycast.title emacs
+      # @raycast.mode silent
+
+      # Optional parameters:
+      # @raycast.icon 🤖
+
+      # Documentation:
+      # @raycast.description emacs from shell
+      # @raycast.author Roch
+
+      # zsh -c /Users/roch/.nix-profile/bin/emacs
+
+      osascript -e 'activate application "emacs"'
+    '';
+  };
 
 }

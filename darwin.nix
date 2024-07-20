@@ -2,11 +2,9 @@
 
 # defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 
-let
-    inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
-in
+let inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
 
-(lib.mkIf isDarwin (builtins.trace "Base system imports was set to Darwin" {
+in (lib.mkIf isDarwin (builtins.trace "Base system imports was set to Darwin" {
   nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
 
   imports = [ ./core/enableFlake.nix ./core/systemPackages.nix ];
@@ -90,9 +88,7 @@ in
     "/System/Library/Sounds/Frog.aiff";
 
   system.defaults.dock.show-recents = false;
-
   services.skhd.enable = false;
-
 
   # Homebrew integration
   homebrew = {
