@@ -39,8 +39,6 @@ in {
   # Set your time zone.
   time.timeZone = "America/Montreal";
 
-  sound.enable = true;
-
   system.autoUpgrade.enable = false;
   system.autoUpgrade.allowReboot = true;
 

@@ -106,7 +106,7 @@
     zoom-us
     slack
     nitrogen
-    youtube-dl
+    yt-dlp
     hunspell
     hunspellDicts.en-ca
     hunspellDicts.fr-any
