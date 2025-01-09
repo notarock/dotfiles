@@ -32,8 +32,6 @@
     [{ device = "/dev/disk/by-uuid/932048db-0a27-4d06-805e-ede0813d8a08"; }];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  # high-resolution display
-  hardware.video.hidpi.enable = lib.mkDefault true;
 
   boot.initrd.luks.devices."root".device =
     "/dev/disk/by-uuid/3bc1c2ad-2183-49e4-8db5-b797af069ef2";
