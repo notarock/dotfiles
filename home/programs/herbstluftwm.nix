@@ -62,9 +62,9 @@ in (lib.mkIf isLinux {
       Mod=Mod4   # Use the super key as the main modifier
 
       # For volume controls and mute
-      herbstclient keybind XF86AudioRaiseVolume spawn ${pkgs.alsaUtils}/bin/amixer set -q Master 5%+
-      herbstclient keybind XF86AudioLowerVolume spawn ${pkgs.alsaUtils}/bin/amixer set -q Master 5%-
-      herbstclient keybind XF86AudioMute spawn ${pkgs.alsaUtils}/bin/amixer set Master toggle
+      herbstclient keybind XF86AudioRaiseVolume spawn ${pkgs.alsa-utils}/bin/amixer set -q Master 5%+
+      herbstclient keybind XF86AudioLowerVolume spawn ${pkgs.alsa-utils}/bin/amixer set -q Master 5%-
+      herbstclient keybind XF86AudioMute spawn ${pkgs.alsa-utils}/bin/amixer set Master toggle
 
       # Brightness using Light
       herbstclient keybind XF86MonBrightnessUp spawn ${pkgs.light}/bin/light -A 5%

@@ -13,6 +13,7 @@
   targets.genericLinux.enable = true;
 
   programs.bash.enable = true;
+  services.nextcloud-client.enable = true;
 
   home.keyboard.layout = "ca,fr";
 

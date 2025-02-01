@@ -18,38 +18,38 @@ in
   services.sshd.enable = true;
 
   # Sops config
-  sops.defaultSopsFile = ./secrets/notarock.yaml;
-  sops.secrets.password = { };
-  sops.secrets.pragmatapro-reg = {
-    format = "binary";
-    sopsFile = ./secrets/EssentialPragmataPro-R.ttf;
-    owner = "notarock";
-  };
-  sops.secrets.pragmatapro-reg-otf = {
-    format = "binary";
-    sopsFile = ./secrets/EssentialPragmataPro-R.otf;
-    owner = "notarock";
-  };
-  sops.secrets.pragmatapro-bold = {
-    format = "binary";
-    sopsFile = ./secrets/EssentialPragmataPro-B.ttf;
-    owner = "notarock";
-  };
-  sops.secrets.pragmatapro-bold-otf = {
-    format = "binary";
-    sopsFile = ./secrets/EssentialPragmataPro-B.otf;
-    owner = "notarock";
-  };
-  sops.secrets.wakatime = {
-    format = "binary";
-    sopsFile = ./secrets/wakatime.cfg;
-    owner = "notarock";
-  };
-  sops.secrets.openai = {
-    format = "binary";
-    sopsFile = ./secrets/openai.txt;
-    owner = "notarock";
-  };
+  #    sops.defaultSopsFile = ./secrets/notarock.yaml;
+  #    sops.secrets.password = { };
+  #    sops.secrets.pragmatapro-reg = {
+  #      format = "binary";
+  #      sopsFile = ./secrets/EssentialPragmataPro-R.ttf;
+  #      owner = "notarock";
+  #    };
+  #    sops.secrets.pragmatapro-reg-otf = {
+  #      format = "binary";
+  #      sopsFile = ./secrets/EssentialPragmataPro-R.otf;
+  #      owner = "notarock";
+  #    };
+  #    sops.secrets.pragmatapro-bold = {
+  #      format = "binary";
+  #      sopsFile = ./secrets/EssentialPragmataPro-B.ttf;
+  #      owner = "notarock";
+  #    };
+  #    sops.secrets.pragmatapro-bold-otf = {
+  #      format = "binary";
+  #      sopsFile = ./secrets/EssentialPragmataPro-B.otf;
+  #      owner = "notarock";
+  #    };
+  #    sops.secrets.wakatime = {
+  #      format = "binary";
+  #      sopsFile = ./secrets/wakatime.cfg;
+  #      owner = "notarock";
+  #    };
+  #    sops.secrets.openai = {
+  #      format = "binary";
+  #      sopsFile = ./secrets/openai.txt;
+  #      owner = "notarock";
+  #    };
 
   programs = {
     zsh.enable = true;
@@ -62,13 +62,12 @@ in
 
   fonts = {
     enableDefaultPackages = true;
-    packages = with pkgs; [
-      nerdfonts
+    packages = with pkgs;[ 
       dejavu_fonts
       open-sans
       font-awesome
       ibm-plex
-    ];
+ ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   };
 
   environment.variables.EDITOR = "vim";

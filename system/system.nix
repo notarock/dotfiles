@@ -67,8 +67,8 @@ in {
       driSupport32Bit = true;
       extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
     };
-    pulseaudio.enable = true;
-    pulseaudio.support32Bit = true;
+    pulseaudio.enable = false;
+    pulseaudio.support32Bit = false;
   };
 
 }

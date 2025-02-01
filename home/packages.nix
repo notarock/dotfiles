@@ -5,6 +5,10 @@
     _1password
     _1password-gui
 
+    rustdesk
+
+    gnome-tweaks
+
     monero-cli
 
    vscode-extensions.vscodevim.vim
@@ -73,7 +77,7 @@
     # postman
     chromium
     firefox
-    brogue
+    # brogue
     scrot
     rhythmbox
     scrot
@@ -88,11 +92,11 @@
     google-cloud-sdk
     # ansible
 
-    # gnomeExtensions.dash-to-dock
-    # gnomeExtensions.caffeine
-    # gnomeExtensions.system-monitor
-    # gnomeExtensions.appindicator
-    # gnomeExtensions.paperwm
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.caffeine
+    gnomeExtensions.system-monitor
+    gnomeExtensions.appindicator
+    gnomeExtensions.paperwm
 
     nodePackages.prettier
     spotify

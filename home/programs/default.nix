@@ -8,10 +8,11 @@ in {
     ./herbstluftwm.nix
     ./polybar.nix
     ./xmonad.nix
-    ./udiskie.nix
+    # ./udiskie.nix
     ./gui.nix
 
     # Cross platform
+    ./ghostty.nix
     ./emacs.nix
     ./go.nix
     ./kitty.nix

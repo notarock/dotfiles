@@ -33,7 +33,7 @@
         ./packages.nix
         ./extras/herbstluftwm.nix
         ./extras/polybar.nix
-        ./extras/udiskie.nix
+        # ./extras/udiskie.nix
         ./extras/dunst.nix
         ./extras/vim.nix
         ./extras/emacs.nix
