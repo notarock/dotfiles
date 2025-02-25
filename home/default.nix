@@ -5,6 +5,7 @@ in {
   imports = [ ./programs ./options ./myTheme.nix ./packages.nix ./xdg.nix ];
 
   targets.genericLinux = (lib.mkIf (isLinux) { enable = true; });
+  nixpkgs.config = { allowUnfree = true; };
 
   programs.bash.enable = true;
 
