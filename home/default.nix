@@ -1,19 +1,14 @@
-{ config, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
-{
-  imports = [
-    ./programs
-    ./options
+let inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+in {
+  imports = [ ./programs ./options ./myTheme.nix ./packages.nix ./xdg.nix ];
 
-    ./myTheme.nix
-    ./packages.nix
-    ./xdg.nix
-  ];
-
-  targets.genericLinux.enable = true;
+  targets.genericLinux = (lib.mkIf (isLinux) { enable = true; });
 
   programs.bash.enable = true;
-  services.nextcloud-client.enable = true;
+
+  services.nextcloud-client.enable = isLinux;
 
   home.keyboard.layout = "ca,fr";
 
@@ -41,13 +36,13 @@
     #   enableZshIntegration = true;
     # };
 
-    rofi = {
-      enable = true;
-      # separator = "solid";
-      font = "Essential PragmataPro 14";
-      # theme = "/etc/nixos/extras/rofi/conf";
-      plugins = with pkgs; [ rofi-emoji ];
-    };
+    # rofi = {
+    #   enable = true;
+    #   # separator = "solid";
+    #   font = "Essential PragmataPro 14";
+    #   # theme = "/etc/nixos/extras/rofi/conf";
+    #   plugins = with pkgs; [ rofi-emoji ];
+    # };
 
     git = {
       delta.enable = false;
@@ -57,4 +52,5 @@
       userName = "Roch D'Amour";
     };
   };
+
 }

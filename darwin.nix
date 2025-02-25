@@ -4,7 +4,7 @@
 
 let inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
 
-in (lib.mkIf isDarwin (builtins.trace "Base system imports was set to Darwin" {
+in (builtins.trace "Base system imports was set to Darwin" {
 
   nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
 
@@ -13,8 +13,7 @@ in (lib.mkIf isDarwin (builtins.trace "Base system imports was set to Darwin" {
   environment.systemPackages = [ pkgs.vim ];
 
   fonts = {
-    fontDir = { enable = true; };
-    fonts = with pkgs; [
+    packages = with pkgs; [
       nerdfonts
       dejavu_fonts
       open-sans
@@ -52,8 +51,6 @@ in (lib.mkIf isDarwin (builtins.trace "Base system imports was set to Darwin" {
       ];
     };
   };
-
-  services.activate-system.enable = true;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
@@ -126,4 +123,4 @@ in (lib.mkIf isDarwin (builtins.trace "Base system imports was set to Darwin" {
     ];
   };
 
-}))
+})

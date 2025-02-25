@@ -3,7 +3,7 @@
 let
   inherit (lib) mkIf mkMerge optional;
   inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
-in (mkIf isLinux (builtins.trace "Base system imports was set to Nixos" {
+in (builtins.trace "Base system imports was set to Nixos" {
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
