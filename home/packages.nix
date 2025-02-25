@@ -15,7 +15,6 @@
         fd
         ripgrep
         bc
-        finger_bsd
         gnupg
         zip
         unzip
@@ -24,7 +23,6 @@
         gotop
         lsof
         pstree
-        parted
         inetutils
         tcpdump
         dnsutils
@@ -33,7 +31,6 @@
         xorg.xhost
         mage
         unrar
-        woeusb
         tldr
         xorg.xmessage
         librsvg
@@ -56,27 +53,11 @@
         colordiff
         nmap
         vagrant
-        libreoffice
         evince
-        gedit
-        pomodoro
-        gimp
-        krita
-        vlc
-        obs-studio
-        arandr
-        peek
         transmission
         # postman
-        chromium
-        firefox
         # brogue
-        scrot
-        rhythmbox
-        scrot
         neofetch
-        nomacs
-
         kubectl
         minikube
         kompose
@@ -84,12 +65,6 @@
         kubernetes-helm
         google-cloud-sdk
         # ansible
-
-        gnomeExtensions.dash-to-dock
-        gnomeExtensions.caffeine
-        gnomeExtensions.system-monitor
-        gnomeExtensions.appindicator
-        gnomeExtensions.paperwm
 
         nodePackages.prettier
         spotify
@@ -100,9 +75,7 @@
 
         pandoc
 
-        zoom-us
         slack
-        nitrogen
         yt-dlp
         hunspell
         hunspellDicts.en-ca
@@ -113,7 +86,6 @@
         gitAndTools.delta
         dive
         delve
-        kdenlive
         pdftk
         jq
         nixfmt
@@ -126,17 +98,11 @@
         jetbrains.datagrip
         kotlin
         figlet
-        lxappearance
-
         ripgrep
         sqlite
         wordnet
         delve
-        volumeicon
-        networkmanager_dmenu
         dmenu
-        blueman
-
         awscli2
 
         # (retroarch.override {
@@ -151,62 +117,67 @@
         #   ];
         # })
 
-        (import inputs.nixpkgs-stable { inherit (pkgs) config system; }).ansible
-        (import inputs.nixpkgs-stable {
-          inherit (pkgs) config system;
-        }).screenkey
-
         # Discord doesnt work? fix is where in this line lol
         # (import inputs.nixpkgs-discord { inherit (pkgs) config system; }).discord
-        discord
+        (import inputs.nixpkgs-stable { inherit (pkgs) config system; }).ansible
       ];
       linuxPackages = [
         _1password-cli
         _1password-gui
         rustdesk
         gnome-tweaks
-        # parted
+        kdePackages.kdenlive
+        lxappearance
+        vlc
+        libreoffice
+        pomodoro
+
+        finger_bsd
+        parted
+        #
+        chromium
+        firefox
+        discord
         # docker-compose
         # xorg.xhost
         # mage
         # unrar
-        # woeusb
+        woeusb
         # xorg.xmessage
         # pciutils
         # openconnect
         # openvpn
         # vagrant
-        # gedit
-        # gimp
-        # krita
-        # obs-studio
-        # arandr
-        # peek
-        # scrot
-        # rhythmbox
-        # nomacs
+        gedit
+        gimp
+        krita
+        obs-studio
+        arandr
+        peek
+        scrot
+        rhythmbox
+        nomacs
         # minikube
         # kompose
-        # gnomeExtensions.dash-to-dock
-        # gnomeExtensions.caffeine
-        # gnomeExtensions.system-monitor
-        # gnomeExtensions.appindicator
-        # gnomeExtensions.paperwm
+        gnomeExtensions.dash-to-dock
+        gnomeExtensions.caffeine
+        gnomeExtensions.system-monitor
+        gnomeExtensions.appindicator
+        gnomeExtensions.paperwm
         # texlive.combined.scheme-medium
-        # zoom-us
-        # nitrogen
+        zoom-us
+        nitrogen
         # pdftk
         # nix-index
         # kdenlive
         # pdftk
-        # volumeicon
-        # networkmanager_dmenu
+        volumeicon
+        networkmanager_dmenu
         # dmenu
-        # blueman
-        # (import inputs.nixpkgs-stable { inherit (pkgs) config system; }).ansible
-        # (import inputs.nixpkgs-stable {
-        #   inherit (pkgs) config system;
-        # }).screenkey
+        blueman
+        (import inputs.nixpkgs-stable {
+          inherit (pkgs) config system;
+        }).screenkey
       ];
       darwinPackages = [
         # Add macOS-specific packages here

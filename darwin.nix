@@ -12,14 +12,11 @@ in (builtins.trace "Base system imports was set to Darwin" {
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [ pkgs.vim ];
 
-  fonts = {
-    packages = with pkgs; [
-      nerdfonts
-      dejavu_fonts
-      open-sans
-      font-awesome
-      ibm-plex
-    ];
+ fonts = {
+    packages = with pkgs;
+      [ dejavu_fonts open-sans font-awesome ibm-plex ]
+      ++ builtins.filter lib.attrsets.isDerivation
+      (builtins.attrValues pkgs.nerd-fonts);
   };
 
   environment.variables = { EDITOR = "vim"; };
@@ -31,10 +28,7 @@ in (builtins.trace "Base system imports was set to Darwin" {
     enableSSHSupport = true;
   };
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
   nix = {
-    configureBuildUsers = true;
     gc.automatic = true;
     settings = {
       # package = pkgs.nix;
