@@ -15,8 +15,6 @@ in {
   #  # };
   #};
 
-  imports = [ ./my/dpi.nix ./my/emacs.fontSize.nix ./my/emacs.fontSizeBig.nix ];
-
   nix.settings.auto-optimise-store = true;
 
   boot.loader.systemd-boot.enable = true;
@@ -40,8 +38,6 @@ in {
 
   # Set your time zone.
   time.timeZone = "America/Montreal";
-
-  sound.enable = true;
 
   system.autoUpgrade.enable = false;
   system.autoUpgrade.allowReboot = true;
@@ -71,8 +67,8 @@ in {
       driSupport32Bit = true;
       extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
     };
-    pulseaudio.enable = true;
-    pulseaudio.support32Bit = true;
+    pulseaudio.enable = false;
+    pulseaudio.support32Bit = false;
   };
 
 }

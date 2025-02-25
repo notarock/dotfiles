@@ -76,19 +76,23 @@
         in {
           home-manager.users.${username} = {
             home.username = username;
+            home.stateVersion = "24.11";
             programs.git.userEmail = email;
+            imports = [ ./home ];
           };
           home-manager.extraSpecialArgs = { inherit inputs; };
           nix.settings.trusted-users = [ username rootUser ];
           users.users.${username} = {
             home = homePath;
-            isHidden = false;
-            shell = nixpkgs.zsh;
-            imports = [ ./home ];
+            description = "Nickname for root";
+            group = "wheel";
+            extraGroups = [ "docker" "video" ];
+            initialPassword = "Ch4ngeMoi%%%";
+            isNormalUser = true;
           };
         };
 
-      mkNixosConfiguration = { hostname, username }:
+      mkNixosConfiguration = { hostname, username, email }:
         let
           hardwareConfig = ./hosts + "/${hostname}/hardware-configuration.nix";
         in nixpkgs.lib.nixosSystem {
@@ -126,7 +130,8 @@
             })
           ];
         };
-
+      personalEmail = "roch.damour@gmail.com";
+      workEmail = "roch.damour@arctiq.com";
     in {
 
       # NixOS configurations
@@ -136,6 +141,7 @@
         Kreizemm = mkNixosConfiguration {
           hostname = "Kreizemm";
           username = "notarock";
+          email = personalEmail;
         };
       };
 
@@ -144,24 +150,21 @@
         Wistari = mkDarwinConfiguration { # Macbook Pro 16" 2019 for work
           hostname = "Wistari";
           username = "roch";
-          email =
-            "roch.damour@arctiq.ca"; # If you email me here I *will* ignore you.
+          email = workEmail; # If you email me here I *will* ignore you.
           system = "x86_64-darwin";
         };
 
         Hectasio = mkDarwinConfiguration { # Mac M2 Max
           hostname = "Hectasio";
           username = "notarock";
-          email =
-            "roch.damour@gmail.com"; # If you email me here I *will* ignore you.
+          email = personalEmail; # If you email me here I *will* ignore you.
           system = "aarch64-darwin";
         };
 
         hectasio = mkDarwinConfiguration { # Mac M2 Max
           hostname = "Hectasio";
           username = "notarock";
-          email =
-            "roch.damour@gmail.com"; # If you email me here I *will* ignore you.
+          email = personalEmail; # If you email me here I *will* ignore you.
           system = "aarch64-darwin";
         };
       };
@@ -178,7 +181,7 @@
               home = {
                 username = "rdamour";
                 homeDirectory = "/home/rdamour";
-                stateVersion = "22.11";
+                stateVersion = "24.11";
               };
               nixpkgs.config = { allowUnfree = true; };
             }

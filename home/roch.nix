@@ -20,10 +20,7 @@
     manpages.enable = true;
   };
 
-  home = {
-    stateVersion = "22.11";
-    enableNixpkgsReleaseCheck = true;
-  };
+  home = { enableNixpkgsReleaseCheck = true; };
 
   home.keyboard.layout = "ca,fr";
 

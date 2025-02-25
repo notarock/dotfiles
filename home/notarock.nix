@@ -5,8 +5,6 @@
     isNormalUser = true;
     home = "/home/notarock";
     description = "Nickname for root";
-    extraGroups = [ "wheel" "docker" "video" ];
-    shell = pkgs.zsh;
     initialPassword = "Ch4ngeMoi%%%";
 
     openssh = let
@@ -21,7 +19,6 @@
   };
 
   home-manager = {
-    users.root.home.stateVersion = "22.11";
     users.root.programs.git = {
       enable = true;
       extraConfig.safe.directory = "/home/notarock/src/dotfiles";
@@ -36,7 +33,7 @@
         ./packages.nix
         ./extras/herbstluftwm.nix
         ./extras/polybar.nix
-        ./extras/udiskie.nix
+        # ./extras/udiskie.nix
         ./extras/dunst.nix
         ./extras/vim.nix
         ./extras/emacs.nix
@@ -67,7 +64,6 @@
       };
 
       home = {
-        stateVersion = "22.11";
         username = "notarock";
         packages = with pkgs; [ xss-lock xsecurelock ];
         enableNixpkgsReleaseCheck = true;

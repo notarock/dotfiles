@@ -15,53 +15,62 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/e634d8ea-3374-4051-9724-8bf22c50049d";
-    fsType = "ext4";
-  };
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/bab675f4-28f8-4665-9491-3665074af4cc";
+      fsType = "ext4";
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/0B0E-37DD";
-    fsType = "vfat";
-  };
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/3FD3-9078";
+      fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
+    };
 
   swapDevices =
-    [{ device = "/dev/disk/by-uuid/44b14860-eaa1-4956-bf47-3b7c69aac097"; }];
+    [ { device = "/dev/disk/by-uuid/0bcbb2e5-13ee-4f33-9945-c27ae40d8d51"; }
+    ];
+
+  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+  # (the default) this is the recommended approach. When using systemd-networkd it's
+  # still possible to use this option, but it's recommended to use it in conjunction
+  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+  networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp7s0.useDHCP = lib.mkDefault true;
+
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
   nix.settings.max-jobs = lib.mkDefault 8;
 
-  services.xserver.xrandrHeads = [
-    {
-      output = "DisplayPort-0";
-      primary = true;
-      monitorConfig = ''
-        Option "PreferredMode" "3440x1440"
-        Option "Position" "2160 1122"
-      '';
-    }
-    {
-      output = "DisplayPort-1";
-      primary = false;
-      monitorConfig = ''
-        Option "PreferredMode" "3840x2160"
-        Option "Position" "0 0"
-        Option "Rotate" "right"
-      '';
-    }
-  ];
+  # services.xserver.xrandrHeads = [
+  #   {
+  #     output = "DisplayPort-0";
+  #     primary = true;
+  #     monitorConfig = ''
+  #       Option "PreferredMode" "3440x1440"
+  #       Option "Position" "2160 1122"
+  #     '';
+  #   }
+  #   {
+  #     output = "DisplayPort-1";
+  #     primary = false;
+  #     monitorConfig = ''
+  #       Option "PreferredMode" "3840x2160"
+  #       Option "Position" "0 0"
+  #       Option "Rotate" "right"
+  #     '';
+  #   }
+  # ];
 
-  my.dpi = 144;
-
-    # Enable OpenGL
+  # Enable OpenGL
   hardware.opengl = {
     enable = true;
-    driSupport = true;
     driSupport32Bit = true;
   };
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
 
@@ -88,7 +97,7 @@
     open = false;
 
     # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
+    # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
