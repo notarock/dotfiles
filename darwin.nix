@@ -5,9 +5,8 @@
 let inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
 
 in (lib.mkIf isDarwin (builtins.trace "Base system imports was set to Darwin" {
-  nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
 
-  imports = [ ./core/enableFlake.nix ./core/systemPackages.nix ];
+  nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget

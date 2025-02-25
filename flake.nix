@@ -70,6 +70,7 @@
       mkBaseUser = { username, email, system }:
         let
           isDarwin = if system == "x86_64-linux" then false else true;
+          isLinux = if system == "x86_64-linux" then true else false;
           rootUser = if isDarwin then "@admin" else "root";
           homePath =
             if isDarwin then "/Users/${username}" else "/home/${username}";
@@ -82,14 +83,16 @@
           };
           home-manager.extraSpecialArgs = { inherit inputs; };
           nix.settings.trusted-users = [ username rootUser ];
-          users.users.${username} = {
+          users.users.${username} = (if isLinux then {
             home = homePath;
-            description = "Nickname for root";
+            isNormalUser = true;
+            initialPassword = "Ch4ngeMoi%%%";
             group = "wheel";
             extraGroups = [ "docker" "video" ];
-            initialPassword = "Ch4ngeMoi%%%";
-            isNormalUser = true;
-          };
+            description = "Nickname for root";
+          } else {
+            home = homePath;
+          });
         };
 
       mkNixosConfiguration = { hostname, username, email }:
@@ -121,7 +124,6 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./darwin.nix
-            ./configuration.nix
             home-manager.darwinModules.home-manager
             (mkBaseUser {
               inherit username;

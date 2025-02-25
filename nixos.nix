@@ -3,8 +3,7 @@
 let
   inherit (lib) mkIf mkMerge optional;
   inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
-in
-(mkIf isLinux (builtins.trace "Base system imports was set to Nixos" {
+in (mkIf isLinux (builtins.trace "Base system imports was set to Nixos" {
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
@@ -62,12 +61,10 @@ in
 
   fonts = {
     enableDefaultPackages = true;
-    packages = with pkgs;[ 
-      dejavu_fonts
-      open-sans
-      font-awesome
-      ibm-plex
- ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+    packages = with pkgs;
+      [ dejavu_fonts open-sans font-awesome ibm-plex ]
+      ++ builtins.filter lib.attrsets.isDerivation
+      (builtins.attrValues pkgs.nerd-fonts);
   };
 
   environment.variables.EDITOR = "vim";
