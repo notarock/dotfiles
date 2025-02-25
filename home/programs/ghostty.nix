@@ -3,7 +3,7 @@
 {
   programs.ghostty = {
     enable = true;
-    # package = pkgs.emptyDirectory; # Explicitly override with null
+    package = pkgs.emptyDirectory; # Explicitly override with null
 
     enableZshIntegration = true;
     settings = {
