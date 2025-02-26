@@ -155,4 +155,4 @@ in (builtins.trace "Base system imports was set to Nixos" {
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-}))
+})
