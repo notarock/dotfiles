@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_waf_rule
-# key: d_aws_waf_rule
-# --
-
-data "aws_waf_rule" "${1:this}" {
-    name = "${2:name}"
-}

@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_wafregional_ipset
-# key: d_aws_wafregional_ipset
-# --
-
-data "aws_wafregional_ipset" "${1:this}" {
-    name = "${2:name}"
-}

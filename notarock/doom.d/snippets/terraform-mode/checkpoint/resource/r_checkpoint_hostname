@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: r_checkpoint_hostname
-# key: r_checkpoint_hostname
-# --
-
-resource "checkpoint_hostname" "${1:this}" {
-    name = "${2:name}"
-}

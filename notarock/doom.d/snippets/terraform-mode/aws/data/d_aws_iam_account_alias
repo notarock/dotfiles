@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_iam_account_alias
-# key: d_aws_iam_account_alias
-# --
-
-data "aws_iam_account_alias" "${1:this}" {
-}

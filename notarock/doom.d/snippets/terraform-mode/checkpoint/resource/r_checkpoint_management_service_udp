@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: r_checkpoint_management_service_udp
-# key: r_checkpoint_management_service_udp
-# --
-
-resource "checkpoint_management_service_udp" "${1:this}" {
-    name = "${2:name}"
-}

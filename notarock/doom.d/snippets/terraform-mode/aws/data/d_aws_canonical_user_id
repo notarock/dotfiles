@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_canonical_user_id
-# key: d_aws_canonical_user_id
-# --
-
-data "aws_canonical_user_id" "${1:this}" {
-}

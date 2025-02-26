@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: r_aws_globalaccelerator_listener
-# key: r_aws_globalaccelerator_listener
-# --
-
-resource "aws_globalaccelerator_listener" "${1:this}" {
-    accelerator_arn = "${2:accelerator_arn}"
-    protocol = "${3:protocol}"
-}

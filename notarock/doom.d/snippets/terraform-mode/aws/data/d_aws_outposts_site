@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: d_aws_outposts_site
-# key: d_aws_outposts_site
-# --
-
-data "aws_outposts_site" "${1:this}" {
-}
