@@ -52,7 +52,6 @@
         pass
         colordiff
         nmap
-        vagrant
         evince
         transmission
         # postman
@@ -147,7 +146,7 @@
         # pciutils
         # openconnect
         # openvpn
-        # vagrant
+        vagrant
         gedit
         gimp
         krita

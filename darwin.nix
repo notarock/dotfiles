@@ -11,8 +11,11 @@ in (builtins.trace "Base system imports was set to Darwin" {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [ pkgs.vim ];
+  networking.hosts = {
+    "192.168.2.64" = [ "r630.local" "traduir.notarock.lol" ];
+  };
 
- fonts = {
+  fonts = {
     packages = with pkgs;
       [ dejavu_fonts open-sans font-awesome ibm-plex ]
       ++ builtins.filter lib.attrsets.isDerivation
@@ -48,7 +51,7 @@ in (builtins.trace "Base system imports was set to Darwin" {
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
-  system.stateVersion = 4;
+  system.stateVersion = 5;
 
   system.keyboard.enableKeyMapping = true;
 
@@ -89,10 +92,10 @@ in (builtins.trace "Base system imports was set to Darwin" {
       cleanup = "zap";
       upgrade = true;
     };
-    taps = [
-      "homebrew/cask"
-      #      "homebrew/cask-drivers"
-    ];
+    # taps = [
+    #   "homebrew/cask"
+    #   #      "homebrew/cask-drivers"
+    # ];
     casks = [
       "obs"
       "gimp"
@@ -112,8 +115,9 @@ in (builtins.trace "Base system imports was set to Darwin" {
       "firefox"
       "google-chrome"
       "lens"
-      "mpv"
+      # "mpv"
       "yubico-authenticator"
+      "ghostty"
     ];
   };
 

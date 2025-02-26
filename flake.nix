@@ -8,7 +8,7 @@
     doom-emacs.flake = false;
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-21.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     darwin.url = "github:lnl7/nix-darwin/master";
@@ -77,7 +77,7 @@
         in {
           home-manager.users.${username} = {
             home.username = username;
-            home.stateVersion = "24.11";
+            home.stateVersion = "25.05";
             programs.git.userEmail = email;
             imports = [ ./home ];
           };
@@ -183,7 +183,7 @@
               home = {
                 username = "rdamour";
                 homeDirectory = "/home/rdamour";
-                stateVersion = "24.11";
+                stateVersion = "25.05";
               };
               nixpkgs.config = { allowUnfree = true; };
             }

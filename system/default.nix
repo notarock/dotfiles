@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
   nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
 
   imports = [
