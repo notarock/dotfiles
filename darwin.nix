@@ -11,9 +11,9 @@ in (builtins.trace "Base system imports was set to Darwin" {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [ pkgs.vim ];
-  networking.hosts = {
-    "192.168.2.64" = [ "r630.local" "traduir.notarock.lol" ];
-  };
+  # networking.hosts = {
+  #   "192.168.2.64" = [ "r630.local" "traduir.notarock.lol" ];
+  # };
 
   fonts = {
     packages = with pkgs;
@@ -118,6 +118,7 @@ in (builtins.trace "Base system imports was set to Darwin" {
       # "mpv"
       "yubico-authenticator"
       "ghostty"
+      "lm-studio"
     ];
   };
 
