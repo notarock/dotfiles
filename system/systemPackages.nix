@@ -44,6 +44,7 @@
     killall
     libnotify
     gcc
+    neovim
 
     pkg-config
     openconnect

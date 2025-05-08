@@ -4,7 +4,7 @@
 
 build:
 	nixos-rebuild --use-remote-sudo switch --flake '.#' -v -L
-	doom sync
+	echo "doom sync ? nah"
 
 mac:
 	darwin-rebuild switch --flake '.#' -v -L

@@ -5,7 +5,7 @@ let
   DOOMDIR = "${config.xdg.configHome}/doom";
   EMACSDIR = "${config.xdg.configHome}/emacs";
   inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
-  emacs_package = if isLinux then pkgs.emacs29-pgtk else pkgs.emacs30;
+  emacs_package = if isLinux then pkgs.emacs30-pgtk else pkgs.emacs30;
 in {
   home.packages = with pkgs; [
     nixfmt

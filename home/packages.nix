@@ -123,7 +123,7 @@
       linuxPackages = [
         _1password-cli
         _1password-gui
-        rustdesk
+        # rustdesk
         gnome-tweaks
         kdePackages.kdenlive
         lxappearance
