@@ -163,6 +163,7 @@
         gnomeExtensions.system-monitor
         gnomeExtensions.appindicator
         gnomeExtensions.paperwm
+        gnomeExtensions.gtile
         # texlive.combined.scheme-medium
         zoom-us
         nitrogen
