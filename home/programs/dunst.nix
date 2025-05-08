@@ -7,8 +7,8 @@ in (lib.mkIf isLinux {
     enable = true;
     settings = {
       global = {
-        font = "Essential PragmataPro 12";
         markup = "full";
+        font = "Essential PragmataPro 12";
         format = "<b>%s</b>\\n%b";
         sort = true;
         indicate_hidden = "yes";
