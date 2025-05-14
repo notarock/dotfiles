@@ -90,6 +90,7 @@
             group = "wheel";
             extraGroups = [ "docker" "video" ];
             description = "Nickname for root";
+            shell = myPkgs.zsh;
           } else {
             home = homePath;
           });
