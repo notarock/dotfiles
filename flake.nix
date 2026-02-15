@@ -78,7 +78,7 @@
           home-manager.users.${username} = {
             home.username = username;
             home.stateVersion = "25.05";
-            programs.git.userEmail = email;
+            programs.git.settings.user.email = email;
             imports = [ ./home ];
           };
           home-manager.extraSpecialArgs = { inherit inputs; };
@@ -121,11 +121,12 @@
 
       mkDarwinConfiguration = { hostname, system, username, email }:
         darwin.lib.darwinSystem {
-          system = system;
+          inherit system;
           specialArgs = { inherit inputs; };
           modules = [
             ./darwin.nix
             home-manager.darwinModules.home-manager
+            { nixpkgs.overlays = [ inputs.emacs-overlay.overlay ]; }
             (mkBaseUser {
               inherit username;
               inherit email;
@@ -192,6 +193,6 @@
           ];
         };
       };
-      rdamour = self.homeConfigurations.bogdb.activationPackage;
+      rdamour = self.homeConfigurations.rdamour.activationPackage;
     };
 }

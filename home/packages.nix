@@ -53,7 +53,6 @@
         colordiff
         nmap
         evince
-        transmission
         # postman
         # brogue
         neofetch
@@ -69,7 +68,7 @@
         spotify
         ccls
         clang-tools
-        wakatime
+        wakatime-cli
         texlive.combined.scheme-medium
 
         pandoc
@@ -82,7 +81,7 @@
         aspell
         aspellDicts.en
         aspellDicts.fr
-        gitAndTools.delta
+        delta
         dive
         delve
         pdftk
@@ -92,7 +91,7 @@
         asciinema
         tmux
         audacity
-        jetbrains.idea-ultimate
+        jetbrains.idea
         jetbrains.goland
         jetbrains.datagrip
         kotlin
@@ -118,7 +117,6 @@
 
         # Discord doesnt work? fix is where in this line lol
         # (import inputs.nixpkgs-discord { inherit (pkgs) config system; }).discord
-        (import inputs.nixpkgs-stable { inherit (pkgs) config system; }).ansible
       ];
       linuxPackages = [
         _1password-cli
@@ -176,7 +174,7 @@
         # dmenu
         blueman
         (import inputs.nixpkgs-stable {
-          inherit (pkgs) config system;
+          system = pkgs.stdenv.hostPlatform.system;
         }).screenkey
       ];
       darwinPackages = [

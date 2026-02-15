@@ -46,12 +46,12 @@ in {
     # };
 
     git = {
-      delta.enable = false;
-      diff-so-fancy.enable = true;
-      difftastic.enable = false;
       enable = true;
-      userName = "Roch D'Amour";
+      settings.user.name = "Roch D'Amour";
     };
+    delta.enable = false;
+    diff-so-fancy.enable = true;
+    difftastic.enable = false;
   };
 
 }

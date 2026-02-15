@@ -1,15 +1,18 @@
 { config, lib, pkgs, ... }:
 
 {
-  git = {
+  programs = {
+    git = {
+      enable = true;
+      settings.user.name = "Roch D'Amour";
+      extraConfig = { pull.rebase = false; };
+    };
     difftastic = {
       enable = true;
       background = "light";
       color = "always";
     };
     delta.enable = false;
-    enable = true;
-    userName = "Roch D'Amour";
-    extraConfig = { pull.rebase = false; };
+    diff-so-fancy.enable = true;
   };
 }

@@ -150,21 +150,15 @@
     };
 
     git = {
-      delta.enable = false;
-      diff-so-fancy.enable = true;
-      difftastic.enable = false;
       enable = true;
-      userName = "Roch D'Amour";
-      userEmail = "rdamour@stingray.com";
+      settings.user.name = "Roch D'Amour";
       extraConfig = {
         pull.rebase = true;
-        url = {
-          "ssh://git@gitlab.stingray-tooling.com/" = {
-            insteadOf = "https://gitlab.stingray-tooling.com/";
-          };
-        };
       };
     };
+    delta.enable = false;
+    diff-so-fancy.enable = true;
+    difftastic.enable = false;
   };
 
   services = {

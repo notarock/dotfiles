@@ -73,7 +73,7 @@ in {
   };
 
   xdg.configFile."doom/extra.el".text = ''
-    (setq wakatime-cli-path "${pkgs.wakatime}/bin/wakatime-cli")
+    (setq wakatime-cli-path "${pkgs.wakatime-cli}/bin/wakatime-cli")
 
     (let ((font-family "Essential PragmataPro"))
       (setq doom-variable-pitch-font (font-spec :family "IBM Plex Sans Condensed")
