@@ -53,6 +53,9 @@ in (builtins.trace "Base system imports was set to Darwin" {
   # $ darwin-rebuild changelog
   system.stateVersion = 5;
 
+  # Set the primary user for user-specific options
+  system.primaryUser = "notarock";
+
   system.keyboard.enableKeyMapping = true;
 
   system.defaults.NSGlobalDomain."com.apple.keyboard.fnState" = true;
@@ -87,7 +90,11 @@ in (builtins.trace "Base system imports was set to Darwin" {
   homebrew = {
     enable = true;
     # brewPrefix = "/usr/local/bin";
-    brews = [ "java" ];
+    brews = [ 
+      "java"
+      "neovim"
+      "cocoapods"
+    ];
     onActivation = {
       cleanup = "zap";
       upgrade = true;
@@ -97,6 +104,7 @@ in (builtins.trace "Base system imports was set to Darwin" {
     #   #      "homebrew/cask-drivers"
     # ];
     casks = [
+      "flutter"
       "obs"
       "gimp"
       "nextcloud"

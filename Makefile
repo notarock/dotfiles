@@ -8,7 +8,7 @@ build:
 
 mac:
 	darwin-rebuild switch --flake '.#' -v -L
-	doom sync
+	# doom sync
 
 hm:
 	nix run github:nix-community/home-manager --no-write-lock-file -- switch  --flake ~/src/dotfiles
@@ -18,6 +18,6 @@ fmt:
 	nixfmt **/*.nix
 
 update:
-	nix flake update --commit-lock-file
+	nix flake update --commit-lock-file --extra-experimental-features nix-command --extra-experimental-features flakes
 
 # end

@@ -4,7 +4,7 @@
   programs = {
     go = {
       enable = true;
-      package = pkgs.go_1_24;
+      package = pkgs.go;
       packages = {
         "github.com/motemen/gore/cmd/gore" = inputs.gore;
         "github.com/mdempsky/gocode" = inputs.gotools;

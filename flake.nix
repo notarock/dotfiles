@@ -131,6 +131,7 @@
               inherit email;
               inherit system;
             })
+            # { system.primaryUser = username; }
           ];
         };
       personalEmail = "roch.damour@gmail.com";
