@@ -136,7 +136,7 @@
           ];
         };
       personalEmail = "roch.damour@gmail.com";
-      workEmail = "roch.damour@arctiq.com";
+      workEmail = "rochdamour@civalgo.com";
     in {
 
       # NixOS configurations
@@ -152,11 +152,11 @@
 
       # Darwin configurations
       darwinConfigurations = {
-        Wistari = mkDarwinConfiguration { # Macbook Pro 16" 2019 for work
-          hostname = "Wistari";
+        coneorange = mkDarwinConfiguration { # Macbook Pro 16" 2019 for work
+          hostname = "coneorange";
           username = "roch";
           email = workEmail; # If you email me here I *will* ignore you.
-          system = "x86_64-darwin";
+          system = "aarch64-darwin";
         };
 
         Hectasio = mkDarwinConfiguration { # Mac M2 Max

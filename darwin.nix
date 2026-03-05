@@ -54,7 +54,7 @@ in (builtins.trace "Base system imports was set to Darwin" {
   system.stateVersion = 5;
 
   # Set the primary user for user-specific options
-  system.primaryUser = "notarock";
+  system.primaryUser = "roch";
 
   system.keyboard.enableKeyMapping = true;
 
@@ -96,7 +96,7 @@ in (builtins.trace "Base system imports was set to Darwin" {
       "cocoapods"
     ];
     onActivation = {
-      cleanup = "zap";
+      cleanup = "none";
       upgrade = true;
     };
     # taps = [
