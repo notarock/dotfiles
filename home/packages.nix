@@ -7,6 +7,7 @@
       commonPackages = [
         vscode-extensions.vscodevim.vim
         vscode
+        opencode
 
         wget
         curl
