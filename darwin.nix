@@ -1,10 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 # defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 
-let inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+let
+  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
 
-in (builtins.trace "Base system imports was set to Darwin" {
+in
+(builtins.trace "Base system imports was set to Darwin" {
 
   nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
 
@@ -16,13 +23,20 @@ in (builtins.trace "Base system imports was set to Darwin" {
   # };
 
   fonts = {
-    packages = with pkgs;
-      [ dejavu_fonts open-sans font-awesome ibm-plex ]
-      ++ builtins.filter lib.attrsets.isDerivation
-      (builtins.attrValues pkgs.nerd-fonts);
+    packages =
+      with pkgs;
+      [
+        dejavu_fonts
+        open-sans
+        font-awesome
+        ibm-plex
+      ]
+      ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   };
 
-  environment.variables = { EDITOR = "vim"; };
+  environment.variables = {
+    EDITOR = "vim";
+  };
 
   programs.zsh.enable = true;
 
@@ -34,7 +48,7 @@ in (builtins.trace "Base system imports was set to Darwin" {
   nix = {
     gc.automatic = true;
     settings = {
-      # package = pkgs.nix;
+      # package = pkgs;
       max-jobs = lib.mkDefault 8;
 
       sandbox = false;
@@ -46,6 +60,10 @@ in (builtins.trace "Base system imports was set to Darwin" {
         "/private/var/tmp"
         "/usr/bin/env"
       ];
+      extra-experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
   };
 
@@ -53,8 +71,7 @@ in (builtins.trace "Base system imports was set to Darwin" {
   # $ darwin-rebuild changelog
   system.stateVersion = 5;
 
-  # Set the primary user for user-specific options
-  system.primaryUser = "roch";
+  # Set the primary user for user-specific options (can be overridden per-host in flake.nix)
 
   system.keyboard.enableKeyMapping = true;
 
@@ -68,8 +85,7 @@ in (builtins.trace "Base system imports was set to Darwin" {
   system.defaults.dock.wvous-tr-corner = 12; # Top left -> Notification Center
   system.defaults.dock.wvous-tl-corner = 11; # Top Right -> Launchpad
 
-  system.defaults.NSGlobalDomain.AppleInterfaceStyleSwitchesAutomatically =
-    true; # Light / Dark modes
+  system.defaults.NSGlobalDomain.AppleInterfaceStyleSwitchesAutomatically = true; # Light / Dark modes
 
   system.defaults.NSGlobalDomain.AppleShowAllExtensions = true;
   system.defaults.finder = {
@@ -90,7 +106,7 @@ in (builtins.trace "Base system imports was set to Darwin" {
   homebrew = {
     enable = true;
     # brewPrefix = "/usr/local/bin";
-    brews = [ 
+    brews = [
       "java"
       "neovim"
       "cocoapods"

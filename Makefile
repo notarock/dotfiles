@@ -7,7 +7,7 @@ build:
 	echo "doom sync ? nah"
 
 mac:
-	darwin-rebuild switch --flake '.#' -v -L
+	darwin-rebuild switch  --flake '.#' -v -L
 	# doom sync
 
 hm:

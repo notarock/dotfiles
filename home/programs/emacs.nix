@@ -1,4 +1,11 @@
-{ config, osConfig, lib, pkgs, inputs, ... }:
+{
+  config,
+  osConfig,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
   DOOMLOCALDIR = "${config.xdg.dataHome}/doom";
@@ -6,47 +13,51 @@ let
   EMACSDIR = "${config.xdg.configHome}/emacs";
   inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
   emacs_package = if isLinux then pkgs.emacs30-pgtk else pkgs.emacs30;
-in {
-  home.packages = with pkgs; [
-    nixfmt
+in
+{
+  home.packages =
+    with pkgs;
+    [
+      nixfmt
 
-    shellcheck
-    shfmt
+      shellcheck
+      shfmt
 
-    yaml-language-server
-    editorconfig-checker
-    editorconfig-core-c
+      yaml-language-server
+      editorconfig-checker
+      editorconfig-core-c
 
-    gopls
-    gomodifytags
-    gotests
-    gore
+      gopls
+      gomodifytags
+      gotests
+      gore
 
-    nodejs_22
+      nodejs_22
 
-    python3
-    terraform
+      python3
+      terraform
 
-    haskellPackages.haskell-language-server
-    haskellPackages.hoogle
-    haskellPackages.cabal-install
+      rustc
+      cargo
+      html-tidy
+      nodePackages.stylelint
+      nodePackages.js-beautify
 
-    rustc
-    cargo
-    html-tidy
-    nodePackages.stylelint
-    nodePackages.js-beautify
+      terraform-ls
 
-    terraform-ls
-
-    (pkgs.makeDesktopItem {
-      name = "Emacs";
-      exec = "emacs";
-      comment = "Editor";
-      desktopName = "Emacs";
-      genericName = "Editor";
-    })
-  ];
+      (pkgs.makeDesktopItem {
+        name = "Emacs";
+        exec = "emacs";
+        comment = "Editor";
+        desktopName = "Emacs";
+        genericName = "Editor";
+      })
+    ]
+    ++ (lib.optionals isLinux [
+      haskellPackages.haskell-language-server
+      haskellPackages.hoogle
+      haskellPackages.cabal-install
+    ]);
 
   programs.emacs = {
     enable = true;

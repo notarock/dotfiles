@@ -26,25 +26,36 @@
 
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, sops-nix, darwin, ... }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      sops-nix,
+      darwin,
+      ...
+    }:
     let
       system = "x86_64-linux";
-      nixpkgsPatched = let originPkgs = (import nixpkgs { inherit system; });
-      in originPkgs.applyPatches {
-        name = "nixpkgs-patched";
-        src = nixpkgs;
-        patches = [
-          # (pkgs.fetchpatch { # https://github.com/NixOS/nixpkgs/pull/#####
-          #   url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/#####.patch";
-          #   sha256 = "sha256-someshaxd";
-          # })
-          #(originPkgs.fetchpatch { # https://github.com/NixOS/nixpkgs/pull/216051
-          #  url =
-          #    "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/216051.patch";
-          #  sha256 = "sha256-aVjt5MZ+lYhKXfFhNHSP/PunhPILjw70mfdTynhE1yc=";
-          #})
-        ];
-      };
+      nixpkgsPatched =
+        let
+          originPkgs = (import nixpkgs { inherit system; });
+        in
+        originPkgs.applyPatches {
+          name = "nixpkgs-patched";
+          src = nixpkgs;
+          patches = [
+            # (pkgs.fetchpatch { # https://github.com/NixOS/nixpkgs/pull/#####
+            #   url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/#####.patch";
+            #   sha256 = "sha256-someshaxd";
+            # })
+            #(originPkgs.fetchpatch { # https://github.com/NixOS/nixpkgs/pull/216051
+            #  url =
+            #    "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/216051.patch";
+            #  sha256 = "sha256-aVjt5MZ+lYhKXfFhNHSP/PunhPILjw70mfdTynhE1yc=";
+            #})
+          ];
+        };
 
       # Patched nixpkgs with add-ons
       myPkgs = import nixpkgsPatched {
@@ -59,22 +70,26 @@
               exec = prev.writeShellScript "cheminot" ''
                 ${prev.icedtea_web}/bin/javaws <(curl 'https://cheminotjws.etsmtl.ca/ChemiNot.jnlp')
               '';
-              comment =
-                "ChemiNot is an integrated consultation and registration system for ÉTS dentues";
+              comment = "ChemiNot is an integrated consultation and registration system for ÉTS dentues";
               desktopName = "ChemiNot";
             };
           })
         ];
       };
 
-      mkBaseUser = { username, email, system }:
+      mkBaseUser =
+        {
+          username,
+          email,
+          system,
+        }:
         let
           isDarwin = if system == "x86_64-linux" then false else true;
           isLinux = if system == "x86_64-linux" then true else false;
           rootUser = if isDarwin then "@admin" else "root";
-          homePath =
-            if isDarwin then "/Users/${username}" else "/home/${username}";
-        in {
+          homePath = if isDarwin then "/Users/${username}" else "/home/${username}";
+        in
+        {
           home-manager.users.${username} = {
             home.username = username;
             home.stateVersion = "25.05";
@@ -82,24 +97,41 @@
             imports = [ ./home ];
           };
           home-manager.extraSpecialArgs = { inherit inputs; };
-          nix.settings.trusted-users = [ username rootUser ];
-          users.users.${username} = (if isLinux then {
-            home = homePath;
-            isNormalUser = true;
-            initialPassword = "Ch4ngeMoi%%%";
-            group = "wheel";
-            extraGroups = [ "docker" "video" ];
-            description = "Nickname for root";
-            shell = myPkgs.zsh;
-          } else {
-            home = homePath;
-          });
+          nix.settings.trusted-users = [
+            username
+            rootUser
+          ];
+          users.users.${username} = (
+            if isLinux then
+              {
+                home = homePath;
+                isNormalUser = true;
+                initialPassword = "Ch4ngeMoi%%%";
+                group = "wheel";
+                extraGroups = [
+                  "docker"
+                  "video"
+                ];
+                description = "Nickname for root";
+                shell = myPkgs.zsh;
+              }
+            else
+              {
+                home = homePath;
+              }
+          );
         };
 
-      mkNixosConfiguration = { hostname, username, email }:
+      mkNixosConfiguration =
+        {
+          hostname,
+          username,
+          email,
+        }:
         let
           hardwareConfig = ./hosts + "/${hostname}/hardware-configuration.nix";
-        in nixpkgs.lib.nixosSystem {
+        in
+        nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
@@ -119,7 +151,13 @@
           pkgs = myPkgs;
         };
 
-      mkDarwinConfiguration = { hostname, system, username, email }:
+      mkDarwinConfiguration =
+        {
+          hostname,
+          system,
+          username,
+          email,
+        }:
         darwin.lib.darwinSystem {
           inherit system;
           specialArgs = { inherit inputs; };
@@ -132,12 +170,13 @@
               inherit email;
               inherit system;
             })
-            # { system.primaryUser = username; }
+            { system.primaryUser = username; }
           ];
         };
       personalEmail = "roch.damour@gmail.com";
       workEmail = "rochdamour@civalgo.com";
-    in {
+    in
+    {
 
       # NixOS configurations
       # nixos-rebuild switch -I nixos-config=hosts/Zonnarth/configuration.nix
@@ -152,21 +191,24 @@
 
       # Darwin configurations
       darwinConfigurations = {
-        coneorange = mkDarwinConfiguration { # Macbook Pro 16" 2019 for work
+        coneorange = mkDarwinConfiguration {
+          # Macbook Pro 16" 2019 for work
           hostname = "coneorange";
           username = "roch";
           email = workEmail; # If you email me here I *will* ignore you.
           system = "aarch64-darwin";
         };
 
-        Hectasio = mkDarwinConfiguration { # Mac M2 Max
+        Hectasio = mkDarwinConfiguration {
+          # Mac M2 Max
           hostname = "Hectasio";
           username = "notarock";
           email = personalEmail; # If you email me here I *will* ignore you.
           system = "aarch64-darwin";
         };
 
-        hectasio = mkDarwinConfiguration { # Mac M2 Max
+        hectasio = mkDarwinConfiguration {
+          # Mac M2 Max
           hostname = "Hectasio";
           username = "notarock";
           email = personalEmail; # If you email me here I *will* ignore you.
@@ -188,7 +230,9 @@
                 homeDirectory = "/home/rdamour";
                 stateVersion = "25.05";
               };
-              nixpkgs.config = { allowUnfree = true; };
+              nixpkgs.config = {
+                allowUnfree = true;
+              };
             }
           ];
         };

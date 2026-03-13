@@ -1,7 +1,14 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
-  home.packages = with pkgs;
+  home.packages =
+    with pkgs;
     let
       inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
       commonPackages = [
@@ -29,11 +36,11 @@
         dnsutils
         mtr
         docker-compose
-        xorg.xhost
+        xhost
         mage
         unrar
         tldr
-        xorg.xmessage
+        xmessage
         librsvg
         gnumake
         cmake
@@ -53,10 +60,10 @@
         pass
         colordiff
         nmap
-        evince
+        # evince  # Linux only - pulls in gnome-desktop which fails on Darwin
         # postman
         # brogue
-        neofetch
+        fastfetch
         kubectl
         minikube
         kompose
@@ -67,7 +74,7 @@
 
         nodePackages.prettier
         spotify
-        ccls
+        # ccls  # Linux only - conflicts with haskell packages on Darwin
         clang-tools
         wakatime-cli
         texlive.combined.scheme-medium
@@ -174,6 +181,8 @@
         networkmanager_dmenu
         # dmenu
         blueman
+        ccls
+        evince
         (import inputs.nixpkgs-stable {
           system = pkgs.stdenv.hostPlatform.system;
         }).screenkey
@@ -181,6 +190,7 @@
       darwinPackages = [
         # Add macOS-specific packages here
       ];
-    in commonPackages ++ (if isDarwin then darwinPackages else linuxPackages);
+    in
+    commonPackages ++ (if isDarwin then darwinPackages else linuxPackages);
 
 }
