@@ -7,7 +7,7 @@
 
     enableZshIntegration = true;
     settings = {
-      theme = "dark:TokyoNight Night,light:TokyoNight Day";
+      theme = "dark:Farmhouse Dark,light:Farmhouse Light";
 
       font-size = 14;
 
