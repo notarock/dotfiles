@@ -7,7 +7,7 @@
 
     enableZshIntegration = true;
     settings = {
-      theme = "notarock";
+      theme = "dark:TokyoNight Night,light:TokyoNight Day";
 
       font-size = 14;
 

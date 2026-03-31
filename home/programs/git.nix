@@ -5,7 +5,7 @@
     git = {
       enable = true;
       settings.user.name = "Roch D'Amour";
-      extraConfig = { pull.rebase = false; };
+      extraConfig = { pull.rebase = false; push.autoSetupRemote = true; };
     };
     difftastic = {
       enable = true;

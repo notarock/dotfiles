@@ -121,6 +121,7 @@ in
     # ];
     casks = [
       "flutter"
+      "claude-code"
       "obs"
       "gimp"
       "nextcloud"
