@@ -3,11 +3,11 @@
 {
   programs.ghostty = {
     enable = true;
-    package = pkgs.emptyDirectory; # Explicitly override with null
+    package = null;
 
     enableZshIntegration = true;
     settings = {
-      theme = "dark:Farmhouse Dark,light:Farmhouse Light";
+      theme = "dark:Bluloco Dark,light:Bluloco Light";
 
       font-size = 14;
 
@@ -16,8 +16,6 @@
 
       cursor-style = "block";
       cursor-style-blink = "false";
-
-      background-opacity = 0.95;
 
       keybind = [
         "ctrl+w>enter=equalize_splits"
