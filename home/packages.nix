@@ -72,7 +72,7 @@
         (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
         # ansible
 
-        nodePackages.prettier
+        prettier
         spotify
         # ccls  # Linux only - conflicts with haskell packages on Darwin
         clang-tools
