@@ -15,6 +15,8 @@ in
 
   nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
 
+  nixpkgs.config.allowUnfree = true;
+
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
