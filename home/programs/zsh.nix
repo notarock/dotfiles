@@ -50,6 +50,31 @@
       extended = true;
       save = 50000;
     };
+    initExtra = ''
+      # Create a git worktree from the latest main branch.
+      # Usage: gwt <branch-name>
+      # Worktree is created at ~/src/worktrees/<reponame>-<branch-name>.
+      # If branch-name matches an existing remote branch it is checked out;
+      # otherwise a new branch is created from origin/main.
+      gwt() {
+        if [[ $# -ne 1 ]]; then
+          echo "Usage: gwt <branch-name>" >&2
+          return 1
+        fi
+        local branch="$1"
+        local repo
+        repo=$(basename "$(git rev-parse --show-toplevel)")
+        local worktree_path="$HOME/src/worktrees/''${repo}-''${branch}"
+
+        git fetch origin main
+
+        if git ls-remote --exit-code --heads origin "$branch" &>/dev/null; then
+          git worktree add "$worktree_path" "$branch"
+        else
+          git worktree add -b "$branch" "$worktree_path" origin/main
+        fi
+      }
+    '';
   };
 
   programs.zsh.oh-my-zsh = {
