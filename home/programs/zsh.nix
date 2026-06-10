@@ -52,13 +52,13 @@
     };
     initExtra = ''
       # Create a git worktree from the latest main branch.
-      # Usage: gwt <branch-name>
+      # Usage: worktree-for <branch-name>
       # Worktree is created at ~/src/worktrees/<reponame>-<branch-name>.
       # If branch-name matches an existing remote branch it is checked out;
       # otherwise a new branch is created from origin/main.
-      gwt() {
+      worktree-for() {
         if [[ $# -ne 1 ]]; then
-          echo "Usage: gwt <branch-name>" >&2
+          echo "Usage: worktree-for <branch-name>" >&2
           return 1
         fi
         local branch="$1"
