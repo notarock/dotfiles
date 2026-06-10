@@ -40,8 +40,8 @@ in
       rustc
       cargo
       html-tidy
-      nodePackages.stylelint
-      nodePackages.js-beautify
+      stylelint
+      js-beautify
 
       terraform-ls
 
