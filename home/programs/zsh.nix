@@ -91,13 +91,14 @@ in
         else
           git worktree add -b "$branch" "$worktree_path" origin/main
         fi
+        cd "$worktree_path"
       }
     '';
   };
 
   programs.zsh.oh-my-zsh = {
     enable = true;
-    theme = "dpoggi";
+    theme = "robbyrussell";
     plugins = [
       "git"
       "git-flow"

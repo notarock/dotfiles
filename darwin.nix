@@ -42,6 +42,9 @@ in
   };
 
   programs.zsh.enable = true;
+  programs.zsh.loginShellInit = ''
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  '';
 
   programs.gnupg.agent = {
     enable = true;
@@ -136,7 +139,6 @@ in
       "nextcloud"
       "krita"
       "visual-studio-code"
-      "microsoft-office"
       # "yubico-yubikey-manager"
       "steam"
       "raycast"
