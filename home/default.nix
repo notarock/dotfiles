@@ -47,6 +47,7 @@ in {
     git = {
       enable = true;
       settings.user.name = "Roch D'Amour";
+      ignores = [ "**/.claude/settings.local.json" ];
     };
     delta.enable = false;
     diff-so-fancy.enable = true;
