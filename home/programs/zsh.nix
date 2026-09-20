@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
@@ -7,7 +12,8 @@ in
   home.sessionPath = [
     "$HOME/bin"
     "$HOME/go/bin"
-  ] ++ lib.optional isLinux "$HOME/snap";
+  ]
+  ++ lib.optional isLinux "$HOME/snap";
 
   programs.zsh = {
     enable = true;
@@ -16,16 +22,18 @@ in
       eval "$(/opt/homebrew/bin/brew shellenv)"
     '';
     # To keep using zsh with nix-shells
-    plugins = [{
-      name = "zsh-nix-shell";
-      file = "nix-shell.plugin.zsh";
-      src = pkgs.fetchFromGitHub {
-        owner = "chisui";
-        repo = "zsh-nix-shell";
-        rev = "v0.1.0";
-        sha256 = "0snhch9hfy83d4amkyxx33izvkhbwmindy0zjjk28hih1a9l2jmx";
-      };
-    }];
+    plugins = [
+      {
+        name = "zsh-nix-shell";
+        file = "nix-shell.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "chisui";
+          repo = "zsh-nix-shell";
+          rev = "v0.1.0";
+          sha256 = "0snhch9hfy83d4amkyxx33izvkhbwmindy0zjjk28hih1a9l2jmx";
+        };
+      }
+    ];
     shellAliases = {
       cp = "cp -i";
       df = "df -h";
@@ -43,8 +51,7 @@ in
       nixc = "sudo $EDITOR /etc/nixos/configuration.nix";
       wttr = "curl wttr.in";
       k = "kubectl";
-      randpw =
-        "dd if=/dev/urandom bs=1 count=64 2>/dev/null | ${pkgs.coreutils}/bin/base64 -w 0 | rev | cut -b 2- | rev";
+      randpw = "dd if=/dev/urandom bs=1 count=64 2>/dev/null | ${pkgs.coreutils}/bin/base64 -w 0 | rev | cut -b 2- | rev";
       gitwtf = "echo 'git reset $(git merge-base master current)'";
       yolo = ''git commit -m "$(curl -s http://whatthecommit.com/index.txt)" '';
       recent = "ls -Art | tail -n 1";

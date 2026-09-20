@@ -1,9 +1,16 @@
-{ config, pkgs, inputs, lib, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 
 let
   inherit (lib) mkIf mkMerge optional;
   inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
-in (builtins.trace "Base system imports was set to Nixos" {
+in
+(builtins.trace "Base system imports was set to Nixos" {
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
@@ -61,10 +68,15 @@ in (builtins.trace "Base system imports was set to Nixos" {
 
   fonts = {
     enableDefaultPackages = true;
-    packages = with pkgs;
-      [ dejavu_fonts open-sans font-awesome ibm-plex ]
-      ++ builtins.filter lib.attrsets.isDerivation
-      (builtins.attrValues pkgs.nerd-fonts);
+    packages =
+      with pkgs;
+      [
+        dejavu_fonts
+        open-sans
+        font-awesome
+        ibm-plex
+      ]
+      ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   };
 
   environment.variables.EDITOR = "vim";
@@ -89,10 +101,12 @@ in (builtins.trace "Base system imports was set to Nixos" {
   security.sudo.extraRules = [
     {
       users = [ "notarock" ];
-      commands = [{
-        command = "/run/current-system/sw/bin/nixos-rebuild";
-        options = [ "NOPASSWD" ];
-      }];
+      commands = [
+        {
+          command = "/run/current-system/sw/bin/nixos-rebuild";
+          options = [ "NOPASSWD" ];
+        }
+      ];
     }
     {
       users = [ "ALL" ];

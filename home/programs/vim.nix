@@ -1,11 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   programs.vim = {
-    plugins = with pkgs.vimPlugins;
-      [
-        vim-wakatime
-      ];
+    plugins = with pkgs.vimPlugins; [
+      vim-wakatime
+    ];
 
     enable = true;
     extraConfig = ''

@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 # for singleton
 with lib;
@@ -7,10 +12,10 @@ let
   cfg = config.services.xserver.windowManager;
   stumpwm-wrapper = (pkgs.callPackage ../pkgs/stumpwm-wrapper.nix { });
 
-in {
+in
+{
   options = {
-    services.xserver.windowManager.stumpwm-wrapper.enable =
-      mkEnableOption "stumpwm-wrapper";
+    services.xserver.windowManager.stumpwm-wrapper.enable = mkEnableOption "stumpwm-wrapper";
   };
 
   config = mkIf cfg.stumpwm-wrapper.enable {

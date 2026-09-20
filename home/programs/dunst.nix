@@ -1,8 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let 
+let
   inherit (pkgs.stdenv.hostPlatform) isLinux;
-in (lib.mkIf isLinux {
+in
+(lib.mkIf isLinux {
   services.dunst = {
     enable = true;
     settings = {
@@ -43,7 +49,9 @@ in (lib.mkIf isLinux {
         frame_color = config.myTheme.color5;
         corner_radius = 2;
       };
-      shortcuts = { close = "esc"; };
+      shortcuts = {
+        close = "esc";
+      };
       urgency_low = {
         frame_color = config.myTheme.color2;
         foreground = config.myTheme.color7;
@@ -70,4 +78,3 @@ in (lib.mkIf isLinux {
     };
   };
 })
-

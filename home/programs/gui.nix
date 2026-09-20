@@ -1,7 +1,15 @@
-{ config, pkgs, inputs, lib, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 
-let inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
-in (lib.mkIf isLinux {
+let
+  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+in
+(lib.mkIf isLinux {
 
   gtk = {
     enable = true;

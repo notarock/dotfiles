@@ -1,4 +1,8 @@
-{ pkgs, stdenv, lib }:
+{
+  pkgs,
+  stdenv,
+  lib,
+}:
 
 # inspired by https://github.com/lihebi/nixos/blob/master/pkgs/stumpwm-wrapper.nix
 

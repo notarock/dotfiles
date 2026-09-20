@@ -1,11 +1,17 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   # unstableTarball = fetchTarball
   #   "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
   # masterTarball =
   #   fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
-in {
+in
+{
   #nixpkgs.config = {
   #  allowUnfree = true;
   #  allowBroken = false;

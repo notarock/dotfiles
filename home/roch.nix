@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
@@ -20,7 +25,9 @@
     manpages.enable = true;
   };
 
-  home = { enableNixpkgsReleaseCheck = true; };
+  home = {
+    enableNixpkgsReleaseCheck = true;
+  };
 
   home.keyboard.layout = "ca,fr";
 

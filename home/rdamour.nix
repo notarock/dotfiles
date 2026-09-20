@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
 
@@ -28,38 +33,42 @@
 
   xdg.mimeApps = {
     enable = false;
-    defaultApplications = let
-      pdf = [ "org.gnome.Evince.desktop" ];
-      browser = [ "firefox.desktop" ];
-      image = [ "org.nomacs.ImageLounge.desktop" ];
-    in {
-      "image/png" = image;
-      "image/jpeg" = image;
-      "image/pjpeg" = image;
-      "image/bmp" = image;
-      "image/gif" = image;
-      "image/fif" = image;
-      "application/pdf" = pdf;
-      "text/html" = browser;
-      "x-scheme-handler/http" = browser;
-      "x-scheme-handler/https" = browser;
-      "x-scheme-handler/about" = browser;
-      "x-scheme-handler/slack" = [ "slack.desktop" ];
-      "x-scheme-handler/zoommtg" = [ "us.zoom.Zoom.desktop" ];
-    };
+    defaultApplications =
+      let
+        pdf = [ "org.gnome.Evince.desktop" ];
+        browser = [ "firefox.desktop" ];
+        image = [ "org.nomacs.ImageLounge.desktop" ];
+      in
+      {
+        "image/png" = image;
+        "image/jpeg" = image;
+        "image/pjpeg" = image;
+        "image/bmp" = image;
+        "image/gif" = image;
+        "image/fif" = image;
+        "application/pdf" = pdf;
+        "text/html" = browser;
+        "x-scheme-handler/http" = browser;
+        "x-scheme-handler/https" = browser;
+        "x-scheme-handler/about" = browser;
+        "x-scheme-handler/slack" = [ "slack.desktop" ];
+        "x-scheme-handler/zoommtg" = [ "us.zoom.Zoom.desktop" ];
+      };
   };
 
-  home.file.".background-image".source = let
-    background = ../resources/bsd-grid.png;
-    bgOut = "bgOut.png";
-    wallpaper = pkgs.runCommandNoCC "wallpaper" { } ''
-      	mkdir -p $out/share;
-      ${pkgs.imagemagick}/bin/convert ${background} \
-      	-fill "${config.myTheme.color14}" -opaque white \
-      	-fill "${config.myTheme.color0}" -opaque black ${bgOut} ;
-      cp -Lr ${bgOut} $out/share;
-    '';
-  in "${wallpaper}/share/${bgOut}";
+  home.file.".background-image".source =
+    let
+      background = ../resources/bsd-grid.png;
+      bgOut = "bgOut.png";
+      wallpaper = pkgs.runCommandNoCC "wallpaper" { } ''
+        mkdir -p $out/share;
+        ${pkgs.imagemagick}/bin/convert ${background} \
+          -fill "${config.myTheme.color14}" -opaque white \
+          -fill "${config.myTheme.color0}" -opaque black ${bgOut} ;
+        cp -Lr ${bgOut} $out/share;
+      '';
+    in
+    "${wallpaper}/share/${bgOut}";
 
   myTheme = import ../themes/base16-brewer.nix;
 
@@ -71,7 +80,10 @@
   home = {
     username = "rdamour";
     homeDirectory = "/home/rdamour";
-    packages = with pkgs; [ xss-lock xsecurelock ];
+    packages = with pkgs; [
+      xss-lock
+      xsecurelock
+    ];
     enableNixpkgsReleaseCheck = true;
   };
 
@@ -117,7 +129,9 @@
     direnv = {
       enable = true;
       enableZshIntegration = true;
-      nix-direnv = { enable = true; };
+      nix-direnv = {
+        enable = true;
+      };
     };
 
     exa = {
@@ -167,9 +181,13 @@
       shadow = false;
       vSync = true;
     };
-    flameshot = { enable = true; };
+    flameshot = {
+      enable = true;
+    };
   };
 
-  xresources.properties = { "XTerm*faceName" = "dejavu sans mono"; };
+  xresources.properties = {
+    "XTerm*faceName" = "dejavu sans mono";
+  };
 
 }

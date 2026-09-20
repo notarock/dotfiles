@@ -1,10 +1,26 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   gapWidth = "10";
-  tags = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
+  tags = [
+    "1"
+    "2"
+    "3"
+    "4"
+    "5"
+    "6"
+    "7"
+    "8"
+    "9"
+  ];
   inherit (pkgs.stdenv.hostPlatform) isLinux;
-in (lib.mkIf isLinux {
+in
+(lib.mkIf isLinux {
 
   xdg.configFile."xmonad" = {
     source = ../configs/xmonad;

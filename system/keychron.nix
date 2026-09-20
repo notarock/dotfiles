@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   systemd.services.keychron = {
@@ -7,8 +12,7 @@
     path = [ pkgs.coreutils ];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart =
-        "${pkgs.coreutils}/bin/echo 0 | ${pkgs.coreutils}/bin/tee /sys/module/hid_apple/parameters/fnmode";
+      ExecStart = "${pkgs.coreutils}/bin/echo 0 | ${pkgs.coreutils}/bin/tee /sys/module/hid_apple/parameters/fnmode";
     };
   };
 }

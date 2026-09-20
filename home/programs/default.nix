@@ -1,7 +1,16 @@
-{ confi, lib, pkgs, inputs, osConfig, ... }:
+{
+  confi,
+  lib,
+  pkgs,
+  inputs,
+  osConfig,
+  ...
+}:
 
-let inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
-in {
+let
+  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+in
+{
   imports = [
     # Linux specifics
     ./dunst.nix
@@ -28,10 +37,14 @@ in {
     direnv = {
       enable = true;
       enableZshIntegration = true;
-      nix-direnv = { enable = true; };
+      nix-direnv = {
+        enable = true;
+      };
     };
 
-    eza = { enable = true; };
+    eza = {
+      enable = true;
+    };
 
     feh.enable = isLinux;
 

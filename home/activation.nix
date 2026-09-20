@@ -1,4 +1,11 @@
-{ nixosConfig, config, osConfig, lib, pkgs, ... }:
+{
+  nixosConfig,
+  config,
+  osConfig,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   home.activation = {

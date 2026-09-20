@@ -1,11 +1,27 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   layoutFolder = "/etc/nixos/notarock/extras/hlwm-layouts";
   gapWidth = "10";
-  tags = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
+  tags = [
+    "1"
+    "2"
+    "3"
+    "4"
+    "5"
+    "6"
+    "7"
+    "8"
+    "9"
+  ];
   inherit (pkgs.stdenv.hostPlatform) isLinux;
-in (lib.mkIf isLinux {
+in
+(lib.mkIf isLinux {
 
   #########################################################################
   #   _   _           _         _   _        __ _                        #
@@ -15,242 +31,245 @@ in (lib.mkIf isLinux {
   #  |_| |_|\___|_|  |_.__/|___/\__|_|\__,_|_|  \__| \_/\_/ |_| |_| |_|  #
   #########################################################################
 
-  xsession.windowManager.herbstluftwm = let selectColor = config.myTheme.color3;
-  in {
-    enable = true;
-    tags = tags;
-    mousebinds = {
-      Mod4-Button1 = "move";
-      Mod4-Button2 = "zoom";
-      Mod4-Button3 = "resize";
+  xsession.windowManager.herbstluftwm =
+    let
+      selectColor = config.myTheme.color3;
+    in
+    {
+      enable = true;
+      tags = tags;
+      mousebinds = {
+        Mod4-Button1 = "move";
+        Mod4-Button2 = "zoom";
+        Mod4-Button3 = "resize";
+      };
+      settings = {
+        frame_gap = gapWidth;
+        frame_border_active_color = config.myTheme.color10;
+        frame_border_normal_color = config.myTheme.color10;
+        frame_bg_normal_color = config.myTheme.color10;
+        frame_bg_active_color = selectColor;
+        frame_border_width = 0;
+        always_show_frame = 0;
+        frame_bg_transparent = 1;
+        frame_transparent_width = 3;
+
+        window_gap = 0;
+        frame_padding = 0;
+        smart_window_surroundings = 0;
+        smart_frame_surroundings = 1;
+        mouse_recenter_gap = 0;
+        default_frame_layout = "grid";
+        focus_follows_mouse = 1;
+      };
+      keybinds = {
+        Mod4-Return = "spawn ${pkgs.kitty}/bin/kitty";
+        Mod4-Shift-c = "quit";
+        Mod4-Shift-r = "reload";
+        Mod4-Shift-q = "close";
+        Mod1-F4 = "close";
+        Mod1-F2 = "spawn rofi -show run -lines 0";
+        Mod4-d = "spawn rofi -show drun";
+        Mod4-e = "spawn rofi -show emoji -modi emoji";
+
+      };
+      extraConfig = ''
+        xsetroot -solid '#000'
+
+        # keybindings
+        # Mod=Mod1    # Use alt as the main modifier
+        Mod=Mod4   # Use the super key as the main modifier
+
+        # For volume controls and mute
+        herbstclient keybind XF86AudioRaiseVolume spawn ${pkgs.alsa-utils}/bin/amixer set -q Master 5%+
+        herbstclient keybind XF86AudioLowerVolume spawn ${pkgs.alsa-utils}/bin/amixer set -q Master 5%-
+        herbstclient keybind XF86AudioMute spawn ${pkgs.alsa-utils}/bin/amixer set Master toggle
+
+        # Brightness using Light
+        herbstclient keybind XF86MonBrightnessUp spawn ${pkgs.light}/bin/light -A 5%
+        herbstclient keybind XF86MonBrightnessDown spawn ${pkgs.light}/bin/light -U 5%
+
+        herbstclient keybind $Mod-F3 spawn firefox
+        herbstclient keybind $Mod-Shift-e spawn emacs
+        herbstclient keybind $Mod-Shift-s spawn flameshot gui
+        herbstclient keybind $Mod-Insert spawn ${pkgs.rofi-pass}/bin/rofi-pass
+        herbstclient keybind $Mod-t spawn ~/.config/herbstluftwm/layout-menu
+        herbstclient keybind $Mod-Shift-0 spawn ~/.config/herbstluftwm/window-menu
+        herbstclient keybind $Mod-Shift-Return spawn ~/.config/herbstluftwm/scratchpad
+        herbstclient keybind $Mod-Shift-y spawn ~/.config/herbstluftwm/sticky
+
+        herbstclient keybind $Mod-Shift-Home spawn ${pkgs.systemd}/bin/loginctl lock-session
+
+        # basic movement
+        # focusing clients
+        herbstclient keybind $Mod-Left  focus left
+        herbstclient keybind $Mod-Down  focus down
+        herbstclient keybind $Mod-Up    focus up
+        herbstclient keybind $Mod-Right focus right
+        herbstclient keybind $Mod-h     focus left
+        herbstclient keybind $Mod-j     focus down
+        herbstclient keybind $Mod-k     focus up
+        herbstclient keybind $Mod-l     focus right
+
+        # moving clients
+        herbstclient keybind $Mod-Shift-Left  shift left
+        herbstclient keybind $Mod-Shift-Down  shift down
+        herbstclient keybind $Mod-Shift-Up    shift up
+        herbstclient keybind $Mod-Shift-Right shift right
+        herbstclient keybind $Mod-Shift-h     shift left
+        herbstclient keybind $Mod-Shift-j     shift down
+        herbstclient keybind $Mod-Shift-k     shift up
+        herbstclient keybind $Mod-Shift-l     shift right
+
+        # splitting frames
+        # create an empty frame at the specified direction
+        herbstclient keybind $Mod-u       split   bottom  0.5
+        herbstclient keybind $Mod-Shift-u chain \
+                                . split bottom 0.5 \
+                                . shift down \
+                                . focus down
+
+        herbstclient keybind $Mod-o       split   right   0.5
+        herbstclient keybind $Mod-Shift-o chain \
+                                . split right 0.5 \
+                                . shift right \
+                                . focus right
+
+        # let the current frame explode into subframes
+        herbstclient keybind $Mod-Control-space split explode
+
+        # resizing frames
+        resizestep=0.05
+        herbstclient keybind $Mod-Control-h       resize left +$resizestep
+        herbstclient keybind $Mod-Control-j       resize down +$resizestep
+        herbstclient keybind $Mod-Control-k       resize up +$resizestep
+        herbstclient keybind $Mod-Control-l       resize right +$resizestep
+        herbstclient keybind $Mod-Control-Left    resize left +$resizestep
+        herbstclient keybind $Mod-Control-Down    resize down +$resizestep
+        herbstclient keybind $Mod-Control-Up      resize up +$resizestep
+        herbstclient keybind $Mod-Control-Right   resize right +$resizestep
+
+        # tags
+        tag_names=( {1..9} )
+        tag_keys=( {1..9} 0 )
+
+        herbstclient rename default "''${tag_names[0]}" || true
+        for i in "''${!tag_names[@]}" ; do
+            # herbstclient add "''${tag_names[$i]}"
+            key="''${tag_keys[$i]}"
+            if ! [ -z "$key" ] ; then
+                herbstclient keybind "$Mod-$key" use_index "$i"
+                herbstclient keybind "$Mod-Shift-$key" move_index "$i"
+            fi
+        done
+
+        # cycle through tags
+        herbstclient keybind $Mod-period use_index +1 --skip-visible
+        herbstclient keybind $Mod-comma  use_index -1 --skip-visible
+
+        # layouting
+        herbstclient keybind $Mod-r remove
+        herbstclient keybind $Mod-s floating toggle
+        herbstclient keybind $Mod-f fullscreen toggle
+        herbstclient keybind $Mod-p pseudotile toggle
+        herbstclient keybind $Mod-Shift-f set_attr clients.focus.floating toggle
+
+        # The following cycles through the available layouts within a frame, but skips
+        # layouts, if the layout change wouldn't affect the actual window positions.
+        # I.e. if there are two windows within a frame, the grid layout is skipped.
+        herbstclient keybind $Mod-space                                                           \
+            or , and . compare tags.focus.curframe_wcount = 2                   \
+            . cycle_layout +1 vertical horizontal max vertical grid    \
+            , cycle_layout +1
+
+        # focus
+        herbstclient keybind $Mod-BackSpace   cycle_monitor
+        herbstclient keybind $Mod-Tab         cycle_all +1
+        herbstclient keybind $Mod-Shift-Tab   cycle_all -1
+        herbstclient keybind $Mod-c cycle
+        herbstclient keybind $Mod-i jumpto urgent
+
+        SELECT="${config.myTheme.color3}"
+
+        # theme
+        herbstclient attr theme.tiling.reset 1
+        herbstclient attr theme.floating.reset 1
+
+        herbstclient attr theme.active.color $SELECT
+        herbstclient attr theme.normal.color '#000000'
+        herbstclient attr theme.urgent.color '${config.myTheme.color1}'
+        herbstclient attr theme.inner_width 0
+        herbstclient attr theme.inner_color black
+        herbstclient attr theme.border_width 1
+        herbstclient attr theme.floating.border_width 1
+        herbstclient attr theme.floating.outer_width 1
+        herbstclient attr theme.floating.outer_color black
+        herbstclient attr theme.active.inner_color $SELECT
+        herbstclient attr theme.active.outer_color $SELECT
+        herbstclient attr theme.background_color '#141414'
+
+        # rules
+        herbstclient unrule -F
+
+        herbstclient rule focus=on # normally focus new clients
+
+        # Workspace rules for common programs
+
+        herbstclient rule class=Firefox tag=1 focus=on switchtag=on
+        herbstclient rule class=Emacs tag=2 focus=on switchtag=on
+        herbstclient rule class=Spotify tag=8 focus=on switchtag=on
+        herbstclient rule class=discord tag=9 focus=on # move Discord to tag 9
+        herbstclient rule class=Slack tag=9 focus=on # move Discord to tag 9
+
+        herbstclient rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
+        herbstclient rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
+        herbstclient rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
+
+        # unlock, just to be sure
+        herbstclient unlock
+
+        herbstclient set tree_style '╾│ ├└╼─┐'
+
+        # do multi monitor setup here, e.g.:
+        # herbstclient set_monitors 1920x1080+0+0
+        # or simply:
+        herbstclient detect_monitors
+
+        # Kill Startup programs
+        herbstclient spawn pkill xsecurelock
+        herbstclient spawn pkill xss-lock
+
+        herbstclient spawn ${pkgs.xss-lock}/bin/xss-lock \
+            ${pkgs.coreutils}/bin/env \
+            XSECURELOCK_AUTH_BACKGROUND_COLOR="${config.myTheme.color11}" \
+            XSECURELOCK_PASSWORD_PROMPT=time \
+            XSECURELOCK_AUTH_CURSOR_BLINK=0 \
+            XSECURELOCK_NO_COMPOSITE=1 \
+            XSECURELOCK_BLANK_DPMS_STATE=off \
+            XSECURELOCK_BLANK_TIMEOUT=30 \
+            ${pkgs.xsecurelock}/bin/xsecurelock
+
+        # gaps are based
+        #   __ _  __ _ _ __  ___
+        #  / _` |/ _` | '_ \/ __|
+        # | (_| | (_| | |_) \__ \
+        #  \__, |\__,_| .__/|___/
+        #  |___/      |_|
+
+        herbstclient keybind $Mod-n set frame_gap 0
+        herbstclient keybind $Mod-g set frame_gap ${gapWidth}
+
+        xsetroot -curser_name ${config.xsession.pointerCursor.name}
+
+        sleep 4
+
+        # Startup programs
+        herbstclient spawn ${pkgs.discord}/bin/discord
+        herbstclient spawn ${pkgs.feh}/bin/feh --bg-tile ~/.background-image
+
+        herbstclient spawn ${pkgs.polybar}/bin/polybar main
+      '';
     };
-    settings = {
-      frame_gap = gapWidth;
-      frame_border_active_color = config.myTheme.color10;
-      frame_border_normal_color = config.myTheme.color10;
-      frame_bg_normal_color = config.myTheme.color10;
-      frame_bg_active_color = selectColor;
-      frame_border_width = 0;
-      always_show_frame = 0;
-      frame_bg_transparent = 1;
-      frame_transparent_width = 3;
-
-      window_gap = 0;
-      frame_padding = 0;
-      smart_window_surroundings = 0;
-      smart_frame_surroundings = 1;
-      mouse_recenter_gap = 0;
-      default_frame_layout = "grid";
-      focus_follows_mouse = 1;
-    };
-    keybinds = {
-      Mod4-Return = "spawn ${pkgs.kitty}/bin/kitty";
-      Mod4-Shift-c = "quit";
-      Mod4-Shift-r = "reload";
-      Mod4-Shift-q = "close";
-      Mod1-F4 = "close";
-      Mod1-F2 = "spawn rofi -show run -lines 0";
-      Mod4-d = "spawn rofi -show drun";
-      Mod4-e = "spawn rofi -show emoji -modi emoji";
-
-    };
-    extraConfig = ''
-      xsetroot -solid '#000'
-
-      # keybindings
-      # Mod=Mod1    # Use alt as the main modifier
-      Mod=Mod4   # Use the super key as the main modifier
-
-      # For volume controls and mute
-      herbstclient keybind XF86AudioRaiseVolume spawn ${pkgs.alsa-utils}/bin/amixer set -q Master 5%+
-      herbstclient keybind XF86AudioLowerVolume spawn ${pkgs.alsa-utils}/bin/amixer set -q Master 5%-
-      herbstclient keybind XF86AudioMute spawn ${pkgs.alsa-utils}/bin/amixer set Master toggle
-
-      # Brightness using Light
-      herbstclient keybind XF86MonBrightnessUp spawn ${pkgs.light}/bin/light -A 5%
-      herbstclient keybind XF86MonBrightnessDown spawn ${pkgs.light}/bin/light -U 5%
-
-      herbstclient keybind $Mod-F3 spawn firefox
-      herbstclient keybind $Mod-Shift-e spawn emacs
-      herbstclient keybind $Mod-Shift-s spawn flameshot gui
-      herbstclient keybind $Mod-Insert spawn ${pkgs.rofi-pass}/bin/rofi-pass
-      herbstclient keybind $Mod-t spawn ~/.config/herbstluftwm/layout-menu
-      herbstclient keybind $Mod-Shift-0 spawn ~/.config/herbstluftwm/window-menu
-      herbstclient keybind $Mod-Shift-Return spawn ~/.config/herbstluftwm/scratchpad
-      herbstclient keybind $Mod-Shift-y spawn ~/.config/herbstluftwm/sticky
-
-      herbstclient keybind $Mod-Shift-Home spawn ${pkgs.systemd}/bin/loginctl lock-session
-
-      # basic movement
-      # focusing clients
-      herbstclient keybind $Mod-Left  focus left
-      herbstclient keybind $Mod-Down  focus down
-      herbstclient keybind $Mod-Up    focus up
-      herbstclient keybind $Mod-Right focus right
-      herbstclient keybind $Mod-h     focus left
-      herbstclient keybind $Mod-j     focus down
-      herbstclient keybind $Mod-k     focus up
-      herbstclient keybind $Mod-l     focus right
-
-      # moving clients
-      herbstclient keybind $Mod-Shift-Left  shift left
-      herbstclient keybind $Mod-Shift-Down  shift down
-      herbstclient keybind $Mod-Shift-Up    shift up
-      herbstclient keybind $Mod-Shift-Right shift right
-      herbstclient keybind $Mod-Shift-h     shift left
-      herbstclient keybind $Mod-Shift-j     shift down
-      herbstclient keybind $Mod-Shift-k     shift up
-      herbstclient keybind $Mod-Shift-l     shift right
-
-      # splitting frames
-      # create an empty frame at the specified direction
-      herbstclient keybind $Mod-u       split   bottom  0.5
-      herbstclient keybind $Mod-Shift-u chain \
-                              . split bottom 0.5 \
-                              . shift down \
-                              . focus down
-
-      herbstclient keybind $Mod-o       split   right   0.5
-      herbstclient keybind $Mod-Shift-o chain \
-                              . split right 0.5 \
-                              . shift right \
-                              . focus right
-
-      # let the current frame explode into subframes
-      herbstclient keybind $Mod-Control-space split explode
-
-      # resizing frames
-      resizestep=0.05
-      herbstclient keybind $Mod-Control-h       resize left +$resizestep
-      herbstclient keybind $Mod-Control-j       resize down +$resizestep
-      herbstclient keybind $Mod-Control-k       resize up +$resizestep
-      herbstclient keybind $Mod-Control-l       resize right +$resizestep
-      herbstclient keybind $Mod-Control-Left    resize left +$resizestep
-      herbstclient keybind $Mod-Control-Down    resize down +$resizestep
-      herbstclient keybind $Mod-Control-Up      resize up +$resizestep
-      herbstclient keybind $Mod-Control-Right   resize right +$resizestep
-
-      # tags
-      tag_names=( {1..9} )
-      tag_keys=( {1..9} 0 )
-
-      herbstclient rename default "''${tag_names[0]}" || true
-      for i in "''${!tag_names[@]}" ; do
-          # herbstclient add "''${tag_names[$i]}"
-          key="''${tag_keys[$i]}"
-          if ! [ -z "$key" ] ; then
-              herbstclient keybind "$Mod-$key" use_index "$i"
-              herbstclient keybind "$Mod-Shift-$key" move_index "$i"
-          fi
-      done
-
-      # cycle through tags
-      herbstclient keybind $Mod-period use_index +1 --skip-visible
-      herbstclient keybind $Mod-comma  use_index -1 --skip-visible
-
-      # layouting
-      herbstclient keybind $Mod-r remove
-      herbstclient keybind $Mod-s floating toggle
-      herbstclient keybind $Mod-f fullscreen toggle
-      herbstclient keybind $Mod-p pseudotile toggle
-      herbstclient keybind $Mod-Shift-f set_attr clients.focus.floating toggle
-
-      # The following cycles through the available layouts within a frame, but skips
-      # layouts, if the layout change wouldn't affect the actual window positions.
-      # I.e. if there are two windows within a frame, the grid layout is skipped.
-      herbstclient keybind $Mod-space                                                           \
-          or , and . compare tags.focus.curframe_wcount = 2                   \
-          . cycle_layout +1 vertical horizontal max vertical grid    \
-          , cycle_layout +1
-
-      # focus
-      herbstclient keybind $Mod-BackSpace   cycle_monitor
-      herbstclient keybind $Mod-Tab         cycle_all +1
-      herbstclient keybind $Mod-Shift-Tab   cycle_all -1
-      herbstclient keybind $Mod-c cycle
-      herbstclient keybind $Mod-i jumpto urgent
-
-      SELECT="${config.myTheme.color3}"
-
-      # theme
-      herbstclient attr theme.tiling.reset 1
-      herbstclient attr theme.floating.reset 1
-
-      herbstclient attr theme.active.color $SELECT
-      herbstclient attr theme.normal.color '#000000'
-      herbstclient attr theme.urgent.color '${config.myTheme.color1}'
-      herbstclient attr theme.inner_width 0
-      herbstclient attr theme.inner_color black
-      herbstclient attr theme.border_width 1
-      herbstclient attr theme.floating.border_width 1
-      herbstclient attr theme.floating.outer_width 1
-      herbstclient attr theme.floating.outer_color black
-      herbstclient attr theme.active.inner_color $SELECT
-      herbstclient attr theme.active.outer_color $SELECT
-      herbstclient attr theme.background_color '#141414'
-
-      # rules
-      herbstclient unrule -F
-
-      herbstclient rule focus=on # normally focus new clients
-
-      # Workspace rules for common programs
-
-      herbstclient rule class=Firefox tag=1 focus=on switchtag=on
-      herbstclient rule class=Emacs tag=2 focus=on switchtag=on
-      herbstclient rule class=Spotify tag=8 focus=on switchtag=on
-      herbstclient rule class=discord tag=9 focus=on # move Discord to tag 9
-      herbstclient rule class=Slack tag=9 focus=on # move Discord to tag 9
-
-      herbstclient rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
-      herbstclient rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
-      herbstclient rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
-
-      # unlock, just to be sure
-      herbstclient unlock
-
-      herbstclient set tree_style '╾│ ├└╼─┐'
-
-      # do multi monitor setup here, e.g.:
-      # herbstclient set_monitors 1920x1080+0+0
-      # or simply:
-      herbstclient detect_monitors
-
-      # Kill Startup programs
-      herbstclient spawn pkill xsecurelock
-      herbstclient spawn pkill xss-lock
-
-      herbstclient spawn ${pkgs.xss-lock}/bin/xss-lock \
-          ${pkgs.coreutils}/bin/env \
-          XSECURELOCK_AUTH_BACKGROUND_COLOR="${config.myTheme.color11}" \
-          XSECURELOCK_PASSWORD_PROMPT=time \
-          XSECURELOCK_AUTH_CURSOR_BLINK=0 \
-          XSECURELOCK_NO_COMPOSITE=1 \
-          XSECURELOCK_BLANK_DPMS_STATE=off \
-          XSECURELOCK_BLANK_TIMEOUT=30 \
-          ${pkgs.xsecurelock}/bin/xsecurelock
-
-      # gaps are based
-      #   __ _  __ _ _ __  ___
-      #  / _` |/ _` | '_ \/ __|
-      # | (_| | (_| | |_) \__ \
-      #  \__, |\__,_| .__/|___/
-      #  |___/      |_|
-
-      herbstclient keybind $Mod-n set frame_gap 0
-      herbstclient keybind $Mod-g set frame_gap ${gapWidth}
-
-      xsetroot -curser_name ${config.xsession.pointerCursor.name}
-
-      sleep 4
-
-      # Startup programs
-      herbstclient spawn ${pkgs.discord}/bin/discord
-      herbstclient spawn ${pkgs.feh}/bin/feh --bg-tile ~/.background-image
-
-      herbstclient spawn ${pkgs.polybar}/bin/polybar main
-    '';
-  };
 
   ########################################
   #   _                       _          #

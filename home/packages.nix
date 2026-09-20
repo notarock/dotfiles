@@ -35,7 +35,8 @@
           ];
           comps = [
             google-cloud-sdk
-          ] ++ filterPreInstalled (findDepsRecursive (defaultComponents ++ comps_));
+          ]
+          ++ filterPreInstalled (findDepsRecursive (defaultComponents ++ comps_));
         in
         symlinkJoin {
           name = "google-cloud-sdk-${google-cloud-sdk.version}";

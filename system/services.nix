@@ -1,6 +1,12 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-with lib; {
+with lib;
+{
   location.latitude = 45.5;
   location.longitude = -73.5;
 
@@ -23,7 +29,10 @@ with lib; {
       temperature.night = 3000;
     };
 
-    udev.packages = [ pkgs.yubikey-personalization pkgs.libu2f-host ];
+    udev.packages = [
+      pkgs.yubikey-personalization
+      pkgs.libu2f-host
+    ];
     pcscd.enable = true;
 
     printing = {

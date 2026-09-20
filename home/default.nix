@@ -1,8 +1,22 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
-let inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
-in {
-  imports = [ ./programs ./options ./myTheme.nix ./packages.nix ./xdg.nix ];
+let
+  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+in
+{
+  imports = [
+    ./programs
+    ./options
+    ./myTheme.nix
+    ./packages.nix
+    ./xdg.nix
+  ];
 
   targets.genericLinux = (lib.mkIf (isLinux) { enable = true; });
 

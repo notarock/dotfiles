@@ -1,8 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   inherit (pkgs.stdenv.hostPlatform) isLinux;
-in (lib.mkIf isLinux {
+in
+(lib.mkIf isLinux {
   services.udiskie = {
     enable = true;
     automount = true;
