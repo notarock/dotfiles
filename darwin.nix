@@ -118,7 +118,8 @@ in
     ];
     onActivation = {
       cleanup = "none";
-      upgrade = true;
+      autoUpdate = false;
+      upgrade = false;
     };
     # taps = [
     #   "homebrew/cask"
