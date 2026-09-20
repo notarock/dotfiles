@@ -28,15 +28,13 @@ in
   # };
 
   fonts = {
-    packages =
-      with pkgs;
-      [
-        dejavu_fonts
-        open-sans
-        font-awesome
-        ibm-plex
-      ]
-      ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+    packages = with pkgs; [
+      dejavu_fonts
+      open-sans
+      font-awesome
+      ibm-plex
+      nerd-fonts.symbols-only
+    ];
   };
 
   environment.variables = {
