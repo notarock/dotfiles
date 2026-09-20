@@ -20,6 +20,11 @@ in
 
   targets.genericLinux = (lib.mkIf (isLinux) { enable = true; });
 
+  xdg = {
+    enable = true;
+    localBinInPath = true;
+  };
+
   programs.bash.enable = true;
 
   services.nextcloud-client.enable = isLinux;

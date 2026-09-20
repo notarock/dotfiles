@@ -209,7 +209,7 @@
       # Darwin configurations
       darwinConfigurations = {
         coneorange = mkDarwinConfiguration {
-          # Macbook Pro 16" 2019 for work
+          # Apple Silicon work Mac
           hostname = "coneorange";
           username = "roch";
           email = workEmail; # If you email me here I *will* ignore you.

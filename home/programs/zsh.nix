@@ -17,6 +17,7 @@ in
 
   programs.zsh = {
     enable = true;
+    dotDir = config.home.homeDirectory;
     enableCompletion = true;
     profileExtra = lib.optionalString isDarwin ''
       eval "$(/opt/homebrew/bin/brew shellenv)"

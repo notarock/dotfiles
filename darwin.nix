@@ -53,6 +53,7 @@ in
 
   nix = {
     gc.automatic = true;
+    optimise.automatic = true;
     settings = {
       # package = pkgs;
       max-jobs = lib.mkDefault 8;
@@ -119,7 +120,7 @@ in
       "herdr"
     ];
     onActivation = {
-      cleanup = "none";
+      cleanup = "check";
       autoUpdate = false;
       upgrade = false;
     };
