@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  inherit (pkgs.stdenv.hostPlatform) isDarwin;
+  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
 in
 {
   programs.zsh = {
@@ -34,12 +34,12 @@ in
       dstop = "docker stop $(docker ps -a -q)";
       dclean = "docker rm $(docker ps -a -q)";
       dclear = "docker rmi --force $(docker images -q)";
-      open = "$FILEMANAGER";
+      open = lib.mkIf isLinux "$FILEMANAGER";
       nixc = "sudo $EDITOR /etc/nixos/configuration.nix";
       wttr = "curl wttr.in";
       k = "kubectl";
       randpw =
-        "dd if=/dev/urandom bs=1 count=64 2>/dev/null | base64 -w 0 | rev | cut -b 2- | rev";
+        "dd if=/dev/urandom bs=1 count=64 2>/dev/null | ${pkgs.coreutils}/bin/base64 -w 0 | rev | cut -b 2- | rev";
       gitwtf = "echo 'git reset $(git merge-base master current)'";
       yolo = ''git commit -m "$(curl -s http://whatthecommit.com/index.txt)" '';
       recent = "ls -Art | tail -n 1";
