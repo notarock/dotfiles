@@ -1,9 +1,15 @@
 { config, lib, pkgs, ... }:
 
+let
+  inherit (pkgs.stdenv.hostPlatform) isDarwin;
+in
 {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
+    profileExtra = lib.optionalString isDarwin ''
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+    '';
     # To keep using zsh with nix-shells
     plugins = [{
       name = "zsh-nix-shell";
