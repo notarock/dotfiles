@@ -46,7 +46,11 @@ in {
 
     git = {
       enable = true;
-      settings.user.name = "Roch D'Amour";
+      settings = {
+        user.name = "Roch D'Amour";
+        pull.rebase = false;
+        push.autoSetupRemote = true;
+      };
       ignores = [ "**/.claude/settings.local.json" ];
     };
     delta.enable = false;
