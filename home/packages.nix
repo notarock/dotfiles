@@ -72,7 +72,7 @@
         # ccls  # Linux only - conflicts with haskell packages on Darwin
         clang-tools
         wakatime-cli
-        texlive.combined.scheme-medium
+        texliveMedium
 
         pandoc
 
