@@ -84,8 +84,8 @@
           system,
         }:
         let
-          isDarwin = if system == "x86_64-linux" then false else true;
-          isLinux = if system == "x86_64-linux" then true else false;
+          platform = nixpkgs.lib.systems.elaborate system;
+          inherit (platform) isDarwin isLinux;
           rootUser = if isDarwin then "@admin" else "root";
           homePath = if isDarwin then "/Users/${username}" else "/home/${username}";
         in

@@ -72,15 +72,12 @@
         dnsutils
         mtr
         docker-compose
-        xhost
         mage
         unrar
         tldr
-        xmessage
         librsvg
         gnumake
         cmake
-        pciutils
         killall
         libnotify
         gcc
@@ -138,7 +135,6 @@
         sqlite
         wordnet
         delve
-        dmenu
         awscli2
 
         # (retroarch.override {
@@ -176,6 +172,10 @@
 
         finger_bsd
         parted
+        xhost
+        xmessage
+        pciutils
+        dmenu
         #
         chromium
         firefox
@@ -228,6 +228,6 @@
         # Add macOS-specific packages here
       ];
     in
-    commonPackages ++ (if isDarwin then darwinPackages else linuxPackages);
+    commonPackages ++ lib.optionals isLinux linuxPackages ++ lib.optionals isDarwin darwinPackages;
 
 }
