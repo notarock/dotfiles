@@ -49,7 +49,6 @@
         };
       commonPackages = [
         vscode-extensions.vscodevim.vim
-        vscode
         opencode
 
         wget
@@ -109,7 +108,6 @@
         # ansible
 
         prettier
-        spotify
         # ccls  # Linux only - conflicts with haskell packages on Darwin
         clang-tools
         wakatime-cli
@@ -117,7 +115,6 @@
 
         pandoc
 
-        slack
         yt-dlp
         hunspell
         hunspellDicts.en-ca
@@ -134,10 +131,6 @@
         nix-index
         asciinema
         tmux
-        audacity
-        jetbrains.idea
-        jetbrains.goland
-        jetbrains.datagrip
         kotlin
         figlet
         ripgrep
@@ -163,6 +156,13 @@
         # (import inputs.nixpkgs-discord { inherit (pkgs) config system; }).discord
       ];
       linuxPackages = [
+        vscode
+        spotify
+        slack
+        audacity
+        jetbrains.idea
+        jetbrains.goland
+        jetbrains.datagrip
         _1password-cli
         _1password-gui
         # rustdesk

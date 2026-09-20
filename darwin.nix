@@ -125,6 +125,10 @@ in
     #   #      "homebrew/cask-drivers"
     # ];
     casks = [
+      "audacity"
+      "intellij-idea"
+      "goland"
+      "datagrip"
       "emacs-app"
       "flutter"
       "claude-code"

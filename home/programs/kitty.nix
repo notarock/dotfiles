@@ -2,7 +2,7 @@
 
 {
   programs.kitty = {
-    # package = pkgs.runCommandLocal "" { } "mkdir $out";
+    package = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin null;
     enable = true;
     font.name = "Essential PragmataPro";
     settings = {
