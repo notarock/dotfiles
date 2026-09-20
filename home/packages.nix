@@ -100,7 +100,7 @@
         # brogue
         fastfetch
         kubectl
-        minikube
+        (lib.lowPrio minikube)
         kompose
         k9s
         kubernetes-helm
