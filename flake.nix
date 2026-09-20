@@ -4,9 +4,12 @@
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
     doom-emacs.url = "github:doomemacs/doomemacs/master";
     doom-emacs.flake = false;
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    emacs-overlay.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
@@ -164,7 +167,6 @@
           modules = [
             ./darwin.nix
             home-manager.darwinModules.home-manager
-            { nixpkgs.overlays = [ inputs.emacs-overlay.overlay ]; }
             (mkBaseUser {
               inherit username;
               inherit email;
