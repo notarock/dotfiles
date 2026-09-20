@@ -21,6 +21,21 @@ and tested.
 
 ## Hectasio
 
+### Bootstrap
+
+On a fresh Mac, install Xcode Command Line Tools (`xcode-select --install`),
+[Nix](https://nixos.org/download/), and [Homebrew](https://brew.sh/) first.
+Clone this repository, then perform the initial activation without requiring a
+preinstalled `darwin-rebuild`:
+
+```sh
+nix run nix-darwin -- switch --flake .#Hectasio
+```
+
+Subsequent rebuilds use the Make targets below.
+
+### Rebuild
+
 Run the following from the repository root:
 
 ```sh
@@ -39,6 +54,14 @@ Format Nix files with `make fmt`. Update pinned inputs with `make update`,
 inspect the resulting `flake.lock` diff, verify the configuration, and commit
 the lockfile separately. Nix generation rollback does not roll back Homebrew
 applications.
+
+### Recovery
+
+List system generations with `sudo darwin-rebuild --list-generations`. Roll
+back to the previous Nix generation with `sudo darwin-rebuild switch --rollback`,
+or activate a specific generation with
+`sudo darwin-rebuild switch --switch-generation <number>`. Homebrew packages
+are managed separately and are not reverted by these commands.
 
 ## macOS fonts
 
