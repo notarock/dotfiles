@@ -61,7 +61,7 @@ in
       extended = true;
       save = 50000;
     };
-    initExtra = ''
+    initContent = ''
       # Create a git worktree from the latest main branch.
       # Usage: worktree-for <branch-name>
       # Worktree is created at ~/src/worktrees/<reponame>-<branch-name>.
