@@ -11,6 +11,42 @@
     with pkgs;
     let
       inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+      googleCloudSdkWithComponentsNoCheck =
+        comps_:
+        let
+          inherit (google-cloud-sdk) components;
+          preInstalledComponents = with components; [
+            bq
+            bq-nix
+            core
+            core-nix
+            gcloud-deps
+            gcloud
+            gsutil
+            gsutil-nix
+          ];
+          filterPreInstalled = builtins.filter (drv: !(builtins.elem drv preInstalledComponents));
+          findDepsRecursive = lib.converge (
+            drvs: lib.unique (drvs ++ (builtins.concatMap (drv: drv.dependencies) drvs))
+          );
+          defaultComponents = with components; [
+            alpha
+            beta
+          ];
+          comps = [
+            google-cloud-sdk
+          ] ++ filterPreInstalled (findDepsRecursive (defaultComponents ++ comps_));
+        in
+        symlinkJoin {
+          name = "google-cloud-sdk-${google-cloud-sdk.version}";
+          inherit (google-cloud-sdk) meta;
+          paths = [ google-cloud-sdk ] ++ comps;
+          PYTHONDONTWRITEBYTECODE = "1";
+          postBuild = ''
+            sed -i ';' $out/google-cloud-sdk/bin/.gcloud-wrapped
+            sed -i -e "s#${google-cloud-sdk}#$out#" "$out/google-cloud-sdk/bin/gcloud"
+          '';
+        };
       commonPackages = [
         vscode-extensions.vscodevim.vim
         vscode
@@ -69,7 +105,7 @@
         kompose
         k9s
         kubernetes-helm
-        (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
+        (googleCloudSdkWithComponentsNoCheck [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
         # ansible
 
         prettier
