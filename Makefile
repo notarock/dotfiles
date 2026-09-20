@@ -4,7 +4,7 @@
 
 HOST ?= Hectasio
 
-.PHONY: mac-check mac-build mac fmt
+.PHONY: mac-check mac-build mac fmt update
 
 build:
 	nixos-rebuild --use-remote-sudo switch --flake '.#' -v -L
@@ -27,6 +27,6 @@ fmt:
 	nix fmt
 
 update:
-	nix flake update --commit-lock-file --extra-experimental-features nix-command --extra-experimental-features flakes
+	nix flake update --extra-experimental-features nix-command --extra-experimental-features flakes
 
 # end
