@@ -177,6 +177,18 @@
       workEmail = "rochdamour@civalgo.com";
     in
     {
+      formatter =
+        nixpkgs.lib.genAttrs
+          [
+            "aarch64-darwin"
+            "x86_64-linux"
+          ]
+          (
+            system:
+            nixpkgs.legacyPackages.${system}.nixfmt-tree.override {
+              settings.tree-root-file = "flake.nix";
+            }
+          );
 
       # NixOS configurations
       # nixos-rebuild switch -I nixos-config=hosts/Zonnarth/configuration.nix

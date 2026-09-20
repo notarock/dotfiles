@@ -4,7 +4,7 @@
 
 HOST ?= Hectasio
 
-.PHONY: mac-check mac-build mac
+.PHONY: mac-check mac-build mac fmt
 
 build:
 	nixos-rebuild --use-remote-sudo switch --flake '.#' -v -L
@@ -24,7 +24,7 @@ hm:
 	doom sync
 
 fmt:
-	nixfmt **/*.nix
+	nix fmt
 
 update:
 	nix flake update --commit-lock-file --extra-experimental-features nix-command --extra-experimental-features flakes
