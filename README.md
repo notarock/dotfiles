@@ -1,10 +1,44 @@
-# My neglected dotfile repository, now with even more breakage!
+# Dotfiles
 
-This repository contains all of my configurations for doom-emacs,
-stumpwm/herbstluftwm/whatever DE/WM I am using at the moment, and
-many more. It is all managed by Nix, mostly home-manager. You will find a
-"macos" branch with the most up-to-date changes. This is simply because I am
-lazy and never merged the two system configurations properly...
+Nix flake configurations for macOS and NixOS, with most user configuration
+managed by Home Manager. `main` is the maintained branch; the historical
+`macos` and `rebased-macos` branches use an older, disconnected layout.
+
+## Configurations
+
+| Output | Platform | Status |
+| --- | --- | --- |
+| `darwinConfigurations.Hectasio` | Apple Silicon macOS | Verified on this Mac |
+| `darwinConfigurations.hectasio` | Apple Silicon macOS | Alias of Hectasio; not separately verified |
+| `darwinConfigurations.coneorange` | Apple Silicon macOS | Evaluates; activation unverified |
+| `nixosConfigurations.Kreizemm` | x86_64 Linux | Declared; not evaluated locally because it requires Linux |
+| `nixosConfigurations.Zonnarth` | x86_64 Linux | Currently invalid: required user arguments are missing |
+| `homeConfigurations.rdamour` | Standalone Home Manager | Currently invalid: its configuration omits `pkgs` |
+
+The NixOS and standalone Home Manager outputs are retained as historical
+machine configurations; do not treat them as supported until they are fixed
+and tested.
+
+## Hectasio
+
+Run the following from the repository root:
+
+```sh
+make mac-check  # evaluate the default Hectasio configuration
+make mac-build  # build without activating
+make mac        # build and activate; prompts for sudo
+```
+
+Override the default host when evaluating another Darwin output:
+
+```sh
+make mac-check HOST=coneorange
+```
+
+Format Nix files with `make fmt`. Update pinned inputs with `make update`,
+inspect the resulting `flake.lock` diff, verify the configuration, and commit
+the lockfile separately. Nix generation rollback does not roll back Homebrew
+applications.
 
 ## macOS fonts
 
