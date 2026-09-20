@@ -4,6 +4,11 @@ let
   inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
 in
 {
+  home.sessionPath = [
+    "$HOME/bin"
+    "$HOME/go/bin"
+  ] ++ lib.optional isLinux "$HOME/snap";
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -104,13 +109,6 @@ in
     ];
     extraConfig = ''
       setopt HIST_IGNORE_SPACE
-
-      export PATH=$HOME/bin:/usr/local/bin:$PATH
-      export PATH=$HOME/snap:$PATH
-      export PATH=$HOME/.emacs.d/bin/:$PATH
-
-      export PATH="/usr/local/go/bin:$PATH"
-      export PATH="$HOME/go/bin:$PATH"
 
       export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
     '';
