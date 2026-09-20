@@ -125,6 +125,7 @@ in
     #   #      "homebrew/cask-drivers"
     # ];
     casks = [
+      "emacs-app"
       "flutter"
       "claude-code"
       "obs"

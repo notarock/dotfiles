@@ -12,7 +12,6 @@ let
   DOOMDIR = "${config.xdg.configHome}/doom";
   EMACSDIR = "${config.xdg.configHome}/emacs";
   inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
-  emacs_package = if isLinux then pkgs.emacs30-pgtk else pkgs.emacs-unstable;
 in
 {
   home.packages =
@@ -59,9 +58,9 @@ in
       haskellPackages.cabal-install
     ]);
 
-  programs.emacs = {
+  programs.emacs = lib.mkIf isLinux {
     enable = true;
-    package = emacs_package;
+    package = pkgs.emacs30-pgtk;
   };
 
   home.sessionVariables = { inherit DOOMLOCALDIR DOOMDIR; };
