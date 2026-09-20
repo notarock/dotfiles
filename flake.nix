@@ -170,7 +170,10 @@
               inherit email;
               inherit system;
             })
-            { system.primaryUser = username; }
+            {
+              networking.hostName = hostname;
+              system.primaryUser = username;
+            }
           ];
         };
       personalEmail = "roch.damour@gmail.com";
@@ -219,13 +222,7 @@
           system = "aarch64-darwin";
         };
 
-        hectasio = mkDarwinConfiguration {
-          # Mac M2 Max
-          hostname = "Hectasio";
-          username = "notarock";
-          email = personalEmail; # If you email me here I *will* ignore you.
-          system = "aarch64-darwin";
-        };
+        hectasio = self.darwinConfigurations.Hectasio;
       };
 
       # Home Manager configurations
