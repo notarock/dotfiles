@@ -84,6 +84,11 @@ in
         repo=$(basename "$(git rev-parse --show-toplevel)")
         local worktree_path="$HOME/src/worktrees/''${repo}-''${branch}"
 
+        if [[ -d "$worktree_path" ]]; then
+          cd "$worktree_path"
+          return 0
+        fi
+
         git fetch origin main
 
         if git ls-remote --exit-code --heads origin "$branch" &>/dev/null; then
