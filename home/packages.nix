@@ -14,6 +14,7 @@
       commonPackages = [
         vscode-extensions.vscodevim.vim
         opencode
+        pi-coding-agent
 
         wget
         curl
