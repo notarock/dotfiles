@@ -2,7 +2,7 @@
 # dotfiles
 #
 
-HOST ?= Hectasio
+HOST ?= $(shell scutil --get LocalHostName 2>/dev/null || hostname -s)
 
 .PHONY: mac-check mac-build mac fmt update
 
