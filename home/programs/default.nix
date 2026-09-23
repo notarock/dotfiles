@@ -23,6 +23,7 @@ in
     # Cross platform
     ./ghostty.nix
     ./claude-code.nix
+    ./opencode.nix
     ./emacs.nix
     ./go.nix
     ./kitty.nix

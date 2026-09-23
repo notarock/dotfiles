@@ -13,7 +13,6 @@
       inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
       commonPackages = [
         vscode-extensions.vscodevim.vim
-        opencode
         pi-coding-agent
 
         wget
