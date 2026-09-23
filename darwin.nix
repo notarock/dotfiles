@@ -116,6 +116,7 @@ in
       "java"
       "neovim"
       "cocoapods"
+      "herdr"
     ];
     onActivation = {
       cleanup = "none";
