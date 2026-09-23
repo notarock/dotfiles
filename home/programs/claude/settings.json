@@ -1,26 +1,9 @@
 {
   "attribution": {},
   "model": "sonnet",
-  "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash '/Users/roch/.claude/hooks/herdr-agent-state.sh' session",
-            "timeout": 10
-          }
-        ]
-      }
-    ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "/Users/roch/.claude/plugins/cache/claude-lens-marketplace/claude-lens/0.5.0/claude-lens.sh"
-  },
   "enabledPlugins": {
     "claude-lens@claude-lens-marketplace": true,
+    "frontend-design@claude-plugins-official": true,
     "gopls-lsp@claude-plugins-official": true,
     "ponytail@ponytail": true,
     "i-have-adhd@i-have-adhd": true
@@ -48,6 +31,5 @@
   "effortLevel": "medium",
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
-  "theme": "light",
   "skipAutoPermissionPrompt": true
 }

@@ -21,7 +21,7 @@ let
         "kubernetes-mcp-server@latest"
         "--read-only"
       ];
-      env.KUBECONFIG = "/Users/roch/src/kubeconfigs/staging-k8s-cluster-kubeconfig.yaml";
+      env.KUBECONFIG = "${config.home.homeDirectory}/src/kubeconfigs/staging-k8s-cluster-kubeconfig.yaml";
     };
     grafana = {
       type = "stdio";
@@ -36,6 +36,17 @@ let
 in
 {
   home.file.".claude/settings.json".source = ./claude/settings.json;
+
+  home.activation.backupUnmanagedClaudeSettings = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
+    path="$HOME/.claude/settings.json"
+    if [ -e "$path" ] && [ ! -L "$path" ]; then
+      if [ -e "$path.pre-nix" ]; then
+        echo "Refusing to overwrite $path.pre-nix" >&2
+        exit 1
+      fi
+      mv "$path" "$path.pre-nix"
+    fi
+  '';
 
   home.activation.claudeCodeMcpServers = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     claudeJson="$HOME/.claude.json"
