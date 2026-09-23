@@ -52,6 +52,8 @@
 ;(package! builtin-package :recipe (:branch "develop"))
 
 (package! base16-theme)
+(package! flexoki-themes
+  :recipe (:host github :repo "d0ublemur/flexoki-emacs-theme"))
 (package! org-fancy-priorities)
 (package! k8s-mode)
 (package! typescript-mode)

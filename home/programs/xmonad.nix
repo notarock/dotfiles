@@ -39,7 +39,7 @@ in
       # background = "0x5f5f5f";
       # setdocktype = "true";
       # expand = "true";
-      tint = "0x5f5f5f";
+      tint = lib.removePrefix "#" config.myTheme.color0;
       # iconspacing = "0";
       # setpartialstrut = "true";
     };
@@ -50,8 +50,8 @@ in
     extraConfig = ''
       Config { overrideRedirect = False
               , font     = "xft:Essential PragmataPro-12"
-              , bgColor  = "#5f5f5f"
-              , fgColor  = "#f8f8f2"
+              , bgColor  = "${config.myTheme.color0}"
+              , fgColor  = "${config.myTheme.color15}"
               , position = TopW L 100
               , commands = [ Run Cpu
                               [ "-L", "3"
@@ -67,7 +67,7 @@ in
                               ]
                           , Run Memory ["--template", "Mem: <usedratio>%"] 10
                           , Run Swap [] 10
-                          , Run Date "%a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
+                          , Run Date "%a %Y-%m-%d <fc=${config.myTheme.color14}>%H:%M</fc>" "date" 10
                           , Run XMonadLog
                           ]
               , sepChar  = "%"

@@ -7,7 +7,17 @@
 (setq user-full-name "Roch D'Amour"
       user-mail-address "roch.damour@gmail.com")
 
-(setq doom-theme 'base16-snazzy)
+(setq doom-theme 'flexoki-themes-dark)
+
+(defun my/flexoki-for-appearance (appearance)
+  (mapc #'disable-theme custom-enabled-themes)
+  (load-theme (if (eq appearance 'light)
+                  'flexoki-themes-light
+                'flexoki-themes-dark)
+              t))
+
+(when (boundp 'ns-system-appearance-change-functions)
+  (add-hook 'ns-system-appearance-change-functions #'my/flexoki-for-appearance))
 
 (setq display-line-numbers-type t)
 

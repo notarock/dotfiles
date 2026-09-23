@@ -18,7 +18,7 @@
     ./extras/starship.nix
   ];
 
-  myTheme = import ../themes/base16-monokai.nix;
+  myTheme = import ../themes/flexoki-dark.nix;
 
   manual = {
     html.enable = true;

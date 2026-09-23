@@ -31,7 +31,7 @@ in
 
   home.keyboard.layout = "ca,fr";
 
-  myTheme = import ../themes/base16-brewer.nix;
+  myTheme = import ../themes/flexoki-dark.nix;
 
   manual = {
     html.enable = true;

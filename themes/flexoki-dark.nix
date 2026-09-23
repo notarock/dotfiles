@@ -1,0 +1,19 @@
+{
+  # Flexoki Dark: https://stephango.com/flexoki
+  color0 = "#100F0F";
+  color1 = "#AF3029";
+  color2 = "#66800B";
+  color3 = "#AD8301";
+  color4 = "#205EA6";
+  color5 = "#A02F6F";
+  color6 = "#24837B";
+  color7 = "#878580";
+  color8 = "#6F6E69";
+  color9 = "#D14D41";
+  color10 = "#879A39";
+  color11 = "#D0A215";
+  color12 = "#4385BE";
+  color13 = "#CE5D97";
+  color14 = "#3AA99F";
+  color15 = "#CECDC3";
+}
