@@ -114,10 +114,17 @@ in
     enable = true;
     # brewPrefix = "/usr/local/bin";
     brews = [
+      "argocd"
       "java"
       "neovim"
       "cocoapods"
+      "ffmpeg"
       "herdr"
+      "kubetail"
+      "ncdu"
+      "ncurses"
+      "syncthing"
+      "yq"
     ];
     onActivation = {
       cleanup = "check";
@@ -130,6 +137,7 @@ in
     # ];
     casks = [
       "audacity"
+      "balenaetcher"
       "intellij-idea"
       "goland"
       "datagrip"
@@ -157,6 +165,7 @@ in
       "yubico-authenticator"
       "ghostty"
       "lm-studio"
+      "microsoft-office"
     ];
   };
 
