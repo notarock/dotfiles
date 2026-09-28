@@ -1,5 +1,9 @@
 onboarding = false
 
+[ui]
+status_indicators = "symbols"
+sidebar_width = 39
+
 [theme]
 name = "catppuccin"
 auto_switch = true
