@@ -125,16 +125,31 @@ in
       "ncurses"
       "syncthing"
       "yq"
+      "asdf"
+      "auth0/auth0-cli/auth0"
+      "cloudflared"
+      "doctl"
+      "glab"
+      "libnghttp3"
+      "libngtcp2"
+      "libpq"
+      "mcp-grafana"
+      "node"
+      "opencode"
+      "pnpm"
+      "schpet/tap/linear"
+      "watch"
+      "watchman"
     ];
     onActivation = {
       cleanup = "check";
       autoUpdate = false;
       upgrade = false;
     };
-    # taps = [
-    #   "homebrew/cask"
-    #   #      "homebrew/cask-drivers"
-    # ];
+    taps = [
+      "auth0/auth0-cli"
+      "schpet/tap"
+    ];
     casks = [
       "audacity"
       "balenaetcher"
@@ -166,6 +181,12 @@ in
       "ghostty"
       "lm-studio"
       "microsoft-office"
+      "android-studio"
+      "claude"
+      "dbeaver-community"
+      "docker-desktop"
+      "notion"
+      "zulu@17"
     ];
   };
 
