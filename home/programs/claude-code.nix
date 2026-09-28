@@ -68,4 +68,9 @@ in
   home.file.".config/herdr/config.toml" = lib.mkIf isDarwin {
     source = ./claude/herdr-config.toml;
   };
+
+  home.file.".claude/statusline.sh" = {
+    source = ./claude/statusline.sh;
+    executable = true;
+  };
 }
