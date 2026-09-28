@@ -33,19 +33,22 @@ let
       };
     };
   };
+
+  # settings.json is also written to at runtime by Claude Code itself (autoMode
+  # learned context, plugin toggles, ...), so we can't own it as a symlink -
+  # doing so means every runtime write flips it back into a plain file and the
+  # next switch would either clobber that state or need a backup dance. Merge
+  # our managed keys in instead, same approach as mcpServers below.
+  managedSettings = builtins.fromJSON (builtins.readFile ./claude/settings.json);
 in
 {
-  home.file.".claude/settings.json".source = ./claude/settings.json;
-
-  home.activation.backupUnmanagedClaudeSettings = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
+  home.activation.claudeCodeSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     path="$HOME/.claude/settings.json"
-    if [ -e "$path" ] && [ ! -L "$path" ]; then
-      if [ -e "$path.pre-nix" ]; then
-        echo "Refusing to overwrite $path.pre-nix" >&2
-        exit 1
-      fi
-      mv "$path" "$path.pre-nix"
-    fi
+    [ -f "$path" ] || echo '{}' > "$path"
+    desired=${lib.escapeShellArg (builtins.toJSON managedSettings)}
+    tmp="$(mktemp)"
+    ${pkgs.jq}/bin/jq --argjson desired "$desired" '. * $desired' "$path" > "$tmp"
+    mv "$tmp" "$path"
   '';
 
   home.activation.claudeCodeMcpServers = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
