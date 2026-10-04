@@ -155,6 +155,7 @@ in
     casks = [
       "audacity"
       "balenaetcher"
+      "chatgpt"
       "intellij-idea"
       "goland"
       "datagrip"
