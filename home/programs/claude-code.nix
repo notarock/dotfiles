@@ -23,6 +23,15 @@ let
       ];
       env.KUBECONFIG = "${config.home.homeDirectory}/src/kubeconfigs/staging-k8s-cluster-kubeconfig.yaml";
     };
+    # Read-only by design: gcloud-mcp refuses mutating gcloud commands and
+    # uses whatever the local gcloud CLI is authenticated for.
+    gcloud = {
+      command = "npx";
+      args = [
+        "-y"
+        "@google-cloud/gcloud-mcp"
+      ];
+    };
     grafana = {
       type = "stdio";
       command = "mcp-grafana";

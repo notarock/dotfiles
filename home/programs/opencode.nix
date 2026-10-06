@@ -16,6 +16,17 @@
         "opencode-wakatime@1.3.9"
       ];
 
+      # Read-only by design: gcloud-mcp refuses mutating gcloud commands and
+      # uses whatever the local gcloud CLI is authenticated for.
+      mcp.gcloud = {
+        type = "local";
+        command = [
+          "npx"
+          "-y"
+          "@google-cloud/gcloud-mcp"
+        ];
+      };
+
       agent = {
         plan = {
           model = "openai/gpt-6-astra";
