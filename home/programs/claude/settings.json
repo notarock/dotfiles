@@ -32,6 +32,11 @@
     "type": "command",
     "command": "~/.claude/statusline.sh"
   },
+  "permissions": {
+    "allow": [
+      "Bash(herdr:*)"
+    ]
+  },
   "effortLevel": "medium",
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
