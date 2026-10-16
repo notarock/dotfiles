@@ -137,7 +137,9 @@ in
       "node"
       "opencode"
       "pnpm"
+      "portaudio"
       "schpet/tap/linear"
+      "uv"
       "watch"
       "watchman"
     ];
